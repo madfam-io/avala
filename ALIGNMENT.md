@@ -116,4 +116,23 @@ AVALA operationalizes **competency-based training** and **evidence-backed verifi
 6. **Competency rules**: definir criterios de aprobación y evidencias obligatorias por rol.
 7. **Risk roles**: rutas y renovaciones para funciones críticas (seguridad/calidad).
 8. **xAPI/cmi5**: activar LRS; verificar trazas de lanzamiento y finalización.
-9. **OB 3.0/VC**: configurar issuer DID, políticas de rev
+9. **OB 3.0/VC**: configurar issuer DID, políticas de revocación y verificación pública.
+10. **Auditoría**: habilitar logs inmutables y panel de conformidad (LFT/ISO/sector).
+
+---
+
+## 8) Why this matters (signal to decision‑makers)
+
+* **Reduce legal/audit risk**: evidencia completa y verificable, de curso a competencia.
+* **Accelerate readiness**: foco en habilidades aplicadas con trazabilidad por criterio.
+* **Improve mobility & trust**: credenciales verificables conectadas a evidencia real.
+* **Operational ROI**: métricas para priorizar formación que mueve la aguja.
+
+---
+
+## 9) Next Steps
+
+* Validar **plantillas DC‑3/SIRCE** con 1–2 clientes piloto en MX.
+* Seleccionar **EC** prioritarios por vertical y publicar rutas base.
+* Encender **OB3/VC** e integrar con perfiles de talento (interna/externa).
+* Publicar **matriz de trazabilidad** por módulo→cláusula (ISO/LFT) en el admin.
