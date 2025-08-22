@@ -1,6 +1,7 @@
 # AVALA
 
 > **Alineamiento y Verificación de Aprendizajes y Logros Acreditables**
+>
 > Trainee‑first, multi‑tenant Learning & Competency Cloud aligned to EC/CONOCER, DC‑3/SIRCE (MX), and verifiable credentials.
 
 <div align="center">
