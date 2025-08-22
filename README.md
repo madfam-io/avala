@@ -25,7 +25,7 @@ AVALA is a SaaS platform to **design, deliver, evidence, and verify applied lear
 * **Avala Connect** — SSO/SCIM, HRIS & email/SMS integrations.
 
 👉 See **[SOFTWARE\_SPEC.md](./SOFTWARE_SPEC.md)** for the detailed product spec.
-👉 See **Standards & HR Alignment Brief** in `./docs/standards-hr-alignment.md`.
+👉 See **Standards & HR Alignment Brief** in `./ALIGNMENT.md`.
 
 ---
 
