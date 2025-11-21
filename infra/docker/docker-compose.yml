@@ -1,0 +1,87 @@
+version: '3.8'
+
+services:
+  # PostgreSQL - Primary Database
+  postgres:
+    image: postgres:16-alpine
+    container_name: avala-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: avala
+      POSTGRES_PASSWORD: avala
+      POSTGRES_DB: avala
+      POSTGRES_INITDB_ARGS: '--encoding=UTF8 --locale=es_MX.UTF-8'
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U avala']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - avala-network
+
+  # Redis - Cache & Queue
+  redis:
+    image: redis:7-alpine
+    container_name: avala-redis
+    restart: unless-stopped
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - avala-network
+
+  # MinIO - S3-compatible Object Storage
+  minio:
+    image: minio/minio:latest
+    container_name: avala-minio
+    restart: unless-stopped
+    environment:
+      MINIO_ROOT_USER: avala
+      MINIO_ROOT_PASSWORD: avala123
+    ports:
+      - '9000:9000'
+      - '9001:9001'
+    volumes:
+      - minio_data:/data
+    command: server /data --console-address ":9001"
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:9000/minio/health/live']
+      interval: 30s
+      timeout: 20s
+      retries: 3
+    networks:
+      - avala-network
+
+  # Mailhog - Email Testing (Development)
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: avala-mailhog
+    restart: unless-stopped
+    ports:
+      - '1025:1025' # SMTP
+      - '8025:8025' # Web UI
+    networks:
+      - avala-network
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  minio_data:
+    driver: local
+
+networks:
+  avala-network:
+    driver: bridge
