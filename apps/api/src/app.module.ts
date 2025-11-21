@@ -5,12 +5,14 @@ import { DatabaseModule } from './database/database.module';
 import { TenantInterceptor } from './common/interceptors/tenant.interceptor';
 import { TenantModule } from './modules/tenant/tenant.module';
 import { UserModule } from './modules/user/user.module';
+import { AuthModule } from './modules/auth/auth.module';
 import { CompetencyModule } from './modules/competency/competency.module';
 import { PortfolioModule } from './modules/portfolio/portfolio.module';
 
 /**
  * Root Application Module
  * Phase 0: Tenant foundation, RBAC, EC structure, Portfolios
+ * Phase 1-A: Authentication & App Shell
  */
 @Module({
   imports: [
@@ -22,6 +24,9 @@ import { PortfolioModule } from './modules/portfolio/portfolio.module';
 
     // Database
     DatabaseModule,
+
+    // Auth (Phase 1-A)
+    AuthModule,
 
     // Feature modules (Phase 0)
     TenantModule,
