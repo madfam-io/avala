@@ -3,6 +3,7 @@ import { PrismaService } from '../../database/prisma.service';
 import PDFDocument from 'pdfkit';
 import { Readable } from 'stream';
 import * as QRCode from 'qrcode';
+import { MailService } from '../mail/mail.service';
 
 /**
  * CertificatesService
@@ -11,7 +12,10 @@ import * as QRCode from 'qrcode';
  */
 @Injectable()
 export class CertificatesService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly mailService: MailService,
+  ) {}
 
   /**
    * Generate a DC-3 certificate for a completed enrollment
@@ -96,6 +100,20 @@ export class CertificatesService {
     //   where: { id: certificate.id },
     //   data: { pdfPath: s3Key }
     // });
+
+    // Send certificate email with PDF attachment (Phase 5: Production Readiness)
+    try {
+      await this.mailService.sendCertificateEmail({
+        email: enrollment.user.email,
+        firstName: enrollment.user.firstName || 'Usuario',
+        courseTitle: enrollment.course.title,
+        folio: certificate.folio,
+        pdfBuffer,
+      });
+    } catch (error) {
+      // Log email error but don't fail certificate generation
+      console.error('Failed to send certificate email:', error);
+    }
 
     return pdfBuffer;
   }

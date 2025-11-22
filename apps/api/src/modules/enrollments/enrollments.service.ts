@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../../database/prisma.service';
 import { CourseEnrollmentStatus } from '@prisma/client';
+import { MailService } from '../mail/mail.service';
 
 /**
  * EnrollmentsService
@@ -8,7 +9,10 @@ import { CourseEnrollmentStatus } from '@prisma/client';
  */
 @Injectable()
 export class EnrollmentsService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly mailService: MailService,
+  ) {}
 
   /**
    * Enroll a user in a course (idempotent)
@@ -92,6 +96,12 @@ export class EnrollmentsService {
     const completeEnrollment = await tenantClient.courseEnrollment.findUnique({
       where: { id: enrollment.id },
       include: {
+        user: {
+          select: {
+            email: true,
+            firstName: true,
+          },
+        },
         progress: {
           include: {
             lesson: {
@@ -103,6 +113,20 @@ export class EnrollmentsService {
         },
       },
     });
+
+    // Send enrollment email (Phase 5: Production Readiness)
+    try {
+      await this.mailService.sendEnrollmentEmail({
+        email: completeEnrollment.user.email,
+        firstName: completeEnrollment.user.firstName || 'Usuario',
+        courseTitle: course.title,
+        courseCode: course.code,
+        durationHours: course.durationHours || 0,
+      });
+    } catch (error) {
+      // Log email error but don't fail enrollment
+      console.error('Failed to send enrollment email:', error);
+    }
 
     return {
       enrollment: completeEnrollment,

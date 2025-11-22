@@ -12,6 +12,7 @@ import { CoursesModule } from './modules/courses/courses.module';
 import { CurriculumModule } from './modules/curriculum/curriculum.module';
 import { EnrollmentsModule } from './modules/enrollments/enrollments.module';
 import { CertificatesModule } from './modules/certificates/certificates.module';
+import { MailModule } from './modules/mail/mail.module';
 
 /**
  * Root Application Module
@@ -21,6 +22,7 @@ import { CertificatesModule } from './modules/certificates/certificates.module';
  * Phase 2-B: Curriculum Structure (Modules & Lessons)
  * Phase 3-A: Enrollment & Learning Player
  * Phase 3-B: Compliance Engine (DC-3 Certificates)
+ * Phase 5: Production Readiness (Mailer & Docker)
  */
 @Module({
   imports: [
@@ -53,6 +55,9 @@ import { CertificatesModule } from './modules/certificates/certificates.module';
 
     // DC-3 Certificates (Phase 3-B)
     CertificatesModule,
+
+    // Email Notifications (Phase 5)
+    MailModule,
   ],
   providers: [
     {
