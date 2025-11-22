@@ -15,17 +15,27 @@ import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
 /**
  * CertificatesController
  * Phase 3-B: DC-3 Certificate Management
+ * Phase 4: Public Verification
  */
 @Controller('certificates')
-@UseGuards(JwtAuthGuard)
 export class CertificatesController {
   constructor(private readonly certificatesService: CertificatesService) {}
+
+  /**
+   * GET /certificates/public/:uuid
+   * Public endpoint for certificate verification (NO AUTH REQUIRED)
+   */
+  @Get('public/:uuid')
+  async verifyPublicCertificate(@Param('uuid') uuid: string) {
+    return this.certificatesService.verifyPublicCertificate(uuid);
+  }
 
   /**
    * POST /certificates/enrollments/:enrollmentId/generate
    * Generate DC-3 certificate for completed enrollment
    */
   @Post('enrollments/:enrollmentId/generate')
+  @UseGuards(JwtAuthGuard)
   async generateCertificate(
     @Req() req: any,
     @Param('enrollmentId') enrollmentId: string,
@@ -54,6 +64,7 @@ export class CertificatesController {
    * Get certificate metadata for an enrollment
    */
   @Get('enrollments/:enrollmentId')
+  @UseGuards(JwtAuthGuard)
   async getCertificate(
     @Req() req: any,
     @Param('enrollmentId') enrollmentId: string,
@@ -68,6 +79,7 @@ export class CertificatesController {
    * Download existing certificate PDF
    */
   @Get('enrollments/:enrollmentId/download')
+  @UseGuards(JwtAuthGuard)
   async downloadCertificate(
     @Req() req: any,
     @Param('enrollmentId') enrollmentId: string,
@@ -96,6 +108,7 @@ export class CertificatesController {
    * Revoke a certificate
    */
   @Post(':certificateId/revoke')
+  @UseGuards(JwtAuthGuard)
   async revokeCertificate(
     @Req() req: any,
     @Param('certificateId') certificateId: string,

@@ -2,6 +2,7 @@ import { Injectable, NotFoundException, BadRequestException } from '@nestjs/comm
 import { PrismaService } from '../../database/prisma.service';
 import PDFDocument from 'pdfkit';
 import { Readable } from 'stream';
+import * as QRCode from 'qrcode';
 
 /**
  * CertificatesService
@@ -159,7 +160,7 @@ export class CertificatesService {
     tenant: any,
     certificate: any
   ): Promise<Buffer> {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
       try {
         const doc = new PDFDocument({
           size: 'LETTER',
@@ -171,6 +172,17 @@ export class CertificatesService {
         doc.on('data', (chunk) => chunks.push(chunk));
         doc.on('end', () => resolve(Buffer.concat(chunks)));
         doc.on('error', reject);
+
+        // Generate QR code for verification
+        const verificationUrl = `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/verify/${certificate.certificateUuid}`;
+        const qrCodeBuffer = await QRCode.toBuffer(verificationUrl, {
+          width: 120,
+          margin: 1,
+          color: {
+            dark: '#000000',
+            light: '#FFFFFF',
+          },
+        });
 
         // Header Section
         this.renderHeader(doc, certificate.folio);
@@ -290,15 +302,46 @@ export class CertificatesService {
           { width: signatureWidth, align: 'center' }
         );
 
-        // Footer
+        // QR Code - Bottom Right Corner
+        const qrSize = 100;
+        const qrX = doc.page.width - doc.page.margins.right - qrSize - 10;
+        const qrY = doc.page.height - doc.page.margins.bottom - qrSize - 30;
+
+        doc.image(qrCodeBuffer, qrX, qrY, {
+          width: qrSize,
+          height: qrSize,
+        });
+
+        // QR Code label
+        doc.fontSize(7).font('Helvetica').text(
+          'Escanea para verificar',
+          qrX,
+          qrY + qrSize + 5,
+          {
+            width: qrSize,
+            align: 'center',
+          }
+        );
+
+        // Footer text - Left side
         doc.fontSize(8).font('Helvetica-Oblique');
         doc.text(
-          `Este documento ha sido generado electrónicamente y puede ser verificado en línea usando el ID: ${certificate.certificateUuid}`,
+          `Este documento ha sido generado electrónicamente y puede ser verificado en línea.`,
           doc.page.margins.left,
           doc.page.height - 80,
           {
-            align: 'center',
-            width: pageWidth,
+            align: 'left',
+            width: pageWidth - qrSize - 30,
+          }
+        );
+
+        doc.fontSize(7).text(
+          `ID de Verificación: ${certificate.certificateUuid}`,
+          doc.page.margins.left,
+          doc.page.height - 65,
+          {
+            align: 'left',
+            width: pageWidth - qrSize - 30,
           }
         );
 
@@ -428,5 +471,94 @@ export class CertificatesService {
     });
 
     return certificate;
+  }
+
+  /**
+   * Public certificate verification (no authentication required)
+   * Returns only public-safe data for verification purposes
+   */
+  async verifyPublicCertificate(certificateUuid: string) {
+    // Use global client (not tenant-scoped) to search across all tenants
+    const certificate = await this.prisma.client.certificate.findUnique({
+      where: { certificateUuid },
+      include: {
+        enrollment: {
+          include: {
+            user: {
+              select: {
+                firstName: true,
+                lastName: true,
+                curp: true,
+                // Explicitly exclude sensitive fields
+              },
+            },
+            course: {
+              select: {
+                title: true,
+                code: true,
+                durationHours: true,
+                ecCodes: true,
+                tenantId: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    if (!certificate) {
+      return {
+        valid: false,
+      };
+    }
+
+    // Get tenant information (public fields only)
+    const tenant = await this.prisma.client.tenant.findUnique({
+      where: { id: certificate.enrollment.course.tenantId },
+      select: {
+        name: true,
+        legalName: true,
+      },
+    });
+
+    // Check if certificate is revoked
+    if (certificate.revokedAt) {
+      return {
+        valid: false,
+        certificate: {
+          certificateUuid: certificate.certificateUuid,
+          folio: certificate.folio,
+          issuedAt: certificate.issuedAt,
+          revokedAt: certificate.revokedAt,
+          revokedReason: certificate.revokedReason,
+        },
+      };
+    }
+
+    // Return public verification data
+    return {
+      valid: true,
+      certificate: {
+        certificateUuid: certificate.certificateUuid,
+        folio: certificate.folio,
+        issuedAt: certificate.issuedAt,
+        revokedAt: null,
+        revokedReason: null,
+      },
+      trainee: {
+        fullName: `${certificate.enrollment.user.firstName || ''} ${certificate.enrollment.user.lastName || ''}`.trim(),
+        curp: certificate.enrollment.user.curp,
+      },
+      course: {
+        title: certificate.enrollment.course.title,
+        code: certificate.enrollment.course.code,
+        durationHours: certificate.enrollment.course.durationHours,
+        ecCodes: certificate.enrollment.course.ecCodes,
+      },
+      tenant: {
+        name: tenant?.name,
+        legalName: tenant?.legalName,
+      },
+    };
   }
 }

@@ -12,7 +12,7 @@ import type { NextRequest } from 'next/server';
  * 4. Otherwise, allow request
  */
 
-const publicPaths = ['/login'];
+const publicPaths = ['/login', '/verify'];
 const protectedPaths = ['/dashboard'];
 
 export function middleware(request: NextRequest) {
