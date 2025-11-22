@@ -221,8 +221,10 @@ model Course {
   id          String   @id @default(uuid()) @db.Uuid
   tenantId    String   @map("tenant_id") @db.Uuid
 
+  code        String   @unique // Course code (e.g., "ALINEACION-001")
   title       String
   description String?  @db.Text
+  durationHours Int    @map("duration_hours") // Total duration in hours (required for DC-3)
   version     String   @default("1.0")
   status      CourseStatus @default(DRAFT)
 
@@ -249,6 +251,7 @@ model Course {
   @@map("courses")
   @@index([tenantId, status])
   @@index([ownerId])
+  @@index([code])
 }
 
 enum CourseStatus {

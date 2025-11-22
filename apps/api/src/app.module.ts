@@ -8,11 +8,13 @@ import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { CompetencyModule } from './modules/competency/competency.module';
 import { PortfolioModule } from './modules/portfolio/portfolio.module';
+import { CoursesModule } from './modules/courses/courses.module';
 
 /**
  * Root Application Module
  * Phase 0: Tenant foundation, RBAC, EC structure, Portfolios
  * Phase 1-A: Authentication & App Shell
+ * Phase 2-A: Course Management & EC Alignment
  */
 @Module({
   imports: [
@@ -33,6 +35,9 @@ import { PortfolioModule } from './modules/portfolio/portfolio.module';
     UserModule,
     CompetencyModule,
     PortfolioModule,
+
+    // Course Management (Phase 2-A)
+    CoursesModule,
   ],
   providers: [
     {
