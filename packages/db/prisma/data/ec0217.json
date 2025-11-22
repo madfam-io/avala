@@ -1,0 +1,280 @@
+{
+  "code": "EC0217.01",
+  "title": "Impartición de cursos de formación del capital humano de manera presencial grupal",
+  "description": "Este Estándar de Competencia establece los conocimientos, habilidades, destrezas y actitudes que debe poseer una persona para impartir cursos de formación del capital humano de manera presencial grupal, considerando la planeación, conducción y evaluación de sesiones de capacitación.",
+  "publishedBy": "CONOCER",
+  "version": "1.0",
+  "publishedAt": "2012-08-01",
+  "isActive": true,
+  "elements": [
+    {
+      "code": "E01",
+      "title": "Preparar la sesión mediante la planeación de la capacitación",
+      "description": "Este elemento describe los productos y conocimientos que se deben demostrar para preparar una sesión de capacitación mediante un proceso de planeación efectivo.",
+      "order": 1,
+      "criteria": [
+        {
+          "code": "PC01",
+          "description": "La lista de verificación de los requerimientos del lugar donde se llevará a cabo la sesión de capacitación con la que cuenta, contiene mobiliario, equipo, materiales de apoyo e infraestructura, conforme a la carta descriptiva y/o temario.",
+          "type": "PERFORMANCE",
+          "evidenceType": "PRODUCT",
+          "order": 1
+        },
+        {
+          "code": "PC02",
+          "description": "El objetivo general del curso que elabora considera la conducta a lograr, el contenido sobre el cual trata y las condiciones de operación.",
+          "type": "PERFORMANCE",
+          "evidenceType": "PRODUCT",
+          "order": 2
+        },
+        {
+          "code": "PC03",
+          "description": "Los objetivos particulares que elabora consideran los contenidos temáticos, orientados al objetivo general del curso.",
+          "type": "PERFORMANCE",
+          "evidenceType": "PRODUCT",
+          "order": 3
+        },
+        {
+          "code": "PC04",
+          "description": "Los temas y subtemas seleccionados están orientados al logro de los objetivos particulares establecidos.",
+          "type": "PERFORMANCE",
+          "evidenceType": "PRODUCT",
+          "order": 4
+        },
+        {
+          "code": "PC05",
+          "description": "Las técnicas de instrucción que selecciona son acordes a los objetivos del curso, las características del grupo, el momento de intervención didáctica, el espacio donde se realizará el curso y el tiempo destinado para la sesión.",
+          "type": "PERFORMANCE",
+          "evidenceType": "PRODUCT",
+          "order": 5
+        },
+        {
+          "code": "PC06",
+          "description": "Las técnicas grupales que selecciona permiten la interacción entre los participantes para el logro de los objetivos del curso.",
+          "type": "PERFORMANCE",
+          "evidenceType": "PRODUCT",
+          "order": 6
+        },
+        {
+          "code": "PC07",
+          "description": "Los instrumentos de evaluación que elabora permiten verificar el logro de los objetivos del curso.",
+          "type": "PERFORMANCE",
+          "evidenceType": "PRODUCT",
+          "order": 7
+        },
+        {
+          "code": "KC01",
+          "description": "Dominios de aprendizaje: cognitivo, afectivo y psicomotriz.",
+          "type": "KNOWLEDGE",
+          "evidenceType": "KNOWLEDGE",
+          "order": 8
+        },
+        {
+          "code": "KC02",
+          "description": "Taxonomía de objetivos de aprendizaje: clasificación de objetivos según dominios.",
+          "type": "KNOWLEDGE",
+          "evidenceType": "KNOWLEDGE",
+          "order": 9
+        },
+        {
+          "code": "KC03",
+          "description": "Técnicas de instrucción: expositiva, diálogo-debate, demostración-ejecución, técnicas vivenciales.",
+          "type": "KNOWLEDGE",
+          "evidenceType": "KNOWLEDGE",
+          "order": 10
+        },
+        {
+          "code": "KC04",
+          "description": "Técnicas grupales: lluvia de ideas, corrillos, panel, foro, mesa redonda, seminario, estudio de casos, juego de roles, simulación.",
+          "type": "KNOWLEDGE",
+          "evidenceType": "KNOWLEDGE",
+          "order": 11
+        },
+        {
+          "code": "KC05",
+          "description": "Instrumentos de evaluación: listas de cotejo, cuestionarios, guías de observación, escalas estimativas.",
+          "type": "KNOWLEDGE",
+          "evidenceType": "KNOWLEDGE",
+          "order": 12
+        }
+      ]
+    },
+    {
+      "code": "E02",
+      "title": "Conducir la sesión mediante la implementación de técnicas de instrucción y grupales",
+      "description": "Este elemento describe los productos y conocimientos necesarios para conducir una sesión de capacitación mediante el uso de técnicas de instrucción y grupales que faciliten el aprendizaje.",
+      "order": 2,
+      "criteria": [
+        {
+          "code": "PC08",
+          "description": "El encuadre que realiza al inicio de la sesión incluye presentación personal, objetivos, contenidos, metodología de trabajo, políticas de operación del grupo y evaluación del curso.",
+          "type": "PERFORMANCE",
+          "evidenceType": "DESEMPEÑO",
+          "order": 1
+        },
+        {
+          "code": "PC09",
+          "description": "La presentación personal que realiza genera un ambiente de confianza.",
+          "type": "PERFORMANCE",
+          "evidenceType": "DESEMPEÑO",
+          "order": 2
+        },
+        {
+          "code": "PC10",
+          "description": "El rapport que establece con el grupo favorece un clima de confianza y respeto.",
+          "type": "PERFORMANCE",
+          "evidenceType": "DESEMPEÑO",
+          "order": 3
+        },
+        {
+          "code": "PC11",
+          "description": "El ambiente físico que propicia favorece el aprendizaje: ventilación, iluminación, temperatura, espacios libres de distractores.",
+          "type": "PERFORMANCE",
+          "evidenceType": "DESEMPEÑO",
+          "order": 4
+        },
+        {
+          "code": "PC12",
+          "description": "La técnica de instrucción que aplica es acorde a los objetivos de aprendizaje, las características del grupo y el tiempo disponible.",
+          "type": "PERFORMANCE",
+          "evidenceType": "DESEMPEÑO",
+          "order": 5
+        },
+        {
+          "code": "PC13",
+          "description": "La técnica grupal que aplica propicia la participación e interacción entre los integrantes del grupo.",
+          "type": "PERFORMANCE",
+          "evidenceType": "DESEMPEÑO",
+          "order": 6
+        },
+        {
+          "code": "PC14",
+          "description": "Los materiales didácticos que utiliza apoyan la comprensión de los contenidos temáticos y el logro de los objetivos.",
+          "type": "PERFORMANCE",
+          "evidenceType": "DESEMPEÑO",
+          "order": 7
+        },
+        {
+          "code": "PC15",
+          "description": "Las preguntas que realiza permiten verificar la comprensión de los participantes sobre los contenidos abordados.",
+          "type": "PERFORMANCE",
+          "evidenceType": "DESEMPEÑO",
+          "order": 8
+        },
+        {
+          "code": "PC16",
+          "description": "El lenguaje corporal que utiliza refuerza la comunicación verbal.",
+          "type": "PERFORMANCE",
+          "evidenceType": "DESEMPEÑO",
+          "order": 9
+        },
+        {
+          "code": "PC17",
+          "description": "Los ejemplos que utiliza son adecuados al contexto de los participantes y facilitan la comprensión de los contenidos.",
+          "type": "PERFORMANCE",
+          "evidenceType": "DESEMPEÑO",
+          "order": 10
+        },
+        {
+          "code": "KC06",
+          "description": "Comunicación: verbal (dicción, volumen, tono, ritmo) y no verbal (postura, gestos, contacto visual).",
+          "type": "KNOWLEDGE",
+          "evidenceType": "KNOWLEDGE",
+          "order": 11
+        },
+        {
+          "code": "KC07",
+          "description": "Manejo de grupo: conducción de sesiones, atención a la diversidad, manejo de conflictos.",
+          "type": "KNOWLEDGE",
+          "evidenceType": "KNOWLEDGE",
+          "order": 12
+        },
+        {
+          "code": "KC08",
+          "description": "Materiales didácticos: impresos, audiovisuales, digitales, tridimensionales.",
+          "type": "KNOWLEDGE",
+          "evidenceType": "KNOWLEDGE",
+          "order": 13
+        },
+        {
+          "code": "KC09",
+          "description": "Encuadre: componentes y propósito en el proceso de enseñanza-aprendizaje.",
+          "type": "KNOWLEDGE",
+          "evidenceType": "KNOWLEDGE",
+          "order": 14
+        }
+      ]
+    },
+    {
+      "code": "E03",
+      "title": "Evaluar el aprendizaje antes, durante y al final del curso",
+      "description": "Este elemento describe los productos y conocimientos necesarios para evaluar el aprendizaje de los participantes en diferentes momentos del curso, proporcionando retroalimentación efectiva.",
+      "order": 3,
+      "criteria": [
+        {
+          "code": "PC18",
+          "description": "La evaluación diagnóstica que aplica al inicio del curso permite identificar el nivel de conocimientos previos de los participantes.",
+          "type": "PERFORMANCE",
+          "evidenceType": "DESEMPEÑO",
+          "order": 1
+        },
+        {
+          "code": "PC19",
+          "description": "La evaluación formativa que realiza durante el curso permite identificar el avance de aprendizaje de los participantes.",
+          "type": "PERFORMANCE",
+          "evidenceType": "DESEMPEÑO",
+          "order": 2
+        },
+        {
+          "code": "PC20",
+          "description": "La evaluación sumativa que aplica al final del curso permite verificar el logro de los objetivos de aprendizaje.",
+          "type": "PERFORMANCE",
+          "evidenceType": "DESEMPEÑO",
+          "order": 3
+        },
+        {
+          "code": "PC21",
+          "description": "Los instrumentos de evaluación que aplica son congruentes con los objetivos del curso y permiten obtener evidencias del aprendizaje.",
+          "type": "PERFORMANCE",
+          "evidenceType": "PRODUCT",
+          "order": 4
+        },
+        {
+          "code": "PC22",
+          "description": "La retroalimentación que proporciona a los participantes es oportuna, específica y orientada a la mejora del aprendizaje.",
+          "type": "PERFORMANCE",
+          "evidenceType": "DESEMPEÑO",
+          "order": 5
+        },
+        {
+          "code": "PC23",
+          "description": "El registro de resultados que elabora contiene los datos de identificación de los participantes y las calificaciones obtenidas.",
+          "type": "PERFORMANCE",
+          "evidenceType": "PRODUCT",
+          "order": 6
+        },
+        {
+          "code": "KC10",
+          "description": "Tipos de evaluación: diagnóstica, formativa y sumativa.",
+          "type": "KNOWLEDGE",
+          "evidenceType": "KNOWLEDGE",
+          "order": 7
+        },
+        {
+          "code": "KC11",
+          "description": "Características de la retroalimentación efectiva: oportuna, específica, constructiva.",
+          "type": "KNOWLEDGE",
+          "evidenceType": "KNOWLEDGE",
+          "order": 8
+        },
+        {
+          "code": "KC12",
+          "description": "Registro de resultados: formatos, elementos que debe contener, confidencialidad.",
+          "type": "KNOWLEDGE",
+          "evidenceType": "KNOWLEDGE",
+          "order": 9
+        }
+      ]
+    }
+  ]
+}
