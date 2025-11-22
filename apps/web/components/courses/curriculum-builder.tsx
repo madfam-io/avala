@@ -11,9 +11,10 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
+import { LessonEditorSheet } from './lesson-editor-sheet';
 import { apiClient } from '@/lib/api-client';
 import { useToast } from '@/hooks/use-toast';
-import { Plus, Trash2, GripVertical, BookOpen } from 'lucide-react';
+import { Plus, Trash2, GripVertical, BookOpen, Edit } from 'lucide-react';
 
 interface Lesson {
   id: string;
@@ -21,6 +22,9 @@ interface Lesson {
   order: number;
   contentRef: string | null;
   durationMin: number | null;
+  _count?: {
+    criteria: number;
+  };
 }
 
 interface Module {
@@ -62,6 +66,8 @@ export function CurriculumBuilder({ courseId }: CurriculumBuilderProps) {
   const [isAddingModule, setIsAddingModule] = useState(false);
   const [newLessonTitle, setNewLessonTitle] = useState<{ [moduleId: string]: string }>({});
   const [addingLessonToModule, setAddingLessonToModule] = useState<string | null>(null);
+  const [selectedLessonId, setSelectedLessonId] = useState<string | null>(null);
+  const [isEditorOpen, setIsEditorOpen] = useState(false);
 
   useEffect(() => {
     fetchCurriculum();
@@ -278,18 +284,33 @@ export function CurriculumBuilder({ courseId }: CurriculumBuilderProps) {
                         {module.lessons.map((lesson, index) => (
                           <div
                             key={lesson.id}
-                            className="flex items-center justify-between p-2 rounded-md hover:bg-muted/50 transition-colors"
+                            className="flex items-center justify-between p-2 rounded-md hover:bg-muted transition-colors group"
                           >
-                            <div className="flex items-center gap-2">
+                            <div
+                              className="flex items-center gap-2 flex-1 cursor-pointer"
+                              onClick={() => {
+                                setSelectedLessonId(lesson.id);
+                                setIsEditorOpen(true);
+                              }}
+                            >
                               <span className="text-xs text-muted-foreground w-6">
                                 {index + 1}.
                               </span>
                               <span className="text-sm">{lesson.title}</span>
+                              {lesson._count && lesson._count.criteria > 0 && (
+                                <Badge variant="secondary" className="text-xs">
+                                  {lesson._count.criteria} criteria
+                                </Badge>
+                              )}
+                              <Edit className="h-3 w-3 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
                             </div>
                             <Button
                               variant="ghost"
                               size="sm"
-                              onClick={() => handleDeleteLesson(lesson.id, lesson.title)}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleDeleteLesson(lesson.id, lesson.title);
+                              }}
                               className="hover:bg-destructive hover:text-destructive-foreground"
                             >
                               <Trash2 className="h-3 w-3" />
@@ -350,6 +371,15 @@ export function CurriculumBuilder({ courseId }: CurriculumBuilderProps) {
           </Button>
         </div>
       </CardContent>
+
+      {/* Lesson Editor Sheet */}
+      <LessonEditorSheet
+        open={isEditorOpen}
+        onOpenChange={setIsEditorOpen}
+        lessonId={selectedLessonId}
+        courseId={courseId}
+        onUpdate={fetchCurriculum}
+      />
     </Card>
   );
 }

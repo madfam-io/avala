@@ -5,6 +5,8 @@ import { Lesson } from '@avala/db';
 export interface CreateLessonDto {
   title: string;
   order?: number;
+  content?: string;
+  videoUrl?: string;
   contentRef?: string;
   durationMin?: number;
 }
@@ -12,7 +14,16 @@ export interface CreateLessonDto {
 export interface UpdateLessonDto {
   title?: string;
   order?: number;
+  content?: string;
+  videoUrl?: string;
   contentRef?: string;
+  durationMin?: number;
+}
+
+export interface UpdateLessonContentDto {
+  title?: string;
+  content?: string;
+  videoUrl?: string;
   durationMin?: number;
 }
 
@@ -54,6 +65,8 @@ export class LessonsService {
       data: {
         title: dto.title,
         order,
+        content: dto.content,
+        videoUrl: dto.videoUrl,
         contentRef: dto.contentRef,
         durationMin: dto.durationMin,
         moduleId,
@@ -78,6 +91,11 @@ export class LessonsService {
 
     return tenantClient.lesson.findMany({
       where: { moduleId },
+      include: {
+        _count: {
+          select: { criteria: true },
+        },
+      },
       orderBy: { order: 'asc' },
     });
   }
@@ -95,6 +113,9 @@ export class LessonsService {
           include: {
             course: true,
           },
+        },
+        _count: {
+          select: { criteria: true },
         },
       },
     });
@@ -130,8 +151,46 @@ export class LessonsService {
       data: {
         ...(dto.title !== undefined && { title: dto.title }),
         ...(dto.order !== undefined && { order: dto.order }),
+        ...(dto.content !== undefined && { content: dto.content }),
+        ...(dto.videoUrl !== undefined && { videoUrl: dto.videoUrl }),
         ...(dto.contentRef !== undefined && { contentRef: dto.contentRef }),
         ...(dto.durationMin !== undefined && { durationMin: dto.durationMin }),
+      },
+    });
+  }
+
+  /**
+   * Update lesson content (title, content, videoUrl, duration)
+   * Specialized method for content editing
+   */
+  async updateContent(
+    tenantId: string,
+    lessonId: string,
+    dto: UpdateLessonContentDto,
+  ): Promise<Lesson> {
+    const tenantClient = this.prisma.forTenant(tenantId);
+
+    // Verify lesson exists
+    const existing = await tenantClient.lesson.findUnique({
+      where: { id: lessonId },
+    });
+
+    if (!existing) {
+      throw new NotFoundException(`Lesson with ID ${lessonId} not found`);
+    }
+
+    return tenantClient.lesson.update({
+      where: { id: lessonId },
+      data: {
+        ...(dto.title !== undefined && { title: dto.title }),
+        ...(dto.content !== undefined && { content: dto.content }),
+        ...(dto.videoUrl !== undefined && { videoUrl: dto.videoUrl }),
+        ...(dto.durationMin !== undefined && { durationMin: dto.durationMin }),
+      },
+      include: {
+        _count: {
+          select: { criteria: true },
+        },
       },
     });
   }

@@ -9,7 +9,8 @@ import {
 } from '@nestjs/common';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { ModulesService, CreateModuleDto, UpdateModuleDto } from './modules.service';
-import { LessonsService, CreateLessonDto, UpdateLessonDto } from './lessons.service';
+import { LessonsService, CreateLessonDto, UpdateLessonDto, UpdateLessonContentDto } from './lessons.service';
+import { CompetencyMappingService } from './competency-mapping.service';
 import { TenantId } from '../../common/decorators/tenant.decorator';
 
 @ApiTags('curriculum')
@@ -18,6 +19,7 @@ export class CurriculumController {
   constructor(
     private readonly modulesService: ModulesService,
     private readonly lessonsService: LessonsService,
+    private readonly competencyMappingService: CompetencyMappingService,
   ) {}
 
   // ============================================
@@ -134,5 +136,74 @@ export class CurriculumController {
     @Body() lessonOrders: { id: string; order: number }[],
   ) {
     return this.lessonsService.reorder(tenantId, moduleId, lessonOrders);
+  }
+
+  @Put('lessons/:lessonId/content')
+  @ApiOperation({ summary: 'Update lesson content (title, content, video)' })
+  updateLessonContent(
+    @TenantId() tenantId: string,
+    @Param('lessonId') lessonId: string,
+    @Body() dto: UpdateLessonContentDto,
+  ) {
+    return this.lessonsService.updateContent(tenantId, lessonId, dto);
+  }
+
+  // ============================================
+  // COMPETENCY MAPPING ENDPOINTS
+  // ============================================
+
+  @Get('courses/:courseId/criteria')
+  @ApiOperation({ summary: 'Get available criteria for a course (from linked standards)' })
+  getAvailableCriteria(
+    @TenantId() tenantId: string,
+    @Param('courseId') courseId: string,
+  ) {
+    return this.competencyMappingService.getAvailableCriteria(tenantId, courseId);
+  }
+
+  @Get('lessons/:lessonId/mapping')
+  @ApiOperation({ summary: 'Get criterion mappings for a lesson' })
+  getLessonMapping(
+    @TenantId() tenantId: string,
+    @Param('lessonId') lessonId: string,
+  ) {
+    return this.competencyMappingService.getLessonMapping(tenantId, lessonId);
+  }
+
+  @Post('lessons/:lessonId/mapping/:criterionId')
+  @ApiOperation({ summary: 'Toggle criterion mapping for a lesson' })
+  toggleMapping(
+    @TenantId() tenantId: string,
+    @Param('lessonId') lessonId: string,
+    @Param('criterionId') criterionId: string,
+  ) {
+    return this.competencyMappingService.toggleMapping(
+      tenantId,
+      lessonId,
+      criterionId,
+    );
+  }
+
+  @Put('lessons/:lessonId/mapping')
+  @ApiOperation({ summary: 'Set all criterion mappings for a lesson' })
+  setLessonMappings(
+    @TenantId() tenantId: string,
+    @Param('lessonId') lessonId: string,
+    @Body() body: { criteriaIds: string[] },
+  ) {
+    return this.competencyMappingService.setLessonMappings(
+      tenantId,
+      lessonId,
+      body.criteriaIds,
+    );
+  }
+
+  @Get('courses/:courseId/mapping-stats')
+  @ApiOperation({ summary: 'Get mapping statistics for a course' })
+  getCourseMappingStats(
+    @TenantId() tenantId: string,
+    @Param('courseId') courseId: string,
+  ) {
+    return this.competencyMappingService.getCourseMappingStats(tenantId, courseId);
   }
 }

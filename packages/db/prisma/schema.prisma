@@ -283,7 +283,9 @@ model Lesson {
 
   title       String
   order       Int      // Order within module
-  contentRef  String?  @map("content_ref") // S3 path or URL
+  content     String?  @db.Text // Lesson text content (description, instructions, etc.)
+  videoUrl    String?  @map("video_url") // Video URL (YouTube, Vimeo, etc.)
+  contentRef  String?  @map("content_ref") // S3 path or URL for additional materials
   durationMin Int?     @map("duration_min")
 
   createdAt   DateTime @default(now()) @map("created_at")
