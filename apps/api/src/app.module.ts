@@ -11,6 +11,7 @@ import { PortfolioModule } from './modules/portfolio/portfolio.module';
 import { CoursesModule } from './modules/courses/courses.module';
 import { CurriculumModule } from './modules/curriculum/curriculum.module';
 import { EnrollmentsModule } from './modules/enrollments/enrollments.module';
+import { CertificatesModule } from './modules/certificates/certificates.module';
 
 /**
  * Root Application Module
@@ -19,6 +20,7 @@ import { EnrollmentsModule } from './modules/enrollments/enrollments.module';
  * Phase 2-A: Course Management & EC Alignment
  * Phase 2-B: Curriculum Structure (Modules & Lessons)
  * Phase 3-A: Enrollment & Learning Player
+ * Phase 3-B: Compliance Engine (DC-3 Certificates)
  */
 @Module({
   imports: [
@@ -48,6 +50,9 @@ import { EnrollmentsModule } from './modules/enrollments/enrollments.module';
 
     // Enrollment & Progress (Phase 3-A)
     EnrollmentsModule,
+
+    // DC-3 Certificates (Phase 3-B)
+    CertificatesModule,
   ],
   providers: [
     {
