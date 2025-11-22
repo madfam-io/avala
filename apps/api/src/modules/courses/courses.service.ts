@@ -329,4 +329,40 @@ export class CoursesService {
       orderBy: { createdAt: 'desc' },
     });
   }
+
+  /**
+   * Get course curriculum (modules and lessons tree)
+   */
+  async getCurriculum(tenantId: string, courseId: string) {
+    const tenantClient = this.prisma.forTenant(tenantId);
+
+    const course = await tenantClient.course.findUnique({
+      where: { id: courseId },
+      include: {
+        modules: {
+          include: {
+            lessons: {
+              orderBy: { order: 'asc' },
+            },
+            _count: {
+              select: { lessons: true },
+            },
+          },
+          orderBy: { order: 'asc' },
+        },
+      },
+    });
+
+    if (!course) {
+      throw new NotFoundException(`Course with ID ${courseId} not found`);
+    }
+
+    return {
+      courseId: course.id,
+      courseTitle: course.title,
+      moduleCount: course.modules.length,
+      lessonCount: course.modules.reduce((sum, m) => sum + m.lessons.length, 0),
+      modules: course.modules,
+    };
+  }
 }

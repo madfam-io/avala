@@ -44,6 +44,12 @@ export class CoursesController {
     return this.coursesService.search(tenantId, query);
   }
 
+  @Get(':id/curriculum')
+  @ApiOperation({ summary: 'Get course curriculum (modules and lessons tree)' })
+  getCurriculum(@TenantId() tenantId: string, @Param('id') id: string) {
+    return this.coursesService.getCurriculum(tenantId, id);
+  }
+
   @Get(':id')
   @ApiOperation({ summary: 'Get course by ID' })
   findById(@TenantId() tenantId: string, @Param('id') id: string) {

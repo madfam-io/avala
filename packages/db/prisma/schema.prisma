@@ -282,6 +282,7 @@ model Lesson {
   moduleId    String   @map("module_id") @db.Uuid
 
   title       String
+  order       Int      // Order within module
   contentRef  String?  @map("content_ref") // S3 path or URL
   durationMin Int?     @map("duration_min")
 
@@ -293,7 +294,7 @@ model Lesson {
   attendance  Attendance[]
 
   @@map("lessons")
-  @@index([moduleId])
+  @@index([moduleId, order])
 }
 
 // Join table: Lesson <-> Criterion mapping
