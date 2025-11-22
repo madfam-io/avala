@@ -2,6 +2,7 @@ import { Injectable, NotFoundException, ConflictException } from '@nestjs/common
 import { PrismaService } from '../../database/prisma.service';
 import { User, Prisma, Role } from '@avala/db';
 import * as bcrypt from 'bcrypt';
+import { MailService } from '../mail/mail.service';
 
 export interface PaginatedUsers {
   data: User[];
@@ -26,7 +27,10 @@ export interface FindAllOptions {
  */
 @Injectable()
 export class UserService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly mailService: MailService,
+  ) {}
 
   /**
    * Find all users for a tenant with pagination
@@ -188,7 +192,7 @@ export class UserService {
     const password = data.password || this.generateRandomPassword();
     const passwordHash = await bcrypt.hash(password, 10);
 
-    return tenantClient.user.create({
+    const user = await tenantClient.user.create({
       data: {
         email: data.email,
         passwordHash,
@@ -221,6 +225,26 @@ export class UserService {
         metadata: false,
       },
     });
+
+    // Send welcome email (Phase 5: Production Readiness)
+    try {
+      // Get tenant name
+      const tenant = await this.prisma.client.tenant.findUnique({
+        where: { id: tenantId },
+        select: { name: true },
+      });
+
+      await this.mailService.sendWelcomeEmail({
+        email: user.email,
+        firstName: user.firstName || 'Usuario',
+        tenantName: tenant?.name || 'AVALA LMS',
+      });
+    } catch (error) {
+      // Log email error but don't fail user creation
+      console.error('Failed to send welcome email:', error);
+    }
+
+    return user;
   }
 
   /**

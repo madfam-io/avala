@@ -35,7 +35,10 @@
     "class-validator": "^0.14.1",
     "class-transformer": "^0.5.1",
     "reflect-metadata": "^0.2.2",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "pdfkit": "^0.15.0",
+    "qrcode": "^1.5.4",
+    "nodemailer": "^6.9.7"
   },
   "devDependencies": {
     "@nestjs/cli": "^11.0.12",
@@ -48,6 +51,9 @@
     "@types/node": "^22.10.5",
     "@types/passport-jwt": "^4.0.1",
     "@types/passport-local": "^1.0.38",
+    "@types/pdfkit": "^0.13.5",
+    "@types/qrcode": "^1.5.5",
+    "@types/nodemailer": "^6.4.14",
     "@types/supertest": "^6.0.2",
     "@typescript-eslint/eslint-plugin": "^8.19.1",
     "@typescript-eslint/parser": "^8.19.1",

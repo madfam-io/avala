@@ -8,11 +8,21 @@ import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { CompetencyModule } from './modules/competency/competency.module';
 import { PortfolioModule } from './modules/portfolio/portfolio.module';
+import { CoursesModule } from './modules/courses/courses.module';
+import { CurriculumModule } from './modules/curriculum/curriculum.module';
+import { EnrollmentsModule } from './modules/enrollments/enrollments.module';
+import { CertificatesModule } from './modules/certificates/certificates.module';
+import { MailModule } from './modules/mail/mail.module';
 
 /**
  * Root Application Module
  * Phase 0: Tenant foundation, RBAC, EC structure, Portfolios
  * Phase 1-A: Authentication & App Shell
+ * Phase 2-A: Course Management & EC Alignment
+ * Phase 2-B: Curriculum Structure (Modules & Lessons)
+ * Phase 3-A: Enrollment & Learning Player
+ * Phase 3-B: Compliance Engine (DC-3 Certificates)
+ * Phase 5: Production Readiness (Mailer & Docker)
  */
 @Module({
   imports: [
@@ -33,6 +43,21 @@ import { PortfolioModule } from './modules/portfolio/portfolio.module';
     UserModule,
     CompetencyModule,
     PortfolioModule,
+
+    // Course Management (Phase 2-A)
+    CoursesModule,
+
+    // Curriculum Builder (Phase 2-B)
+    CurriculumModule,
+
+    // Enrollment & Progress (Phase 3-A)
+    EnrollmentsModule,
+
+    // DC-3 Certificates (Phase 3-B)
+    CertificatesModule,
+
+    // Email Notifications (Phase 5)
+    MailModule,
   ],
   providers: [
     {
