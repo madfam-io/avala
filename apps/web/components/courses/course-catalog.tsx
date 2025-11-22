@@ -1,11 +1,14 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Search, Clock, Award, User } from 'lucide-react';
+import { Search, Clock, Award, User, PlayCircle, Edit } from 'lucide-react';
 import { apiClient } from '@/lib/api-client';
+import { useToast } from '@/hooks/use-toast';
 
 interface CompetencyStandard {
   id: string;
@@ -38,17 +41,22 @@ interface Course {
 /**
  * CourseCatalog Component
  * Phase 2-A: Displays courses in a grid layout with EC alignment
+ * Phase 3-A: Added enrollment functionality
  * Features:
  * - Grid card layout for courses
  * - Search by title or code
  * - Display EC alignment badges
  * - Show duration for DC-3 compliance
+ * - Enroll in courses
  */
 export function CourseCatalog() {
+  const router = useRouter();
+  const { toast } = useToast();
   const [courses, setCourses] = useState<Course[]>([]);
   const [filteredCourses, setFilteredCourses] = useState<Course[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  const [enrollingCourseId, setEnrollingCourseId] = useState<string | null>(null);
 
   useEffect(() => {
     fetchCourses();
@@ -87,6 +95,39 @@ export function CourseCatalog() {
       return `${owner.firstName} ${owner.lastName}`;
     }
     return owner.email;
+  };
+
+  const handleEnroll = async (courseId: string) => {
+    try {
+      setEnrollingCourseId(courseId);
+      const result = await apiClient.post<{ enrollment: { id: string }; isNew: boolean }>(
+        '/enrollments',
+        { courseId }
+      );
+
+      if (result.isNew) {
+        toast({
+          title: 'Success',
+          description: 'You have been enrolled in this course!',
+        });
+      }
+
+      // Navigate to learning player
+      router.push(`/learn/${courseId}?enrollment=${result.enrollment.id}`);
+    } catch (error: any) {
+      console.error('Failed to enroll:', error);
+      toast({
+        title: 'Error',
+        description: error.message || 'Failed to enroll in course',
+        variant: 'destructive',
+      });
+    } finally {
+      setEnrollingCourseId(null);
+    }
+  };
+
+  const handleManageCourse = (courseId: string) => {
+    router.push(`/dashboard/courses/${courseId}`);
   };
 
   if (isLoading) {
@@ -158,20 +199,48 @@ export function CourseCatalog() {
                 )}
               </CardContent>
 
-              <CardFooter className="flex flex-col items-start gap-2 text-xs text-muted-foreground border-t pt-4">
-                <div className="flex items-center gap-1.5 w-full">
-                  <Clock className="h-3.5 w-3.5" />
-                  <span>{course.durationHours} hours</span>
-                  {course._count && course._count.modules > 0 && (
-                    <>
-                      <span className="mx-2">•</span>
-                      <span>{course._count.modules} modules</span>
-                    </>
-                  )}
+              <CardFooter className="flex flex-col gap-3 border-t pt-4">
+                <div className="flex flex-col gap-2 text-xs text-muted-foreground w-full">
+                  <div className="flex items-center gap-1.5">
+                    <Clock className="h-3.5 w-3.5" />
+                    <span>{course.durationHours} hours</span>
+                    {course._count && course._count.modules > 0 && (
+                      <>
+                        <span className="mx-2">•</span>
+                        <span>{course._count.modules} modules</span>
+                      </>
+                    )}
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <User className="h-3.5 w-3.5" />
+                    <span>{getOwnerName(course.owner)}</span>
+                  </div>
                 </div>
-                <div className="flex items-center gap-1.5 w-full">
-                  <User className="h-3.5 w-3.5" />
-                  <span>{getOwnerName(course.owner)}</span>
+                <div className="flex gap-2 w-full">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => handleManageCourse(course.id)}
+                    className="flex-1"
+                  >
+                    <Edit className="mr-2 h-3.5 w-3.5" />
+                    Manage
+                  </Button>
+                  <Button
+                    size="sm"
+                    onClick={() => handleEnroll(course.id)}
+                    disabled={enrollingCourseId === course.id || course.status !== 'PUBLISHED'}
+                    className="flex-1"
+                  >
+                    {enrollingCourseId === course.id ? (
+                      'Enrolling...'
+                    ) : (
+                      <>
+                        <PlayCircle className="mr-2 h-3.5 w-3.5" />
+                        Enroll
+                      </>
+                    )}
+                  </Button>
                 </div>
               </CardFooter>
             </Card>

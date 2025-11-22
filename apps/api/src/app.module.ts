@@ -10,6 +10,7 @@ import { CompetencyModule } from './modules/competency/competency.module';
 import { PortfolioModule } from './modules/portfolio/portfolio.module';
 import { CoursesModule } from './modules/courses/courses.module';
 import { CurriculumModule } from './modules/curriculum/curriculum.module';
+import { EnrollmentsModule } from './modules/enrollments/enrollments.module';
 
 /**
  * Root Application Module
@@ -17,6 +18,7 @@ import { CurriculumModule } from './modules/curriculum/curriculum.module';
  * Phase 1-A: Authentication & App Shell
  * Phase 2-A: Course Management & EC Alignment
  * Phase 2-B: Curriculum Structure (Modules & Lessons)
+ * Phase 3-A: Enrollment & Learning Player
  */
 @Module({
   imports: [
@@ -43,6 +45,9 @@ import { CurriculumModule } from './modules/curriculum/curriculum.module';
 
     // Curriculum Builder (Phase 2-B)
     CurriculumModule,
+
+    // Enrollment & Progress (Phase 3-A)
+    EnrollmentsModule,
   ],
   providers: [
     {

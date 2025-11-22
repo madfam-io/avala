@@ -88,6 +88,7 @@ model User {
 
   // As trainee
   enrollments         Enrollment[]
+  courseEnrollments   CourseEnrollment[] @relation("UserCourseEnrollments")
   attempts            Attempt[]
   artifacts           Artifact[]
   portfolios          Portfolio[]
@@ -244,6 +245,7 @@ model Course {
   owner       User @relation("CourseOwner", fields: [ownerId], references: [id])
   standards   CompetencyStandard[] @relation("CourseStandards")
   modules     Module[]
+  enrollments CourseEnrollment[] @relation("CourseEnrollments")
   assessments Assessment[]
   pathItems   PathItem[]
   dc3Records  DC3[]
@@ -293,6 +295,7 @@ model Lesson {
   // Relations
   module      Module @relation(fields: [moduleId], references: [id], onDelete: Cascade)
   criteria    LessonCriterion[]
+  progress    LessonProgress[]
   attendance  Attendance[]
 
   @@map("lessons")
@@ -382,6 +385,65 @@ enum EnrollmentStatus {
   ACTIVE
   COMPLETED
   CANCELLED
+}
+
+// ============================================
+// COURSE ENROLLMENT & PROGRESS (Phase 3-A)
+// ============================================
+
+model CourseEnrollment {
+  id          String   @id @default(uuid()) @db.Uuid
+  userId      String   @map("user_id") @db.Uuid
+  courseId    String   @map("course_id") @db.Uuid
+
+  status      CourseEnrollmentStatus @default(IN_PROGRESS)
+
+  enrolledAt  DateTime @default(now()) @map("enrolled_at")
+  completedAt DateTime? @map("completed_at")
+
+  // Relations
+  user        User @relation("UserCourseEnrollments", fields: [userId], references: [id], onDelete: Cascade)
+  course      Course @relation("CourseEnrollments", fields: [courseId], references: [id], onDelete: Cascade)
+  progress    LessonProgress[]
+
+  @@unique([userId, courseId])
+  @@map("course_enrollments")
+  @@index([userId])
+  @@index([courseId])
+  @@index([status])
+}
+
+enum CourseEnrollmentStatus {
+  IN_PROGRESS
+  COMPLETED
+}
+
+model LessonProgress {
+  id            String   @id @default(uuid()) @db.Uuid
+  enrollmentId  String   @map("enrollment_id") @db.Uuid
+  lessonId      String   @map("lesson_id") @db.Uuid
+
+  status        ProgressStatus @default(NOT_STARTED)
+  completedAt   DateTime? @map("completed_at")
+  viewedAt      DateTime? @map("viewed_at") // First time lesson was opened
+
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  // Relations
+  enrollment    CourseEnrollment @relation(fields: [enrollmentId], references: [id], onDelete: Cascade)
+  lesson        Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@unique([enrollmentId, lessonId])
+  @@map("lesson_progress")
+  @@index([enrollmentId])
+  @@index([lessonId])
+  @@index([status])
+}
+
+enum ProgressStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  COMPLETED
 }
 
 // ============================================
