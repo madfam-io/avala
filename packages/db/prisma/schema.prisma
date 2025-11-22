@@ -65,6 +65,13 @@ model User {
   role      Role     @default(TRAINEE)
   status    UserStatus @default(ACTIVE)
 
+  // Authentication
+  passwordHash String? @map("password_hash")
+
+  // Mexican Compliance (DC-3/SIRCE/LFT)
+  curp      String?  @unique // Clave Única de Registro de Población
+  rfc       String?  // Registro Federal de Contribuyentes
+
   // SSO
   ssoSubject String?  @map("sso_subject")
   ssoProvider String? @map("sso_provider")
