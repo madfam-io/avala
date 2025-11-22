@@ -8,7 +8,7 @@ import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { apiClient } from '@/lib/api-client';
 import { useToast } from '@/hooks/use-toast';
-import { BookOpen, PlayCircle, CheckCircle2, Clock } from 'lucide-react';
+import { BookOpen, PlayCircle, CheckCircle2, Clock, Download } from 'lucide-react';
 
 interface EnrolledCourse {
   enrollmentId: string;
@@ -66,6 +66,49 @@ export default function MyLearningPage() {
 
   const handleStartCourse = (courseId: string, enrollmentId: string) => {
     router.push(`/learn/${courseId}?enrollment=${enrollmentId}`);
+  };
+
+  const handleDownloadCertificate = async (enrollmentId: string, courseCode: string) => {
+    try {
+      // Fetch PDF as blob
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000'}/certificates/enrollments/${enrollmentId}/download`,
+        {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || 'Failed to download certificate');
+      }
+
+      // Create blob and download
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `DC3-${courseCode}-Certificate.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+
+      toast({
+        title: 'Success',
+        description: 'Certificate downloaded successfully',
+      });
+    } catch (error: any) {
+      console.error('Failed to download certificate:', error);
+      toast({
+        title: 'Error',
+        description: error.message || 'Failed to download certificate. Please ensure all legal information is complete.',
+        variant: 'destructive',
+      });
+    }
   };
 
   const formatDate = (dateString: string) => {
@@ -174,29 +217,43 @@ export default function MyLearningPage() {
                   </div>
                 </div>
 
-                {/* Action Button */}
-                <Button
-                  className="w-full"
-                  onClick={() => handleStartCourse(course.courseId, course.enrollmentId)}
-                  variant={course.status === 'COMPLETED' ? 'outline' : 'default'}
-                >
-                  {course.status === 'COMPLETED' ? (
-                    <>
+                {/* Action Buttons */}
+                {course.status === 'COMPLETED' ? (
+                  <div className="space-y-2">
+                    <Button
+                      className="w-full"
+                      onClick={() => handleDownloadCertificate(course.enrollmentId, course.courseCode)}
+                    >
+                      <Download className="mr-2 h-4 w-4" />
+                      Download DC-3 Certificate
+                    </Button>
+                    <Button
+                      className="w-full"
+                      variant="outline"
+                      onClick={() => handleStartCourse(course.courseId, course.enrollmentId)}
+                    >
                       <BookOpen className="mr-2 h-4 w-4" />
                       Review Course
-                    </>
-                  ) : course.progress.completedLessons > 0 ? (
-                    <>
-                      <PlayCircle className="mr-2 h-4 w-4" />
-                      Continue Learning
-                    </>
-                  ) : (
-                    <>
-                      <PlayCircle className="mr-2 h-4 w-4" />
-                      Start Course
-                    </>
-                  )}
-                </Button>
+                    </Button>
+                  </div>
+                ) : (
+                  <Button
+                    className="w-full"
+                    onClick={() => handleStartCourse(course.courseId, course.enrollmentId)}
+                  >
+                    {course.progress.completedLessons > 0 ? (
+                      <>
+                        <PlayCircle className="mr-2 h-4 w-4" />
+                        Continue Learning
+                      </>
+                    ) : (
+                      <>
+                        <PlayCircle className="mr-2 h-4 w-4" />
+                        Start Course
+                      </>
+                    )}
+                  </Button>
+                )}
               </CardContent>
             </Card>
           ))}

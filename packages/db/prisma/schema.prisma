@@ -22,6 +22,11 @@ model Tenant {
   status    TenantStatus @default(ACTIVE)
   settings  Json     @default("{}")
 
+  // Mexican Legal/Tax Compliance (DC-3/STPS)
+  rfc       String?  // Registro Federal de Contribuyentes (company tax ID)
+  legalName String?  @map("legal_name") // Official registered company name
+  representativeName String? @map("representative_name") // Legal representative for DC-3
+
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
@@ -234,6 +239,9 @@ model Course {
   // EC Alignment
   ecCodes     String[] @map("ec_codes") // Array of EC codes
 
+  // Mexican Compliance (DC-3/STPS)
+  stpsRegistrationNumber String? @map("stps_registration_number") // STPS course registration number
+
   metadata    Json     @default("{}")
 
   createdAt   DateTime @default(now()) @map("created_at")
@@ -402,9 +410,10 @@ model CourseEnrollment {
   completedAt DateTime? @map("completed_at")
 
   // Relations
-  user        User @relation("UserCourseEnrollments", fields: [userId], references: [id], onDelete: Cascade)
-  course      Course @relation("CourseEnrollments", fields: [courseId], references: [id], onDelete: Cascade)
-  progress    LessonProgress[]
+  user         User @relation("UserCourseEnrollments", fields: [userId], references: [id], onDelete: Cascade)
+  course       Course @relation("CourseEnrollments", fields: [courseId], references: [id], onDelete: Cascade)
+  progress     LessonProgress[]
+  certificates Certificate[]
 
   @@unique([userId, courseId])
   @@map("course_enrollments")
@@ -444,6 +453,44 @@ enum ProgressStatus {
   NOT_STARTED
   IN_PROGRESS
   COMPLETED
+}
+
+// ============================================
+// CERTIFICATES & DC-3 (Phase 3-B)
+// ============================================
+
+model Certificate {
+  id            String   @id @default(uuid()) @db.Uuid
+  enrollmentId  String   @map("enrollment_id") @db.Uuid
+
+  // Public certificate identifier (for verification)
+  certificateUuid String  @unique @default(uuid()) @map("certificate_uuid") @db.Uuid
+
+  // PDF storage
+  pdfPath       String?  @map("pdf_path") // S3 key or local file path
+
+  // DC-3 specific fields
+  folio         String?  @unique // DC-3 folio number (sequential or formatted)
+
+  // Issuance tracking
+  issuedAt      DateTime @default(now()) @map("issued_at")
+  issuedBy      String?  @map("issued_by") @db.Uuid // User ID of issuer (admin/system)
+
+  // Revocation (for compliance audits)
+  revokedAt     DateTime? @map("revoked_at")
+  revokedBy     String?   @map("revoked_by") @db.Uuid
+  revokedReason String?   @map("revoked_reason") @db.Text
+
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  // Relations
+  enrollment    CourseEnrollment @relation(fields: [enrollmentId], references: [id], onDelete: Cascade)
+
+  @@map("certificates")
+  @@index([enrollmentId])
+  @@index([certificateUuid])
+  @@index([folio])
+  @@index([issuedAt])
 }
 
 // ============================================
