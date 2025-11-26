@@ -1,0 +1,46 @@
+# CODEOWNERS file for AVALA (LATAM Learning Alignment Platform)
+#
+# Code owners are automatically requested for review when someone opens a pull request
+# that modifies code that they own.
+
+# Default owners for everything in the repo
+* @madfam-io/developers
+
+# GitHub configuration and workflows
+/.github/ @madfam-io/devops @madfam-io/developers
+
+# Root configuration files
+/*.config.* @madfam-io/developers
+/*.json @madfam-io/developers
+
+# Documentation
+/docs/ @madfam-io/developers
+README.md @madfam-io/developers
+ALIGNMENT.md @madfam-io/developers
+
+# Apps
+/apps/web/ @madfam-io/web-team @madfam-io/edtech-team
+
+# Packages
+/packages/ @madfam-io/backend-team @madfam-io/edtech-team
+
+# Database
+**/prisma/ @madfam-io/database-team @madfam-io/backend-team
+
+# Infrastructure
+/infra/ @madfam-io/devops
+docker-compose*.yml @madfam-io/devops
+**/*deploy*.yml @madfam-io/devops
+
+# Security-sensitive
+**/.env.* @madfam-io/security-team @madfam-io/devops
+
+# Compliance (CONOCER/EC standards)
+/compliance/ @madfam-io/edtech-team @madfam-io/security-team
+
+# Testing
+**/*.test.* @madfam-io/qa-team @madfam-io/developers
+
+# Dependencies
+package.json @madfam-io/security-team @madfam-io/developers
+pnpm-lock.yaml @madfam-io/security-team @madfam-io/developers
