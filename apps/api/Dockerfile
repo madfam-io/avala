@@ -1,88 +1,51 @@
-# ================================
-# Phase 5: Production API Dockerfile
-# Multi-stage build for NestJS backend
-# ================================
-
-# Stage 1: Dependencies
-FROM node:20-alpine AS deps
+# Production Dockerfile for Avala API (NestJS)
+FROM node:20-alpine AS base
+RUN apk add --no-cache libc6-compat openssl
+RUN corepack enable && corepack prepare pnpm@9.15.0 --activate
 WORKDIR /app
 
-# Install pnpm
-RUN npm install -g pnpm@9
-
-# Copy workspace files
+# Install dependencies
+FROM base AS deps
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY apps/api/package.json ./apps/api/
 COPY packages/db/package.json ./packages/db/
-
-# Install dependencies
+COPY packages/shared/package.json ./packages/shared/ 2>/dev/null || true
 RUN pnpm install --frozen-lockfile
 
-# Stage 2: Builder
-FROM node:20-alpine AS builder
-WORKDIR /app
-
-# Install pnpm
-RUN npm install -g pnpm@9
-
-# Copy dependencies from deps stage
+# Build the application
+FROM base AS builder
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=deps /app/apps/api/node_modules ./apps/api/node_modules
-COPY --from=deps /app/packages/db/node_modules ./packages/db/node_modules
+COPY . .
 
-# Copy workspace config
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
-COPY turbo.json ./
-
-# Copy database package
-COPY packages/db ./packages/db
-
-# Generate Prisma Client
+# Generate Prisma client
 WORKDIR /app/packages/db
-RUN pnpm exec prisma generate
-
-# Copy API source
-WORKDIR /app
-COPY apps/api ./apps/api
+RUN npx prisma generate
 
 # Build API
 WORKDIR /app/apps/api
-RUN pnpm run build
+RUN pnpm build
 
-# Stage 3: Production Runtime
-FROM node:20-alpine AS production
+# Production image
+FROM base AS runner
+ENV NODE_ENV=production
+
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nestjs
+
 WORKDIR /app
 
-# Install pnpm
-RUN npm install -g pnpm@9
+# Copy built application
+COPY --from=builder --chown=nestjs:nodejs /app/apps/api/dist ./dist
+COPY --from=builder --chown=nestjs:nodejs /app/apps/api/node_modules ./node_modules
+COPY --from=builder --chown=nestjs:nodejs /app/packages/db/node_modules/.prisma ./node_modules/.prisma
+COPY --from=builder --chown=nestjs:nodejs /app/apps/api/package.json ./
 
-# Install production dependencies only
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
-COPY apps/api/package.json ./apps/api/
-COPY packages/db/package.json ./packages/db/
+USER nestjs
 
-RUN pnpm install --frozen-lockfile --prod
+EXPOSE 3000
 
-# Copy database package and generate Prisma Client
-COPY packages/db ./packages/db
-WORKDIR /app/packages/db
-RUN pnpm exec prisma generate
+HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=3 \
+  CMD wget --no-verbose --tries=1 --spider http://localhost:3000/health || exit 1
 
-# Copy built application from builder
-WORKDIR /app/apps/api
-COPY --from=builder /app/apps/api/dist ./dist
-COPY --from=builder /app/apps/api/package.json ./
-
-# Set environment
-ENV NODE_ENV=production
-ENV PORT=4000
-
-# Expose port
-EXPOSE 4000
-
-# Health check
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD node -e "require('http').get('http://localhost:4000/health', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"
-
-# Start application
 CMD ["node", "dist/main.js"]
