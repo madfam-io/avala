@@ -13,6 +13,7 @@ import { CurriculumModule } from './modules/curriculum/curriculum.module';
 import { EnrollmentsModule } from './modules/enrollments/enrollments.module';
 import { CertificatesModule } from './modules/certificates/certificates.module';
 import { MailModule } from './modules/mail/mail.module';
+import { BillingModule } from './modules/billing/billing.module';
 
 /**
  * Root Application Module
@@ -58,6 +59,9 @@ import { MailModule } from './modules/mail/mail.module';
 
     // Email Notifications (Phase 5)
     MailModule,
+
+    // Billing & Subscriptions (Phase 6)
+    BillingModule,
   ],
   providers: [
     {

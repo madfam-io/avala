@@ -11,6 +11,9 @@
   },
   "dependencies": {
     "@avala/db": "workspace:*",
+    "@janua/react-sdk": "^0.1.0",
+    "@madfam/analytics": "^0.1.0",
+    "@coforma/client": "^0.1.0",
     "@hookform/resolvers": "^3.9.1",
     "@radix-ui/react-accordion": "^1.2.2",
     "@radix-ui/react-checkbox": "^1.1.3",

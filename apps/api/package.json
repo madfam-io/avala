@@ -25,6 +25,7 @@
     "@nestjs/platform-express": "^10.4.15",
     "@nestjs/swagger": "^8.0.7",
     "@avala/db": "workspace:*",
+    "@janua/client": "workspace:*",
     "@nestjs/jwt": "^10.2.0",
     "@nestjs/passport": "^10.0.3",
     "passport": "^0.7.0",

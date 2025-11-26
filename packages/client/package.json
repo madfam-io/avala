@@ -1,0 +1,68 @@
+{
+  "name": "@avala/client",
+  "version": "0.1.0",
+  "description": "AVALA Learning & Competency SDK - TypeScript client for team certification and compliance",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./react": {
+      "types": "./dist/react.d.ts",
+      "import": "./dist/react.mjs",
+      "require": "./dist/react.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/react": "^18.2.0",
+    "react": "^18.2.0",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.0"
+  },
+  "peerDependencies": {
+    "react": ">=17.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
+  },
+  "keywords": [
+    "avala",
+    "learning",
+    "competency",
+    "certification",
+    "dc3",
+    "conocer",
+    "madfam",
+    "compliance"
+  ],
+  "author": "MADFAM <dev@madfam.io>",
+  "license": "PROPRIETARY",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/madfam-io/avala.git",
+    "directory": "packages/client"
+  },
+  "publishConfig": {
+    "registry": "https://npm.madfam.io",
+    "access": "restricted"
+  }
+}

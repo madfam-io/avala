@@ -20,12 +20,19 @@ model Tenant {
   slug      String   @unique
   plan      Plan     @default(BASIC)
   status    TenantStatus @default(ACTIVE)
+  subscriptionStatus SubscriptionStatus @default(TRIALING) @map("subscription_status")
   settings  Json     @default("{}")
 
   // Mexican Legal/Tax Compliance (DC-3/STPS)
   rfc       String?  // Registro Federal de Contribuyentes (company tax ID)
   legalName String?  @map("legal_name") // Official registered company name
   representativeName String? @map("representative_name") // Legal representative for DC-3
+
+  // Janua multi-provider billing (Conekta for MX, Polar for international)
+  januaCustomerId   String?  @unique @map("janua_customer_id")
+  billingProvider   String?  @map("billing_provider") // 'conekta' | 'polar' | 'stripe'
+  countryCode       String?  @map("country_code") // ISO country code for billing routing
+  billingEmail      String?  @map("billing_email") // Billing contact email
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
@@ -59,6 +66,14 @@ enum TenantStatus {
   ACTIVE
   SUSPENDED
   CANCELLED
+}
+
+enum SubscriptionStatus {
+  TRIALING
+  ACTIVE
+  PAST_DUE
+  CANCELLED
+  PAUSED
 }
 
 model User {
