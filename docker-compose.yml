@@ -1,0 +1,94 @@
+version: "3.8"
+
+services:
+  # Avala API (NestJS)
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    ports:
+      - "4000:4000"
+    environment:
+      - NODE_ENV=development
+      - PORT=4000
+      - DATABASE_URL=postgresql://avala:avala_dev@postgres:5432/avala_dev
+      - REDIS_URL=redis://redis:6379/0
+      - JANUA_URL=http://host.docker.internal:8000
+      - JANUA_CLIENT_ID=avala-dev
+      - JANUA_CLIENT_SECRET=dev-secret
+    volumes:
+      - ./apps/api:/app/apps/api
+      - ./packages:/app/packages
+      - /app/node_modules
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - avala-network
+
+  # Avala Web (Next.js)
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+      target: development
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_API_URL=http://localhost:4000
+      - NEXT_PUBLIC_JANUA_URL=http://localhost:8000
+      - NEXT_PUBLIC_JANUA_CLIENT_ID=avala-dev
+    volumes:
+      - ./apps/web:/app/apps/web
+      - ./packages:/app/packages
+      - /app/node_modules
+    depends_on:
+      - api
+    networks:
+      - avala-network
+
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_USER=avala
+      - POSTGRES_PASSWORD=avala_dev
+      - POSTGRES_DB=avala_dev
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U avala -d avala_dev"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - avala-network
+
+  # Redis
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6380:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - avala-network
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  avala-network:
+    driver: bridge
