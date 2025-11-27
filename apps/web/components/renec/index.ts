@@ -6,3 +6,4 @@ export { CertifierCard, CertifierList } from "./certifier-card";
 export { CenterCard, CenterList } from "./center-card";
 export { Pagination } from "./pagination";
 export { LeadCapture, FloatingCTA, ExitIntentPopup } from "./lead-capture";
+export { CenterMap, CenterMiniMap } from "./center-map";

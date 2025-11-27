@@ -2,12 +2,13 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { Filter, X, MapPin, Navigation } from "lucide-react";
+import { Filter, X, MapPin, Navigation, Map, List } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { SearchBox } from "@/components/renec/search-box";
 import { CenterList } from "@/components/renec/center-card";
 import { Pagination } from "@/components/renec/pagination";
+import { CenterMap } from "@/components/renec/center-map";
 import {
   searchCenters,
   searchNearby,
@@ -35,6 +36,8 @@ export default function CentrosPage() {
     lng: number;
   } | null>(null);
   const [locationError, setLocationError] = useState<string | null>(null);
+  const [viewMode, setViewMode] = useState<"list" | "map">("list");
+  const [selectedCenterId, setSelectedCenterId] = useState<string | null>(null);
 
   // Get current params
   const currentParams: CenterSearchParams = {
@@ -214,19 +217,40 @@ export default function CentrosPage() {
               placeholder="Buscar por nombre, dirección..."
             />
           </div>
-          <Button
-            variant="outline"
-            onClick={() => setShowFilters(!showFilters)}
-            className="shrink-0"
-          >
-            <Filter className="mr-2 h-4 w-4" />
-            Filtros
-            {activeFilters > 0 && (
-              <Badge variant="secondary" className="ml-2">
-                {activeFilters}
-              </Badge>
-            )}
-          </Button>
+          <div className="flex gap-2">
+            <Button
+              variant="outline"
+              onClick={() => setShowFilters(!showFilters)}
+              className="shrink-0"
+            >
+              <Filter className="mr-2 h-4 w-4" />
+              Filtros
+              {activeFilters > 0 && (
+                <Badge variant="secondary" className="ml-2">
+                  {activeFilters}
+                </Badge>
+              )}
+            </Button>
+            {/* View Toggle */}
+            <div className="flex rounded-md border">
+              <Button
+                variant={viewMode === "list" ? "secondary" : "ghost"}
+                size="sm"
+                onClick={() => setViewMode("list")}
+                className="rounded-r-none"
+              >
+                <List className="h-4 w-4" />
+              </Button>
+              <Button
+                variant={viewMode === "map" ? "secondary" : "ghost"}
+                size="sm"
+                onClick={() => setViewMode("map")}
+                className="rounded-l-none"
+              >
+                <Map className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
         </div>
 
         {/* Filter Panel */}
@@ -428,7 +452,52 @@ export default function CentrosPage() {
             </div>
           ))}
         </div>
+      ) : viewMode === "map" ? (
+        /* Map View */
+        <div className="grid gap-6 lg:grid-cols-3">
+          {/* Map */}
+          <div className="lg:col-span-2">
+            <CenterMap
+              centers={items as Center[]}
+              userLocation={userLocation}
+              selectedCenterId={selectedCenterId || undefined}
+              onCenterClick={(center) => setSelectedCenterId(center.id)}
+              height="500px"
+              className="border rounded-lg"
+            />
+          </div>
+          {/* Side list */}
+          <div className="space-y-3 max-h-[500px] overflow-y-auto">
+            <p className="text-sm text-muted-foreground sticky top-0 bg-background py-2">
+              {items.length} centros encontrados
+            </p>
+            {items.map((center) => (
+              <button
+                key={center.id}
+                onClick={() => setSelectedCenterId(center.id)}
+                className={`w-full text-left rounded-lg border p-3 transition-colors hover:bg-accent ${
+                  selectedCenterId === center.id
+                    ? "border-primary bg-primary/5"
+                    : ""
+                }`}
+              >
+                <p className="font-medium text-sm line-clamp-1">
+                  {center.nombre}
+                </p>
+                <p className="text-xs text-muted-foreground line-clamp-1">
+                  {[center.municipio, center.estado].filter(Boolean).join(", ")}
+                </p>
+                {"distance" in center && center.distance && (
+                  <p className="text-xs text-orange-600 mt-1">
+                    📍 {center.distance.toFixed(1)} km
+                  </p>
+                )}
+              </button>
+            ))}
+          </div>
+        </div>
       ) : (
+        /* List View */
         <>
           <CenterList items={items} showDistance={nearbyMode} />
 

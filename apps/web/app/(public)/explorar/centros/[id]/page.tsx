@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import type { Metadata } from "next";
 import {
   ArrowLeft,
   MapPin,
@@ -13,10 +14,40 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { LeadCapture } from "@/components/renec/lead-capture";
+import { CenterJsonLd, BreadcrumbJsonLd } from "@/components/seo/json-ld";
 import { getCenter } from "@/lib/api/renec";
 
 interface PageProps {
   params: Promise<{ id: string }>;
+}
+
+// Generate dynamic metadata for SEO
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { id } = await params;
+
+  try {
+    const center = await getCenter(id);
+    const location = [center.municipio, center.estado].filter(Boolean).join(", ");
+
+    return {
+      title: `${center.nombre} - Centro de Evaluación | Avala`,
+      description: `Centro de evaluación ${center.nombre} en ${location || "México"}. Evalúa ${center.ecStandards.length} estándares de competencia.`,
+      openGraph: {
+        title: `${center.nombre} - Centro de Evaluación`,
+        description: `Centro de evaluación en ${location || "México"} con ${center.ecStandards.length} estándares.`,
+        type: "place",
+        url: `https://avala.mx/explorar/centros/${id}`,
+      },
+      alternates: {
+        canonical: `https://avala.mx/explorar/centros/${id}`,
+      },
+    };
+  } catch {
+    return {
+      title: "Centro de Evaluación | Avala",
+      description: "Explora centros de evaluación en México.",
+    };
+  }
 }
 
 export default async function CenterDetailPage({ params }: PageProps) {
@@ -40,8 +71,20 @@ export default async function CenterDetailPage({ params }: PageProps) {
       : null;
 
   return (
-    <div className="container py-8">
-      {/* Back link */}
+    <>
+      {/* Structured Data */}
+      <CenterJsonLd center={center} />
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Inicio", url: "https://avala.mx" },
+          { name: "Explorar", url: "https://avala.mx/explorar" },
+          { name: "Centros", url: "https://avala.mx/explorar/centros" },
+          { name: center.nombre, url: `https://avala.mx/explorar/centros/${center.id}` },
+        ]}
+      />
+
+      <div className="container py-8">
+        {/* Back link */}
       <Link
         href="/explorar/centros"
         className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground mb-6"
@@ -304,13 +347,14 @@ export default async function CenterDetailPage({ params }: PageProps) {
         </div>
       </div>
 
-      {/* Lead Capture Banner */}
-      <div className="mt-12">
-        <LeadCapture
-          variant="banner"
-          context={{ centerId: center.id }}
-        />
+        {/* Lead Capture Banner */}
+        <div className="mt-12">
+          <LeadCapture
+            variant="banner"
+            context={{ centerId: center.id }}
+          />
+        </div>
       </div>
-    </div>
+    </>
   );
 }

@@ -305,3 +305,85 @@ export async function searchNearby(params: NearbySearchParams): Promise<NearbyRe
 export async function getEstados(): Promise<Estado[]> {
   return fetchAPI<Estado[]>("/estados");
 }
+
+// ============================================
+// Leads API
+// ============================================
+
+export interface LeadInput {
+  email: string;
+  name?: string;
+  phone?: string;
+  company?: string;
+  leadType?: "INDIVIDUAL" | "ORGANIZATION";
+  interests?: string[];
+  ecCode?: string;
+  certifierId?: string;
+  centerId?: string;
+  utmSource?: string;
+  utmMedium?: string;
+  utmCampaign?: string;
+}
+
+export interface LeadResponse {
+  success: boolean;
+  lead: {
+    id: string;
+    email: string;
+    isNew: boolean;
+  };
+}
+
+export async function createLead(data: LeadInput): Promise<LeadResponse> {
+  const response = await fetch(`${API_BASE}/renec/leads`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to create lead");
+  }
+
+  return response.json();
+}
+
+// ============================================
+// Analytics API
+// ============================================
+
+export type SearchType =
+  | "GENERAL"
+  | "EC_STANDARDS"
+  | "CERTIFIERS"
+  | "CENTERS"
+  | "AUTOCOMPLETE"
+  | "NEARBY";
+
+export interface SearchAnalyticsInput {
+  query?: string;
+  searchType?: SearchType;
+  filters?: Record<string, unknown>;
+  resultCount?: number;
+  sessionId?: string;
+  userLat?: number;
+  userLng?: number;
+  userEstado?: string;
+}
+
+export async function trackSearch(data: SearchAnalyticsInput): Promise<void> {
+  try {
+    // Fire and forget - don't block on analytics
+    fetch(`${API_BASE}/renec/analytics/search`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+  } catch {
+    // Silently ignore analytics errors
+  }
+}

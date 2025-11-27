@@ -5,7 +5,7 @@ import { Search, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { autocomplete, type AutocompleteResult } from "@/lib/api/renec";
+import { autocomplete, trackSearch, type AutocompleteResult } from "@/lib/api/renec";
 
 interface SearchBoxProps {
   placeholder?: string;
@@ -69,6 +69,14 @@ export function SearchBox({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsOpen(false);
+
+    // Track the search
+    trackSearch({
+      query,
+      searchType: "GENERAL",
+      resultCount: results ? results.ec.length + results.certifiers.length + results.centers.length : 0,
+    });
+
     if (onSearch) {
       onSearch(query);
     } else {

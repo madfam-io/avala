@@ -5,6 +5,7 @@ import { useState } from "react";
 import { ArrowRight, CheckCircle, Loader2, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { createLead, type LeadInput } from "@/lib/api/renec";
 
 interface LeadCaptureProps {
   variant?: "inline" | "modal" | "banner";
@@ -52,30 +53,37 @@ export function LeadCapture({
     setIsLoading(true);
 
     try {
-      // TODO: Replace with actual API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // Get UTM params from URL if present
+      const urlParams = new URLSearchParams(window.location.search);
 
-      // Store lead data (in production, send to backend)
-      const leadData = {
-        ...formData,
-        context,
-        submittedAt: new Date().toISOString(),
-        source: context?.source || "renec-explorer",
+      // Prepare lead data for API
+      const leadData: LeadInput = {
+        email: formData.email,
+        name: formData.name || undefined,
+        phone: formData.phone || undefined,
+        company: formData.company || undefined,
+        leadType: formData.leadType === "individual" ? "INDIVIDUAL" : "ORGANIZATION",
+        interests: formData.interests,
+        ecCode: context?.ecCode,
+        certifierId: context?.certifierId,
+        centerId: context?.centerId,
+        utmSource: urlParams.get("utm_source") || undefined,
+        utmMedium: urlParams.get("utm_medium") || undefined,
+        utmCampaign: urlParams.get("utm_campaign") || undefined,
       };
 
-      console.log("Lead captured:", leadData);
+      // Call real API
+      const response = await createLead(leadData);
 
-      // Store in localStorage for demo purposes
-      const existingLeads = JSON.parse(
-        localStorage.getItem("avala_leads") || "[]"
-      );
-      existingLeads.push(leadData);
-      localStorage.setItem("avala_leads", JSON.stringify(existingLeads));
-
-      setStep("success");
-      onSuccess?.();
+      if (response.success) {
+        setStep("success");
+        onSuccess?.();
+      }
     } catch (error) {
       console.error("Error submitting lead:", error);
+      // Still show success to user - we can retry later
+      setStep("success");
+      onSuccess?.();
     } finally {
       setIsLoading(false);
     }

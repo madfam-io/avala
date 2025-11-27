@@ -1048,6 +1048,111 @@ enum RenecSyncStatus {
 }
 
 // ============================================
+// LEADS (RENEC Explorer Conversion)
+// ============================================
+
+model Lead {
+  id            String   @id @default(uuid()) @db.Uuid
+
+  // Contact info
+  email         String
+  name          String?
+  phone         String?
+  company       String?
+
+  // Lead classification
+  leadType      LeadType @default(INDIVIDUAL) @map("lead_type")
+  source        String   @default("renec_explorer") // Source of the lead
+
+  // Interest tracking
+  interests     String[] @default([]) // Array: certification, training, dc3, compliance
+
+  // Context (what they were looking at)
+  ecCode        String?  @map("ec_code")
+  certifierId   String?  @map("certifier_id") @db.Uuid
+  centerId      String?  @map("center_id") @db.Uuid
+
+  // UTM tracking
+  utmSource     String?  @map("utm_source")
+  utmMedium     String?  @map("utm_medium")
+  utmCampaign   String?  @map("utm_campaign")
+
+  // Status
+  status        LeadStatus @default(NEW)
+  notes         String?  @db.Text
+
+  // Timestamps
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+  convertedAt   DateTime? @map("converted_at")
+
+  @@map("leads")
+  @@index([email])
+  @@index([leadType])
+  @@index([status])
+  @@index([createdAt])
+  @@index([ecCode])
+}
+
+enum LeadType {
+  INDIVIDUAL
+  ORGANIZATION
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  QUALIFIED
+  CONVERTED
+  CLOSED
+}
+
+// ============================================
+// SEARCH ANALYTICS
+// ============================================
+
+model SearchAnalytics {
+  id            String   @id @default(uuid()) @db.Uuid
+
+  // What was searched
+  query         String?
+  searchType    SearchType @default(GENERAL) @map("search_type")
+
+  // Filters used
+  filters       Json     @default("{}") // { vigente, sector, estado, etc. }
+
+  // Results
+  resultCount   Int      @default(0) @map("result_count")
+
+  // User context (anonymous tracking)
+  sessionId     String?  @map("session_id")
+  userAgent     String?  @map("user_agent")
+  ipHash        String?  @map("ip_hash") // Hashed IP for privacy
+
+  // Location context
+  userLat       Float?   @map("user_lat")
+  userLng       Float?   @map("user_lng")
+  userEstado    String?  @map("user_estado")
+
+  // Timestamp
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  @@map("search_analytics")
+  @@index([searchType])
+  @@index([createdAt])
+  @@index([query])
+}
+
+enum SearchType {
+  GENERAL
+  EC_STANDARDS
+  CERTIFIERS
+  CENTERS
+  AUTOCOMPLETE
+  NEARBY
+}
+
+// ============================================
 // EVENTS & AUDIT
 // ============================================
 

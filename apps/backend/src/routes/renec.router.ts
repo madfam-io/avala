@@ -16,6 +16,15 @@ import {
   createScheduler,
   type SchedulerConfig,
 } from "../services/scheduler.service";
+import {
+  sendLeadNotification,
+  sendLeadWelcomeEmail,
+} from "../services/email.service";
+import {
+  geocodeCenter,
+  geocodeAllCenters,
+  getGeocodingStats,
+} from "../services/geocoding.service";
 
 // ============================================
 // Query Schemas
@@ -1400,7 +1409,419 @@ export function createRenecRouter(
     },
   );
 
+  // ============================================
+  // LEADS API - Lead Capture & Management
+  // ============================================
+
+  const leadCreateSchema = z.object({
+    email: z.string().email(),
+    name: z.string().optional(),
+    phone: z.string().optional(),
+    company: z.string().optional(),
+    leadType: z.enum(["INDIVIDUAL", "ORGANIZATION"]).default("INDIVIDUAL"),
+    interests: z.array(z.string()).default([]),
+    ecCode: z.string().optional(),
+    certifierId: z.string().uuid().optional(),
+    centerId: z.string().uuid().optional(),
+    utmSource: z.string().optional(),
+    utmMedium: z.string().optional(),
+    utmCampaign: z.string().optional(),
+  });
+
+  /**
+   * POST /renec/leads
+   * Create a new lead from RENEC Explorer
+   */
+  router.post("/leads", zValidator("json", leadCreateSchema), async (c) => {
+    const data = c.req.valid("json");
+
+    try {
+      // Check for existing lead with same email
+      const existingLead = await prisma.lead.findFirst({
+        where: { email: data.email },
+        orderBy: { createdAt: "desc" },
+      });
+
+      if (existingLead) {
+        // Update existing lead with new interests/context
+        const updatedLead = await prisma.lead.update({
+          where: { id: existingLead.id },
+          data: {
+            name: data.name || existingLead.name,
+            phone: data.phone || existingLead.phone,
+            company: data.company || existingLead.company,
+            leadType: data.leadType,
+            interests: [
+              ...new Set([...existingLead.interests, ...data.interests]),
+            ],
+            ecCode: data.ecCode || existingLead.ecCode,
+            certifierId: data.certifierId || existingLead.certifierId,
+            centerId: data.centerId || existingLead.centerId,
+          },
+        });
+
+        return c.json({
+          success: true,
+          lead: {
+            id: updatedLead.id,
+            email: updatedLead.email,
+            isNew: false,
+          },
+        });
+      }
+
+      // Create new lead
+      const lead = await prisma.lead.create({
+        data: {
+          email: data.email,
+          name: data.name,
+          phone: data.phone,
+          company: data.company,
+          leadType: data.leadType,
+          interests: data.interests,
+          ecCode: data.ecCode,
+          certifierId: data.certifierId,
+          centerId: data.centerId,
+          utmSource: data.utmSource,
+          utmMedium: data.utmMedium,
+          utmCampaign: data.utmCampaign,
+          source: "renec_explorer",
+        },
+      });
+
+      // Send email notifications (fire and forget - don't block response)
+      Promise.all([
+        sendLeadNotification(lead),
+        sendLeadWelcomeEmail(lead),
+      ]).catch((err) => console.error("Email notification error:", err));
+
+      return c.json(
+        {
+          success: true,
+          lead: {
+            id: lead.id,
+            email: lead.email,
+            isNew: true,
+          },
+        },
+        201,
+      );
+    } catch (error) {
+      console.error("Error creating lead:", error);
+      return c.json({ error: "Failed to create lead" }, 500);
+    }
+  });
+
+  /**
+   * GET /renec/leads
+   * List leads (admin endpoint)
+   */
+  router.get(
+    "/leads",
+    zValidator(
+      "query",
+      paginationSchema.extend({
+        status: z
+          .enum(["NEW", "CONTACTED", "QUALIFIED", "CONVERTED", "CLOSED", "all"])
+          .default("all"),
+        leadType: z.enum(["INDIVIDUAL", "ORGANIZATION", "all"]).default("all"),
+        ecCode: z.string().optional(),
+        sortBy: z.enum(["createdAt", "email", "status"]).default("createdAt"),
+        sortOrder: z.enum(["asc", "desc"]).default("desc"),
+      }),
+    ),
+    async (c) => {
+      const { page, limit, status, leadType, ecCode, sortBy, sortOrder } =
+        c.req.valid("query");
+
+      const where: Prisma.LeadWhereInput = {};
+
+      if (status !== "all") {
+        where.status = status;
+      }
+      if (leadType !== "all") {
+        where.leadType = leadType;
+      }
+      if (ecCode) {
+        where.ecCode = ecCode;
+      }
+
+      const [leads, total] = await Promise.all([
+        prisma.lead.findMany({
+          where,
+          orderBy: { [sortBy]: sortOrder },
+          skip: (page - 1) * limit,
+          take: limit,
+        }),
+        prisma.lead.count({ where }),
+      ]);
+
+      return c.json({
+        data: leads,
+        pagination: {
+          page,
+          limit,
+          total,
+          totalPages: Math.ceil(total / limit),
+        },
+      });
+    },
+  );
+
+  /**
+   * PATCH /renec/leads/:id
+   * Update lead status (admin endpoint)
+   */
+  router.patch(
+    "/leads/:id",
+    zValidator(
+      "json",
+      z.object({
+        status: z
+          .enum(["NEW", "CONTACTED", "QUALIFIED", "CONVERTED", "CLOSED"])
+          .optional(),
+        notes: z.string().optional(),
+      }),
+    ),
+    async (c) => {
+      const id = c.req.param("id");
+      const data = c.req.valid("json");
+
+      try {
+        const updateData: Prisma.LeadUpdateInput = {};
+        if (data.status) updateData.status = data.status;
+        if (data.notes) updateData.notes = data.notes;
+        if (data.status === "CONVERTED") updateData.convertedAt = new Date();
+
+        const lead = await prisma.lead.update({
+          where: { id },
+          data: updateData,
+        });
+
+        return c.json({ success: true, lead });
+      } catch (error) {
+        return c.json({ error: "Lead not found" }, 404);
+      }
+    },
+  );
+
+  // ============================================
+  // SEARCH ANALYTICS API
+  // ============================================
+
+  const analyticsTrackSchema = z.object({
+    query: z.string().optional(),
+    searchType: z
+      .enum([
+        "GENERAL",
+        "EC_STANDARDS",
+        "CERTIFIERS",
+        "CENTERS",
+        "AUTOCOMPLETE",
+        "NEARBY",
+      ])
+      .default("GENERAL"),
+    filters: z.record(z.unknown()).default({}),
+    resultCount: z.number().default(0),
+    sessionId: z.string().optional(),
+    userLat: z.number().optional(),
+    userLng: z.number().optional(),
+    userEstado: z.string().optional(),
+  });
+
+  /**
+   * POST /renec/analytics/search
+   * Track a search event
+   */
+  router.post(
+    "/analytics/search",
+    zValidator("json", analyticsTrackSchema),
+    async (c) => {
+      const data = c.req.valid("json");
+
+      try {
+        // Hash IP for privacy
+        const forwarded = c.req.header("x-forwarded-for");
+        const ip = forwarded ? forwarded.split(",")[0] : "unknown";
+        const ipHash = await hashString(ip);
+
+        await prisma.searchAnalytics.create({
+          data: {
+            query: data.query,
+            searchType: data.searchType,
+            filters: data.filters,
+            resultCount: data.resultCount,
+            sessionId: data.sessionId,
+            userAgent: c.req.header("user-agent"),
+            ipHash,
+            userLat: data.userLat,
+            userLng: data.userLng,
+            userEstado: data.userEstado,
+          },
+        });
+
+        return c.json({ success: true });
+      } catch (error) {
+        console.error("Error tracking search:", error);
+        // Don't fail the request for analytics errors
+        return c.json({ success: true });
+      }
+    },
+  );
+
+  /**
+   * GET /renec/analytics/summary
+   * Get analytics summary (admin endpoint)
+   */
+  router.get(
+    "/analytics/summary",
+    zValidator(
+      "query",
+      z.object({
+        days: z.coerce.number().min(1).max(365).default(30),
+      }),
+    ),
+    async (c) => {
+      const { days } = c.req.valid("query");
+      const since = new Date();
+      since.setDate(since.getDate() - days);
+
+      const [totalSearches, searchesByType, topQueries, topEstados] =
+        await Promise.all([
+          // Total searches
+          prisma.searchAnalytics.count({
+            where: { createdAt: { gte: since } },
+          }),
+
+          // Searches by type
+          prisma.searchAnalytics.groupBy({
+            by: ["searchType"],
+            where: { createdAt: { gte: since } },
+            _count: true,
+            orderBy: { _count: { searchType: "desc" } },
+          }),
+
+          // Top queries (non-empty)
+          prisma.$queryRaw`
+            SELECT query, COUNT(*)::int as count
+            FROM search_analytics
+            WHERE created_at >= ${since}
+              AND query IS NOT NULL
+              AND query != ''
+            GROUP BY query
+            ORDER BY count DESC
+            LIMIT 20
+          `,
+
+          // Top estados
+          prisma.$queryRaw`
+            SELECT user_estado as estado, COUNT(*)::int as count
+            FROM search_analytics
+            WHERE created_at >= ${since}
+              AND user_estado IS NOT NULL
+            GROUP BY user_estado
+            ORDER BY count DESC
+            LIMIT 10
+          `,
+        ]);
+
+      return c.json({
+        period: { days, since: since.toISOString() },
+        totalSearches,
+        searchesByType: searchesByType.map((s) => ({
+          type: s.searchType,
+          count: s._count,
+        })),
+        topQueries,
+        topEstados,
+      });
+    },
+  );
+
+  // ============================================
+  // GEOCODING API
+  // ============================================
+
+  /**
+   * GET /renec/geocoding/stats
+   * Get geocoding statistics
+   */
+  router.get("/geocoding/stats", async (c) => {
+    const stats = await getGeocodingStats(prisma);
+    return c.json(stats);
+  });
+
+  /**
+   * POST /renec/geocoding/center/:id
+   * Geocode a single center
+   */
+  router.post("/geocoding/center/:id", async (c) => {
+    const id = c.req.param("id");
+
+    try {
+      const success = await geocodeCenter(prisma, id);
+
+      if (success) {
+        const center = await prisma.renecCenter.findUnique({
+          where: { id },
+          select: { id: true, nombre: true, latitud: true, longitud: true },
+        });
+        return c.json({ success: true, center });
+      }
+
+      return c.json({ success: false, error: "Could not geocode center" }, 400);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Unknown error";
+      return c.json({ success: false, error: message }, 500);
+    }
+  });
+
+  /**
+   * POST /renec/geocoding/batch
+   * Batch geocode all centers without coordinates
+   */
+  router.post(
+    "/geocoding/batch",
+    zValidator(
+      "json",
+      z.object({
+        batchSize: z.number().min(1).max(500).default(100),
+      }),
+    ),
+    async (c) => {
+      const { batchSize } = c.req.valid("json");
+
+      try {
+        // Run geocoding in background
+        const result = await geocodeAllCenters(prisma, {
+          batchSize,
+          onProgress: (processed, total) => {
+            console.log(`Geocoding: ${processed}/${total}`);
+          },
+        });
+
+        return c.json({
+          success: true,
+          ...result,
+        });
+      } catch (error) {
+        const message =
+          error instanceof Error ? error.message : "Unknown error";
+        return c.json({ success: false, error: message }, 500);
+      }
+    },
+  );
+
   return router;
+}
+
+// Helper function to hash strings (for IP privacy)
+async function hashString(str: string): Promise<string> {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(str);
+  const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
 }
 
 // Export scheduler instance for external access

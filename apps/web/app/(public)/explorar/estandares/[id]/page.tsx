@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import type { Metadata } from "next";
 import {
   ArrowLeft,
   BookOpen,
@@ -13,10 +14,54 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { LeadCapture } from "@/components/renec/lead-capture";
+import { ECJsonLd, BreadcrumbJsonLd } from "@/components/seo/json-ld";
 import { getEC, type ECDetail } from "@/lib/api/renec";
 
 interface PageProps {
   params: Promise<{ id: string }>;
+}
+
+// Generate dynamic metadata for SEO
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { id } = await params;
+
+  try {
+    const ec = await getEC(id);
+
+    return {
+      title: `${ec.ecClave} - ${ec.titulo} | Avala`,
+      description: ec.proposito
+        ? ec.proposito.substring(0, 160)
+        : `Estándar de Competencia ${ec.ecClave}: ${ec.titulo}. Encuentra certificadores y centros de evaluación.`,
+      keywords: [
+        ec.ecClave,
+        ec.titulo,
+        "certificación",
+        "competencias laborales",
+        "CONOCER",
+        ec.sector || "",
+      ].filter(Boolean),
+      openGraph: {
+        title: `${ec.ecClave} - ${ec.titulo}`,
+        description: ec.proposito?.substring(0, 200) || `Estándar de Competencia ${ec.ecClave}`,
+        type: "article",
+        url: `https://avala.mx/explorar/estandares/${id}`,
+      },
+      twitter: {
+        card: "summary",
+        title: `${ec.ecClave} - ${ec.titulo}`,
+        description: ec.proposito?.substring(0, 200) || `Estándar de Competencia ${ec.ecClave}`,
+      },
+      alternates: {
+        canonical: `https://avala.mx/explorar/estandares/${id}`,
+      },
+    };
+  } catch {
+    return {
+      title: "Estándar de Competencia | Avala",
+      description: "Explora estándares de competencia laboral en México.",
+    };
+  }
 }
 
 export default async function ECDetailPage({ params }: PageProps) {
@@ -31,15 +76,27 @@ export default async function ECDetailPage({ params }: PageProps) {
   }
 
   return (
-    <div className="container py-8">
-      {/* Back link */}
-      <Link
-        href="/explorar/estandares"
-        className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground mb-6"
-      >
-        <ArrowLeft className="mr-2 h-4 w-4" />
-        Volver a estándares
-      </Link>
+    <>
+      {/* Structured Data */}
+      <ECJsonLd ec={ec} />
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Inicio", url: "https://avala.mx" },
+          { name: "Explorar", url: "https://avala.mx/explorar" },
+          { name: "Estándares", url: "https://avala.mx/explorar/estandares" },
+          { name: ec.ecClave, url: `https://avala.mx/explorar/estandares/${ec.id}` },
+        ]}
+      />
+
+      <div className="container py-8">
+        {/* Back link */}
+        <Link
+          href="/explorar/estandares"
+          className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground mb-6"
+        >
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          Volver a estándares
+        </Link>
 
       {/* Header */}
       <div className="mb-8">
@@ -319,13 +376,14 @@ export default async function ECDetailPage({ params }: PageProps) {
         </div>
       </div>
 
-      {/* Lead Capture Banner */}
-      <div className="mt-12">
-        <LeadCapture
-          variant="banner"
-          context={{ ecCode: ec.ecClave }}
-        />
+        {/* Lead Capture Banner */}
+        <div className="mt-12">
+          <LeadCapture
+            variant="banner"
+            context={{ ecCode: ec.ecClave }}
+          />
+        </div>
       </div>
-    </div>
+    </>
   );
 }
