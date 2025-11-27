@@ -818,6 +818,229 @@ enum CredentialStatus {
 }
 
 // ============================================
+// RENEC DATA (CONOCER Registry)
+// ============================================
+
+// EC Standards from RENEC (cached/synced from CONOCER)
+model RenecEC {
+  id            String   @id @default(uuid()) @db.Uuid
+
+  // Core EC identifiers
+  ecClave       String   @unique @map("ec_clave") // e.g., "EC0217.01"
+  titulo        String
+  version       String   @default("01")
+
+  // Status
+  vigente       Boolean  @default(true)
+  fechaPublicacion DateTime? @map("fecha_publicacion")
+  fechaFinVigencia DateTime? @map("fecha_fin_vigencia")
+
+  // Classification
+  sector        String?
+  nivelCompetencia Int?  @map("nivel_competencia") // 1-5
+
+  // Detailed structure (JSON for flexibility)
+  proposito     String?  @db.Text
+  competencias  Json     @default("[]") // Array of competency descriptions
+  elementosJson Json     @default("[]") @map("elementos_json") // Full element structure
+  critDesempeno Json     @default("[]") @map("crit_desempeno")
+  critConocimiento Json  @default("[]") @map("crit_conocimiento")
+  critProducto  Json     @default("[]") @map("crit_producto")
+
+  // Source tracking
+  sourceUrl     String?  @map("source_url")
+  contentHash   String?  @map("content_hash") // SHA256 for change detection
+  lastSyncedAt  DateTime @default(now()) @map("last_synced_at")
+
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  accreditations RenecAccreditation[]
+  centerOfferings RenecCenterOffering[]
+
+  @@map("renec_ec")
+  @@index([ecClave])
+  @@index([vigente])
+  @@index([sector])
+}
+
+// ECE/OC Certifying Entities from RENEC
+model RenecCertifier {
+  id            String   @id @default(uuid()) @db.Uuid
+
+  // Core identifiers
+  certId        String   @unique @map("cert_id") // ID from RENEC
+  tipo          RenecCertifierType @default(ECE)
+  razonSocial   String   @map("razon_social")
+  nombreComercial String? @map("nombre_comercial")
+
+  // Status
+  activo        Boolean  @default(true)
+
+  // Contact
+  direccion     String?  @db.Text
+  telefono      String?
+  email         String?
+  sitioWeb      String?  @map("sitio_web")
+
+  // Legal
+  rfc           String?
+  representanteLegal String? @map("representante_legal")
+
+  // Location (normalized)
+  estado        String?
+  estadoInegi   String?  @map("estado_inegi") // 2-digit INEGI code
+  municipio     String?
+
+  // Source tracking
+  sourceUrl     String?  @map("source_url")
+  contentHash   String?  @map("content_hash")
+  lastSyncedAt  DateTime @default(now()) @map("last_synced_at")
+
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  accreditations RenecAccreditation[]
+  centers       RenecCenter[]
+
+  @@map("renec_certifiers")
+  @@index([certId])
+  @@index([tipo])
+  @@index([activo])
+  @@index([estadoInegi])
+}
+
+enum RenecCertifierType {
+  ECE // Entidad de Certificación y Evaluación
+  OC  // Organismo Certificador
+}
+
+// Accreditation relationship: Certifier <-> EC
+model RenecAccreditation {
+  id            String   @id @default(uuid()) @db.Uuid
+
+  certifierId   String   @map("certifier_id") @db.Uuid
+  ecId          String   @map("ec_id") @db.Uuid
+
+  // Accreditation details
+  fechaAcreditacion DateTime? @map("fecha_acreditacion")
+  vigente       Boolean  @default(true)
+
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  // Relations
+  certifier     RenecCertifier @relation(fields: [certifierId], references: [id], onDelete: Cascade)
+  ec            RenecEC @relation(fields: [ecId], references: [id], onDelete: Cascade)
+
+  @@unique([certifierId, ecId])
+  @@map("renec_accreditations")
+  @@index([certifierId])
+  @@index([ecId])
+}
+
+// Evaluation Centers from RENEC
+model RenecCenter {
+  id            String   @id @default(uuid()) @db.Uuid
+
+  // Core identifiers
+  centerId      String   @unique @map("center_id") // ID from RENEC
+  certifierId   String?  @map("certifier_id") @db.Uuid // Parent ECE/OC
+
+  nombre        String
+  activo        Boolean  @default(true)
+
+  // Contact
+  direccion     String?  @db.Text
+  telefono      String?
+  email         String?
+
+  // Location (normalized)
+  estado        String?
+  estadoInegi   String?  @map("estado_inegi")
+  municipio     String?
+
+  // Source tracking
+  sourceUrl     String?  @map("source_url")
+  contentHash   String?  @map("content_hash")
+  lastSyncedAt  DateTime @default(now()) @map("last_synced_at")
+
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  certifier     RenecCertifier? @relation(fields: [certifierId], references: [id], onDelete: SetNull)
+  offerings     RenecCenterOffering[]
+
+  @@map("renec_centers")
+  @@index([centerId])
+  @@index([certifierId])
+  @@index([activo])
+  @@index([estadoInegi])
+}
+
+// Center EC offerings (which ECs a center can evaluate)
+model RenecCenterOffering {
+  id            String   @id @default(uuid()) @db.Uuid
+
+  centerId      String   @map("center_id") @db.Uuid
+  ecId          String   @map("ec_id") @db.Uuid
+
+  activo        Boolean  @default(true)
+
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  // Relations
+  center        RenecCenter @relation(fields: [centerId], references: [id], onDelete: Cascade)
+  ec            RenecEC @relation(fields: [ecId], references: [id], onDelete: Cascade)
+
+  @@unique([centerId, ecId])
+  @@map("renec_center_offerings")
+  @@index([centerId])
+  @@index([ecId])
+}
+
+// Sync job tracking
+model RenecSyncJob {
+  id            String   @id @default(uuid()) @db.Uuid
+
+  jobType       RenecSyncJobType @map("job_type")
+  status        RenecSyncStatus @default(PENDING)
+
+  // Statistics
+  itemsProcessed Int     @default(0) @map("items_processed")
+  itemsCreated  Int      @default(0) @map("items_created")
+  itemsUpdated  Int      @default(0) @map("items_updated")
+  itemsSkipped  Int      @default(0) @map("items_skipped")
+  errors        Json     @default("[]")
+
+  startedAt     DateTime? @map("started_at")
+  completedAt   DateTime? @map("completed_at")
+
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  @@map("renec_sync_jobs")
+  @@index([jobType])
+  @@index([status])
+  @@index([createdAt])
+}
+
+enum RenecSyncJobType {
+  EC_STANDARDS
+  CERTIFIERS
+  CENTERS
+  FULL_SYNC
+}
+
+enum RenecSyncStatus {
+  PENDING
+  RUNNING
+  COMPLETED
+  FAILED
+}
+
+// ============================================
 // EVENTS & AUDIT
 // ============================================
 

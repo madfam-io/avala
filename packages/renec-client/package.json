@@ -1,0 +1,36 @@
+{
+  "name": "@avala/renec-client",
+  "version": "0.1.0",
+  "description": "RENEC (CONOCER) data harvester and client for Avala",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
+    "lint": "eslint src/",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "playwright": "^1.40.0",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.2",
+    "vitest": "^1.0.4"
+  },
+  "peerDependencies": {
+    "@prisma/client": "^5.0.0"
+  },
+  "keywords": [
+    "renec",
+    "conocer",
+    "competency-standards",
+    "mexico",
+    "harvester"
+  ],
+  "author": "MADFAM",
+  "license": "UNLICENSED"
+}
