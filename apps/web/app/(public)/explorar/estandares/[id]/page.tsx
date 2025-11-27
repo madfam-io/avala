@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { LeadCapture } from "@/components/renec/lead-capture";
 import { getEC, type ECDetail } from "@/lib/api/renec";
 
 interface PageProps {
@@ -316,6 +317,14 @@ export default async function ECDetailPage({ params }: PageProps) {
             </p>
           </div>
         </div>
+      </div>
+
+      {/* Lead Capture Banner */}
+      <div className="mt-12">
+        <LeadCapture
+          variant="banner"
+          context={{ ecCode: ec.ecClave }}
+        />
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { BookOpen, Building2, MapPin } from "lucide-react";
+import { FloatingCTA } from "@/components/renec/lead-capture";
 
 export default function ExplorarLayout({
   children,
@@ -63,6 +64,9 @@ export default function ExplorarLayout({
 
       {/* Main Content */}
       <main>{children}</main>
+
+      {/* Floating CTA */}
+      <FloatingCTA />
 
       {/* Footer */}
       <footer className="border-t bg-muted/50 mt-16">
