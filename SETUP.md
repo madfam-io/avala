@@ -43,6 +43,20 @@
 - Docker & Docker Compose
 - PostgreSQL 16 (or use Docker)
 
+### NPM Registry Configuration
+
+AVALA uses MADFAM's private npm registry for internal packages. Configure your `.npmrc`:
+
+```bash
+# Add to ~/.npmrc
+@madfam:registry=https://npm.madfam.io
+@avala:registry=https://npm.madfam.io
+@janua:registry=https://npm.madfam.io
+//npm.madfam.io/:_authToken=${NPM_MADFAM_TOKEN}
+```
+
+Set the `NPM_MADFAM_TOKEN` environment variable with your registry token.
+
 ### 1. Clone & Install
 
 ```bash

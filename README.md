@@ -37,6 +37,20 @@ AVALA is a SaaS platform to **design, deliver, evidence, and verify applied lear
 * **Docker** & **Docker Compose**
 * **Make** (optional), **OpenSSL** for local keypair generation
 
+### NPM Registry Configuration
+
+AVALA uses MADFAM's private npm registry for internal packages. Configure your `.npmrc`:
+
+```bash
+# Add to your project's .npmrc or ~/.npmrc
+@madfam:registry=https://npm.madfam.io
+@avala:registry=https://npm.madfam.io
+@janua:registry=https://npm.madfam.io
+//npm.madfam.io/:_authToken=${NPM_MADFAM_TOKEN}
+```
+
+Set the `NPM_MADFAM_TOKEN` environment variable with your registry token.
+
 ### 2.1 Local setup
 
 ```bash
