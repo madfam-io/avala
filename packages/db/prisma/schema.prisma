@@ -960,6 +960,12 @@ model RenecCenter {
   estado        String?
   estadoInegi   String?  @map("estado_inegi")
   municipio     String?
+  codigoPostal  String?  @map("codigo_postal")
+
+  // Geolocation (for map/distance queries)
+  latitud       Float?
+  longitud      Float?
+  geocodedAt    DateTime? @map("geocoded_at") // When lat/lng was resolved
 
   // Source tracking
   sourceUrl     String?  @map("source_url")
@@ -978,6 +984,7 @@ model RenecCenter {
   @@index([certifierId])
   @@index([activo])
   @@index([estadoInegi])
+  @@index([latitud, longitud])
 }
 
 // Center EC offerings (which ECs a center can evaluate)
