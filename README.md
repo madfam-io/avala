@@ -95,19 +95,23 @@ Login: `admin@avala.local` • Password: `changeme` (rotate immediately)
 ```
 avala/
 ├─ apps/
-│  ├─ web/                 # Next.js PWA (Avala Learn/Comply UI)
-│  └─ backend/             # API (NestJS/Go), LRS endpoints, jobs
+│  ├─ api/                 # NestJS REST API (EC modules, training, portfolio, assessment)
+│  ├─ web/                 # Next.js PWA (Avala Learn/Comply/Assess UI)
+│  └─ backend/             # Legacy backend (deprecated, migrating to api/)
 ├─ packages/
-│  ├─ ui/                  # Shared UI components
-│  ├─ core/                # Domain models, validators, constants
-│  └─ sdk/                 # TypeScript SDK for API & xAPI helpers
+│  ├─ db/                  # Prisma schema, migrations, seed data
+│  ├─ client/              # TypeScript API client
+│  ├─ renec-client/        # RENEC integration client
+│  ├─ assessment-engine/   # Quiz & evaluation logic
+│  └─ document-engine/     # PDF generation (DC-3, certificates)
 ├─ infra/
 │  ├─ docker/              # Compose, service images, init scripts
 │  ├─ terraform/           # (Optional) Cloud IaC
 │  └─ k8s/                 # (Optional) Helm manifests
 ├─ docs/
-│  ├─ SOFTWARE_SPEC.md
-│  └─ standards-hr-alignment.md
+│  ├─ architecture/        # SOFTWARE_SPEC.md, ALIGNMENT.md
+│  ├─ setup/               # SETUP.md, DEPLOY.md
+│  └─ INDEX.md             # Documentation index
 └─ .github/                # CI/CD, issue templates
 ```
 
