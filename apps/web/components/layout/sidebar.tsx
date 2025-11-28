@@ -1,14 +1,16 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { cn } from '@/lib/utils';
-import { useAuth } from '@/hooks/useAuth';
-import { getNavigationForRole, type NavItem } from '@/config/navigation';
-import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
-import { LogOut } from 'lucide-react';
-import { TenantSwitcher } from './tenant-switcher';
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { cn } from "@/lib/utils";
+import { useAuth } from "@/hooks/useAuth";
+import { getNavigationForRole, type NavItem } from "@/config/navigation";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { LogOut } from "lucide-react";
+import { TenantSwitcher } from "./tenant-switcher";
+import { LanguageSwitcher } from "./language-switcher";
 
 /**
  * Sidebar Component
@@ -17,6 +19,7 @@ import { TenantSwitcher } from './tenant-switcher';
 export function Sidebar() {
   const pathname = usePathname();
   const { user, logout, isLoggingOut } = useAuth();
+  const t = useTranslations();
 
   if (!user) {
     return null;
@@ -30,9 +33,7 @@ export function Sidebar() {
       <div className="p-6 space-y-4">
         <Link href="/dashboard" className="flex items-center gap-2">
           <div className="w-8 h-8 bg-primary rounded-md flex items-center justify-center">
-            <span className="text-lg font-bold text-primary-foreground">
-              A
-            </span>
+            <span className="text-lg font-bold text-primary-foreground">A</span>
           </div>
           <span className="font-semibold text-lg">AVALA</span>
         </Link>
@@ -50,18 +51,21 @@ export function Sidebar() {
             key={item.href}
             item={item}
             isActive={pathname === item.href}
+            t={t}
           />
         ))}
       </nav>
 
       <Separator />
 
-      {/* User Info & Logout */}
-      <div className="p-4 space-y-2">
+      {/* Language Switcher & User Info */}
+      <div className="p-4 space-y-3">
+        <LanguageSwitcher />
+
         <div className="text-sm">
           <p className="font-medium truncate">{user.email}</p>
           <p className="text-muted-foreground capitalize">
-            {user.role.toLowerCase().replace('_', ' ')}
+            {user.role.toLowerCase().replace("_", " ")}
           </p>
         </div>
         <Button
@@ -72,7 +76,7 @@ export function Sidebar() {
           disabled={isLoggingOut}
         >
           <LogOut className="mr-2 h-4 w-4" />
-          {isLoggingOut ? 'Logging out...' : 'Logout'}
+          {isLoggingOut ? t("auth.loggingOut") : t("auth.logout")}
         </Button>
       </div>
     </div>
@@ -82,22 +86,31 @@ export function Sidebar() {
 /**
  * Individual navigation link component
  */
-function NavLink({ item, isActive }: { item: NavItem; isActive: boolean }) {
+function NavLink({
+  item,
+  isActive,
+  t,
+}: {
+  item: NavItem;
+  isActive: boolean;
+  t: ReturnType<typeof useTranslations>;
+}) {
   const Icon = item.icon;
+  const title = t(item.titleKey);
 
   return (
     <Link
       href={item.href}
       className={cn(
-        'flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors',
-        'hover:bg-accent hover:text-accent-foreground',
+        "flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors",
+        "hover:bg-accent hover:text-accent-foreground",
         isActive
-          ? 'bg-accent text-accent-foreground font-medium'
-          : 'text-muted-foreground'
+          ? "bg-accent text-accent-foreground font-medium"
+          : "text-muted-foreground",
       )}
     >
       <Icon className="h-4 w-4" />
-      <span>{item.title}</span>
+      <span>{title}</span>
     </Link>
   );
 }

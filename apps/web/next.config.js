@@ -1,3 +1,7 @@
+const createNextIntlPlugin = require("next-intl/plugin");
+
+const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -18,7 +22,7 @@ const nextConfig = {
         source: "/api/v1/:path*",
         destination: process.env.NEXT_PUBLIC_API_URL
           ? `${process.env.NEXT_PUBLIC_API_URL}/v1/:path*`
-          : "http://localhost:4000/v1/:path*",
+          : "http://localhost:4900/v1/:path*",
       },
     ];
   },
@@ -26,8 +30,8 @@ const nextConfig = {
   // Environment variables exposed to browser
   env: {
     NEXT_PUBLIC_API_URL:
-      process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000",
+      process.env.NEXT_PUBLIC_API_URL || "http://localhost:4900",
   },
 };
 
-module.exports = nextConfig;
+module.exports = withNextIntl(nextConfig);

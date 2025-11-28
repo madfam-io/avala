@@ -15,10 +15,10 @@ import {
 import { Role } from "@avala/db";
 
 export interface NavItem {
-  title: string;
+  titleKey: string; // i18n key for title
+  descriptionKey?: string; // i18n key for description
   href: string;
   icon: LucideIcon;
-  description?: string;
   roles: Role[]; // Which roles can see this item
 }
 
@@ -48,90 +48,90 @@ const ALL_ROLES: Role[] = [
 export const navigation: NavItem[] = [
   // Universal - All Users
   {
-    title: "Dashboard",
+    titleKey: "nav.dashboard",
+    descriptionKey: "nav.dashboardDesc",
     href: "/dashboard",
     icon: Home,
-    description: "Overview and quick actions",
     roles: ALL_ROLES,
   },
 
   // Admin Section
   {
-    title: "Users",
+    titleKey: "nav.users",
+    descriptionKey: "nav.usersDesc",
     href: "/dashboard/users",
     icon: Users,
-    description: "Manage users and roles",
     roles: ["ADMIN"],
   },
   {
-    title: "Tenants",
+    titleKey: "nav.tenants",
+    descriptionKey: "nav.tenantsDesc",
     href: "/dashboard/tenants",
     icon: Building2,
-    description: "Tenant management",
     roles: ["ADMIN"],
   },
 
   // Compliance Section
   {
-    title: "Compliance",
+    titleKey: "nav.compliance",
+    descriptionKey: "nav.complianceDesc",
     href: "/dashboard/compliance",
     icon: FileCheck,
-    description: "DC-3, SIRCE, LFT plans",
     roles: ["ADMIN", "COMPLIANCE_OFFICER"],
   },
 
   // Instructor Section
   {
-    title: "My Courses",
+    titleKey: "nav.myCourses",
+    descriptionKey: "nav.myCoursesDesc",
     href: "/dashboard/courses",
     icon: BookOpen,
-    description: "Manage your courses",
     roles: ["ADMIN", "INSTRUCTOR", "SUPERVISOR"],
   },
   {
-    title: "Assessments",
+    titleKey: "nav.assessments",
+    descriptionKey: "nav.assessmentsDesc",
     href: "/dashboard/assessments",
     icon: ClipboardCheck,
-    description: "Create and grade assessments",
     roles: ["ADMIN", "INSTRUCTOR", "ASSESSOR"],
   },
   {
-    title: "Trainee Progress",
+    titleKey: "nav.traineeProgress",
+    descriptionKey: "nav.traineeProgressDesc",
     href: "/dashboard/progress",
     icon: TrendingUp,
-    description: "Monitor trainee advancement",
     roles: ["ADMIN", "INSTRUCTOR", "SUPERVISOR"],
   },
 
   // Trainee Section
   {
-    title: "My Learning Path",
+    titleKey: "nav.myLearning",
+    descriptionKey: "nav.myLearningDesc",
     href: "/dashboard/learning",
     icon: GraduationCap,
-    description: "Your courses and progress",
     roles: ["TRAINEE"],
   },
   {
-    title: "My Badges",
+    titleKey: "nav.myBadges",
+    descriptionKey: "nav.myBadgesDesc",
     href: "/dashboard/badges",
     icon: Award,
-    description: "Earned credentials",
     roles: ["TRAINEE"],
   },
   {
-    title: "My Certificates",
+    titleKey: "nav.myCertificates",
+    descriptionKey: "nav.myCertificatesDesc",
     href: "/dashboard/certificates",
     icon: FileBadge,
-    description: "DC-3 and certifications",
     roles: ["TRAINEE"],
   },
 
   // Settings - All Users
   {
-    title: "Settings",
+    titleKey: "nav.settings",
+    descriptionKey: "nav.settingsDesc",
     href: "/dashboard/settings",
     icon: Settings,
-    description: "Account preferences",
     roles: ALL_ROLES,
   },
 ];

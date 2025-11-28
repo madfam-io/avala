@@ -1,10 +1,17 @@
-'use client';
+"use client";
 
-import { useAuth } from '@/hooks/useAuth';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { getNavigationForRole } from '@/config/navigation';
-import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { useAuth } from "@/hooks/useAuth";
+import { useTranslations } from "next-intl";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { getNavigationForRole, type NavItem } from "@/config/navigation";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 /**
  * Dashboard Home Page
@@ -12,25 +19,46 @@ import { ArrowRight } from 'lucide-react';
  */
 export default function DashboardPage() {
   const { user, tenant } = useAuth();
+  const t = useTranslations();
 
   if (!user || !tenant) {
     return null;
   }
 
   const navigation = getNavigationForRole(user.role);
-  const quickActions = navigation.filter(
-    (item) => item.href !== '/dashboard' && item.href !== '/dashboard/settings'
-  ).slice(0, 6);
+  const quickActions = navigation
+    .filter(
+      (item) =>
+        item.href !== "/dashboard" && item.href !== "/dashboard/settings",
+    )
+    .slice(0, 6);
+
+  // Get role key for translation
+  const roleKey = user.role
+    .toLowerCase()
+    .replace("_", "") as keyof typeof roleKeyMap;
+  const roleKeyMap = {
+    admin: "admin",
+    complianceofficer: "manager",
+    instructor: "instructor",
+    assessor: "assessor",
+    trainee: "trainee",
+    supervisor: "manager",
+    eceocadmin: "admin",
+  } as const;
+  const translatedRoleKey = roleKeyMap[roleKey] || "trainee";
 
   return (
     <div className="space-y-6">
       {/* Welcome Section */}
       <div>
         <h1 className="text-3xl font-bold tracking-tight">
-          Welcome back{user.firstName ? `, ${user.firstName}` : ''}!
+          {user.firstName
+            ? t("dashboard.welcomeUser", { name: user.firstName })
+            : `${t("dashboard.welcome")}!`}
         </h1>
         <p className="text-muted-foreground mt-2">
-          {getRoleWelcomeMessage(user.role)}
+          {t(`roleMessages.${translatedRoleKey}`)}
         </p>
       </div>
 
@@ -39,27 +67,27 @@ export default function DashboardPage() {
         <Card>
           <CardHeader>
             <CardTitle className="text-sm font-medium">
-              Organization
+              {t("dashboard.organization")}
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{tenant.name}</div>
-            <p className="text-xs text-muted-foreground mt-1">
-              {tenant.slug}
-            </p>
+            <p className="text-xs text-muted-foreground mt-1">{tenant.slug}</p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader>
-            <CardTitle className="text-sm font-medium">Your Role</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              {t("dashboard.yourRole")}
+            </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold capitalize">
-              {user.role.toLowerCase().replace('_', ' ')}
+            <div className="text-2xl font-bold">
+              {t(`roles.${translatedRoleKey}`)}
             </div>
             <p className="text-xs text-muted-foreground mt-1">
-              Access level
+              {t("dashboard.accessLevel")}
             </p>
           </CardContent>
         </Card>
@@ -67,13 +95,13 @@ export default function DashboardPage() {
         <Card>
           <CardHeader>
             <CardTitle className="text-sm font-medium">
-              Available Features
+              {t("dashboard.availableFeatures")}
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{navigation.length}</div>
             <p className="text-xs text-muted-foreground mt-1">
-              Menu items accessible
+              {t("dashboard.menuItems")}
             </p>
           </CardContent>
         </Card>
@@ -81,16 +109,18 @@ export default function DashboardPage() {
 
       {/* Quick Actions */}
       <div>
-        <h2 className="text-2xl font-semibold mb-4">Quick Actions</h2>
+        <h2 className="text-2xl font-semibold mb-4">
+          {t("dashboard.quickActions")}
+        </h2>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {quickActions.map((item) => (
-            <QuickActionCard key={item.href} item={item} />
+            <QuickActionCard key={item.href} item={item} t={t} />
           ))}
         </div>
       </div>
 
       {/* Role-Specific Content */}
-      <RoleSpecificContent role={user.role} />
+      <RoleSpecificContent role={user.role} t={t} />
     </div>
   );
 }
@@ -98,8 +128,16 @@ export default function DashboardPage() {
 /**
  * Quick Action Card Component
  */
-function QuickActionCard({ item }: { item: any }) {
+function QuickActionCard({
+  item,
+  t,
+}: {
+  item: NavItem;
+  t: ReturnType<typeof useTranslations>;
+}) {
   const Icon = item.icon;
+  const title = t(item.titleKey);
+  const description = item.descriptionKey ? t(item.descriptionKey) : undefined;
 
   return (
     <Link href={item.href}>
@@ -108,13 +146,11 @@ function QuickActionCard({ item }: { item: any }) {
           <CardTitle className="flex items-center justify-between text-base">
             <div className="flex items-center gap-2">
               <Icon className="h-5 w-5 text-primary" />
-              {item.title}
+              {title}
             </div>
             <ArrowRight className="h-4 w-4 opacity-50" />
           </CardTitle>
-          {item.description && (
-            <CardDescription>{item.description}</CardDescription>
-          )}
+          {description && <CardDescription>{description}</CardDescription>}
         </CardHeader>
       </Card>
     </Link>
@@ -122,34 +158,21 @@ function QuickActionCard({ item }: { item: any }) {
 }
 
 /**
- * Role-Specific Welcome Messages
- */
-function getRoleWelcomeMessage(role: string): string {
-  const messages: Record<string, string> = {
-    ADMIN: "You have full access to manage users, compliance, and system settings.",
-    COMPLIANCE_OFFICER: "Manage DC-3 records, SIRCE exports, and LFT plans from your dashboard.",
-    INSTRUCTOR: "Create courses, assess trainees, and track their progress.",
-    ASSESSOR: "Review evidence portfolios and grade assessments.",
-    TRAINEE: "Continue your learning journey and track your certifications.",
-    SUPERVISOR: "Monitor your team's training progress and compliance.",
-    ECE_OC_ADMIN: "Manage certification processes and candidate evaluations.",
-  };
-
-  return messages[role] || "Welcome to your personalized dashboard.";
-}
-
-/**
  * Role-Specific Dashboard Content
  */
-function RoleSpecificContent({ role }: { role: string }) {
-  if (role === 'ADMIN') {
+function RoleSpecificContent({
+  role,
+  t,
+}: {
+  role: string;
+  t: ReturnType<typeof useTranslations>;
+}) {
+  if (role === "ADMIN") {
     return (
       <Card>
         <CardHeader>
-          <CardTitle>System Overview</CardTitle>
-          <CardDescription>
-            Quick insights into platform usage
-          </CardDescription>
+          <CardTitle>{t("dashboard.overview")}</CardTitle>
+          <CardDescription>{t("common.info")}</CardDescription>
         </CardHeader>
         <CardContent>
           <p className="text-sm text-muted-foreground">
@@ -160,12 +183,12 @@ function RoleSpecificContent({ role }: { role: string }) {
     );
   }
 
-  if (role === 'TRAINEE') {
+  if (role === "TRAINEE") {
     return (
       <Card>
         <CardHeader>
-          <CardTitle>My Learning Progress</CardTitle>
-          <CardDescription>Your current courses and achievements</CardDescription>
+          <CardTitle>{t("training.myTraining")}</CardTitle>
+          <CardDescription>{t("training.progress")}</CardDescription>
         </CardHeader>
         <CardContent>
           <p className="text-sm text-muted-foreground">
@@ -176,12 +199,12 @@ function RoleSpecificContent({ role }: { role: string }) {
     );
   }
 
-  if (role === 'INSTRUCTOR') {
+  if (role === "INSTRUCTOR") {
     return (
       <Card>
         <CardHeader>
-          <CardTitle>My Courses</CardTitle>
-          <CardDescription>Active courses and recent activity</CardDescription>
+          <CardTitle>{t("navigation.courses")}</CardTitle>
+          <CardDescription>{t("dashboard.recentActivity")}</CardDescription>
         </CardHeader>
         <CardContent>
           <p className="text-sm text-muted-foreground">
