@@ -210,7 +210,7 @@ export class ECDriver extends BaseDriver {
               this.updateStats("itemsExtracted");
             }
           }
-        } catch (rowError) {
+        } catch {
           // Skip problematic rows
           continue;
         }
@@ -804,15 +804,15 @@ export class ECDriver extends BaseDriver {
   // Legacy methods (kept for compatibility)
   // ============================================
 
-  async parse(html: string, url: string): Promise<ExtractedItem[]> {
+  async parse(_html: string, _url: string): Promise<ExtractedItem[]> {
     // Not used in SPA mode - data is extracted via Playwright
     return [];
   }
 
   async parseDetail(
-    html: string,
-    url: string,
-    meta?: Record<string, unknown>,
+    _html: string,
+    _url: string,
+    _meta?: Record<string, unknown>,
   ): Promise<ExtractedItem | null> {
     // Not used in SPA mode
     return null;

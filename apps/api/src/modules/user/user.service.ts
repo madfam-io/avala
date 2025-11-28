@@ -274,7 +274,7 @@ export class UserService {
         where: { id: userId },
         data,
       });
-    } catch (error) {
+    } catch (_error) {
       throw new NotFoundException(`User with ID ${userId} not found`);
     }
   }

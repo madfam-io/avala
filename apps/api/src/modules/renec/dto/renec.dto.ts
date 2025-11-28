@@ -651,7 +651,7 @@ export const RENEC_VALIDATION_PATTERNS = {
   oec_code: /^OC\d{3,4}$/,
   ce_code: /^CE\d{4,5}$/,
   email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-  phone: /^[\d\s\-\+\(\)]+$/,
+  phone: /^[\d\s\-+()]+$/,
   rfc: /^[A-Z&Ñ]{3,4}\d{6}[A-Z0-9]{3}$/,
   curp: /^[A-Z]{4}\d{6}[HM][A-Z]{5}[A-Z0-9]\d$/,
 };

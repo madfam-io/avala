@@ -37,7 +37,7 @@ export default function StandardDetailPage() {
   const [loading, setLoading] = useState(true);
   const [enrolling, setEnrolling] = useState(false);
   const [isEnrolled, setIsEnrolled] = useState(false);
-  const [_enrollmentId, setEnrollmentId] = useState<string | null>(null);
+  const [, setEnrollmentId] = useState<string | null>(null);
 
   useEffect(() => {
     loadStandardData();

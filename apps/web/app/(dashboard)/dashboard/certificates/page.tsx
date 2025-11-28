@@ -1,7 +1,7 @@
 'use client';
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { FileBadge, Download, ExternalLink, Clock } from 'lucide-react';
+import { FileBadge, Download, ExternalLink } from 'lucide-react';
 
 /**
  * My Certificates Page

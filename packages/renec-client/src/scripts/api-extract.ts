@@ -89,7 +89,7 @@ async function fetchAPI(url: string): Promise<any> {
       return response.json();
     }, url);
     return result;
-  } catch (error) {
+  } catch (_error) {
     console.warn(`⚠️ API call failed: ${url} - ${(error as Error).message}`);
     return null;
   }
@@ -280,7 +280,7 @@ async function extractECDetails(maxItems?: number) {
         data.ecDetails.set(ec.codigo, detail);
       }
 
-    } catch (error) {
+    } catch (_error) {
       // Skip errors silently
     }
   }
@@ -310,7 +310,7 @@ function inferCertifierType(nombre: string): 'ECE' | 'OC' | 'unknown' {
 }
 
 function saveData() {
-  const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+  const _timestamp = new Date().toISOString().replace(/[:.]/g, '-');
 
   // Save EC standards
   fs.writeFileSync(
@@ -432,7 +432,7 @@ async function main() {
     saveData();
     generateSummary();
 
-  } catch (error) {
+  } catch (_error) {
     console.error('❌ Fatal error:', error);
     saveData();
   } finally {

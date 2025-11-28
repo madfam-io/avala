@@ -13,8 +13,17 @@ const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
     rules: {
-      "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
-      "@typescript-eslint/no-explicit-any": "warn",
+      // Unused variables - allow underscore-prefixed args and variables
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        { argsIgnorePattern: "^_", varsIgnorePattern: "^_", caughtErrorsIgnorePattern: "^_" }
+      ],
+      // Allow any for API responses and catch blocks - TODO: add proper types incrementally
+      "@typescript-eslint/no-explicit-any": "off",
+      // Allow exhaustive deps warnings - many intentional patterns (run-once effects)
+      "react-hooks/exhaustive-deps": "warn",
+      // Allow <img> for external images not compatible with next/image
+      "@next/next/no-img-element": "warn",
     },
   },
 ];

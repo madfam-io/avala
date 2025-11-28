@@ -190,7 +190,18 @@ export class CertificatesService {
     tenant: any,
     certificate: any,
   ): Promise<Buffer> {
-    return new Promise(async (resolve, reject) => {
+    // Generate QR code before entering Promise (async operations outside executor)
+    const verificationUrl = `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/verify/${certificate.certificateUuid}`;
+    const qrCodeBuffer = await QRCode.toBuffer(verificationUrl, {
+      width: 120,
+      margin: 1,
+      color: {
+        dark: "#000000",
+        light: "#FFFFFF",
+      },
+    });
+
+    return new Promise((resolve, reject) => {
       try {
         const doc = new PDFDocument({
           size: "LETTER",
@@ -202,17 +213,6 @@ export class CertificatesService {
         doc.on("data", (chunk) => chunks.push(chunk));
         doc.on("end", () => resolve(Buffer.concat(chunks)));
         doc.on("error", reject);
-
-        // Generate QR code for verification
-        const verificationUrl = `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/verify/${certificate.certificateUuid}`;
-        const qrCodeBuffer = await QRCode.toBuffer(verificationUrl, {
-          width: 120,
-          margin: 1,
-          color: {
-            dark: "#000000",
-            light: "#FFFFFF",
-          },
-        });
 
         // Header Section
         this.renderHeader(doc, certificate.folio);

@@ -129,11 +129,7 @@ export function DocumentEditor({
   const handleSave = async () => {
     setSaving(true);
     try {
-      const payload = {
-        templateId: template.id,
-        enrollmentId,
-        content: formData,
-      };
+
 
       let result: ECDocument;
       if (existingDocument) {

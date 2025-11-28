@@ -8,7 +8,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Comprehensive test coverage for API (80 suites, 1,087 tests)
+- Comprehensive test coverage for Web (8 suites, 96 tests)
+- Handler tests for all API controllers
+- Strategy tests for search and authentication
+- Guard and interceptor tests
+- React component tests with Vitest
 - Interactive LMS demo route at `/demo`
+
+### Changed
+- Updated Next.js to 15 with React 19
+- Updated NestJS to 10
+- Improved documentation accuracy
+
+### Fixed
+- Documentation port numbers (Web: 3060, API: 4900)
+- Node.js version requirements (20+)
+- Test configuration for JWT strategy
 
 ## [0.1.0] - 2024-11-27
 
@@ -27,6 +43,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Certificate generation
 - Bilingual interface (Spanish primary, English)
 - Janua billing and email integration
+- RENEC integration for EC standards
 
 ### Standards Compliance
 - EC (Estándares de Competencia) mapping
@@ -37,11 +54,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - W3C Verifiable Credentials
 
 ### Technical
-- Next.js 14 with App Router
-- PostgreSQL with row-level security
-- Redis for session management
+- Next.js 15 with App Router and React 19
+- NestJS 10 with Prisma ORM
+- PostgreSQL 15+ with row-level security
+- Redis for caching and sessions
 - SHA-256 content-addressed storage
-- Supabase integration
+- Turborepo monorepo with pnpm workspaces
 - Docker containerization
 - GitHub Actions CI/CD
 

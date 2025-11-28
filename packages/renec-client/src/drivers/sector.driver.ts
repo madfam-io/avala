@@ -8,7 +8,7 @@
  */
 
 import { BaseDriver, type ExtractedItem } from "./base.driver";
-import type { Sector, Comite, ECSectorRelation } from "../types";
+// Types Sector and Comite are defined in ../types but we use Record<string, unknown> for flexibility
 import { RENEC_ENDPOINTS } from "../types";
 import { cleanText, computeContentHash } from "../utils/helpers";
 
@@ -22,15 +22,7 @@ const LEGACY_SECTOR_ENDPOINTS = {
   comiteStandards: "/RENEC/controlador.do?comp=COMITE_EC&id=",
 } as const;
 
-interface SectorData extends Sector {
-  extractedAt: string;
-  contentHash: string;
-}
 
-interface ComiteData extends Comite {
-  extractedAt: string;
-  contentHash: string;
-}
 
 export class SectorDriver extends BaseDriver {
   private pendingDetailRequests: Array<{
@@ -489,7 +481,7 @@ export class SectorDriver extends BaseDriver {
         const detailUrl = this.buildUrl(
           LEGACY_SECTOR_ENDPOINTS.sectorDetail + request.id,
         );
-        const html = await this.fetchPage(detailUrl);
+        await this.fetchPage(detailUrl);
         const detail = await this.parseSectorDetail(detailUrl, {
           basicData: request.basicData,
         });
@@ -587,9 +579,11 @@ export class SectorDriver extends BaseDriver {
             "td:first-child",
             (el) => el.textContent?.trim() || "",
           );
-          const sectorNombre = await row
+          // sectorNombre extracted but not used in basic data - may be needed for detail lookup
+          const _sectorNombre = await row
             .$eval("td:nth-child(2)", (el) => el.textContent?.trim() || "")
             .catch(() => "");
+          void _sectorNombre;
           const numEstandaresText = await row
             .$eval("td:nth-child(3)", (el) => el.textContent?.trim() || "")
             .catch(() => "");

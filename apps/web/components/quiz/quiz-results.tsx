@@ -11,14 +11,13 @@ import {
 } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
+
 import {
   CheckCircle2,
   XCircle,
   Trophy,
   Clock,
   Target,
-  ArrowRight,
   RotateCcw,
   Home,
 } from "lucide-react";
@@ -57,7 +56,7 @@ interface QuizResultsProps {
  */
 export function QuizResults({
   result,
-  quizTitle,
+  quizTitle: _quizTitle,
   passingScore,
   onRetry,
   onGoHome,

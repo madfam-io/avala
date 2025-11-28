@@ -22,6 +22,7 @@ import { RenecModule } from "./modules/renec/renec.module";
 import { SimulationModule } from "./modules/ec-simulation/simulation.module";
 import { CertificationModule } from "./modules/certification/certification.module";
 import { SearchModule } from "./modules/search/search.module";
+import { ComplianceModule } from "./modules/compliance/compliance.module";
 
 // Multi-EC Training System (Phase 7)
 import { ECConfigModule } from "./modules/ec-config/ec-config.module";
@@ -100,6 +101,9 @@ import { ECAssessmentModule } from "./modules/ec-assessment/ec-assessment.module
 
     // Global Search (Phase 7)
     SearchModule,
+
+    // STPS Compliance: SIRCE Export & LFT Plans (Phase 8)
+    ComplianceModule,
 
     // Multi-EC Training System (Phase 7)
     // Configuration-driven EC training for EC0249, EC0217, etc.

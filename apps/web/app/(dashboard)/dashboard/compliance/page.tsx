@@ -77,7 +77,7 @@ export default function CompliancePage() {
             Compliance Overview
           </CardTitle>
           <CardDescription>
-            Monitor your organization's compliance status
+            Monitor your organization&apos;s compliance status
           </CardDescription>
         </CardHeader>
         <CardContent>

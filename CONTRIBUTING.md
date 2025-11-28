@@ -6,33 +6,48 @@ Thank you for your interest in contributing to AVALA! This document provides gui
 
 ### Prerequisites
 
-- Node.js 18+
+- Node.js 20+
 - pnpm 9+
 - Docker and Docker Compose
-- Supabase CLI (optional)
+- PostgreSQL 15+ (via Docker or local)
 
 ### Getting Started
 
 ```bash
 # Clone the repository
-git clone https://github.com/madfam/avala.git
+git clone <repo-url>
 cd avala
 
 # Install dependencies
 pnpm install
 
 # Copy environment variables
-cp .env.example .env.local
+cp .env.example .env
 
 # Start development services
-docker-compose up -d
+docker compose up -d
+
+# Build packages
+pnpm build
 
 # Run database migrations
-pnpm db:push
+pnpm db:migrate
+
+# Seed initial data
+pnpm db:seed
 
 # Start development server
 pnpm dev
 ```
+
+### Default Development URLs
+
+| Service | URL |
+|---------|-----|
+| Web App | http://localhost:3060 |
+| API | http://localhost:4900 |
+| API Docs | http://localhost:4900/api |
+| Mailhog | http://localhost:8025 |
 
 ## Branch Strategy
 
@@ -54,7 +69,15 @@ We follow [Conventional Commits](https://www.conventionalcommits.org/):
 
 **Types:** `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
 
-**Scopes:** `web`, `api`, `lrs`, `badges`, `dc3`, `sirce`, `ec`
+**Scopes:** `web`, `api`, `db`, `badges`, `dc3`, `sirce`, `ec`, `renec`
+
+**Examples:**
+```
+feat(api): add EC standard cloning endpoint
+fix(web): resolve leaderboard sorting issue
+test(api): add auth controller tests
+docs: update setup instructions
+```
 
 ## Pull Request Process
 
@@ -70,7 +93,7 @@ We follow [Conventional Commits](https://www.conventionalcommits.org/):
 - [ ] Tests pass (`pnpm test`)
 - [ ] Linting passes (`pnpm lint`)
 - [ ] Type checking passes (`pnpm typecheck`)
-- [ ] Demo mode still works correctly
+- [ ] Build succeeds (`pnpm build`)
 - [ ] Standards compliance maintained
 - [ ] CHANGELOG.md updated for significant changes
 
@@ -79,15 +102,58 @@ We follow [Conventional Commits](https://www.conventionalcommits.org/):
 ### TypeScript
 
 - Strict mode enabled
-- Explicit return types
-- Use Zod for validation
+- Explicit return types for public APIs
+- Use Zod for runtime validation
 - Bilingual string handling (ES/EN)
+
+### API (NestJS)
+
+- Follow module-based architecture
+- Use decorators consistently
+- Document endpoints with Swagger decorators
+- Write unit tests for controllers and services
+
+### Web (Next.js)
+
+- Use App Router patterns
+- Server Components by default
+- Client Components only when necessary
+- Use shadcn/ui for UI components
 
 ### Database
 
-- Use Supabase/Prisma for operations
-- Implement Row-Level Security (RLS) policies
+- Prisma for ORM operations
+- Implement Row-Level Security (RLS) where needed
 - Document all data models
+- Write migrations for schema changes
+
+## Testing
+
+### Running Tests
+
+```bash
+# Run all tests
+pnpm test
+
+# API tests only
+pnpm --filter api test
+
+# Web tests only
+pnpm --filter web test
+
+# With coverage
+pnpm --filter api test:cov
+
+# Watch mode
+pnpm --filter api test:watch
+```
+
+### Test Standards
+
+- Write unit tests for new features
+- Maintain test coverage above 70%
+- Use descriptive test names
+- Mock external dependencies
 
 ## Standards Compliance
 
@@ -135,14 +201,6 @@ AVALA is Spanish-first with English support:
 - All user-facing strings must be translatable
 - Use i18n library consistently
 
-## Demo Mode
-
-AVALA includes a demo mode. When making changes:
-
-- Ensure demo mode continues to function
-- Update mock data if new features added
-- Test full demo flow before PR
-
 ## Security Guidelines
 
 Education data requires careful handling:
@@ -153,11 +211,28 @@ Education data requires careful handling:
 - Log audit events
 - Report vulnerabilities to security@madfam.io
 
+## Project Structure
+
+```
+avala/
+├── apps/
+│   ├── api/           # NestJS REST API
+│   └── web/           # Next.js frontend
+├── packages/
+│   ├── db/            # Prisma schema & migrations
+│   ├── client/        # TypeScript API client
+│   └── ...            # Other shared packages
+└── docs/              # Documentation
+```
+
 ## Getting Help
 
+- **Documentation**: See [docs/INDEX.md](docs/INDEX.md)
 - **Issues**: Open a GitHub issue
 - **Discussions**: Use GitHub Discussions
 
 ## License
 
-By contributing, you agree that your contributions will be licensed under the AGPL-3.0 license.
+AVALA is proprietary software. © Innovaciones MADFAM S.A.S. de C.V. — All rights reserved.
+
+By contributing, you agree that your contributions will be owned by Innovaciones MADFAM S.A.S. de C.V.

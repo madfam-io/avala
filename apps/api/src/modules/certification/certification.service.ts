@@ -247,7 +247,20 @@ export class CertificationService {
     const certificationDate = data.certificationDate as Date;
     const includeQRCode = data.includeQRCode as boolean;
 
-    return new Promise(async (resolve, reject) => {
+    // Generate QR code before Promise (async operations outside executor)
+    let qrBuffer: Buffer | null = null;
+    if (includeQRCode) {
+      try {
+        const qrDataUrl = await QRCode.toDataURL(`DC3:${certificateNumber}`, {
+          width: 80,
+        });
+        qrBuffer = Buffer.from(qrDataUrl.split(",")[1], "base64");
+      } catch (qrError) {
+        this.logger.warn("Failed to generate QR code", qrError);
+      }
+    }
+
+    return new Promise((resolve, reject) => {
       try {
         const chunks: Buffer[] = [];
         const doc = new PDFDocument({
@@ -274,18 +287,9 @@ export class CertificationService {
           .text(`Folio: ${certificateNumber}`, { align: "center" });
         doc.moveDown();
 
-        // QR Code (if requested)
-        if (includeQRCode) {
-          try {
-            const qrDataUrl = await QRCode.toDataURL(
-              `DC3:${certificateNumber}`,
-              { width: 80 },
-            );
-            const qrBuffer = Buffer.from(qrDataUrl.split(",")[1], "base64");
-            doc.image(qrBuffer, doc.page.width - 130, 50, { width: 80 });
-          } catch (qrError) {
-            this.logger.warn("Failed to generate QR code", qrError);
-          }
+        // QR Code (if pre-generated)
+        if (qrBuffer) {
+          doc.image(qrBuffer, doc.page.width - 130, 50, { width: 80 });
         }
 
         // Divider line

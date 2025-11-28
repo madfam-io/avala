@@ -125,7 +125,7 @@ export class JanuaEmailService implements OnModuleInit {
         `Janua email service: ${this.isAvailable ? "available" : "unavailable"}`,
       );
       return this.isAvailable;
-    } catch (error) {
+    } catch (_error) {
       this.logger.warn(
         "Janua email service health check failed, will use SMTP fallback",
       );

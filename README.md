@@ -2,56 +2,52 @@
 
 > **Alineamiento y Verificación de Aprendizajes y Logros Acreditables**
 >
-> Trainee‑first, multi‑tenant Learning & Competency Cloud aligned to EC/CONOCER, DC‑3/SIRCE (MX), and verifiable credentials.
+> Trainee-first, multi-tenant Learning & Competency Cloud aligned to EC/CONOCER, DC-3/SIRCE (MX), and verifiable credentials.
 
 <div align="center">
 
-**Status:** pre‑alpha • **Monorepo:** backend + web + infra • **License:** © Innovaciones MADFAM S.A.S. de C.V. — All rights reserved
+**Status:** Alpha • **Monorepo:** Turborepo + pnpm • **License:** © Innovaciones MADFAM S.A.S. de C.V. — All rights reserved
 
 </div>
 
 ---
 
-## 1) What is AVALA?
+## What is AVALA?
 
-AVALA is a SaaS platform to **design, deliver, evidence, and verify applied learning** mapped to Mexico’s **Estándares de Competencia (EC/CONOCER)** and international best practices. It automates **DC‑3** issuance, prepares **SIRCE/LFT** reporting, and issues **Open Badges 3.0 / Verifiable Credentials**.
+AVALA is a SaaS platform to **design, deliver, evidence, and verify applied learning** mapped to Mexico's **Estándares de Competencia (EC/CONOCER)** and international best practices. It automates **DC-3** issuance, prepares **SIRCE/LFT** reporting, and issues **Open Badges 3.0 / Verifiable Credentials**.
 
-**Core modules**
+### Core Modules
 
-* **Avala Learn** — paths, lessons, attendance, cmi5/xAPI tracking.
-* **Avala Assess** — multi‑method evaluations, criterion‑level scoring, **Portfolio of Evidence**.
-* **Avala Comply** — **DC‑3**, **SIRCE** exports, **LFT** plan snapshots.
-* **Avala Badges** — Open Badges 3.0 / VC issuance & verification.
-* **Avala Connect** — SSO/SCIM, HRIS & email/SMS integrations.
-
-👉 See **[SOFTWARE\_SPEC.md](./SOFTWARE_SPEC.md)** for the detailed product spec.
-👉 See **Standards & HR Alignment Brief** in `./ALIGNMENT.md`.
+| Module | Description |
+|--------|-------------|
+| **Avala Learn** | Learning paths, lessons, attendance, cmi5/xAPI tracking |
+| **Avala Assess** | Multi-method evaluations, criterion-level scoring, Portfolio of Evidence |
+| **Avala Comply** | DC-3 generation, SIRCE exports, LFT plan snapshots |
+| **Avala Badges** | Open Badges 3.0 / VC issuance & verification |
+| **Avala Connect** | SSO/SCIM, HRIS & email/SMS integrations |
 
 ---
 
-## 2) Quickstart (TL;DR)
+## Quick Start
 
 ### Prerequisites
 
-* **Node.js** ≥ 20, **pnpm** ≥ 9 (or npm/yarn)
-* **Docker** & **Docker Compose**
-* **Make** (optional), **OpenSSL** for local keypair generation
+- **Node.js** ≥ 20
+- **pnpm** ≥ 9
+- **Docker** & **Docker Compose**
 
 ### NPM Registry Configuration
 
-AVALA uses MADFAM's private npm registry for internal packages. Configure your `.npmrc`:
+AVALA uses MADFAM's private npm registry. Configure your `.npmrc`:
 
 ```bash
-# Add to your project's .npmrc or ~/.npmrc
 @madfam:registry=https://npm.madfam.io
 @avala:registry=https://npm.madfam.io
 @janua:registry=https://npm.madfam.io
 //npm.madfam.io/:_authToken=${NPM_MADFAM_TOKEN}
 ```
 
-Set the `NPM_MADFAM_TOKEN` environment variable with your registry token.
-
-### 2.1 Local setup
+### Setup
 
 ```bash
 # 1) Clone
@@ -59,266 +55,186 @@ git clone https://your.git.server/madfam/avala.git && cd avala
 
 # 2) Environment
 cp .env.example .env
-# (Optional) Generate keys for OB v3 / JWT
-openssl genpkey -algorithm ed25519 -out ./keys/issuer.key
-openssl pkey -in ./keys/issuer.key -pubout -out ./keys/issuer.pub
 
-# 3) Infra (Postgres, Redis, MinIO, Mailhog)
+# 3) Start infrastructure (Postgres, Redis, MinIO, Mailhog)
 docker compose up -d
 
 # 4) Install & build
-pnpm i
+pnpm install
 pnpm build
 
-# 5) DB migrate & seed (creates admin@avala.local / changeme)
-pnpm backend prisma migrate deploy
-pnpm backend seed
+# 5) Database setup
+pnpm db:migrate
+pnpm db:seed
 
-# 6) Run all services (dev)
+# 6) Run development
 pnpm dev
 ```
 
-**Default URLs**
+### Default URLs
 
-* Web: `http://localhost:3000`
-* API: `http://localhost:4000`
-* LRS: `http://localhost:4000/xapi`
-* Mailhog UI: `http://localhost:8025`
-* MinIO Console: `http://localhost:9001`
+| Service | URL | Description |
+|---------|-----|-------------|
+| Web | http://localhost:3060 | Next.js frontend |
+| API | http://localhost:4900 | NestJS backend |
+| API Docs | http://localhost:4900/docs | Swagger documentation |
+| Mailhog | http://localhost:8025 | Email testing UI |
+| MinIO | http://localhost:9001 | Object storage console |
 
-Login: `admin@avala.local` • Password: `changeme` (rotate immediately)
+**Default Login:** `admin@avala.local` / `changeme`
 
 ---
 
-## 3) Repository Layout
+## Repository Structure
 
 ```
 avala/
-├─ apps/
-│  ├─ api/                 # NestJS REST API (EC modules, training, portfolio, assessment)
-│  ├─ web/                 # Next.js PWA (Avala Learn/Comply/Assess UI)
-│  └─ backend/             # Legacy backend (deprecated, migrating to api/)
-├─ packages/
-│  ├─ db/                  # Prisma schema, migrations, seed data
-│  ├─ client/              # TypeScript API client
-│  ├─ renec-client/        # RENEC integration client
-│  ├─ assessment-engine/   # Quiz & evaluation logic
-│  └─ document-engine/     # PDF generation (DC-3, certificates)
-├─ infra/
-│  ├─ docker/              # Compose, service images, init scripts
-│  ├─ terraform/           # (Optional) Cloud IaC
-│  └─ k8s/                 # (Optional) Helm manifests
-├─ docs/
-│  ├─ architecture/        # SOFTWARE_SPEC.md, ALIGNMENT.md
-│  ├─ setup/               # SETUP.md, DEPLOY.md
-│  └─ INDEX.md             # Documentation index
-└─ .github/                # CI/CD, issue templates
+├── apps/
+│   ├── api/                  # NestJS REST API
+│   │   ├── src/modules/      # Feature modules (auth, courses, ec-*, etc.)
+│   │   ├── src/common/       # Guards, interceptors, decorators
+│   │   └── prisma/           # Database schema
+│   └── web/                  # Next.js 14 PWA
+│       ├── app/              # App Router pages
+│       ├── components/       # React components
+│       └── lib/              # Utilities & API client
+├── packages/
+│   ├── db/                   # Prisma schema & migrations
+│   ├── client/               # TypeScript API client
+│   ├── renec-client/         # RENEC integration client
+│   ├── assessment-engine/    # Quiz & evaluation logic
+│   └── document-engine/      # PDF generation (DC-3, certificates)
+├── docs/                     # Documentation
+│   ├── architecture/         # SOFTWARE_SPEC.md, ALIGNMENT.md
+│   ├── setup/                # SETUP.md, DEPLOY.md
+│   └── INDEX.md              # Documentation index
+└── infra/                    # Docker, Terraform, K8s configs
 ```
 
 ---
 
-## 4) Configuration
+## Development
 
-### 4.1 Environment variables (`.env`)
+### Scripts
 
 ```bash
-# Core
-NODE_ENV=development
-PORT=4000
-WEB_URL=http://localhost:3000
-API_URL=http://localhost:4000
+# Development
+pnpm dev                      # Run all apps in dev mode
+pnpm dev --filter @avala/api  # API only
+pnpm dev --filter @avala/web  # Web only
+
+# Build & Test
+pnpm build                    # Build all packages
+pnpm test                     # Run all tests
+pnpm lint                     # Lint all packages
 
 # Database
-DATABASE_URL=postgresql://avala:avala@localhost:5432/avala
-
-# Cache/Queue
-REDIS_URL=redis://localhost:6379
-
-# Object storage (MinIO or S3)
-S3_ENDPOINT=http://localhost:9000
-S3_REGION=us-east-1
-S3_BUCKET=avala-evidence
-S3_ACCESS_KEY=avala
-S3_SECRET_KEY=avala
-S3_USE_PATH_STYLE=true
-
-# Auth/SSO
-JWT_SECRET=replace-me
-OIDC_ISSUER=
-OIDC_CLIENT_ID=
-OIDC_CLIENT_SECRET=
-
-# Email
-SMTP_HOST=localhost
-SMTP_PORT=1025
-SMTP_USER=
-SMTP_PASS=
-EMAIL_FROM="Avala <no-reply@avala.local>"
-
-# Open Badges / VC
-OB_ISSUER_DID=did:web:localhost
-OB_ISSUER_KID=did:web:localhost#keys-1
-OB_PRIVATE_KEY_PATH=./keys/issuer.key
-OB_PUBLIC_KEY_PATH=./keys/issuer.pub
-
-# LRS (xAPI/cmi5)
-LRS_BASIC_USER=lrs
-LRS_BASIC_PASS=lrs
+pnpm db:generate              # Generate Prisma client
+pnpm db:migrate               # Run migrations
+pnpm db:seed                  # Seed database
+pnpm db:studio                # Open Prisma Studio
 ```
 
-> See `infra/docker/.env.example` for container‑specific overrides.
+### Test Coverage
 
-### 4.2 Secrets
-
-Use your secret manager (Doppler, 1Password, Vault, SSM) for prod. Never commit real keys.
-
----
-
-## 5) Running Services
-
-### Dev
+| App | Test Suites | Tests | Coverage |
+|-----|-------------|-------|----------|
+| API | 80 | 1,087 | ~75% |
+| Web | 8 | 96 | UI components |
 
 ```bash
-pnpm dev            # web + backend with watch
-pnpm web dev        # UI only
-pnpm backend start:dev
-```
-
-### Build & run
-
-```bash
-pnpm build
-pnpm start          # starts backend (API + LRS) & serves web
-```
-
-### Docker
-
-```bash
-docker compose up -d --build
+# Run with coverage
+cd apps/api && pnpm test:cov
+cd apps/web && pnpm test:coverage
 ```
 
 ---
 
-## 6) Data & Migrations
+## Tech Stack
 
-* ORM: Prisma (if Node/Nest) or GORM/Ent (if Go).
-* Apply migrations on boot; use **Git‑versioned** migration files.
-* Seed scripts create: default tenant, admin user, base roles, demo EC import.
+| Layer | Technology |
+|-------|------------|
+| **Frontend** | Next.js 14, TypeScript, Tailwind CSS, shadcn/ui |
+| **API** | NestJS, TypeScript, Prisma ORM |
+| **Database** | PostgreSQL 16 with Row-Level Security |
+| **Cache** | Redis |
+| **Storage** | S3-compatible (MinIO/AWS) |
+| **Auth** | JWT + Janua SSO integration |
+| **Testing** | Jest (API), Vitest (Web) |
 
-```bash
-pnpm backend prisma migrate dev
-pnpm backend seed
+---
+
+## API Overview
+
+### Authentication
+```
+POST /auth/login              # Email/password login
+POST /auth/register           # User registration
+GET  /auth/me                 # Current user profile
 ```
 
----
-
-## 7) Key Domains (quick reference)
-
-* **Standard / Element / Criterion** — EC structure (snapshot & version pinning).
-* **Course / Lesson / Path** — authored content mapped to criteria.
-* **Assessment / Attempt / Rubric** — multi‑method evaluation per criterion.
-* **Artifact / Portfolio** — evidence with hash, signer, timestamp.
-* **DC3 / LFTPlan / SIRCEExport** — compliance objects (MX).
-* **Credential (OBv3/VC)** — verifiable credential payload & status.
-
-See **SOFTWARE\_SPEC.md** §4 for the full data model.
-
----
-
-## 8) API (glance)
-
-* REST/JSON, OAuth2/OIDC; SCIM 2.0 (enterprise).
-* Representative endpoints:
-
-  * `GET /v1/ec/search?q=EC0217`
-  * `POST /v1/courses`, `GET /v1/courses/{id}/coverage`
-  * `POST /v1/assessments/{id}/attempts`, `POST /v1/artifacts`
-  * `POST /v1/dc3`, `POST /v1/sirce/exports`
-  * `POST /v1/credentials/obv3`, `GET /v1/credentials/verify/{id}`
-  * `POST /v1/xapi/statements`, `POST /v1/cmi5/launch`
-
-The **`packages/sdk`** provides typed clients & helpers.
-
----
-
-## 9) Security, Privacy, Compliance
-
-* **Tenancy & RLS**: per‑tenant row‑level security; org/site scoping.
-* **Evidence integrity**: content‑addressed storage (SHA‑256), signed URLs.
-* **Auditability**: immutable audit log; DC‑3 serial registry; SIRCE validators.
-* **PII**: minimization, consent capture, retention policies (defaults: evidence 24m; DC‑3 & plans 5y).
-* **Residency**: MX default; EU option (enterprise).
-
-> Legal note: EC **certification** is issued only by **ECE/OC** via SII. AVALA prepares evidence and dictamen packages; it does **not** issue EC certificates unless accredited.
-
----
-
-## 10) Testing & Quality
-
-* **Unit**: validators, coverage calculator, DC‑3 schema, OBv3 signing/verify.
-* **Integration**: enrollment→assessment→artifact→portfolio; DC‑3→SIRCE pipeline.
-* **E2E**: Playwright/Cypress flows for trainee, assessor, compliance.
-* **CI**: lint → test → build → scan → package; preview envs per PR.
-
-Scripts:
-
-```bash
-pnpm test
-pnpm lint
-pnpm e2e
+### EC Standards & Training
+```
+GET  /ec-standards            # List competency standards
+POST /training/enroll         # Enroll in EC standard
+GET  /training/enrollments    # User enrollments
+PUT  /training/progress/:id   # Update lesson progress
 ```
 
----
+### Portfolio & Assessment
+```
+GET  /portfolio/templates     # Document templates
+POST /portfolio/documents     # Create document
+POST /assessments/:id/attempt # Start assessment
+```
 
-## 11) Observability
+### Compliance
+```
+POST /compliance/dc3          # Generate DC-3
+POST /compliance/sirce        # Export SIRCE data
+GET  /compliance/lft-plan     # Get LFT plan
+```
 
-* Structured logs (pino/winston), request IDs, correlation IDs.
-* Metrics (Prometheus/OpenTelemetry), health & readiness probes.
-* Traces (OTel) for API & LRS.
-
----
-
-## 12) Internationalization
-
-* Primary **ES**, secondary **EN**; i18n keys in `packages/ui` & `apps/web`.
-* Localized DC‑3 templates (ES‑MX); credentials/OB metadata bilingual where applicable.
-
----
-
-## 13) Roadmap (public excerpt)
-
-* v0.1: EC mapping, portfolios, DC‑3, SIRCE, basic analytics.
-* v0.2: LRS (xAPI/cmi5), Open Badges 3.0 issuer/verify.
-* v0.3: SCORM ingest (read‑only), ECE/OC toolkit, SCIM.
-
-👉 Full roadmap lives in **SOFTWARE\_SPEC.md §13**.
+See full API documentation at `/docs` when running the API.
 
 ---
 
-## 14) Contributing
+## Documentation
 
-Internal contributors only (closed source). Use conventional commits. Open a PR with:
-
-* Scope: `web`, `backend`, `sdk`, `infra`, `docs`
-* Checklist: tests updated, migrations included, docs touched.
-
-Issue templates and PR checklists live in `.github/`.
-
----
-
-## 15) Security Policy
-
-Report vulnerabilities to **[security@madfam.com](mailto:security@madfam.com)** (PGP key in `/SECURITY.md`). We commit to triage within 72h.
+| Document | Description |
+|----------|-------------|
+| [docs/INDEX.md](./docs/INDEX.md) | Documentation hub |
+| [docs/architecture/SOFTWARE_SPEC.md](./docs/architecture/SOFTWARE_SPEC.md) | Full product specification |
+| [docs/setup/SETUP.md](./docs/setup/SETUP.md) | Detailed setup guide |
+| [docs/setup/DEPLOY.md](./docs/setup/DEPLOY.md) | Deployment guide |
+| [CONTRIBUTING.md](./CONTRIBUTING.md) | Development guidelines |
+| [SECURITY.md](./SECURITY.md) | Security policies |
+| [CHANGELOG.md](./CHANGELOG.md) | Version history |
 
 ---
 
-## 16) Acknowledgments
+## Mexican Compliance Standards
 
-* Built by Innovaciones MADFAM S.A.S. de C.V. with love for trainees, assessors, and ops teams.
+- **EC/CONOCER** — National competency standards alignment
+- **DC-3** — Training completion certificates (STPS requirement)
+- **SIRCE** — Government registry integration
+- **LFT** — Federal Labor Law compliance
 
 ---
 
-## 17) Legal
+## Security
+
+- **Multi-tenancy** with Row-Level Security
+- **Evidence integrity** via SHA-256 content addressing
+- **Audit logging** for all compliance operations
+- **PII protection** with consent management
+
+Report vulnerabilities to **security@madfam.io** — see [SECURITY.md](./SECURITY.md)
+
+---
+
+## License
 
 © Innovaciones MADFAM S.A.S. de C.V. All rights reserved.
-“AVALA” is used as a trademark. DC‑3/SIRCE/LFT/CONOCER references are for interoperability; all rights belong to their respective holders.
+
+"AVALA" is a trademark. DC-3/SIRCE/LFT/CONOCER references are for interoperability; all rights belong to their respective holders.

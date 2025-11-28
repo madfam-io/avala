@@ -16,7 +16,8 @@ export default function DocumentPage() {
   const documentId = params.documentId as string;
   const isNew = documentId === "new";
   const templateId = searchParams.get("templateId");
-  const viewOnly = searchParams.get("view") === "true";
+  // viewOnly flag for future read-only mode support
+void searchParams.get("view");
 
   const [document, setDocument] = useState<ECDocument | null>(null);
   const [template, setTemplate] = useState<DocumentTemplate | null>(null);

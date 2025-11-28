@@ -1,7 +1,7 @@
 'use client';
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { ClipboardCheck, FileQuestion, CheckCircle2, Clock } from 'lucide-react';
+import { ClipboardCheck, FileQuestion, CheckCircle2 } from 'lucide-react';
 
 /**
  * Assessments Page

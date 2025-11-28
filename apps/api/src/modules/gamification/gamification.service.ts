@@ -407,7 +407,7 @@ export class GamificationService {
       },
     });
 
-    let newStreak = yesterdayActivity ? record.currentStreak + 1 : 1;
+    const newStreak = yesterdayActivity ? record.currentStreak + 1 : 1;
     const newLongestStreak = Math.max(newStreak, record.longestStreak);
 
     await this.prisma.userGamificationStats.update({

@@ -302,7 +302,7 @@ export class LeaderboardService {
 
     switch (type) {
       case LeaderboardType.WEEKLY_POINTS:
-      case LeaderboardType.MONTHLY_POINTS:
+      case LeaderboardType.MONTHLY_POINTS: {
         // Calculate periodic points
         const periodicPoints = await this.prisma.dailyActivity.aggregate({
           where: {
@@ -330,8 +330,9 @@ export class LeaderboardService {
 
         rank = higherRankedPeriodic.length + 1;
         break;
+      }
 
-      case LeaderboardType.GLOBAL_POINTS:
+      case LeaderboardType.GLOBAL_POINTS: {
         points = userStats.totalPoints;
         const higherRankedAllTime =
           await this.prisma.userGamificationStats.count({
@@ -342,8 +343,9 @@ export class LeaderboardService {
           });
         rank = higherRankedAllTime + 1;
         break;
+      }
 
-      case LeaderboardType.STREAK_LENGTH:
+      case LeaderboardType.STREAK_LENGTH: {
         points = userStats.totalPoints;
         const higherRankedStreak =
           await this.prisma.userGamificationStats.count({
@@ -354,6 +356,7 @@ export class LeaderboardService {
           });
         rank = higherRankedStreak + 1;
         break;
+      }
 
       default:
         points = userStats.totalPoints;
@@ -398,11 +401,12 @@ export class LeaderboardService {
     const now = new Date();
 
     switch (type) {
-      case LeaderboardType.WEEKLY_POINTS:
+      case LeaderboardType.WEEKLY_POINTS: {
         const weekStart = new Date(now);
         weekStart.setDate(now.getDate() - now.getDay()); // Start of week (Sunday)
         weekStart.setHours(0, 0, 0, 0);
         return weekStart;
+      }
 
       case LeaderboardType.MONTHLY_POINTS:
         return new Date(now.getFullYear(), now.getMonth(), 1);

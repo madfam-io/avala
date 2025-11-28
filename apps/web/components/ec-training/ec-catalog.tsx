@@ -9,10 +9,8 @@ import { Input } from '@/components/ui/input';
 import {
   BookOpen,
   Clock,
-  Users,
   Award,
   Search,
-  Filter,
   ChevronRight,
   GraduationCap,
   FileText,
@@ -95,7 +93,6 @@ export function ECCatalog({
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {filteredStandards.map((ec) => {
           const enrollment = enrollmentMap.get(ec.code);
-          const isEnrolled = !!enrollment;
 
           return (
             <ECStandardCard
@@ -137,12 +134,6 @@ function ECStandardCard({
 }: ECStandardCardProps) {
   const isEnrolled = !!enrollment;
   const isCompleted = enrollment?.status === 'COMPLETED' || enrollment?.status === 'CERTIFIED';
-
-  const statusBadge = {
-    DRAFT: { label: 'Borrador', variant: 'secondary' as const },
-    PUBLISHED: { label: 'Publicado', variant: 'default' as const },
-    DEPRECATED: { label: 'Obsoleto', variant: 'destructive' as const },
-  };
 
   const enrollmentStatusBadge = {
     IN_PROGRESS: { label: 'En Progreso', variant: 'default' as const, color: 'bg-blue-500' },

@@ -18,7 +18,7 @@
  *   --stats          Show current stats and exit
  */
 
-import { RenecExtractor, createExtractor } from './RenecExtractor';
+import { createExtractor } from './RenecExtractor';
 import type { ExtractorConfig, ExtractorEvent } from './types';
 import { readJSON } from './utils';
 import * as path from 'path';

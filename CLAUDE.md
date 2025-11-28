@@ -6,8 +6,7 @@
 
 **Status**: 🟡 Pre-Alpha (Foundation Phase)  
 **Purpose**: Multi-tenant Learning & Competency Cloud for Mexico's EC/CONOCER standards  
-**License**: © Innovaciones MADFAM S.A.S. de C.V. — All rights reserved  
-**Domain**: TBD
+**License**: © Innovaciones MADFAM S.A.S. de C.V. — All rights reserved
 
 AVALA is a SaaS platform to **design, deliver, evidence, and verify applied learning** mapped to Mexico's Estándares de Competencia (EC/CONOCER) and international standards. It automates DC-3 issuance, SIRCE/LFT reporting, and issues Open Badges 3.0 / Verifiable Credentials.
 
@@ -34,8 +33,8 @@ pnpm install
 pnpm build
 
 # 5. Database setup
-pnpm backend prisma migrate deploy
-pnpm backend seed  # Creates admin@avala.local / changeme
+pnpm db:migrate
+pnpm db:seed  # Creates admin@avala.local / changeme
 
 # 6. Run development
 pnpm dev
@@ -48,22 +47,25 @@ pnpm dev
 ```
 avala/
 ├── apps/
-│   ├── api/              # NestJS backend
+│   ├── api/              # NestJS backend (port 4900)
 │   │   ├── src/
 │   │   │   ├── modules/  # Feature modules
 │   │   │   ├── common/   # Shared utilities
 │   │   │   └── config/   # Configuration
-│   │   └── prisma/       # Database schema
-│   └── web/              # Next.js frontend
+│   │   └── test/         # Test utilities
+│   └── web/              # Next.js frontend (port 3060)
 │       ├── app/          # App Router pages
 │       ├── components/   # React components
 │       └── lib/          # Utilities
 ├── packages/
-│   ├── client/           # API client SDK
-│   └── db/               # Shared database types
+│   ├── db/               # Prisma schema & migrations
+│   ├── client/           # TypeScript API client
+│   ├── renec-client/     # RENEC integration client
+│   ├── assessment-engine/# Quiz & evaluation logic
+│   └── document-engine/  # PDF generation
+├── docs/                 # Documentation
 ├── keys/                 # Ed25519 keys for badges
-├── docker-compose.yml    # Local infrastructure
-└── .env.example          # Environment template
+└── docker-compose.yml    # Local infrastructure
 ```
 
 ---
@@ -77,34 +79,33 @@ pnpm dev              # Run all apps in dev mode
 pnpm build            # Build all packages
 pnpm lint             # Lint all packages
 pnpm test             # Run all tests
+pnpm typecheck        # Type check all packages
 ```
 
-### Backend (NestJS)
+### API (NestJS)
 ```bash
-cd apps/api
-
-pnpm dev              # Start with hot reload (port 4900)
-pnpm build            # Production build
-pnpm test             # Unit tests
-pnpm test:e2e         # E2E tests
-pnpm test:cov         # Coverage report
-
-# Database
-pnpm prisma generate  # Generate Prisma client
-pnpm prisma migrate dev --name <name>  # Create migration
-pnpm prisma migrate deploy  # Apply migrations
-pnpm prisma studio    # Database GUI
-pnpm seed             # Seed initial data
+pnpm --filter api dev           # Start with hot reload (port 4900)
+pnpm --filter api build         # Production build
+pnpm --filter api test          # Unit tests (80 suites, 1,087 tests)
+pnpm --filter api test:e2e      # E2E tests
+pnpm --filter api test:cov      # Coverage report
 ```
 
-### Frontend (Next.js)
+### Web (Next.js)
 ```bash
-cd apps/web
+pnpm --filter web dev           # Start dev server (port 3060)
+pnpm --filter web build         # Production build
+pnpm --filter web start         # Start production server
+pnpm --filter web test          # Unit tests (8 suites, 96 tests)
+```
 
-pnpm dev              # Start dev server (port 4901)
-pnpm build            # Production build
-pnpm start            # Start production server
-pnpm lint             # Lint code
+### Database
+```bash
+pnpm db:generate      # Generate Prisma client
+pnpm db:migrate       # Apply migrations (dev)
+pnpm db:push          # Push schema changes
+pnpm db:seed          # Seed initial data
+pnpm db:studio        # Database GUI
 ```
 
 ---
@@ -113,11 +114,13 @@ pnpm lint             # Lint code
 
 | Service | Port | Description |
 |---------|------|-------------|
+| Web | 3060 | Next.js frontend |
 | API | 4900 | NestJS backend |
-| Web | 4901 | Next.js frontend |
+| API Docs | 4900/api | Swagger documentation |
 | PostgreSQL | 5432 | Database |
 | Redis | 6379 | Cache/Sessions |
 | MinIO | 9000 | Object storage |
+| MinIO Console | 9001 | MinIO admin UI |
 | Mailhog | 8025 | Email testing UI |
 
 ---
@@ -187,6 +190,42 @@ SMTP_PORT=1025
 
 ---
 
+## Testing
+
+### API Tests
+```bash
+# Run all API tests
+pnpm --filter api test
+
+# Run with coverage
+pnpm --filter api test:cov
+
+# Run specific test file
+pnpm --filter api test auth.controller.spec.ts
+
+# Watch mode
+pnpm --filter api test:watch
+```
+
+**Coverage**: 80 test suites, 1,087 tests
+- Statements: 74.75%
+- Branches: 60.53%
+- Functions: 75.39%
+- Lines: 75.62%
+
+### Web Tests
+```bash
+# Run all web tests
+pnpm --filter web test
+
+# Run with UI
+pnpm --filter web test:ui
+```
+
+**Coverage**: 8 test suites, 96 tests
+
+---
+
 ## NPM Registry
 
 AVALA uses MADFAM's private npm registry:
@@ -229,46 +268,37 @@ AVALA uses MADFAM's private npm registry:
 
 ```
 # Authentication
-POST   /api/v1/auth/login
-POST   /api/v1/auth/register
+POST   /auth/login
+POST   /auth/register
+POST   /auth/refresh
 
-# Learning
-GET    /api/v1/paths
-POST   /api/v1/paths
-GET    /api/v1/paths/:id/lessons
-POST   /api/v1/lessons/:id/complete
+# EC Standards
+GET    /ec-standards
+GET    /ec-standards/:id
+POST   /ec-standards/:id/clone
 
-# Assessment
-POST   /api/v1/assessments
-GET    /api/v1/assessments/:id/results
-POST   /api/v1/evidence
+# Training & Progress
+POST   /training/enroll
+GET    /training/enrollments
+PUT    /training/progress/:id
+
+# Portfolio
+GET    /portfolio/templates
+POST   /portfolio/documents
+POST   /portfolio/documents/:id/submit
+
+# Assessments
+GET    /assessments/:standardId
+POST   /assessments/:id/attempt
+POST   /assessments/:id/submit
 
 # Compliance
-POST   /api/v1/dc3/generate
-GET    /api/v1/sirce/export
-GET    /api/v1/training-plans
+POST   /dc3/generate
+GET    /sirce/export
 
 # Badges
-POST   /api/v1/badges/issue
-GET    /api/v1/badges/:id/verify
-```
-
----
-
-## Testing
-
-```bash
-# Backend unit tests
-cd apps/api && pnpm test
-
-# Backend E2E tests
-cd apps/api && pnpm test:e2e
-
-# Frontend tests
-cd apps/web && pnpm test
-
-# Full test suite
-pnpm test
+POST   /badges/issue
+GET    /badges/:id/verify
 ```
 
 ---
@@ -280,10 +310,8 @@ pnpm test
 docker compose up -d
 ```
 
-### Production (Enclii)
-```bash
-enclii deploy --service avala
-```
+### Production
+See [Deployment Guide](docs/setup/DEPLOY.md)
 
 ### Environment Requirements
 - PostgreSQL 15+
@@ -295,10 +323,13 @@ enclii deploy --service avala
 
 ## Related Documentation
 
-- **SOFTWARE_SPEC.md** - Detailed product specification
-- **ALIGNMENT.md** - Standards & HR alignment brief
-- **DC-3 Guide** - Mexican labor training compliance
-- **Open Badges** - Credential issuance guide
+| Document | Description |
+|----------|-------------|
+| [INDEX](docs/INDEX.md) | Documentation hub |
+| [SOFTWARE_SPEC](docs/architecture/SOFTWARE_SPEC.md) | Detailed product specification |
+| [ALIGNMENT](docs/architecture/ALIGNMENT.md) | Standards & HR alignment brief |
+| [SETUP](docs/setup/SETUP.md) | Installation guide |
+| [CONTRIBUTING](CONTRIBUTING.md) | Development guidelines |
 
 ---
 

@@ -27,7 +27,8 @@ interface HarvestRun {
   components: RenecComponent[];
 }
 
-interface HarvestedData {
+// HarvestedData interface - exported for future use when full harvesting is implemented
+export interface HarvestedData {
   ecStandards: Record<string, unknown>[];
   certifiers: Record<string, unknown>[];
   centers: Record<string, unknown>[];
@@ -371,11 +372,13 @@ export class RenecScraperService implements OnModuleInit {
       // Process EC standards
       for (const ec of data.ecStandards) {
         try {
-          await this.upsertECFromClient(ec as Record<string, unknown>);
+          await this.upsertECFromClient(
+            ec as unknown as Record<string, unknown>,
+          );
           this.activeRun!.itemsScraped++;
         } catch (error) {
           this.logger.error(
-            `Error processing EC: ${(ec as Record<string, unknown>).code}`,
+            `Error processing EC: ${(ec as unknown as Record<string, unknown>).code}`,
             error,
           );
           this.activeRun!.errors++;
@@ -385,7 +388,9 @@ export class RenecScraperService implements OnModuleInit {
       // Process certifiers
       for (const cert of data.certifiers) {
         try {
-          await this.upsertCertifierFromClient(cert as Record<string, unknown>);
+          await this.upsertCertifierFromClient(
+            cert as unknown as Record<string, unknown>,
+          );
           this.activeRun!.itemsScraped++;
         } catch (error) {
           this.logger.error(`Error processing certifier`, error);
@@ -396,7 +401,9 @@ export class RenecScraperService implements OnModuleInit {
       // Process centers
       for (const center of data.centers) {
         try {
-          await this.upsertCenterFromClient(center as Record<string, unknown>);
+          await this.upsertCenterFromClient(
+            center as unknown as Record<string, unknown>,
+          );
           this.activeRun!.itemsScraped++;
         } catch (error) {
           this.logger.error(`Error processing center`, error);
@@ -424,9 +431,11 @@ export class RenecScraperService implements OnModuleInit {
 
     for (const cert of certifiers) {
       try {
-        await this.upsertCertifierFromClient(cert as Record<string, unknown>);
+        await this.upsertCertifierFromClient(
+          cert as unknown as Record<string, unknown>,
+        );
         this.activeRun!.itemsScraped++;
-      } catch (error) {
+      } catch (_error) {
         this.activeRun!.errors++;
       }
     }
@@ -443,9 +452,11 @@ export class RenecScraperService implements OnModuleInit {
 
     for (const center of centers) {
       try {
-        await this.upsertCenterFromClient(center as Record<string, unknown>);
+        await this.upsertCenterFromClient(
+          center as unknown as Record<string, unknown>,
+        );
         this.activeRun!.itemsScraped++;
-      } catch (error) {
+      } catch (_error) {
         this.activeRun!.errors++;
       }
     }
@@ -639,7 +650,7 @@ export class RenecScraperService implements OnModuleInit {
 
   private async harvestComponent(
     component: RenecComponent,
-    maxPages: number,
+    _maxPages: number,
   ): Promise<void> {
     this.logger.log(`Harvesting component (fallback mode): ${component}`);
     // Fallback mode - no actual harvesting without renec-client

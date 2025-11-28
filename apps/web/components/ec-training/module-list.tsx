@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
@@ -14,7 +14,6 @@ import {
   Circle,
   Lock,
   Video,
-  FileText,
   ChevronRight,
 } from 'lucide-react';
 import type { ECModule, ECLesson, ModuleProgress, LessonProgress } from '@/lib/api/ec-api';
@@ -154,7 +153,7 @@ export function ModuleList({
 
                 {/* Lessons List */}
                 <div className="space-y-2 pl-10">
-                  {moduleLessons.map((lesson, lessonIndex) => {
+                  {moduleLessons.map((lesson) => {
                     const lessonProg = lessonProgressMap.get(lesson.id);
                     const isLessonCompleted = lessonProg?.status === 'COMPLETED';
                     const isLessonInProgress = lessonProg?.status === 'IN_PROGRESS';

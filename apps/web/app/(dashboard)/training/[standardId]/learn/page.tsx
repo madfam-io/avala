@@ -72,9 +72,9 @@ export default function LearnPage() {
     setCurrentLesson(lesson);
     // Find and set the current module
     if (moduleId && standard?.modules) {
-      const module = standard.modules.find((m) => m.id === moduleId);
-      if (module) {
-        setCurrentModule(module);
+      const foundModule = standard.modules.find((m) => m.id === moduleId);
+      if (foundModule) {
+        setCurrentModule(foundModule);
       }
     }
   };
@@ -283,9 +283,9 @@ export default function LearnPage() {
                 });
               }}
               onViewModule={(moduleId) => {
-                const module = standard.modules?.find((m) => m.id === moduleId);
-                if (module?.lessons?.[0]) {
-                  handleLessonSelect(module.lessons[0]);
+                const foundModule = standard.modules?.find((m) => m.id === moduleId);
+                if (foundModule?.lessons?.[0]) {
+                  handleLessonSelect(foundModule.lessons[0]);
                 }
               }}
             />

@@ -7,6 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "test": "npx vitest run",
+    "test:watch": "npx vitest --watch",
+    "test:coverage": "npx vitest run --coverage",
     "clean": "rm -rf .next .turbo node_modules"
   },
   "dependencies": {
@@ -44,6 +47,13 @@
     "zustand": "^5.0.3"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.1.0",
+    "@testing-library/user-event": "^14.5.2",
+    "@vitejs/plugin-react": "^4.3.4",
+    "@vitest/coverage-v8": "^2.1.8",
+    "jsdom": "^25.0.1",
+    "vitest": "^2.1.8",
     "@types/leaflet": "^1.9.21",
     "@types/node": "^22.10.5",
     "@types/react": "^19.0.6",

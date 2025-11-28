@@ -51,13 +51,13 @@ import {
 // ============================================
 
 const CONOCER_BASE_URL = "https://conocer.gob.mx";
-const RENEC_URL = `${CONOCER_BASE_URL}/acciones_movil/renec_v2/index.html#/renec`;
+const _RENEC_URL = `${CONOCER_BASE_URL}/acciones_movil/renec_v2/index.html#/renec`;
 const EC_DETAIL_URL = (codigo: string) =>
   `${CONOCER_BASE_URL}/acciones_movil/renec_v2/index.html#/competencia/${codigo}`;
 const API_URL = `${CONOCER_BASE_URL}/CONOCERBACKCITAS/sectoresProductivos/getEstandaresAll`;
 
 // Accordion panel selectors for EC detail pages
-const PANEL_SELECTORS = {
+const _PANEL_SELECTORS = {
   description: "mat-expansion-panel:nth-child(1)",
   certification: "mat-expansion-panel:nth-child(2)",
   centers: "mat-expansion-panel:nth-child(3)", // ¿EN DÓNDE PUEDO CERTIFICARME?
@@ -422,20 +422,13 @@ export class RenecExtractor {
           // Panel might not exist for this EC
         }
 
-        // Extract data using page.evaluate for reliability
-        const data = await this.page!.evaluate(() => {
-          const result = {
-            certificadores: [] as { nombre: string }[],
-            centrosCapacitacion: [] as { nombre: string; curso?: string }[],
-          };
-
+        // Expand all panels using page.evaluate
+        await this.page!.evaluate(() => {
           // Find all expansion panels
           const panels = document.querySelectorAll("mat-expansion-panel");
 
           panels.forEach((panel) => {
             const header = panel.querySelector("mat-expansion-panel-header");
-            const headerText = header?.textContent?.toLowerCase() || "";
-
             // Click to expand if not expanded
             const panelBody = panel.querySelector(
               ".mat-expansion-panel-content",
@@ -444,11 +437,6 @@ export class RenecExtractor {
               (header as HTMLElement)?.click();
             }
           });
-
-          // Give time for expansion animation
-          // (We'll handle this with a small delay outside evaluate)
-
-          return result;
         });
 
         // Wait for panels to expand

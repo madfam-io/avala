@@ -1,7 +1,7 @@
 # AVALA Documentation
 
 > *Alineamiento y Verificación de Aprendizajes y Logros Acreditables*
-> 
+>
 > Multi-tenant Learning & Competency Cloud aligned to EC/CONOCER, DC-3/SIRCE (MX), and verifiable credentials.
 
 ## Quick Navigation
@@ -68,21 +68,21 @@
 
 | Layer | Technology |
 |-------|------------|
-| **Frontend** | Next.js 14, TypeScript, Tailwind CSS, shadcn/ui |
-| **API** | NestJS, TypeScript, Prisma ORM |
+| **Frontend** | Next.js 15, React 19, TypeScript, Tailwind CSS, shadcn/ui |
+| **API** | NestJS 10, TypeScript, Prisma ORM |
 | **Database** | PostgreSQL 15+ with Row-Level Security |
 | **Cache/Queue** | Redis |
 | **Storage** | S3-compatible (MinIO/AWS) |
 | **LRS** | Built-in xAPI/cmi5 endpoints |
+| **Monorepo** | Turborepo with pnpm workspaces |
 
 ## Repository Structure
 
 ```
 avala/
 ├── apps/
-│   ├── api/           # NestJS REST API
-│   ├── web/           # Next.js PWA frontend
-│   └── backend/       # Legacy/migration (deprecated)
+│   ├── api/           # NestJS REST API (port 4900)
+│   └── web/           # Next.js PWA frontend (port 3060)
 ├── packages/
 │   ├── db/            # Prisma schema & migrations
 │   ├── client/        # TypeScript API client
@@ -154,10 +154,25 @@ pnpm dev
 ```
 
 ### Default URLs
-- Web: http://localhost:3000
-- API: http://localhost:4000
-- Mailhog: http://localhost:8025
-- MinIO: http://localhost:9001
+| Service | URL |
+|---------|-----|
+| Web App | http://localhost:3060 |
+| API | http://localhost:4900 |
+| API Docs | http://localhost:4900/api |
+| Mailhog | http://localhost:8025 |
+| MinIO Console | http://localhost:9001 |
+
+### Testing
+```bash
+# Run all tests
+pnpm test
+
+# API tests (80 suites, 1,087 tests)
+pnpm --filter api test
+
+# Web tests (8 suites, 96 tests)
+pnpm --filter web test
+```
 
 ---
 

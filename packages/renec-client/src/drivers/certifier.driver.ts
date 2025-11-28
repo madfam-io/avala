@@ -7,7 +7,6 @@ import { BaseDriver, type ExtractedItem } from "./base.driver";
 import {
   type Certifier,
   type CertifierType,
-  type ECEAccreditation,
   type RenecClientConfig,
   RENEC_ENDPOINTS,
 } from "../types";
@@ -311,7 +310,7 @@ export class CertifierDriver extends BaseDriver {
   }
 
   private async extractCP(): Promise<string | undefined> {
-    let text = await this.extractText('td:has-text("C.P.") + td');
+    const text = await this.extractText('td:has-text("C.P.") + td');
 
     if (!text) {
       // Try to extract from address

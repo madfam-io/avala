@@ -458,7 +458,7 @@ function inferCertifierType(nombre: string): 'ECE' | 'OC' | 'unknown' {
  * Save progress data
  */
 function saveProgressData(): void {
-  const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+  const _timestamp = new Date().toISOString().replace(/[:.]/g, '-');
 
   // Save ECs
   fs.writeFileSync(
