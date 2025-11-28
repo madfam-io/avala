@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { Suspense, useEffect, useState, useCallback } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Filter, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -17,7 +17,7 @@ import {
   type Sector,
 } from "@/lib/api/renec";
 
-export default function EstandaresPage() {
+function EstandaresContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -62,7 +62,7 @@ export default function EstandaresPage() {
 
       router.push(`?${params.toString()}`, { scroll: false });
     },
-    [router, searchParams]
+    [router, searchParams],
   );
 
   // Fetch data
@@ -327,5 +327,33 @@ export default function EstandaresPage() {
         </>
       )}
     </div>
+  );
+}
+
+function LoadingFallback() {
+  return (
+    <div className="container py-8">
+      <div className="mb-8">
+        <div className="h-8 w-64 bg-muted rounded animate-pulse" />
+        <div className="h-4 w-96 bg-muted rounded mt-2 animate-pulse" />
+      </div>
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {[1, 2, 3, 4, 5, 6].map((i) => (
+          <div key={i} className="rounded-lg border bg-card p-4 animate-pulse">
+            <div className="h-6 w-24 bg-muted rounded mb-2" />
+            <div className="h-4 w-full bg-muted rounded mb-2" />
+            <div className="h-4 w-3/4 bg-muted rounded" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default function EstandaresPage() {
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <EstandaresContent />
+    </Suspense>
   );
 }

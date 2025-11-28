@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { Suspense, useEffect, useState, useCallback } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Filter, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -17,7 +17,7 @@ import {
   type Estado,
 } from "@/lib/api/renec";
 
-export default function CertificadoresPage() {
+function CertificadoresContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -62,7 +62,7 @@ export default function CertificadoresPage() {
 
       router.push(`?${params.toString()}`, { scroll: false });
     },
-    [router, searchParams]
+    [router, searchParams],
   );
 
   // Fetch data
@@ -176,7 +176,9 @@ export default function CertificadoresPage() {
 
               {/* Activo Filter */}
               <div>
-                <label className="text-sm font-medium mb-2 block">Estatus</label>
+                <label className="text-sm font-medium mb-2 block">
+                  Estatus
+                </label>
                 <select
                   value={currentParams.activo}
                   onChange={(e) =>
@@ -346,5 +348,38 @@ export default function CertificadoresPage() {
         </>
       )}
     </div>
+  );
+}
+
+function LoadingFallback() {
+  return (
+    <div className="container py-8">
+      <div className="mb-8">
+        <div className="h-8 w-48 bg-muted rounded animate-pulse" />
+        <div className="h-4 w-96 bg-muted rounded mt-2 animate-pulse" />
+      </div>
+      <div className="grid gap-4 md:grid-cols-2">
+        {[1, 2, 3, 4].map((i) => (
+          <div key={i} className="rounded-lg border bg-card p-4 animate-pulse">
+            <div className="flex items-start gap-4">
+              <div className="h-12 w-12 bg-muted rounded-lg" />
+              <div className="flex-1">
+                <div className="h-4 w-16 bg-muted rounded mb-2" />
+                <div className="h-5 w-full bg-muted rounded mb-2" />
+                <div className="h-4 w-24 bg-muted rounded" />
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default function CertificadoresPage() {
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <CertificadoresContent />
+    </Suspense>
   );
 }

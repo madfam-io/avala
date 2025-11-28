@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { Suspense, useEffect, useState, useCallback } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Filter, X, MapPin, Navigation, Map, List } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -20,7 +20,7 @@ import {
   type Estado,
 } from "@/lib/api/renec";
 
-export default function CentrosPage() {
+function CentrosContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -72,7 +72,7 @@ export default function CentrosPage() {
 
       router.push(`?${params.toString()}`, { scroll: false });
     },
-    [router, searchParams]
+    [router, searchParams],
   );
 
   // Get user location
@@ -106,7 +106,7 @@ export default function CentrosPage() {
             setLocationError("Error al obtener ubicación");
         }
       },
-      { enableHighAccuracy: true, timeout: 10000 }
+      { enableHighAccuracy: true, timeout: 10000 },
     );
   };
 
@@ -290,7 +290,9 @@ export default function CentrosPage() {
 
               {/* Activo Filter */}
               <div>
-                <label className="text-sm font-medium mb-2 block">Estatus</label>
+                <label className="text-sm font-medium mb-2 block">
+                  Estatus
+                </label>
                 <select
                   value={currentParams.activo}
                   onChange={(e) =>
@@ -369,7 +371,10 @@ export default function CentrosPage() {
         {(activeFilters > 0 || nearbyMode) && (
           <div className="flex flex-wrap gap-2">
             {nearbyMode && (
-              <Badge variant="default" className="bg-orange-100 text-orange-700">
+              <Badge
+                variant="default"
+                className="bg-orange-100 text-orange-700"
+              >
                 <Navigation className="mr-1 h-3 w-3" />
                 Centros cercanos
               </Badge>
@@ -512,5 +517,38 @@ export default function CentrosPage() {
         </>
       )}
     </div>
+  );
+}
+
+function LoadingFallback() {
+  return (
+    <div className="container py-8">
+      <div className="mb-8">
+        <div className="h-8 w-56 bg-muted rounded animate-pulse" />
+        <div className="h-4 w-96 bg-muted rounded mt-2 animate-pulse" />
+      </div>
+      <div className="grid gap-4 md:grid-cols-2">
+        {[1, 2, 3, 4].map((i) => (
+          <div key={i} className="rounded-lg border bg-card p-4 animate-pulse">
+            <div className="flex items-start gap-4">
+              <div className="h-12 w-12 bg-muted rounded-lg" />
+              <div className="flex-1">
+                <div className="h-4 w-16 bg-muted rounded mb-2" />
+                <div className="h-5 w-full bg-muted rounded mb-2" />
+                <div className="h-4 w-24 bg-muted rounded" />
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default function CentrosPage() {
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <CentrosContent />
+    </Suspense>
   );
 }

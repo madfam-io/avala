@@ -3,7 +3,7 @@
  * Handles authentication, tenant context, and request/response formatting
  */
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
 
 export interface ApiError {
   message: string;
@@ -38,22 +38,22 @@ export class ApiClient {
    */
   private async request<T>(
     endpoint: string,
-    options: RequestInit = {}
+    options: RequestInit = {},
   ): Promise<T> {
-    const headers: HeadersInit = {
-      'Content-Type': 'application/json',
-      ...options.headers,
+    const headers: Record<string, string> = {
+      "Content-Type": "application/json",
+      ...(options.headers as Record<string, string>),
     };
 
     // Add tenant header if available
     if (this.tenantId) {
-      headers['X-Tenant-Id'] = this.tenantId;
+      headers["X-Tenant-Id"] = this.tenantId;
     }
 
     const config: RequestInit = {
       ...options,
       headers,
-      credentials: 'include', // Include cookies for JWT
+      credentials: "include", // Include cookies for JWT
     };
 
     const url = `${this.baseUrl}/v1${endpoint}`;
@@ -82,7 +82,7 @@ export class ApiClient {
         throw error;
       }
       throw {
-        message: (error as Error).message || 'Network error',
+        message: (error as Error).message || "Network error",
         statusCode: 0,
       } as ApiError;
     }
@@ -92,7 +92,7 @@ export class ApiClient {
    * GET request
    */
   async get<T>(endpoint: string, options?: RequestInit): Promise<T> {
-    return this.request<T>(endpoint, { ...options, method: 'GET' });
+    return this.request<T>(endpoint, { ...options, method: "GET" });
   }
 
   /**
@@ -101,11 +101,26 @@ export class ApiClient {
   async post<T>(
     endpoint: string,
     data?: unknown,
-    options?: RequestInit
+    options?: RequestInit,
   ): Promise<T> {
     return this.request<T>(endpoint, {
       ...options,
-      method: 'POST',
+      method: "POST",
+      body: data ? JSON.stringify(data) : undefined,
+    });
+  }
+
+  /**
+   * PUT request
+   */
+  async put<T>(
+    endpoint: string,
+    data?: unknown,
+    options?: RequestInit,
+  ): Promise<T> {
+    return this.request<T>(endpoint, {
+      ...options,
+      method: "PUT",
       body: data ? JSON.stringify(data) : undefined,
     });
   }
@@ -116,11 +131,11 @@ export class ApiClient {
   async patch<T>(
     endpoint: string,
     data?: unknown,
-    options?: RequestInit
+    options?: RequestInit,
   ): Promise<T> {
     return this.request<T>(endpoint, {
       ...options,
-      method: 'PATCH',
+      method: "PATCH",
       body: data ? JSON.stringify(data) : undefined,
     });
   }
@@ -129,7 +144,7 @@ export class ApiClient {
    * DELETE request
    */
   async delete<T>(endpoint: string, options?: RequestInit): Promise<T> {
-    return this.request<T>(endpoint, { ...options, method: 'DELETE' });
+    return this.request<T>(endpoint, { ...options, method: "DELETE" });
   }
 }
 

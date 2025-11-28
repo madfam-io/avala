@@ -1,9 +1,13 @@
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
-import { PrismaService } from '../../database/prisma.service';
-import PDFDocument from 'pdfkit';
-import { Readable } from 'stream';
-import * as QRCode from 'qrcode';
-import { MailService } from '../mail/mail.service';
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from "@nestjs/common";
+import { PrismaService } from "../../database/prisma.service";
+import PDFDocument from "pdfkit";
+// Readable imported for potential streaming use
+import * as QRCode from "qrcode";
+import { MailService } from "../mail/mail.service";
 
 /**
  * CertificatesService
@@ -44,23 +48,27 @@ export class CertificatesService {
             revokedAt: null,
           },
           orderBy: {
-            issuedAt: 'desc',
+            issuedAt: "desc",
           },
         },
       },
     });
 
     if (!enrollment) {
-      throw new NotFoundException(`Enrollment with ID ${enrollmentId} not found`);
+      throw new NotFoundException(
+        `Enrollment with ID ${enrollmentId} not found`,
+      );
     }
 
     // Validate enrollment is completed
-    if (enrollment.status !== 'COMPLETED') {
-      throw new BadRequestException('Certificate can only be issued for completed courses');
+    if (enrollment.status !== "COMPLETED") {
+      throw new BadRequestException(
+        "Certificate can only be issued for completed courses",
+      );
     }
 
     // Fetch tenant data for legal fields
-    const tenant = await this.prisma.client.tenant.findUnique({
+    const tenant = await this.prisma.tenant.findUnique({
       where: { id: tenantId },
     });
 
@@ -75,7 +83,11 @@ export class CertificatesService {
     if (enrollment.certificates.length > 0) {
       // Certificate already exists, regenerate PDF
       const existingCert = enrollment.certificates[0];
-      const pdfBuffer = await this.createDc3Pdf(enrollment, tenant, existingCert);
+      const pdfBuffer = await this.createDc3Pdf(
+        enrollment,
+        tenant,
+        existingCert,
+      );
       return pdfBuffer;
     }
 
@@ -105,14 +117,14 @@ export class CertificatesService {
     try {
       await this.mailService.sendCertificateEmail({
         email: enrollment.user.email,
-        firstName: enrollment.user.firstName || 'Usuario',
+        firstName: enrollment.user.firstName || "Usuario",
         courseTitle: enrollment.course.title,
         folio: certificate.folio,
         pdfBuffer,
       });
     } catch (error) {
       // Log email error but don't fail certificate generation
-      console.error('Failed to send certificate email:', error);
+      console.error("Failed to send certificate email:", error);
     }
 
     return pdfBuffer;
@@ -126,31 +138,31 @@ export class CertificatesService {
 
     // Validate tenant fields
     if (!tenant.rfc) {
-      errors.push('Tenant RFC is required');
+      errors.push("Tenant RFC is required");
     }
     if (!tenant.legalName) {
-      errors.push('Tenant legal name is required');
+      errors.push("Tenant legal name is required");
     }
     if (!tenant.representativeName) {
-      errors.push('Tenant representative name is required');
+      errors.push("Tenant representative name is required");
     }
 
     // Validate user fields
     if (!enrollment.user.curp) {
-      errors.push('User CURP is required');
+      errors.push("User CURP is required");
     }
     if (!enrollment.user.firstName || !enrollment.user.lastName) {
-      errors.push('User full name is required');
+      errors.push("User full name is required");
     }
 
     // Validate course fields
     if (!enrollment.course.durationHours) {
-      errors.push('Course duration is required');
+      errors.push("Course duration is required");
     }
 
     if (errors.length > 0) {
       throw new BadRequestException(
-        `Cannot generate DC-3: Missing required fields: ${errors.join(', ')}`
+        `Cannot generate DC-3: Missing required fields: ${errors.join(", ")}`,
       );
     }
   }
@@ -165,7 +177,7 @@ export class CertificatesService {
 
     // Format: DC3-YYYY-NNNNNN
     const year = new Date().getFullYear();
-    const folio = `DC3-${year}-${nextNumber.toString().padStart(6, '0')}`;
+    const folio = `DC3-${year}-${nextNumber.toString().padStart(6, "0")}`;
 
     return folio;
   }
@@ -176,29 +188,29 @@ export class CertificatesService {
   private async createDc3Pdf(
     enrollment: any,
     tenant: any,
-    certificate: any
+    certificate: any,
   ): Promise<Buffer> {
     return new Promise(async (resolve, reject) => {
       try {
         const doc = new PDFDocument({
-          size: 'LETTER',
+          size: "LETTER",
           margins: { top: 50, bottom: 50, left: 50, right: 50 },
         });
 
         const chunks: Buffer[] = [];
 
-        doc.on('data', (chunk) => chunks.push(chunk));
-        doc.on('end', () => resolve(Buffer.concat(chunks)));
-        doc.on('error', reject);
+        doc.on("data", (chunk) => chunks.push(chunk));
+        doc.on("end", () => resolve(Buffer.concat(chunks)));
+        doc.on("error", reject);
 
         // Generate QR code for verification
-        const verificationUrl = `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/verify/${certificate.certificateUuid}`;
+        const verificationUrl = `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/verify/${certificate.certificateUuid}`;
         const qrCodeBuffer = await QRCode.toBuffer(verificationUrl, {
           width: 120,
           margin: 1,
           color: {
-            dark: '#000000',
-            light: '#FFFFFF',
+            dark: "#000000",
+            light: "#FFFFFF",
           },
         });
 
@@ -207,59 +219,65 @@ export class CertificatesService {
 
         // Title
         doc.moveDown(2);
-        doc.fontSize(18).font('Helvetica-Bold').text('CONSTANCIA DE COMPETENCIAS', {
-          align: 'center',
-        });
-        doc.fontSize(16).text('DC-3 (Formato STPS)', {
-          align: 'center',
+        doc
+          .fontSize(18)
+          .font("Helvetica-Bold")
+          .text("CONSTANCIA DE COMPETENCIAS", {
+            align: "center",
+          });
+        doc.fontSize(16).text("DC-3 (Formato STPS)", {
+          align: "center",
         });
 
         doc.moveDown(2);
 
         // Certificate UUID for verification
-        doc.fontSize(9).font('Helvetica').text(
-          `ID de Verificación: ${certificate.certificateUuid}`,
-          { align: 'right' }
-        );
+        doc
+          .fontSize(9)
+          .font("Helvetica")
+          .text(`ID de Verificación: ${certificate.certificateUuid}`, {
+            align: "right",
+          });
 
         doc.moveDown(1);
 
         // Worker Information Section
-        this.renderSection(doc, 'INFORMACIÓN DEL TRABAJADOR', [
+        this.renderSection(doc, "INFORMACIÓN DEL TRABAJADOR", [
           {
-            label: 'Nombre Completo',
+            label: "Nombre Completo",
             value: `${enrollment.user.firstName} ${enrollment.user.lastName}`,
           },
-          { label: 'CURP', value: enrollment.user.curp },
-          { label: 'RFC', value: enrollment.user.rfc || 'N/A' },
+          { label: "CURP", value: enrollment.user.curp },
+          { label: "RFC", value: enrollment.user.rfc || "N/A" },
         ]);
 
         doc.moveDown(1);
 
         // Company Information Section
-        this.renderSection(doc, 'INFORMACIÓN DE LA EMPRESA', [
-          { label: 'Razón Social', value: tenant.legalName },
-          { label: 'RFC', value: tenant.rfc },
-          { label: 'Representante Legal', value: tenant.representativeName },
+        this.renderSection(doc, "INFORMACIÓN DE LA EMPRESA", [
+          { label: "Razón Social", value: tenant.legalName },
+          { label: "RFC", value: tenant.rfc },
+          { label: "Representante Legal", value: tenant.representativeName },
         ]);
 
         doc.moveDown(1);
 
         // Course Information Section
-        this.renderSection(doc, 'INFORMACIÓN DEL CURSO', [
-          { label: 'Nombre del Curso', value: enrollment.course.title },
-          { label: 'Código', value: enrollment.course.code },
+        this.renderSection(doc, "INFORMACIÓN DEL CURSO", [
+          { label: "Nombre del Curso", value: enrollment.course.title },
+          { label: "Código", value: enrollment.course.code },
           {
-            label: 'Duración',
+            label: "Duración",
             value: `${enrollment.course.durationHours} horas`,
           },
           {
-            label: 'Registro STPS',
-            value: enrollment.course.stpsRegistrationNumber || 'N/A',
+            label: "Registro STPS",
+            value: enrollment.course.stpsRegistrationNumber || "N/A",
           },
           {
-            label: 'Instructor',
-            value: `${enrollment.course.owner.firstName || ''} ${enrollment.course.owner.lastName || ''}`.trim() ||
+            label: "Instructor",
+            value:
+              `${enrollment.course.owner.firstName || ""} ${enrollment.course.owner.lastName || ""}`.trim() ||
               enrollment.course.owner.email,
           },
         ]);
@@ -267,17 +285,17 @@ export class CertificatesService {
         doc.moveDown(1);
 
         // Completion Information
-        this.renderSection(doc, 'INFORMACIÓN DE FINALIZACIÓN', [
+        this.renderSection(doc, "INFORMACIÓN DE FINALIZACIÓN", [
           {
-            label: 'Fecha de Inicio',
+            label: "Fecha de Inicio",
             value: this.formatDate(enrollment.enrolledAt),
           },
           {
-            label: 'Fecha de Terminación',
+            label: "Fecha de Terminación",
             value: this.formatDate(enrollment.completedAt),
           },
           {
-            label: 'Fecha de Emisión',
+            label: "Fecha de Emisión",
             value: this.formatDate(certificate.issuedAt),
           },
         ]);
@@ -285,39 +303,47 @@ export class CertificatesService {
         doc.moveDown(2);
 
         // Signature Section
-        doc.fontSize(10).font('Helvetica-Italic').text(
-          'Se extiende la presente constancia en cumplimiento de lo establecido en el artículo 153-V de la Ley Federal del Trabajo.',
-          { align: 'center' }
-        );
+        doc
+          .fontSize(10)
+          .font("Helvetica-Italic")
+          .text(
+            "Se extiende la presente constancia en cumplimiento de lo establecido en el artículo 153-V de la Ley Federal del Trabajo.",
+            { align: "center" },
+          );
 
         doc.moveDown(3);
 
         // Signature lines
         const signatureY = doc.y;
-        const pageWidth = doc.page.width - doc.page.margins.left - doc.page.margins.right;
+        const pageWidth =
+          doc.page.width - doc.page.margins.left - doc.page.margins.right;
         const signatureWidth = pageWidth / 3;
 
         // Instructor signature
-        doc.fontSize(10).font('Helvetica');
-        doc.text('_________________________', doc.page.margins.left, signatureY);
+        doc.fontSize(10).font("Helvetica");
         doc.text(
-          'Firma del Instructor',
+          "_________________________",
+          doc.page.margins.left,
+          signatureY,
+        );
+        doc.text(
+          "Firma del Instructor",
           doc.page.margins.left,
           signatureY + 20,
-          { width: signatureWidth, align: 'center' }
+          { width: signatureWidth, align: "center" },
         );
 
         // Representative signature
         doc.text(
-          '_________________________',
+          "_________________________",
           doc.page.margins.left + pageWidth - signatureWidth,
-          signatureY
+          signatureY,
         );
         doc.text(
-          'Firma del Representante Legal',
+          "Firma del Representante Legal",
           doc.page.margins.left + pageWidth - signatureWidth,
           signatureY + 20,
-          { width: signatureWidth, align: 'center' }
+          { width: signatureWidth, align: "center" },
         );
 
         // QR Code - Bottom Right Corner
@@ -331,37 +357,37 @@ export class CertificatesService {
         });
 
         // QR Code label
-        doc.fontSize(7).font('Helvetica').text(
-          'Escanea para verificar',
-          qrX,
-          qrY + qrSize + 5,
-          {
+        doc
+          .fontSize(7)
+          .font("Helvetica")
+          .text("Escanea para verificar", qrX, qrY + qrSize + 5, {
             width: qrSize,
-            align: 'center',
-          }
-        );
+            align: "center",
+          });
 
         // Footer text - Left side
-        doc.fontSize(8).font('Helvetica-Oblique');
+        doc.fontSize(8).font("Helvetica-Oblique");
         doc.text(
           `Este documento ha sido generado electrónicamente y puede ser verificado en línea.`,
           doc.page.margins.left,
           doc.page.height - 80,
           {
-            align: 'left',
+            align: "left",
             width: pageWidth - qrSize - 30,
-          }
+          },
         );
 
-        doc.fontSize(7).text(
-          `ID de Verificación: ${certificate.certificateUuid}`,
-          doc.page.margins.left,
-          doc.page.height - 65,
-          {
-            align: 'left',
-            width: pageWidth - qrSize - 30,
-          }
-        );
+        doc
+          .fontSize(7)
+          .text(
+            `ID de Verificación: ${certificate.certificateUuid}`,
+            doc.page.margins.left,
+            doc.page.height - 65,
+            {
+              align: "left",
+              width: pageWidth - qrSize - 30,
+            },
+          );
 
         doc.end();
       } catch (error) {
@@ -374,17 +400,14 @@ export class CertificatesService {
    * Render PDF header with logo and folio
    */
   private renderHeader(doc: PDFKit.PDFDocument, folio: string): void {
-    doc.fontSize(12).font('Helvetica-Bold').text('AVALA LMS', 50, 50);
-    doc
-      .fontSize(10)
-      .font('Helvetica')
-      .text(`Folio: ${folio}`, 50, 65);
+    doc.fontSize(12).font("Helvetica-Bold").text("AVALA LMS", 50, 50);
+    doc.fontSize(10).font("Helvetica").text(`Folio: ${folio}`, 50, 65);
 
     doc
       .fontSize(8)
       .text(`Fecha: ${this.formatDate(new Date())}`, doc.page.width - 150, 50, {
         width: 100,
-        align: 'right',
+        align: "right",
       });
   }
 
@@ -394,29 +417,29 @@ export class CertificatesService {
   private renderSection(
     doc: PDFKit.PDFDocument,
     title: string,
-    fields: Array<{ label: string; value: string }>
+    fields: Array<{ label: string; value: string }>,
   ): void {
     const startY = doc.y;
 
     // Section title with background
     doc
       .rect(50, startY, doc.page.width - 100, 20)
-      .fillAndStroke('#E0E0E0', '#CCCCCC');
+      .fillAndStroke("#E0E0E0", "#CCCCCC");
 
     doc
-      .fillColor('#000000')
+      .fillColor("#000000")
       .fontSize(11)
-      .font('Helvetica-Bold')
+      .font("Helvetica-Bold")
       .text(title, 55, startY + 5);
 
     doc.moveDown(0.5);
 
     // Fields
-    doc.fontSize(10).font('Helvetica');
+    doc.fontSize(10).font("Helvetica");
     fields.forEach((field) => {
       const y = doc.y;
-      doc.font('Helvetica-Bold').text(`${field.label}:`, 55, y, { width: 150 });
-      doc.font('Helvetica').text(field.value, 210, y, {
+      doc.font("Helvetica-Bold").text(`${field.label}:`, 55, y, { width: 150 });
+      doc.font("Helvetica").text(field.value, 210, y, {
         width: doc.page.width - 260,
       });
       doc.moveDown(0.5);
@@ -428,10 +451,10 @@ export class CertificatesService {
    */
   private formatDate(date: Date | string): string {
     const d = new Date(date);
-    return d.toLocaleDateString('es-MX', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
+    return d.toLocaleDateString("es-MX", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
     });
   }
 
@@ -455,13 +478,13 @@ export class CertificatesService {
         },
       },
       orderBy: {
-        issuedAt: 'desc',
+        issuedAt: "desc",
       },
     });
 
     if (!certificate) {
       throw new NotFoundException(
-        `Certificate for enrollment ${enrollmentId} not found`
+        `Certificate for enrollment ${enrollmentId} not found`,
       );
     }
 
@@ -475,7 +498,7 @@ export class CertificatesService {
     tenantId: string,
     certificateId: string,
     revokedBy: string,
-    reason: string
+    reason: string,
   ) {
     const tenantClient = this.prisma.forTenant(tenantId);
 
@@ -497,7 +520,7 @@ export class CertificatesService {
    */
   async verifyPublicCertificate(certificateUuid: string) {
     // Use global client (not tenant-scoped) to search across all tenants
-    const certificate = await this.prisma.client.certificate.findUnique({
+    const certificate = await this.prisma.certificate.findUnique({
       where: { certificateUuid },
       include: {
         enrollment: {
@@ -531,7 +554,7 @@ export class CertificatesService {
     }
 
     // Get tenant information (public fields only)
-    const tenant = await this.prisma.client.tenant.findUnique({
+    const tenant = await this.prisma.tenant.findUnique({
       where: { id: certificate.enrollment.course.tenantId },
       select: {
         name: true,
@@ -564,7 +587,8 @@ export class CertificatesService {
         revokedReason: null,
       },
       trainee: {
-        fullName: `${certificate.enrollment.user.firstName || ''} ${certificate.enrollment.user.lastName || ''}`.trim(),
+        fullName:
+          `${certificate.enrollment.user.firstName || ""} ${certificate.enrollment.user.lastName || ""}`.trim(),
         curp: certificate.enrollment.user.curp,
       },
       course: {

@@ -4,7 +4,7 @@
  * Provides schema.org structured data for better SEO and rich snippets.
  */
 
-import type { ECDetail, Center } from "@/lib/api/renec";
+import type { ECDetail } from "@/lib/api/renec";
 
 interface JsonLdProps {
   data: Record<string, unknown>;
@@ -86,7 +86,9 @@ export function CertifierJsonLd({
       : undefined,
     telephone: certifier.telefono || undefined,
     email: certifier.email || undefined,
-    url: certifier.sitioWeb || `https://avala.mx/explorar/certificadores/${certifier.id}`,
+    url:
+      certifier.sitioWeb ||
+      `https://avala.mx/explorar/certificadores/${certifier.id}`,
     sameAs: certifier.sitioWeb ? [certifier.sitioWeb] : undefined,
   };
 

@@ -1,6 +1,6 @@
-import { Injectable, NotFoundException, ForbiddenException } from '@nestjs/common';
-import { PrismaService } from '../../database/prisma.service';
-import { Module, Prisma } from '@avala/db';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { PrismaService } from "../../database/prisma.service";
+import { Module } from "@avala/db";
 
 export interface CreateModuleDto {
   title: string;
@@ -52,7 +52,7 @@ export class ModulesService {
       },
       include: {
         lessons: {
-          orderBy: { order: 'asc' },
+          orderBy: { order: "asc" },
         },
       },
     });
@@ -77,13 +77,13 @@ export class ModulesService {
       where: { courseId },
       include: {
         lessons: {
-          orderBy: { order: 'asc' },
+          orderBy: { order: "asc" },
         },
         _count: {
           select: { lessons: true },
         },
       },
-      orderBy: { order: 'asc' },
+      orderBy: { order: "asc" },
     });
   }
 
@@ -98,7 +98,7 @@ export class ModulesService {
       include: {
         course: true,
         lessons: {
-          orderBy: { order: 'asc' },
+          orderBy: { order: "asc" },
         },
       },
     });
@@ -137,7 +137,7 @@ export class ModulesService {
       },
       include: {
         lessons: {
-          orderBy: { order: 'asc' },
+          orderBy: { order: "asc" },
         },
       },
     });

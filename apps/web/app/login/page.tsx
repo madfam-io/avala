@@ -1,33 +1,28 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
-import { useAuth } from '@/hooks/useAuth';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { useAuth } from "@/hooks/useAuth";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { AlertCircle, Loader2 } from 'lucide-react';
+} from "@/components/ui/card";
+import { AlertCircle, Loader2 } from "lucide-react";
 
 /**
  * Login form validation schema
  */
 const loginSchema = z.object({
-  email: z
-    .string()
-    .min(1, 'Email is required')
-    .email('Invalid email address'),
-  password: z
-    .string()
-    .min(6, 'Password must be at least 6 characters'),
+  email: z.string().min(1, "Email is required").email("Invalid email address"),
+  password: z.string().min(6, "Password must be at least 6 characters"),
 });
 
 type LoginFormData = z.infer<typeof loginSchema>;
@@ -37,7 +32,7 @@ type LoginFormData = z.infer<typeof loginSchema>;
  * The face of the application - first user touchpoint
  */
 export default function LoginPage() {
-  const { login, isLoggingIn, loginError } = useAuth();
+  const { login, isLoggingIn } = useAuth();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const {
@@ -47,20 +42,20 @@ export default function LoginPage() {
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
     },
   });
 
   const onSubmit = async (data: LoginFormData) => {
     try {
       setErrorMessage(null);
-      await login(data);
+      await login({ email: data.email, password: data.password });
       // Redirect handled by useAuth hook
     } catch (error: any) {
-      console.error('Login error:', error);
+      console.error("Login error:", error);
       setErrorMessage(
-        error?.message || 'Invalid credentials. Please try again.'
+        error?.message || "Invalid credentials. Please try again.",
       );
     }
   };
@@ -92,9 +87,9 @@ export default function LoginPage() {
                 id="email"
                 type="email"
                 placeholder="admin@avala.local"
-                {...register('email')}
+                {...register("email")}
                 disabled={isLoggingIn}
-                className={errors.email ? 'border-destructive' : ''}
+                className={errors.email ? "border-destructive" : ""}
               />
               {errors.email && (
                 <p className="text-sm text-destructive">
@@ -110,9 +105,9 @@ export default function LoginPage() {
                 id="password"
                 type="password"
                 placeholder="••••••••"
-                {...register('password')}
+                {...register("password")}
                 disabled={isLoggingIn}
-                className={errors.password ? 'border-destructive' : ''}
+                className={errors.password ? "border-destructive" : ""}
               />
               {errors.password && (
                 <p className="text-sm text-destructive">
@@ -130,18 +125,14 @@ export default function LoginPage() {
             )}
 
             {/* Submit Button */}
-            <Button
-              type="submit"
-              className="w-full"
-              disabled={isLoggingIn}
-            >
+            <Button type="submit" className="w-full" disabled={isLoggingIn}>
               {isLoggingIn ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                   Signing in...
                 </>
               ) : (
-                'Sign In'
+                "Sign In"
               )}
             </Button>
           </form>

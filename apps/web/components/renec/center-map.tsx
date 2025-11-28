@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { useState, useEffect, useCallback, useRef } from "react";
-import { MapPin, Navigation, Loader2, ZoomIn, ZoomOut, Locate } from "lucide-react";
+import { MapPin, Loader2, ZoomIn, ZoomOut, Locate } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { Center } from "@/lib/api/renec";
@@ -14,10 +14,22 @@ declare global {
   }
 }
 
+// Minimal center data needed for map display
+type MapCenter = Pick<
+  Center,
+  "id" | "nombre" | "latitud" | "longitud" | "estado" | "municipio"
+> & {
+  distance?: number;
+  centerId?: string;
+  activo?: boolean;
+  ecCount?: number;
+  lastSyncedAt?: string;
+};
+
 interface CenterMapProps {
-  centers: Center[];
+  centers: MapCenter[];
   userLocation?: { lat: number; lng: number } | null;
-  onCenterClick?: (center: Center) => void;
+  onCenterClick?: (center: MapCenter) => void;
   onBoundsChange?: (bounds: {
     north: number;
     south: number;
@@ -55,12 +67,12 @@ export function CenterMap({
 
   // Load Leaflet dynamically
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (typeof window === "undefined") return undefined;
 
     // Check if Leaflet is already loaded
     if (window.L) {
       setIsLoading(false);
-      return;
+      return undefined;
     }
 
     // Load Leaflet CSS
@@ -82,8 +94,8 @@ export function CenterMap({
 
   // Initialize map
   useEffect(() => {
-    if (isLoading || !mapRef.current || !window.L) return;
-    if (mapInstanceRef.current) return; // Already initialized
+    if (isLoading || !mapRef.current || !window.L) return undefined;
+    if (mapInstanceRef.current) return undefined; // Already initialized
 
     const L = window.L;
 
@@ -122,7 +134,7 @@ export function CenterMap({
 
   // Update markers when centers change
   useEffect(() => {
-    if (!mapInstanceRef.current || !window.L) return;
+    if (!mapInstanceRef.current || !window.L) return undefined;
 
     const L = window.L;
     const map = mapInstanceRef.current;
@@ -170,7 +182,7 @@ export function CenterMap({
               ${[center.municipio, center.estado].filter(Boolean).join(", ")}
             </p>
             ${
-              center.distance
+              "distance" in center && center.distance
                 ? `<p class="text-xs text-orange-600 mb-2">📍 ${center.distance.toFixed(1)} km</p>`
                 : ""
             }
@@ -267,7 +279,7 @@ export function CenterMap({
         console.error("Geolocation error:", error);
         setIsLocating(false);
       },
-      { enableHighAccuracy: true }
+      { enableHighAccuracy: true },
     );
   }, []);
 
@@ -286,7 +298,7 @@ export function CenterMap({
       <div
         className={cn(
           "flex items-center justify-center bg-muted rounded-lg",
-          className
+          className,
         )}
         style={{ height }}
       >
@@ -395,7 +407,7 @@ export function CenterMiniMap({
       <div
         className={cn(
           "flex items-center justify-center bg-muted rounded-lg h-48",
-          className
+          className,
         )}
       >
         <div className="text-center text-muted-foreground">
@@ -411,15 +423,11 @@ export function CenterMiniMap({
       centers={[
         {
           id: "single",
-          centerId: "single",
           nombre: center.nombre,
           latitud: center.latitud,
           longitud: center.longitud,
-          activo: true,
           estado: null,
           municipio: null,
-          ecCount: 0,
-          lastSyncedAt: new Date().toISOString(),
         },
       ]}
       className={className}

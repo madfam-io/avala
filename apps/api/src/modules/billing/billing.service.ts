@@ -1,6 +1,7 @@
-import { Injectable, Logger, ForbiddenException } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import { PrismaService } from '../../database/prisma.service';
+import { Injectable, Logger, ForbiddenException } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
+import { PrismaService } from "../../database/prisma.service";
+import { Plan, SubscriptionStatus } from "@avala/db";
 
 /**
  * Avala Plan Limits
@@ -18,7 +19,7 @@ export const AVALA_PLAN_LIMITS = {
     paths: 5,
     dc3_per_month: 50,
     storage_gb: 5,
-    features: ['basic_lms', 'dc3_generation', 'basic_analytics'],
+    features: ["basic_lms", "dc3_generation", "basic_analytics"],
   },
   professional: {
     learners: 100,
@@ -28,14 +29,14 @@ export const AVALA_PLAN_LIMITS = {
     dc3_per_month: 500,
     storage_gb: 50,
     features: [
-      'basic_lms',
-      'dc3_generation',
-      'sirce_export',
-      'lft_plans',
-      'open_badges',
-      'advanced_analytics',
-      'custom_branding',
-      'api_access',
+      "basic_lms",
+      "dc3_generation",
+      "sirce_export",
+      "lft_plans",
+      "open_badges",
+      "advanced_analytics",
+      "custom_branding",
+      "api_access",
     ],
   },
   enterprise: {
@@ -46,19 +47,19 @@ export const AVALA_PLAN_LIMITS = {
     dc3_per_month: -1,
     storage_gb: 500,
     features: [
-      'basic_lms',
-      'dc3_generation',
-      'sirce_export',
-      'lft_plans',
-      'open_badges',
-      'advanced_analytics',
-      'custom_branding',
-      'api_access',
-      'ece_oc_toolkit',
-      'sso_saml',
-      'scim_provisioning',
-      'dedicated_support',
-      'sla_guarantee',
+      "basic_lms",
+      "dc3_generation",
+      "sirce_export",
+      "lft_plans",
+      "open_badges",
+      "advanced_analytics",
+      "custom_branding",
+      "api_access",
+      "ece_oc_toolkit",
+      "sso_saml",
+      "scim_provisioning",
+      "dedicated_support",
+      "sla_guarantee",
     ],
   },
 } as const;
@@ -91,8 +92,11 @@ export class BillingService {
     private readonly config: ConfigService,
     private readonly prisma: PrismaService,
   ) {
-    this.januaApiUrl = this.config.get('JANUA_API_URL', 'http://janua-api:8001');
-    this.januaApiKey = this.config.get('JANUA_API_KEY', '');
+    this.januaApiUrl = this.config.get(
+      "JANUA_API_URL",
+      "http://janua-api:8001",
+    );
+    this.januaApiKey = this.config.get("JANUA_API_KEY", "");
   }
 
   /**
@@ -109,8 +113,8 @@ export class BillingService {
     }
 
     // Default to basic if no plan set
-    const plan = (tenant.plan || 'basic').toLowerCase() as AvalaPlanTier;
-    return plan in AVALA_PLAN_LIMITS ? plan : 'basic';
+    const plan = (tenant.plan || "basic").toLowerCase() as AvalaPlanTier;
+    return plan in AVALA_PLAN_LIMITS ? plan : "basic";
   }
 
   /**
@@ -133,16 +137,16 @@ export class BillingService {
         this.prisma.user.count({
           where: {
             tenantId,
-            role: 'TRAINEE',
-            status: 'ACTIVE',
+            role: "TRAINEE",
+            status: "ACTIVE",
           },
         }),
         // Count instructors
         this.prisma.user.count({
           where: {
             tenantId,
-            role: { in: ['INSTRUCTOR', 'ASSESSOR'] },
-            status: 'ACTIVE',
+            role: { in: ["INSTRUCTOR", "ASSESSOR"] },
+            status: "ACTIVE",
           },
         }),
         // Count courses
@@ -150,25 +154,28 @@ export class BillingService {
           where: { tenantId },
         }),
         // Count learning paths
-        this.prisma.learningPath.count({
+        this.prisma.path.count({
           where: { tenantId },
         }),
-        // Count DC-3s generated this month
+        // Count DC-3s generated this month (through enrollment relation)
         this.prisma.certificate.count({
           where: {
-            tenantId,
-            type: 'DC3',
+            enrollment: {
+              course: { tenantId },
+            },
             createdAt: { gte: startOfMonth },
           },
         }),
       ]);
 
     // Storage calculation would come from file storage service
-    // For now, estimate based on evidence count
-    const evidenceCount = await this.prisma.evidence.count({
-      where: { tenantId },
+    // For now, estimate based on artifact count (through trainee relation)
+    const artifactCount = await this.prisma.artifact.count({
+      where: {
+        trainee: { tenantId },
+      },
     });
-    const estimatedStorageGb = (evidenceCount * 5) / 1024; // ~5MB per evidence avg
+    const estimatedStorageGb = (artifactCount * 5) / 1024; // ~5MB per artifact avg
 
     return {
       learners: learnerCount,
@@ -194,7 +201,12 @@ export class BillingService {
 
     // -1 means unlimited
     if (limit === -1) {
-      return { allowed: true, current: usage.learners, limit: -1, remaining: -1 };
+      return {
+        allowed: true,
+        current: usage.learners,
+        limit: -1,
+        remaining: -1,
+      };
     }
 
     return {
@@ -218,7 +230,12 @@ export class BillingService {
     const limit = limits.courses;
 
     if (limit === -1) {
-      return { allowed: true, current: usage.courses, limit: -1, remaining: -1 };
+      return {
+        allowed: true,
+        current: usage.courses,
+        limit: -1,
+        remaining: -1,
+      };
     }
 
     return {
@@ -242,7 +259,12 @@ export class BillingService {
     const limit = limits.dc3_per_month;
 
     if (limit === -1) {
-      return { allowed: true, current: usage.dc3_this_month, limit: -1, remaining: -1 };
+      return {
+        allowed: true,
+        current: usage.dc3_this_month,
+        limit: -1,
+        remaining: -1,
+      };
     }
 
     return {
@@ -259,7 +281,7 @@ export class BillingService {
   async hasFeature(tenantId: string, feature: string): Promise<boolean> {
     const plan = await this.getTenantPlan(tenantId);
     const limits = this.getPlanLimits(plan);
-    return limits.features.includes(feature);
+    return (limits.features as readonly string[]).includes(feature);
   }
 
   /**
@@ -313,39 +335,40 @@ export class BillingService {
   /**
    * Get available plans with pricing (from Janua)
    */
-  async getAvailablePlans(countryCode: string = 'MX') {
+  async getAvailablePlans(countryCode: string = "MX") {
     // For Mexico, use Conekta pricing in MXN
     // For international, use Polar.sh/Stripe in USD
-    const isMexico = countryCode === 'MX';
+    const isMexico = countryCode === "MX";
 
     return [
       {
-        id: 'basic',
-        name: 'Basic',
-        description: 'Para equipos pequeños comenzando con capacitación formal',
+        id: "basic",
+        name: "Basic",
+        description: "Para equipos pequeños comenzando con capacitación formal",
         price: isMexico ? 2499 : 149,
-        currency: isMexico ? 'MXN' : 'USD',
-        interval: 'month',
+        currency: isMexico ? "MXN" : "USD",
+        interval: "month",
         limits: AVALA_PLAN_LIMITS.basic,
         popular: false,
       },
       {
-        id: 'professional',
-        name: 'Professional',
-        description: 'Para organizaciones con necesidades de cumplimiento DC-3/SIRCE',
+        id: "professional",
+        name: "Professional",
+        description:
+          "Para organizaciones con necesidades de cumplimiento DC-3/SIRCE",
         price: isMexico ? 7999 : 449,
-        currency: isMexico ? 'MXN' : 'USD',
-        interval: 'month',
+        currency: isMexico ? "MXN" : "USD",
+        interval: "month",
         limits: AVALA_PLAN_LIMITS.professional,
         popular: true,
       },
       {
-        id: 'enterprise',
-        name: 'Enterprise',
-        description: 'Para grandes organizaciones con necesidades avanzadas',
+        id: "enterprise",
+        name: "Enterprise",
+        description: "Para grandes organizaciones con necesidades avanzadas",
         price: null, // Contact sales
-        currency: isMexico ? 'MXN' : 'USD',
-        interval: 'month',
+        currency: isMexico ? "MXN" : "USD",
+        interval: "month",
         limits: AVALA_PLAN_LIMITS.enterprise,
         popular: false,
         contactSales: true,
@@ -367,7 +390,7 @@ export class BillingService {
       where: { id: tenantId },
       include: {
         users: {
-          where: { role: 'ADMIN' },
+          where: { role: "ADMIN" },
           take: 1,
         },
       },
@@ -379,14 +402,14 @@ export class BillingService {
 
     const adminUser = tenant.users[0];
     if (!adminUser) {
-      throw new Error('No admin user found for tenant');
+      throw new Error("No admin user found for tenant");
     }
 
     // Call Janua billing API
     const response = await fetch(`${this.januaApiUrl}/api/billing/checkout`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${this.januaApiKey}`,
       },
       body: JSON.stringify({
@@ -398,7 +421,7 @@ export class BillingService {
         cancel_url: cancelUrl,
         metadata: {
           tenant_id: tenantId,
-          product: 'avala',
+          product: "avala",
         },
       }),
     });
@@ -406,7 +429,7 @@ export class BillingService {
     if (!response.ok) {
       const error = await response.text();
       this.logger.error(`Janua checkout error: ${error}`);
-      throw new Error('Failed to create checkout session');
+      throw new Error("Failed to create checkout session");
     }
 
     return response.json();
@@ -415,7 +438,10 @@ export class BillingService {
   /**
    * Get billing portal URL via Janua
    */
-  async getBillingPortalUrl(tenantId: string, returnUrl: string): Promise<string> {
+  async getBillingPortalUrl(
+    tenantId: string,
+    returnUrl: string,
+  ): Promise<string> {
     const tenant = await this.prisma.tenant.findUnique({
       where: { id: tenantId },
     });
@@ -425,9 +451,9 @@ export class BillingService {
     }
 
     const response = await fetch(`${this.januaApiUrl}/api/billing/portal`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${this.januaApiKey}`,
       },
       body: JSON.stringify({
@@ -437,10 +463,10 @@ export class BillingService {
     });
 
     if (!response.ok) {
-      throw new Error('Failed to create billing portal session');
+      throw new Error("Failed to create billing portal session");
     }
 
-    const data = await response.json();
+    const data = (await response.json()) as { url: string };
     return data.url;
   }
 
@@ -452,13 +478,13 @@ export class BillingService {
     planId: string,
     status: string,
   ): Promise<void> {
-    const plan = planId.replace('avala_', '') as AvalaPlanTier;
+    const plan = planId.replace("avala_", "").toUpperCase() as Plan;
 
     await this.prisma.tenant.update({
       where: { id: tenantId },
       data: {
-        plan: plan.toUpperCase(),
-        subscriptionStatus: status,
+        plan,
+        subscriptionStatus: status.toUpperCase() as SubscriptionStatus,
         updatedAt: new Date(),
       },
     });
@@ -486,18 +512,20 @@ export class BillingService {
     }
 
     // Extract plan tier from Janua plan_id (e.g., "avala_professional" -> "PROFESSIONAL")
-    const planTier = (plan_id || 'basic').replace('avala_', '').toUpperCase();
+    const planTier = (plan_id || "basic").replace("avala_", "").toUpperCase();
 
     await this.prisma.tenant.update({
       where: { id: tenant.id },
       data: {
         plan: planTier,
-        subscriptionStatus: 'ACTIVE',
+        subscriptionStatus: "ACTIVE",
         billingProvider: provider,
       },
     });
 
-    this.logger.log(`Janua subscription created for tenant ${tenant.id} via ${provider}: ${planTier}`);
+    this.logger.log(
+      `Janua subscription created for tenant ${tenant.id} via ${provider}: ${planTier}`,
+    );
   }
 
   /**
@@ -518,7 +546,7 @@ export class BillingService {
     const updateData: any = {};
 
     if (plan_id) {
-      updateData.plan = plan_id.replace('avala_', '').toUpperCase();
+      updateData.plan = plan_id.replace("avala_", "").toUpperCase();
     }
 
     if (status) {
@@ -530,7 +558,9 @@ export class BillingService {
       data: updateData,
     });
 
-    this.logger.log(`Janua subscription updated for tenant ${tenant.id}: ${status}`);
+    this.logger.log(
+      `Janua subscription updated for tenant ${tenant.id}: ${status}`,
+    );
   }
 
   /**
@@ -551,8 +581,8 @@ export class BillingService {
     await this.prisma.tenant.update({
       where: { id: tenant.id },
       data: {
-        plan: 'BASIC',
-        subscriptionStatus: 'CANCELLED',
+        plan: "BASIC",
+        subscriptionStatus: "CANCELLED",
       },
     });
 
@@ -577,10 +607,12 @@ export class BillingService {
     // Ensure subscription is active
     await this.prisma.tenant.update({
       where: { id: tenant.id },
-      data: { subscriptionStatus: 'ACTIVE' },
+      data: { subscriptionStatus: "ACTIVE" },
     });
 
-    this.logger.log(`Janua payment succeeded for tenant ${tenant.id}: ${currency} ${amount} via ${provider}`);
+    this.logger.log(
+      `Janua payment succeeded for tenant ${tenant.id}: ${currency} ${amount} via ${provider}`,
+    );
   }
 
   /**
@@ -601,9 +633,11 @@ export class BillingService {
     // Mark as past due but don't immediately downgrade
     await this.prisma.tenant.update({
       where: { id: tenant.id },
-      data: { subscriptionStatus: 'PAST_DUE' },
+      data: { subscriptionStatus: "PAST_DUE" },
     });
 
-    this.logger.warn(`Janua payment failed for tenant ${tenant.id} via ${provider}`);
+    this.logger.warn(
+      `Janua payment failed for tenant ${tenant.id} via ${provider}`,
+    );
   }
 }

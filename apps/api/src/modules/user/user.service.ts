@@ -1,11 +1,15 @@
-import { Injectable, NotFoundException, ConflictException } from '@nestjs/common';
-import { PrismaService } from '../../database/prisma.service';
-import { User, Prisma, Role } from '@avala/db';
-import * as bcrypt from 'bcrypt';
-import { MailService } from '../mail/mail.service';
+import {
+  Injectable,
+  NotFoundException,
+  ConflictException,
+} from "@nestjs/common";
+import { PrismaService } from "../../database/prisma.service";
+import { User, Prisma, Role } from "@avala/db";
+import * as bcrypt from "bcrypt";
+import { MailService } from "../mail/mail.service";
 
 export interface PaginatedUsers {
-  data: User[];
+  data: Partial<User>[];
   total: number;
   page: number;
   limit: number;
@@ -38,17 +42,11 @@ export class UserService {
    */
   async findAll(
     tenantId: string,
-    options: FindAllOptions = {}
+    options: FindAllOptions = {},
   ): Promise<PaginatedUsers> {
     const tenantClient = this.prisma.forTenant(tenantId);
 
-    const {
-      page = 1,
-      limit = 10,
-      role,
-      status,
-      search,
-    } = options;
+    const { page = 1, limit = 10, role, status, search } = options;
 
     const skip = (page - 1) * limit;
 
@@ -65,10 +63,10 @@ export class UserService {
 
     if (search) {
       where.OR = [
-        { email: { contains: search, mode: 'insensitive' } },
-        { firstName: { contains: search, mode: 'insensitive' } },
-        { lastName: { contains: search, mode: 'insensitive' } },
-        { curp: { contains: search, mode: 'insensitive' } },
+        { email: { contains: search, mode: "insensitive" } },
+        { firstName: { contains: search, mode: "insensitive" } },
+        { lastName: { contains: search, mode: "insensitive" } },
+        { curp: { contains: search, mode: "insensitive" } },
       ];
     }
 
@@ -80,7 +78,7 @@ export class UserService {
       where,
       skip,
       take: limit,
-      orderBy: { createdAt: 'desc' },
+      orderBy: { createdAt: "desc" },
       select: {
         id: true,
         email: true,
@@ -150,7 +148,7 @@ export class UserService {
 
     return tenantClient.user.findMany({
       where: { role },
-      orderBy: { createdAt: 'desc' },
+      orderBy: { createdAt: "desc" },
     });
   }
 
@@ -169,13 +167,13 @@ export class UserService {
       rfc?: string;
       status?: string;
     },
-  ): Promise<User> {
+  ): Promise<Partial<User>> {
     const tenantClient = this.prisma.forTenant(tenantId);
 
     // Check if email already exists
     const existingUser = await this.findByEmail(tenantId, data.email);
     if (existingUser) {
-      throw new ConflictException('User with this email already exists');
+      throw new ConflictException("User with this email already exists");
     }
 
     // Check if CURP already exists (if provided)
@@ -184,7 +182,7 @@ export class UserService {
         where: { curp: data.curp },
       });
       if (existingCurp) {
-        throw new ConflictException('User with this CURP already exists');
+        throw new ConflictException("User with this CURP already exists");
       }
     }
 
@@ -201,7 +199,7 @@ export class UserService {
         role: data.role,
         curp: data.curp,
         rfc: data.rfc,
-        status: (data.status as any) || 'ACTIVE',
+        status: (data.status as any) || "ACTIVE",
         tenant: {
           connect: { id: tenantId },
         },
@@ -229,19 +227,19 @@ export class UserService {
     // Send welcome email (Phase 5: Production Readiness)
     try {
       // Get tenant name
-      const tenant = await this.prisma.client.tenant.findUnique({
+      const tenant = await this.prisma.tenant.findUnique({
         where: { id: tenantId },
         select: { name: true },
       });
 
       await this.mailService.sendWelcomeEmail({
         email: user.email,
-        firstName: user.firstName || 'Usuario',
-        tenantName: tenant?.name || 'AVALA LMS',
+        firstName: user.firstName || "Usuario",
+        tenantName: tenant?.name || "AVALA LMS",
       });
     } catch (error) {
       // Log email error but don't fail user creation
-      console.error('Failed to send welcome email:', error);
+      console.error("Failed to send welcome email:", error);
     }
 
     return user;
@@ -252,8 +250,9 @@ export class UserService {
    */
   private generateRandomPassword(): string {
     const length = 12;
-    const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*';
-    let password = '';
+    const charset =
+      "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*";
+    let password = "";
     for (let i = 0; i < length; i++) {
       password += charset.charAt(Math.floor(Math.random() * charset.length));
     }
@@ -284,7 +283,7 @@ export class UserService {
    * Delete user (tenant-scoped soft delete)
    */
   async delete(tenantId: string, userId: string): Promise<User> {
-    return this.update(tenantId, userId, { status: 'INACTIVE' });
+    return this.update(tenantId, userId, { status: "INACTIVE" });
   }
 
   /**
@@ -294,7 +293,7 @@ export class UserService {
     const tenantClient = this.prisma.forTenant(tenantId);
 
     const counts = await tenantClient.user.groupBy({
-      by: ['role'],
+      by: ["role"],
       _count: true,
     });
 

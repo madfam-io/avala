@@ -3,19 +3,19 @@
  * Extracts Estándares de Competencia from RENEC
  */
 
-import { BaseDriver, type ExtractedItem } from './base.driver';
+import { BaseDriver, type ExtractedItem } from "./base.driver";
 import {
   type ECStandard,
   type ECListingType,
   type RenecClientConfig,
   RENEC_ENDPOINTS,
-} from '../types';
+} from "../types";
 import {
   cleanText,
   isValidECCode,
   parseDate,
   generateRunId,
-} from '../utils/helpers';
+} from "../utils/helpers";
 
 export class ECDriver extends BaseDriver {
   private runId: string;
@@ -34,11 +34,11 @@ export class ECDriver extends BaseDriver {
   }
 
   private determineListingType(url: string): ECListingType {
-    if (url.includes('ESLACT')) return 'active';
-    if (url.includes('ESLINACT')) return 'inactive';
-    if (url.includes('ESLHIST')) return 'historical';
-    if (url.includes('ECNew')) return 'new';
-    return 'unknown';
+    if (url.includes("ESLACT")) return "active";
+    if (url.includes("ESLINACT")) return "inactive";
+    if (url.includes("ESLHIST")) return "historical";
+    if (url.includes("ECNew")) return "new";
+    return "unknown";
   }
 
   async parse(html: string, url: string): Promise<ExtractedItem[]> {
@@ -49,15 +49,15 @@ export class ECDriver extends BaseDriver {
 
     try {
       // Try table format
-      const rows = await this.page.$$('table.table tr:not(:first-child)');
+      const rows = await this.page.$$("table.table tr:not(:first-child)");
 
       if (rows.length > 0) {
         for (const row of rows) {
           const ecData = await this.extractECFromTableRow(row, listingType);
-          if (ecData && isValidECCode(ecData.ecClave)) {
+          if (ecData && ecData.ecClave && isValidECCode(ecData.ecClave)) {
             // Fetch detail page
             const detailUrl = this.buildUrl(
-              `${RENEC_ENDPOINTS.ec.detail}${ecData.ecClave}`
+              `${RENEC_ENDPOINTS.ec.detail}${ecData.ecClave}`,
             );
 
             try {
@@ -74,13 +74,15 @@ export class ECDriver extends BaseDriver {
               this.logError(detailUrl, error as Error);
               // Still yield basic data if detail fetch fails
               items.push({
-                type: 'ec_standard',
+                type: "ec_standard",
                 data: {
                   ...ecData,
-                  vigente: listingType === 'active',
+                  vigente: listingType === "active",
                   renecUrl: detailUrl,
                   extractedAt: new Date().toISOString(),
-                  contentHash: this.computeHash(ecData as Record<string, unknown>),
+                  contentHash: this.computeHash(
+                    ecData as unknown as Record<string, unknown>,
+                  ),
                 },
               });
             }
@@ -88,13 +90,13 @@ export class ECDriver extends BaseDriver {
         }
       } else {
         // Try alternative div-based format
-        const divItems = await this.page.$$('div.ec-item, div.estandar-item');
+        const divItems = await this.page.$$("div.ec-item, div.estandar-item");
 
         for (const div of divItems) {
           const ecData = await this.extractECFromDiv(div, listingType);
-          if (ecData && isValidECCode(ecData.ecClave)) {
+          if (ecData && ecData.ecClave && isValidECCode(ecData.ecClave)) {
             items.push({
-              type: 'ec_standard',
+              type: "ec_standard",
               data: ecData,
             });
           }
@@ -110,19 +112,19 @@ export class ECDriver extends BaseDriver {
   async parseDetail(
     html: string,
     url: string,
-    meta?: Record<string, unknown>
+    meta?: Record<string, unknown>,
   ): Promise<ExtractedItem | null> {
     if (!this.page) return null;
 
     const ecData = (meta?.ecData as Partial<ECStandard>) || {};
-    const listingType = (meta?.listingType as ECListingType) || 'unknown';
+    const listingType = (meta?.listingType as ECListingType) || "unknown";
 
     try {
       const detailData: ECStandard = {
-        ecClave: ecData.ecClave || await this.extractECCode(),
+        ecClave: ecData.ecClave || (await this.extractECCode()),
         titulo: await this.extractTitulo(),
         version: await this.extractVersion(),
-        vigente: listingType === 'active',
+        vigente: listingType === "active",
         sector: await this.extractSector(),
         sectorId: await this.extractSectorId(),
         comite: await this.extractComite(),
@@ -138,7 +140,7 @@ export class ECDriver extends BaseDriver {
         criteriosEvaluacion: await this.extractCriterios(),
         renecUrl: url,
         extractedAt: new Date().toISOString(),
-        contentHash: '', // Will be computed after
+        contentHash: "", // Will be computed after
       };
 
       // Merge with listing data
@@ -146,13 +148,17 @@ export class ECDriver extends BaseDriver {
 
       // Clean and compute hash
       const cleanedData = this.cleanECData(detailData);
-      cleanedData.contentHash = this.computeHash(cleanedData as Record<string, unknown>);
+      cleanedData.contentHash = this.computeHash(
+        cleanedData as unknown as Record<string, unknown>,
+      );
 
-      if (this.validateItem(cleanedData as Record<string, unknown>)) {
-        this.updateStats('itemsExtracted');
+      if (
+        this.validateItem(cleanedData as unknown as Record<string, unknown>)
+      ) {
+        this.updateStats("itemsExtracted");
         return {
-          type: 'ec_standard',
-          data: cleanedData,
+          type: "ec_standard",
+          data: cleanedData as unknown as Record<string, unknown>,
         };
       }
     } catch (error) {
@@ -164,17 +170,19 @@ export class ECDriver extends BaseDriver {
 
   private async extractECFromTableRow(
     row: unknown,
-    listingType: ECListingType
+    _listingType: ECListingType,
   ): Promise<Partial<ECStandard> | null> {
     try {
       // Using page evaluation for row extraction
-      const data = await this.page!.evaluate((el: Element) => {
-        const cells = el.querySelectorAll('td');
+      // Note: evaluate runs in browser context where DOM types exist
+      const data = await this.page!.evaluate((el) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const cells = (el as any).querySelectorAll("td");
         return {
-          ecClave: cells[0]?.textContent?.trim() || '',
-          titulo: cells[1]?.textContent?.trim() || '',
+          ecClave: cells[0]?.textContent?.trim() || "",
+          titulo: cells[1]?.textContent?.trim() || "",
         };
-      }, row as Element);
+      }, row);
 
       if (data.ecClave && isValidECCode(data.ecClave)) {
         return {
@@ -191,21 +199,24 @@ export class ECDriver extends BaseDriver {
 
   private async extractECFromDiv(
     div: unknown,
-    listingType: ECListingType
+    listingType: ECListingType,
   ): Promise<Partial<ECStandard> | null> {
     try {
-      const data = await this.page!.evaluate((el: Element) => {
+      // Note: evaluate runs in browser context where DOM types exist
+      const data = await this.page!.evaluate((el) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const element = el as any;
         return {
-          ecClave: el.querySelector('.ec-code')?.textContent?.trim() || '',
-          titulo: el.querySelector('.ec-title')?.textContent?.trim() || '',
+          ecClave: element.querySelector(".ec-code")?.textContent?.trim() || "",
+          titulo: element.querySelector(".ec-title")?.textContent?.trim() || "",
         };
-      }, div as Element);
+      }, div);
 
       if (data.ecClave && isValidECCode(data.ecClave)) {
         return {
           ecClave: data.ecClave,
           titulo: cleanText(data.titulo),
-          vigente: listingType === 'active',
+          vigente: listingType === "active",
         };
       }
     } catch {
@@ -216,11 +227,7 @@ export class ECDriver extends BaseDriver {
   }
 
   private async extractECCode(): Promise<string> {
-    const selectors = [
-      'h1.ec-title',
-      '.ec-code',
-      'span[id="codigo"]',
-    ];
+    const selectors = ["h1.ec-title", ".ec-code", 'span[id="codigo"]'];
 
     for (const selector of selectors) {
       const text = await this.extractText(selector);
@@ -228,15 +235,15 @@ export class ECDriver extends BaseDriver {
       if (match) return match[0];
     }
 
-    return '';
+    return "";
   }
 
   private async extractTitulo(): Promise<string> {
     const selectors = [
-      'h1.ec-title',
-      'div.titulo-estandar',
+      "h1.ec-title",
+      "div.titulo-estandar",
       'td:has-text("Título") + td',
-      'span#titulo',
+      "span#titulo",
     ];
 
     for (const selector of selectors) {
@@ -244,13 +251,13 @@ export class ECDriver extends BaseDriver {
       if (text && text.length > 10) return text;
     }
 
-    return '';
+    return "";
   }
 
   private async extractVersion(): Promise<string> {
     const text = await this.extractText('td:has-text("Versión") + td');
     const match = text.match(/(\d+\.?\d*)/);
-    return match ? match[1] : '1.0';
+    return match ? match[1] : "1.0";
   }
 
   private async extractSector(): Promise<string> {
@@ -258,7 +265,7 @@ export class ECDriver extends BaseDriver {
   }
 
   private async extractSectorId(): Promise<string | undefined> {
-    const href = await this.extractAttribute('a[href*="sector="]', 'href');
+    const href = await this.extractAttribute('a[href*="sector="]', "href");
     if (href) {
       const match = href.match(/sector=(\d+)/);
       if (match) return match[1];
@@ -271,7 +278,7 @@ export class ECDriver extends BaseDriver {
   }
 
   private async extractComiteId(): Promise<string | undefined> {
-    const href = await this.extractAttribute('a[href*="comite="]', 'href');
+    const href = await this.extractAttribute('a[href*="comite="]', "href");
     if (href) {
       const match = href.match(/comite=(\d+)/);
       if (match) return match[1];
@@ -281,9 +288,9 @@ export class ECDriver extends BaseDriver {
 
   private async extractDescripcion(): Promise<string> {
     const selectors = [
-      'div.descripcion',
+      "div.descripcion",
       'td:has-text("Descripción") + td',
-      'div#descripcion',
+      "div#descripcion",
     ];
 
     for (const selector of selectors) {
@@ -291,13 +298,13 @@ export class ECDriver extends BaseDriver {
       if (text) return text;
     }
 
-    return '';
+    return "";
   }
 
   private async extractCompetencias(): Promise<string[]> {
     const selectors = [
-      'ul.competencias li',
-      'div.competencia-item',
+      "ul.competencias li",
+      "div.competencia-item",
       'td:has-text("Elementos") + td li',
     ];
 
@@ -334,11 +341,11 @@ export class ECDriver extends BaseDriver {
   }
 
   private async extractPerfilEvaluador(): Promise<string> {
-    return this.extractText('div.perfil-evaluador');
+    return this.extractText("div.perfil-evaluador");
   }
 
   private async extractCriterios(): Promise<string[]> {
-    return this.extractAllText('div.criterios li');
+    return this.extractAllText("div.criterios li");
   }
 
   private cleanECData(data: ECStandard): ECStandard {
@@ -363,7 +370,7 @@ export class ECDriver extends BaseDriver {
   }
 
   validateItem(item: Record<string, unknown>): boolean {
-    const required = ['ecClave', 'titulo', 'renecUrl'];
+    const required = ["ecClave", "titulo", "renecUrl"];
 
     for (const field of required) {
       if (!item[field]) {

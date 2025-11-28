@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { useAuth } from '@/hooks/useAuth';
-import { Sidebar } from '@/components/layout/sidebar';
-import { Loader2 } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useAuth } from "@/hooks/useAuth";
+import { Sidebar } from "@/components/layout/sidebar";
+import { Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 /**
  * Dashboard Layout
@@ -15,13 +15,13 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { isAuthenticated, isLoading, user } = useAuth();
+  const { isAuthenticated, isLoading, user: _user } = useAuth();
   const router = useRouter();
 
   // Redirect if not authenticated
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
-      router.push('/login');
+      router.push("/login");
     }
   }, [isAuthenticated, isLoading, router]);
 

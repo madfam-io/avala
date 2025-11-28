@@ -1,6 +1,6 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaService } from '../../database/prisma.service';
-import { ProgressStatus, CourseEnrollmentStatus } from '@prisma/client';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { PrismaService } from "../../database/prisma.service";
+import { ProgressStatus, CourseEnrollmentStatus } from "@avala/db";
 
 /**
  * ProgressService
@@ -246,10 +246,10 @@ export class ProgressService {
             modules: {
               include: {
                 lessons: {
-                  orderBy: { order: 'asc' },
+                  orderBy: { order: "asc" },
                 },
               },
-              orderBy: { order: 'asc' },
+              orderBy: { order: "asc" },
             },
           },
         },

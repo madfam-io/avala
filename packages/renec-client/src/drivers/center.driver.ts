@@ -3,20 +3,20 @@
  * Extracts Centros de Evaluación from RENEC
  */
 
-import { BaseDriver, type ExtractedItem } from './base.driver';
+import { BaseDriver, type ExtractedItem } from "./base.driver";
 import {
   type EvaluationCenter,
   type CenterECOffering,
   type RenecClientConfig,
   RENEC_ENDPOINTS,
-} from '../types';
+} from "../types";
 import {
   cleanText,
   isValidECCode,
   normalizePhone,
   normalizeEstadoInegi,
   generateRunId,
-} from '../utils/helpers';
+} from "../utils/helpers";
 
 export class CenterDriver extends BaseDriver {
   private runId: string;
@@ -37,7 +37,7 @@ export class CenterDriver extends BaseDriver {
 
     try {
       // Try table format
-      const rows = await this.page.$$('table.table tr:not(:first-child)');
+      const rows = await this.page.$$("table.table tr:not(:first-child)");
 
       if (rows.length > 0) {
         for (const row of rows) {
@@ -46,7 +46,7 @@ export class CenterDriver extends BaseDriver {
           if (centerData?.centroId) {
             // Fetch detail page
             const detailUrl = this.buildUrl(
-              `${RENEC_ENDPOINTS.center.detail}${centerData.centroId}`
+              `${RENEC_ENDPOINTS.center.detail}${centerData.centroId}`,
             );
 
             try {
@@ -59,17 +59,17 @@ export class CenterDriver extends BaseDriver {
                 items.push(detailItem);
 
                 // Also yield EC offerings
-                const center = detailItem.data as EvaluationCenter;
+                const center = detailItem.data as unknown as EvaluationCenter;
                 if (center.estandaresOfrecidos?.length) {
                   for (const ecCode of center.estandaresOfrecidos) {
                     items.push({
-                      type: 'center_ec_offering',
+                      type: "center_ec_offering",
                       data: {
                         centroId: center.centroId,
                         ecClave: ecCode,
                         runId: this.runId,
                         extractedAt: new Date().toISOString(),
-                      } as CenterECOffering,
+                      } as unknown as Record<string, unknown>,
                     });
                   }
                 }
@@ -81,13 +81,13 @@ export class CenterDriver extends BaseDriver {
         }
       } else {
         // Try card format
-        const cards = await this.page.$$('div.centro-card, div.ce-item');
+        const cards = await this.page.$$("div.centro-card, div.ce-item");
 
         for (const card of cards) {
           const centerData = await this.extractCenterFromCard(card);
           if (centerData) {
             items.push({
-              type: 'evaluation_center',
+              type: "evaluation_center",
               data: centerData,
             });
           }
@@ -103,19 +103,19 @@ export class CenterDriver extends BaseDriver {
   async parseDetail(
     html: string,
     url: string,
-    meta?: Record<string, unknown>
+    meta?: Record<string, unknown>,
   ): Promise<ExtractedItem | null> {
     if (!this.page) return null;
 
     const centerData = (meta?.centerData as Partial<EvaluationCenter>) || {};
 
     try {
-      const estado = await this.extractEstado() || centerData.estado;
+      const estado = (await this.extractEstado()) || centerData.estado;
 
       const detailData: EvaluationCenter = {
-        centroId: centerData.centroId || '',
-        nombre: await this.extractNombre() || centerData.nombre || '',
-        certId: await this.extractCertId() || centerData.certId,
+        centroId: centerData.centroId || "",
+        nombre: (await this.extractNombre()) || centerData.nombre || "",
+        certId: (await this.extractCertId()) || centerData.certId,
         estado,
         estadoInegi: estado ? normalizeEstadoInegi(estado) : undefined,
         municipio: await this.extractMunicipio(),
@@ -131,11 +131,11 @@ export class CenterDriver extends BaseDriver {
       // Merge with listing data
       Object.assign(detailData, centerData);
 
-      if (this.validateItem(detailData as Record<string, unknown>)) {
-        this.updateStats('itemsExtracted');
+      if (this.validateItem(detailData as unknown as Record<string, unknown>)) {
+        this.updateStats("itemsExtracted");
         return {
-          type: 'evaluation_center',
-          data: detailData,
+          type: "evaluation_center",
+          data: detailData as unknown as Record<string, unknown>,
         };
       }
     } catch (error) {
@@ -146,32 +146,34 @@ export class CenterDriver extends BaseDriver {
   }
 
   private async extractCenterFromTableRow(
-    row: unknown
+    row: unknown,
   ): Promise<Partial<EvaluationCenter> | null> {
     try {
-      const data = await this.page!.evaluate((el: Element) => {
+      // Note: evaluate runs in browser context where DOM types exist
+      const data = await this.page!.evaluate((el) => {
         // Look for ID in link or data attribute
-        const link = el.querySelector('a[href*="id="]');
-        let centroId = '';
+        const element = el as HTMLElement;
+        const link = element.querySelector('a[href*="id="]');
+        let centroId = "";
 
         if (link) {
-          const href = link.getAttribute('href') || '';
+          const href = link.getAttribute("href") || "";
           const match = href.match(/id=(\w+)/);
           if (match) centroId = match[1];
         }
 
         if (!centroId) {
-          centroId = el.getAttribute('data-id') || '';
+          centroId = element.getAttribute("data-id") || "";
         }
 
-        const cells = el.querySelectorAll('td');
+        const cells = element.querySelectorAll("td");
         return {
           centroId,
-          nombre: cells[0]?.textContent?.trim() || '',
-          certId: cells[1]?.textContent?.trim() || '', // Parent certifier
-          estado: cells[2]?.textContent?.trim() || '',
+          nombre: cells[0]?.textContent?.trim() || "",
+          certId: cells[1]?.textContent?.trim() || "", // Parent certifier
+          estado: cells[2]?.textContent?.trim() || "",
         };
-      }, row as Element);
+      }, row);
 
       if (data.centroId || data.nombre) {
         return {
@@ -189,17 +191,23 @@ export class CenterDriver extends BaseDriver {
   }
 
   private async extractCenterFromCard(
-    card: unknown
+    card: unknown,
   ): Promise<Partial<EvaluationCenter> | null> {
     try {
-      const data = await this.page!.evaluate((el: Element) => {
+      // Note: evaluate runs in browser context where DOM types exist
+      const data = await this.page!.evaluate((el) => {
+        const element = el as HTMLElement;
         return {
-          centroId: el.getAttribute('data-centro-id') || '',
-          nombre: el.querySelector('.centro-name, h3')?.textContent?.trim() || '',
-          certId: el.querySelector('.oec-parent')?.textContent?.trim() || '',
-          estado: el.querySelector('.centro-estado')?.textContent?.trim() || '',
+          centroId: element.getAttribute("data-centro-id") || "",
+          nombre:
+            element.querySelector(".centro-name, h3")?.textContent?.trim() ||
+            "",
+          certId:
+            element.querySelector(".oec-parent")?.textContent?.trim() || "",
+          estado:
+            element.querySelector(".centro-estado")?.textContent?.trim() || "",
         };
-      }, card as Element);
+      }, card);
 
       if (data.centroId || data.nombre) {
         return {
@@ -219,8 +227,8 @@ export class CenterDriver extends BaseDriver {
   private async extractNombre(): Promise<string> {
     const selectors = [
       'td:has-text("Nombre") + td',
-      'h1.centro-title',
-      'div.nombre-centro',
+      "h1.centro-title",
+      "div.nombre-centro",
     ];
 
     for (const selector of selectors) {
@@ -228,7 +236,7 @@ export class CenterDriver extends BaseDriver {
       if (text) return text;
     }
 
-    return '';
+    return "";
   }
 
   private async extractCertId(): Promise<string | undefined> {
@@ -242,7 +250,7 @@ export class CenterDriver extends BaseDriver {
     }
 
     // Try link
-    const href = await this.extractAttribute('a[href*="cert="]', 'href');
+    const href = await this.extractAttribute('a[href*="cert="]', "href");
     if (href) {
       const match = href.match(/cert=(\w+)/);
       if (match) return match[1];
@@ -265,7 +273,7 @@ export class CenterDriver extends BaseDriver {
     const selectors = [
       'td:has-text("Dirección") + td',
       'td:has-text("Domicilio") + td',
-      'div.direccion',
+      "div.direccion",
     ];
 
     for (const selector of selectors) {
@@ -287,7 +295,7 @@ export class CenterDriver extends BaseDriver {
       }
     }
 
-    return text ? text.replace(/\D/g, '').slice(0, 5) : undefined;
+    return text ? text.replace(/\D/g, "").slice(0, 5) : undefined;
   }
 
   private async extractTelefono(): Promise<string | undefined> {
@@ -310,7 +318,7 @@ export class CenterDriver extends BaseDriver {
 
     // Try list of EC codes
     const codes = await this.extractAllText(
-      'div.estandares-ofrecidos li, ul.ec-list li'
+      "div.estandares-ofrecidos li, ul.ec-list li",
     );
 
     for (const code of codes) {
@@ -324,8 +332,10 @@ export class CenterDriver extends BaseDriver {
     if (ecCodes.length === 0 && this.page) {
       try {
         const modalCodes = await this.page.evaluate(() => {
-          const items = document.querySelectorAll('[data-ec-code]');
-          return Array.from(items).map(el => el.getAttribute('data-ec-code') || '');
+          const items = document.querySelectorAll("[data-ec-code]");
+          return Array.from(items).map(
+            (el) => el.getAttribute("data-ec-code") || "",
+          );
         });
 
         for (const code of modalCodes) {
@@ -343,12 +353,12 @@ export class CenterDriver extends BaseDriver {
 
   validateItem(item: Record<string, unknown>): boolean {
     // Check if it's a relation
-    if (item.type === 'center_ec_offering') {
+    if (item.type === "center_ec_offering") {
       return Boolean(item.centroId && item.ecClave);
     }
 
     // Main center validation
-    const required = ['centroId', 'nombre', 'srcUrl'];
+    const required = ["centroId", "nombre", "srcUrl"];
 
     for (const field of required) {
       if (!item[field]) {

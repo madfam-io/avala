@@ -1,11 +1,17 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
-import { ScrollArea } from '@/components/ui/scroll-area';
+import { useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   ChevronLeft,
   ChevronRight,
@@ -21,7 +27,7 @@ import {
   Lock,
   Sparkles,
   ArrowRight,
-} from 'lucide-react';
+} from "lucide-react";
 
 // ============================================================================
 // Sample Course Data
@@ -33,7 +39,7 @@ interface DemoLesson {
   durationMin: number;
   videoUrl?: string;
   content?: string;
-  status: 'NOT_STARTED' | 'IN_PROGRESS' | 'COMPLETED';
+  status: "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
 }
 
 interface DemoModule {
@@ -57,23 +63,24 @@ interface DemoCourse {
 
 const DEMO_COURSES: DemoCourse[] = [
   {
-    id: 'course-1',
-    code: 'MFG-101',
-    title: 'Introduction to 3D Printing for Engineers',
-    description: 'Learn the fundamentals of FDM, SLA, and SLS 3D printing technologies. Understand material selection, design considerations, and best practices for manufacturing.',
-    instructor: 'Dr. María García',
+    id: "course-1",
+    code: "MFG-101",
+    title: "Introduction to 3D Printing for Engineers",
+    description:
+      "Learn the fundamentals of FDM, SLA, and SLS 3D printing technologies. Understand material selection, design considerations, and best practices for manufacturing.",
+    instructor: "Dr. María García",
     totalLessons: 12,
-    totalDuration: '4.5 hours',
+    totalDuration: "4.5 hours",
     enrolled: 342,
-    thumbnail: '🖨️',
+    thumbnail: "🖨️",
     modules: [
       {
-        id: 'mod-1',
-        title: 'Module 1: Fundamentals of Additive Manufacturing',
+        id: "mod-1",
+        title: "Module 1: Fundamentals of Additive Manufacturing",
         lessons: [
           {
-            id: 'lesson-1',
-            title: 'What is 3D Printing?',
+            id: "lesson-1",
+            title: "What is 3D Printing?",
             durationMin: 15,
             content: `# What is 3D Printing?
 
@@ -92,105 +99,133 @@ const DEMO_COURSES: DemoCourse[] = [
 3. Medical implants
 4. Aerospace components
 5. Consumer products`,
-            status: 'COMPLETED',
+            status: "COMPLETED",
           },
           {
-            id: 'lesson-2',
-            title: 'FDM Technology Deep Dive',
+            id: "lesson-2",
+            title: "FDM Technology Deep Dive",
             durationMin: 22,
-            videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-            content: 'Fused Deposition Modeling (FDM) is the most common 3D printing technology...',
-            status: 'COMPLETED',
+            videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+            content:
+              "Fused Deposition Modeling (FDM) is the most common 3D printing technology...",
+            status: "COMPLETED",
           },
           {
-            id: 'lesson-3',
-            title: 'SLA and Resin Printing',
+            id: "lesson-3",
+            title: "SLA and Resin Printing",
             durationMin: 18,
-            content: 'Stereolithography (SLA) uses UV light to cure liquid resin into solid parts...',
-            status: 'IN_PROGRESS',
+            content:
+              "Stereolithography (SLA) uses UV light to cure liquid resin into solid parts...",
+            status: "IN_PROGRESS",
           },
         ],
       },
       {
-        id: 'mod-2',
-        title: 'Module 2: Materials Science',
+        id: "mod-2",
+        title: "Module 2: Materials Science",
         lessons: [
           {
-            id: 'lesson-4',
-            title: 'PLA vs ABS vs PETG',
+            id: "lesson-4",
+            title: "PLA vs ABS vs PETG",
             durationMin: 20,
-            content: 'Understanding the differences between common FDM materials...',
-            status: 'NOT_STARTED',
+            content:
+              "Understanding the differences between common FDM materials...",
+            status: "NOT_STARTED",
           },
           {
-            id: 'lesson-5',
-            title: 'Engineering-Grade Materials',
+            id: "lesson-5",
+            title: "Engineering-Grade Materials",
             durationMin: 25,
-            content: 'Nylon, Polycarbonate, and composite materials for demanding applications...',
-            status: 'NOT_STARTED',
+            content:
+              "Nylon, Polycarbonate, and composite materials for demanding applications...",
+            status: "NOT_STARTED",
           },
         ],
       },
       {
-        id: 'mod-3',
-        title: 'Module 3: Design for Manufacturing',
+        id: "mod-3",
+        title: "Module 3: Design for Manufacturing",
         lessons: [
           {
-            id: 'lesson-6',
-            title: 'Design Guidelines for FDM',
+            id: "lesson-6",
+            title: "Design Guidelines for FDM",
             durationMin: 30,
-            content: 'Best practices for designing parts optimized for FDM printing...',
-            status: 'NOT_STARTED',
+            content:
+              "Best practices for designing parts optimized for FDM printing...",
+            status: "NOT_STARTED",
           },
           {
-            id: 'lesson-7',
-            title: 'Support Structures & Orientation',
+            id: "lesson-7",
+            title: "Support Structures & Orientation",
             durationMin: 22,
-            content: 'How to minimize supports and choose optimal print orientation...',
-            status: 'NOT_STARTED',
+            content:
+              "How to minimize supports and choose optimal print orientation...",
+            status: "NOT_STARTED",
           },
         ],
       },
     ],
   },
   {
-    id: 'course-2',
-    code: 'CNC-201',
-    title: 'CNC Machining Fundamentals',
-    description: 'Master the basics of CNC milling and turning. From G-code to toolpath optimization.',
-    instructor: 'Ing. Carlos Mendoza',
+    id: "course-2",
+    code: "CNC-201",
+    title: "CNC Machining Fundamentals",
+    description:
+      "Master the basics of CNC milling and turning. From G-code to toolpath optimization.",
+    instructor: "Ing. Carlos Mendoza",
     totalLessons: 15,
-    totalDuration: '6 hours',
+    totalDuration: "6 hours",
     enrolled: 189,
-    thumbnail: '⚙️',
+    thumbnail: "⚙️",
     modules: [
       {
-        id: 'mod-cnc-1',
-        title: 'Module 1: Introduction to CNC',
+        id: "mod-cnc-1",
+        title: "Module 1: Introduction to CNC",
         lessons: [
-          { id: 'cnc-1', title: 'What is CNC Machining?', durationMin: 18, status: 'NOT_STARTED' },
-          { id: 'cnc-2', title: 'Types of CNC Machines', durationMin: 20, status: 'NOT_STARTED' },
+          {
+            id: "cnc-1",
+            title: "What is CNC Machining?",
+            durationMin: 18,
+            status: "NOT_STARTED",
+          },
+          {
+            id: "cnc-2",
+            title: "Types of CNC Machines",
+            durationMin: 20,
+            status: "NOT_STARTED",
+          },
         ],
       },
     ],
   },
   {
-    id: 'course-3',
-    code: 'QA-301',
-    title: 'Quality Control in Manufacturing',
-    description: 'Implement robust quality systems, statistical process control, and inspection techniques.',
-    instructor: 'Dra. Ana Rodríguez',
+    id: "course-3",
+    code: "QA-301",
+    title: "Quality Control in Manufacturing",
+    description:
+      "Implement robust quality systems, statistical process control, and inspection techniques.",
+    instructor: "Dra. Ana Rodríguez",
     totalLessons: 10,
-    totalDuration: '3.5 hours',
+    totalDuration: "3.5 hours",
     enrolled: 256,
-    thumbnail: '📊',
+    thumbnail: "📊",
     modules: [
       {
-        id: 'mod-qa-1',
-        title: 'Module 1: Quality Fundamentals',
+        id: "mod-qa-1",
+        title: "Module 1: Quality Fundamentals",
         lessons: [
-          { id: 'qa-1', title: 'Introduction to Quality Systems', durationMin: 15, status: 'NOT_STARTED' },
-          { id: 'qa-2', title: 'Six Sigma Basics', durationMin: 25, status: 'NOT_STARTED' },
+          {
+            id: "qa-1",
+            title: "Introduction to Quality Systems",
+            durationMin: 15,
+            status: "NOT_STARTED",
+          },
+          {
+            id: "qa-2",
+            title: "Six Sigma Basics",
+            durationMin: 25,
+            status: "NOT_STARTED",
+          },
         ],
       },
     ],
@@ -218,13 +253,13 @@ function CourseCard({
 }) {
   const completedLessons = course.modules
     .flatMap((m) => m.lessons)
-    .filter((l) => l.status === 'COMPLETED').length;
+    .filter((l) => l.status === "COMPLETED").length;
   const progress = Math.round((completedLessons / course.totalLessons) * 100);
 
   return (
     <Card
       className={`cursor-pointer transition-all hover:shadow-lg ${
-        isSelected ? 'ring-2 ring-primary' : ''
+        isSelected ? "ring-2 ring-primary" : ""
       }`}
       onClick={onSelect}
     >
@@ -234,7 +269,9 @@ function CourseCard({
           <Badge variant="outline">{course.code}</Badge>
         </div>
         <CardTitle className="text-lg">{course.title}</CardTitle>
-        <CardDescription className="line-clamp-2">{course.description}</CardDescription>
+        <CardDescription className="line-clamp-2">
+          {course.description}
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <div className="space-y-3">
@@ -284,8 +321,8 @@ function LessonContent({
             <Lock className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
             <h3 className="text-lg font-semibold mb-2">Demo Limit Reached</h3>
             <p className="text-sm text-muted-foreground mb-6">
-              You've explored {DEMO_LESSON_LIMIT} lessons in this demo. Sign up to unlock all courses
-              and track your learning progress!
+              {"You've explored"} {DEMO_LESSON_LIMIT} {"lessons in this demo."}
+              Sign up to unlock all courses and track your learning progress!
             </p>
             <div className="space-y-3">
               <Button className="w-full" size="lg">
@@ -333,7 +370,7 @@ function LessonContent({
         )}
 
         {/* Complete Button */}
-        {lesson.status !== 'COMPLETED' && (
+        {lesson.status !== "COMPLETED" && (
           <div className="flex justify-center">
             <Button size="lg" onClick={onComplete}>
               <CheckCircle2 className="mr-2 h-5 w-5" />
@@ -351,19 +388,22 @@ function LessonContent({
 // ============================================================================
 
 export default function AvalaDemo() {
-  const [selectedCourse, setSelectedCourse] = useState<DemoCourse>(DEMO_COURSES[0]);
-  const [currentLessonId, setCurrentLessonId] = useState<string>('lesson-1');
-  const [completedInDemo, setCompletedInDemo] = useState<Set<string>>(new Set(['lesson-1', 'lesson-2']));
+  const [selectedCourse, setSelectedCourse] = useState<DemoCourse>(
+    DEMO_COURSES[0],
+  );
+  const [currentLessonId, setCurrentLessonId] = useState<string>("lesson-1");
+  const [completedInDemo, setCompletedInDemo] = useState<Set<string>>(
+    new Set(["lesson-1", "lesson-2"]),
+  );
   const [showUpsell, setShowUpsell] = useState(false);
 
   const allLessons = selectedCourse.modules.flatMap((m) => m.lessons);
   const currentLesson = allLessons.find((l) => l.id === currentLessonId);
   const currentModule = selectedCourse.modules.find((m) =>
-    m.lessons.some((l) => l.id === currentLessonId)
+    m.lessons.some((l) => l.id === currentLessonId),
   );
 
   const completedCount = completedInDemo.size;
-  const isLimitReached = completedCount >= DEMO_LESSON_LIMIT;
 
   const handleSelectLesson = (lessonId: string) => {
     const lessonIndex = allLessons.findIndex((l) => l.id === lessonId);
@@ -372,7 +412,10 @@ export default function AvalaDemo() {
       .filter((l) => completedInDemo.has(l.id)).length;
 
     // Allow selecting only if within demo limit or already completed
-    if (completedLessonsBeforeThis < DEMO_LESSON_LIMIT || completedInDemo.has(lessonId)) {
+    if (
+      completedLessonsBeforeThis < DEMO_LESSON_LIMIT ||
+      completedInDemo.has(lessonId)
+    ) {
       setCurrentLessonId(lessonId);
     } else {
       setShowUpsell(true);
@@ -398,12 +441,21 @@ export default function AvalaDemo() {
     }
   };
 
-  const currentLessonIndex = allLessons.findIndex((l) => l.id === currentLessonId);
-  const previousLesson = currentLessonIndex > 0 ? allLessons[currentLessonIndex - 1] : null;
-  const nextLesson = currentLessonIndex < allLessons.length - 1 ? allLessons[currentLessonIndex + 1] : null;
+  const currentLessonIndex = allLessons.findIndex(
+    (l) => l.id === currentLessonId,
+  );
+  const previousLesson =
+    currentLessonIndex > 0 ? allLessons[currentLessonIndex - 1] : null;
+  const nextLesson =
+    currentLessonIndex < allLessons.length - 1
+      ? allLessons[currentLessonIndex + 1]
+      : null;
 
-  const isCurrentLessonLocked = !completedInDemo.has(currentLessonId) &&
-    allLessons.slice(0, currentLessonIndex).filter((l) => completedInDemo.has(l.id)).length >= DEMO_LESSON_LIMIT;
+  const isCurrentLessonLocked =
+    !completedInDemo.has(currentLessonId) &&
+    allLessons
+      .slice(0, currentLessonIndex)
+      .filter((l) => completedInDemo.has(l.id)).length >= DEMO_LESSON_LIMIT;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-950">
@@ -456,7 +508,9 @@ export default function AvalaDemo() {
             {/* Course Header */}
             <div className="p-4 border-b space-y-2">
               <Badge variant="outline">{selectedCourse.code}</Badge>
-              <h2 className="font-semibold line-clamp-2">{selectedCourse.title}</h2>
+              <h2 className="font-semibold line-clamp-2">
+                {selectedCourse.title}
+              </h2>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Award className="h-4 w-4" />
                 <span>{selectedCourse.instructor}</span>
@@ -468,7 +522,10 @@ export default function AvalaDemo() {
                     {completedCount}/{DEMO_LESSON_LIMIT} lessons
                   </span>
                 </div>
-                <Progress value={(completedCount / DEMO_LESSON_LIMIT) * 100} className="h-2" />
+                <Progress
+                  value={(completedCount / DEMO_LESSON_LIMIT) * 100}
+                  className="h-2"
+                />
               </div>
             </div>
 
@@ -477,16 +534,21 @@ export default function AvalaDemo() {
               <div className="p-4 space-y-4">
                 {selectedCourse.modules.map((module) => (
                   <div key={module.id} className="space-y-2">
-                    <h3 className="font-medium text-sm text-muted-foreground">{module.title}</h3>
+                    <h3 className="font-medium text-sm text-muted-foreground">
+                      {module.title}
+                    </h3>
                     <div className="space-y-1 pl-2">
                       {module.lessons.map((lesson, index) => {
                         const isActive = lesson.id === currentLessonId;
                         const isCompleted = completedInDemo.has(lesson.id);
-                        const lessonGlobalIndex = allLessons.findIndex((l) => l.id === lesson.id);
+                        const lessonGlobalIndex = allLessons.findIndex(
+                          (l) => l.id === lesson.id,
+                        );
                         const completedBefore = allLessons
                           .slice(0, lessonGlobalIndex)
                           .filter((l) => completedInDemo.has(l.id)).length;
-                        const isLocked = !isCompleted && completedBefore >= DEMO_LESSON_LIMIT;
+                        const isLocked =
+                          !isCompleted && completedBefore >= DEMO_LESSON_LIMIT;
 
                         return (
                           <button
@@ -494,10 +556,10 @@ export default function AvalaDemo() {
                             onClick={() => handleSelectLesson(lesson.id)}
                             className={`w-full flex items-center gap-2 p-2 rounded-md text-sm text-left transition-colors ${
                               isActive
-                                ? 'bg-primary text-primary-foreground'
+                                ? "bg-primary text-primary-foreground"
                                 : isLocked
-                                ? 'opacity-50 cursor-not-allowed'
-                                : 'hover:bg-muted'
+                                  ? "opacity-50 cursor-not-allowed"
+                                  : "hover:bg-muted"
                             }`}
                           >
                             {isCompleted ? (
@@ -512,7 +574,9 @@ export default function AvalaDemo() {
                             <span className="flex-1 line-clamp-1">
                               {index + 1}. {lesson.title}
                             </span>
-                            <span className="text-xs opacity-70">{lesson.durationMin}m</span>
+                            <span className="text-xs opacity-70">
+                              {lesson.durationMin}m
+                            </span>
                           </button>
                         );
                       })}
@@ -531,8 +595,12 @@ export default function AvalaDemo() {
                 <div className="p-6 border-b">
                   <div className="flex items-start justify-between">
                     <div className="space-y-1">
-                      <p className="text-sm text-muted-foreground">{currentModule?.title}</p>
-                      <h1 className="text-2xl font-bold">{currentLesson.title}</h1>
+                      <p className="text-sm text-muted-foreground">
+                        {currentModule?.title}
+                      </p>
+                      <h1 className="text-2xl font-bold">
+                        {currentLesson.title}
+                      </h1>
                       <div className="flex items-center gap-3 text-sm text-muted-foreground">
                         <span className="flex items-center gap-1">
                           <Clock className="h-4 w-4" />
@@ -567,7 +635,9 @@ export default function AvalaDemo() {
                   <div className="flex items-center justify-between">
                     <Button
                       variant="outline"
-                      onClick={() => previousLesson && handleSelectLesson(previousLesson.id)}
+                      onClick={() =>
+                        previousLesson && handleSelectLesson(previousLesson.id)
+                      }
                       disabled={!previousLesson}
                     >
                       <ChevronLeft className="mr-2 h-4 w-4" />
@@ -578,7 +648,9 @@ export default function AvalaDemo() {
                     </span>
                     <Button
                       variant="outline"
-                      onClick={() => nextLesson && handleSelectLesson(nextLesson.id)}
+                      onClick={() =>
+                        nextLesson && handleSelectLesson(nextLesson.id)
+                      }
                       disabled={!nextLesson}
                     >
                       Next
@@ -592,7 +664,9 @@ export default function AvalaDemo() {
                 <Card className="max-w-md">
                   <CardContent className="py-12 text-center">
                     <BookOpen className="h-12 w-12 mx-auto mb-4 opacity-50 text-muted-foreground" />
-                    <p className="font-medium text-lg">Select a lesson to begin</p>
+                    <p className="font-medium text-lg">
+                      Select a lesson to begin
+                    </p>
                   </CardContent>
                 </Card>
               </div>
@@ -610,7 +684,8 @@ export default function AvalaDemo() {
                 </div>
                 <CardTitle className="text-2xl">Unlock Full Access</CardTitle>
                 <CardDescription>
-                  You've completed the demo! Sign up to continue learning and earn certificates.
+                  {"You've completed the demo! Sign up to continue learning"}
+                  and earn certificates.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -664,10 +739,13 @@ export default function AvalaDemo() {
         <div className="mt-8 text-center">
           <Card className="bg-gradient-to-r from-primary/10 to-primary/5 border-primary/20">
             <CardContent className="py-8">
-              <h3 className="text-2xl font-bold mb-2">Ready to upskill your team?</h3>
+              <h3 className="text-2xl font-bold mb-2">
+                Ready to upskill your team?
+              </h3>
               <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                Avala LMS powers corporate training for manufacturing companies across Latin America.
-                Custom courses, progress tracking, and team analytics included.
+                Avala LMS powers corporate training for manufacturing companies
+                across Latin America. Custom courses, progress tracking, and
+                team analytics included.
               </p>
               <div className="flex justify-center gap-4">
                 <Button size="lg">

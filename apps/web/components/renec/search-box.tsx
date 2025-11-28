@@ -5,7 +5,11 @@ import { Search, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { autocomplete, trackSearch, type AutocompleteResult } from "@/lib/api/renec";
+import {
+  autocomplete,
+  trackSearch,
+  type AutocompleteResult,
+} from "@/lib/api/renec";
 
 interface SearchBoxProps {
   placeholder?: string;
@@ -35,7 +39,7 @@ export function SearchBox({
     if (!showAutocomplete || query.length < 2) {
       setResults(null);
       setIsOpen(false);
-      return;
+      return undefined;
     }
 
     const timer = setTimeout(async () => {
@@ -57,7 +61,10 @@ export function SearchBox({
   // Close on click outside
   React.useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     }
@@ -74,7 +81,9 @@ export function SearchBox({
     trackSearch({
       query,
       searchType: "GENERAL",
-      resultCount: results ? results.ec.length + results.certifiers.length + results.centers.length : 0,
+      resultCount: results
+        ? results.ec.length + results.certifiers.length + results.centers.length
+        : 0,
     });
 
     if (onSearch) {
@@ -107,7 +116,9 @@ export function SearchBox({
 
   const hasResults =
     results &&
-    (results.ec.length > 0 || results.certifiers.length > 0 || results.centers.length > 0);
+    (results.ec.length > 0 ||
+      results.certifiers.length > 0 ||
+      results.centers.length > 0);
 
   return (
     <div ref={containerRef} className={cn("relative w-full", className)}>
@@ -201,7 +212,8 @@ export function SearchBox({
                 >
                   <span className="font-medium">{item.name}</span>
                   <span className="ml-2 text-xs text-muted-foreground">
-                    {[item.municipio, item.estado].filter(Boolean).join(", ") || "Sin ubicación"}
+                    {[item.municipio, item.estado].filter(Boolean).join(", ") ||
+                      "Sin ubicación"}
                   </span>
                 </button>
               ))}

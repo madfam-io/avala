@@ -112,8 +112,18 @@ export interface RenecStats {
 
 export interface AutocompleteResult {
   ec: Array<{ id: string; code: string; title: string }>;
-  certifiers: Array<{ id: string; name: string; type: string; estado: string | null }>;
-  centers: Array<{ id: string; name: string; estado: string | null; municipio: string | null }>;
+  certifiers: Array<{
+    id: string;
+    name: string;
+    type: string;
+    estado: string | null;
+  }>;
+  centers: Array<{
+    id: string;
+    name: string;
+    estado: string | null;
+    municipio: string | null;
+  }>;
 }
 
 export interface Estado {
@@ -215,7 +225,10 @@ interface NearbyResponse {
 // API Functions
 // ============================================
 
-async function fetchAPI<T>(endpoint: string, params?: Record<string, string | number | undefined>): Promise<T> {
+async function fetchAPI<T>(
+  endpoint: string,
+  params?: Record<string, string | number | undefined>,
+): Promise<T> {
   const url = new URL(`${API_BASE}/renec${endpoint}`);
 
   if (params) {
@@ -249,14 +262,19 @@ export async function getStats(estado?: string): Promise<RenecStats> {
 export async function autocomplete(
   q: string,
   type: "ec" | "certifier" | "center" | "all" = "all",
-  limit = 10
+  limit = 10,
 ): Promise<AutocompleteResult> {
   return fetchAPI<AutocompleteResult>("/autocomplete", { q, type, limit });
 }
 
 // EC Standards
-export async function searchEC(params: ECSearchParams = {}): Promise<ECListResponse> {
-  return fetchAPI<ECListResponse>("/ec", params as Record<string, string | number | undefined>);
+export async function searchEC(
+  params: ECSearchParams = {},
+): Promise<ECListResponse> {
+  return fetchAPI<ECListResponse>(
+    "/ec",
+    params as Record<string, string | number | undefined>,
+  );
 }
 
 export async function getEC(id: string): Promise<ECDetail> {
@@ -272,20 +290,34 @@ export async function getSectors(): Promise<Sector[]> {
 }
 
 // Certifiers
-export async function searchCertifiers(params: CertifierSearchParams = {}): Promise<CertifierListResponse> {
-  return fetchAPI<CertifierListResponse>("/certifiers", params as Record<string, string | number | undefined>);
+export async function searchCertifiers(
+  params: CertifierSearchParams = {},
+): Promise<CertifierListResponse> {
+  return fetchAPI<CertifierListResponse>(
+    "/certifiers",
+    params as Record<string, string | number | undefined>,
+  );
 }
 
-export async function getCertifier(id: string): Promise<Certifier & { ecStandards: ECStandard[]; centers: Center[] }> {
+export async function getCertifier(
+  id: string,
+): Promise<Certifier & { ecStandards: ECStandard[]; centers: Center[] }> {
   return fetchAPI(`/certifiers/${id}`);
 }
 
 // Centers
-export async function searchCenters(params: CenterSearchParams = {}): Promise<CenterListResponse> {
-  return fetchAPI<CenterListResponse>("/centers", params as Record<string, string | number | undefined>);
+export async function searchCenters(
+  params: CenterSearchParams = {},
+): Promise<CenterListResponse> {
+  return fetchAPI<CenterListResponse>(
+    "/centers",
+    params as Record<string, string | number | undefined>,
+  );
 }
 
-export async function getCenter(id: string): Promise<Center & { ecStandards: ECStandard[] }> {
+export async function getCenter(
+  id: string,
+): Promise<Center & { ecStandards: ECStandard[] }> {
   return fetchAPI(`/centers/${id}`);
 }
 
@@ -297,8 +329,13 @@ export async function getCentersByState(estado: string): Promise<{
   return fetchAPI(`/centers/by-state/${encodeURIComponent(estado)}`);
 }
 
-export async function searchNearby(params: NearbySearchParams): Promise<NearbyResponse> {
-  return fetchAPI<NearbyResponse>("/centers/nearby", params as Record<string, string | number | undefined>);
+export async function searchNearby(
+  params: NearbySearchParams,
+): Promise<NearbyResponse> {
+  return fetchAPI<NearbyResponse>(
+    "/centers/nearby",
+    params as unknown as Record<string, string | number | undefined>,
+  );
 }
 
 // Reference Data

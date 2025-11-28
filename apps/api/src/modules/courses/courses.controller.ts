@@ -7,22 +7,28 @@ import {
   Body,
   Param,
   Query,
-} from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiQuery } from '@nestjs/swagger';
-import { CoursesService, CreateCourseDto, UpdateCourseDto } from './courses.service';
-import { TenantId } from '../../common/decorators/tenant.decorator';
-import { CurrentUser } from '../../common/decorators/user.decorator';
+} from "@nestjs/common";
+import { ApiTags, ApiOperation, ApiQuery } from "@nestjs/swagger";
+import {
+  CoursesService,
+  CreateCourseDto,
+  UpdateCourseDto,
+} from "./courses.service";
+import {
+  TenantId,
+  CurrentUser,
+} from "../../common/decorators/tenant.decorator";
 
-@ApiTags('courses')
-@Controller('courses')
+@ApiTags("courses")
+@Controller("courses")
 export class CoursesController {
   constructor(private readonly coursesService: CoursesService) {}
 
   @Post()
-  @ApiOperation({ summary: 'Create a new course' })
+  @ApiOperation({ summary: "Create a new course" })
   create(
     @TenantId() tenantId: string,
-    @CurrentUser('sub') userId: string,
+    @CurrentUser("sub") userId: string,
     @Body() dto: CreateCourseDto,
   ) {
     return this.coursesService.create(tenantId, {
@@ -32,43 +38,43 @@ export class CoursesController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'List all courses' })
+  @ApiOperation({ summary: "List all courses" })
   findAll(@TenantId() tenantId: string) {
     return this.coursesService.findAll(tenantId);
   }
 
-  @Get('search')
-  @ApiOperation({ summary: 'Search courses by title or code' })
-  @ApiQuery({ name: 'q', required: true })
-  search(@TenantId() tenantId: string, @Query('q') query: string) {
+  @Get("search")
+  @ApiOperation({ summary: "Search courses by title or code" })
+  @ApiQuery({ name: "q", required: true })
+  search(@TenantId() tenantId: string, @Query("q") query: string) {
     return this.coursesService.search(tenantId, query);
   }
 
-  @Get(':id/curriculum')
-  @ApiOperation({ summary: 'Get course curriculum (modules and lessons tree)' })
-  getCurriculum(@TenantId() tenantId: string, @Param('id') id: string) {
+  @Get(":id/curriculum")
+  @ApiOperation({ summary: "Get course curriculum (modules and lessons tree)" })
+  getCurriculum(@TenantId() tenantId: string, @Param("id") id: string) {
     return this.coursesService.getCurriculum(tenantId, id);
   }
 
-  @Get(':id')
-  @ApiOperation({ summary: 'Get course by ID' })
-  findById(@TenantId() tenantId: string, @Param('id') id: string) {
+  @Get(":id")
+  @ApiOperation({ summary: "Get course by ID" })
+  findById(@TenantId() tenantId: string, @Param("id") id: string) {
     return this.coursesService.findById(tenantId, id);
   }
 
-  @Put(':id')
-  @ApiOperation({ summary: 'Update course' })
+  @Put(":id")
+  @ApiOperation({ summary: "Update course" })
   update(
     @TenantId() tenantId: string,
-    @Param('id') id: string,
+    @Param("id") id: string,
     @Body() dto: UpdateCourseDto,
   ) {
     return this.coursesService.update(tenantId, id, dto);
   }
 
-  @Delete(':id')
-  @ApiOperation({ summary: 'Archive course' })
-  delete(@TenantId() tenantId: string, @Param('id') id: string) {
+  @Delete(":id")
+  @ApiOperation({ summary: "Archive course" })
+  delete(@TenantId() tenantId: string, @Param("id") id: string) {
     return this.coursesService.delete(tenantId, id);
   }
 }

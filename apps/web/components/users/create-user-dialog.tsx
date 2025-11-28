@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
-import { Role } from '@avala/db';
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { Role } from "@avala/db";
 import {
   Dialog,
   DialogContent,
@@ -12,56 +12,53 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { useCreateUser } from '@/hooks/useUsers';
-import { Loader2 } from 'lucide-react';
+} from "@/components/ui/dropdown-menu";
+import { useCreateUser } from "@/hooks/useUsers";
+import { Loader2 } from "lucide-react";
 
 const createUserSchema = z.object({
-  email: z.string().email('Invalid email address'),
+  email: z.string().email("Invalid email address"),
   password: z
     .string()
-    .min(8, 'Password must be at least 8 characters')
+    .min(8, "Password must be at least 8 characters")
     .optional()
-    .or(z.literal('')),
-  firstName: z.string().min(1, 'First name is required'),
-  lastName: z.string().min(1, 'Last name is required'),
+    .or(z.literal("")),
+  firstName: z.string().min(1, "First name is required"),
+  lastName: z.string().min(1, "Last name is required"),
   role: z.nativeEnum(Role),
   curp: z
     .string()
-    .length(18, 'CURP must be exactly 18 characters')
-    .regex(
-      /^[A-Z]{4}\d{6}[HM][A-Z]{5}[0-9A-Z]\d$/,
-      'Invalid CURP format'
-    )
+    .length(18, "CURP must be exactly 18 characters")
+    .regex(/^[A-Z]{4}\d{6}[HM][A-Z]{5}[0-9A-Z]\d$/, "Invalid CURP format")
     .optional()
-    .or(z.literal('')),
+    .or(z.literal("")),
   rfc: z
     .string()
-    .min(12, 'RFC must be 12-13 characters')
-    .max(13, 'RFC must be 12-13 characters')
+    .min(12, "RFC must be 12-13 characters")
+    .max(13, "RFC must be 12-13 characters")
     .optional()
-    .or(z.literal('')),
+    .or(z.literal("")),
 });
 
 type CreateUserFormData = z.infer<typeof createUserSchema>;
 
 const roleLabels: Record<Role, string> = {
-  SUPER_ADMIN: 'Super Admin',
-  ADMIN: 'Admin',
-  INSTRUCTOR: 'Instructor',
-  TRAINEE: 'Trainee',
-  EVALUATOR: 'Evaluator',
-  EC_VALIDATOR: 'EC Validator',
-  VIEWER: 'Viewer',
+  ADMIN: "Administrador",
+  COMPLIANCE_OFFICER: "Oficial de Cumplimiento",
+  ECE_OC_ADMIN: "Admin ECE/OC",
+  ASSESSOR: "Evaluador",
+  INSTRUCTOR: "Instructor",
+  SUPERVISOR: "Supervisor",
+  TRAINEE: "Participante",
 };
 
 interface CreateUserDialogProps {
@@ -69,7 +66,10 @@ interface CreateUserDialogProps {
   onOpenChange: (open: boolean) => void;
 }
 
-export function CreateUserDialog({ open, onOpenChange }: CreateUserDialogProps) {
+export function CreateUserDialog({
+  open,
+  onOpenChange,
+}: CreateUserDialogProps) {
   const createUserMutation = useCreateUser();
   const [selectedRole, setSelectedRole] = useState<Role>(Role.TRAINEE);
 
@@ -105,7 +105,7 @@ export function CreateUserDialog({ open, onOpenChange }: CreateUserDialogProps) 
       onOpenChange(false);
     } catch (error) {
       // Error handling is managed by the mutation
-      console.error('Failed to create user:', error);
+      console.error("Failed to create user:", error);
     }
   };
 
@@ -115,8 +115,8 @@ export function CreateUserDialog({ open, onOpenChange }: CreateUserDialogProps) 
         <DialogHeader>
           <DialogTitle>Create New User</DialogTitle>
           <DialogDescription>
-            Add a new user to your organization. A random password will be generated
-            if not provided.
+            Add a new user to your organization. A random password will be
+            generated if not provided.
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -127,7 +127,7 @@ export function CreateUserDialog({ open, onOpenChange }: CreateUserDialogProps) 
               </Label>
               <Input
                 id="firstName"
-                {...register('firstName')}
+                {...register("firstName")}
                 placeholder="Juan"
               />
               {errors.firstName && (
@@ -142,7 +142,7 @@ export function CreateUserDialog({ open, onOpenChange }: CreateUserDialogProps) 
               </Label>
               <Input
                 id="lastName"
-                {...register('lastName')}
+                {...register("lastName")}
                 placeholder="Pérez"
               />
               {errors.lastName && (
@@ -160,7 +160,7 @@ export function CreateUserDialog({ open, onOpenChange }: CreateUserDialogProps) 
             <Input
               id="email"
               type="email"
-              {...register('email')}
+              {...register("email")}
               placeholder="juan.perez@example.com"
             />
             {errors.email && (
@@ -173,7 +173,7 @@ export function CreateUserDialog({ open, onOpenChange }: CreateUserDialogProps) 
             <Input
               id="password"
               type="password"
-              {...register('password')}
+              {...register("password")}
               placeholder="Leave empty for auto-generated password"
             />
             {errors.password && (
@@ -210,7 +210,7 @@ export function CreateUserDialog({ open, onOpenChange }: CreateUserDialogProps) 
             <Label htmlFor="curp">CURP (Optional)</Label>
             <Input
               id="curp"
-              {...register('curp')}
+              {...register("curp")}
               placeholder="ABCD123456HDFLRN09"
               className="font-mono"
               maxLength={18}
@@ -227,7 +227,7 @@ export function CreateUserDialog({ open, onOpenChange }: CreateUserDialogProps) 
             <Label htmlFor="rfc">RFC (Optional)</Label>
             <Input
               id="rfc"
-              {...register('rfc')}
+              {...register("rfc")}
               placeholder="ABCD123456ABC"
               className="font-mono"
               maxLength={13}
@@ -245,7 +245,7 @@ export function CreateUserDialog({ open, onOpenChange }: CreateUserDialogProps) 
               <p className="text-sm text-destructive">
                 {createUserMutation.error instanceof Error
                   ? createUserMutation.error.message
-                  : 'Failed to create user. Please try again.'}
+                  : "Failed to create user. Please try again."}
               </p>
             </div>
           )}
@@ -270,7 +270,7 @@ export function CreateUserDialog({ open, onOpenChange }: CreateUserDialogProps) 
                   Creating...
                 </>
               ) : (
-                'Create User'
+                "Create User"
               )}
             </Button>
           </DialogFooter>

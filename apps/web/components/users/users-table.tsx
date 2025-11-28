@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
 import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
   useReactTable,
-} from '@tanstack/react-table';
-import { Role } from '@avala/db';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+} from "@tanstack/react-table";
+import { Role } from "@avala/db";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -17,17 +17,23 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
-import { Input } from '@/components/ui/input';
+} from "@/components/ui/table";
+import { Input } from "@/components/ui/input";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { useUsers } from '@/hooks/useUsers';
-import { ChevronLeft, ChevronRight, MoreVertical, Pencil, Trash2 } from 'lucide-react';
-import { useState } from 'react';
+} from "@/components/ui/dropdown-menu";
+import { useUsers } from "@/hooks/useUsers";
+import {
+  ChevronLeft,
+  ChevronRight,
+  MoreVertical,
+  Pencil,
+  Trash2,
+} from "lucide-react";
+import { useState } from "react";
 
 interface User {
   id: string;
@@ -42,26 +48,30 @@ interface User {
 }
 
 const roleColors: Record<Role, string> = {
-  SUPER_ADMIN: 'bg-purple-100 text-purple-800 border-purple-300',
-  ADMIN: 'bg-blue-100 text-blue-800 border-blue-300',
-  INSTRUCTOR: 'bg-green-100 text-green-800 border-green-300',
-  TRAINEE: 'bg-yellow-100 text-yellow-800 border-yellow-300',
-  EVALUATOR: 'bg-orange-100 text-orange-800 border-orange-300',
-  EC_VALIDATOR: 'bg-pink-100 text-pink-800 border-pink-300',
-  VIEWER: 'bg-gray-100 text-gray-800 border-gray-300',
+  ADMIN: "bg-blue-100 text-blue-800 border-blue-300",
+  COMPLIANCE_OFFICER: "bg-purple-100 text-purple-800 border-purple-300",
+  ECE_OC_ADMIN: "bg-pink-100 text-pink-800 border-pink-300",
+  ASSESSOR: "bg-orange-100 text-orange-800 border-orange-300",
+  INSTRUCTOR: "bg-green-100 text-green-800 border-green-300",
+  SUPERVISOR: "bg-indigo-100 text-indigo-800 border-indigo-300",
+  TRAINEE: "bg-yellow-100 text-yellow-800 border-yellow-300",
 };
 
 const roleLabels: Record<Role, string> = {
-  SUPER_ADMIN: 'Super Admin',
-  ADMIN: 'Admin',
-  INSTRUCTOR: 'Instructor',
-  TRAINEE: 'Trainee',
-  EVALUATOR: 'Evaluator',
-  EC_VALIDATOR: 'EC Validator',
-  VIEWER: 'Viewer',
+  ADMIN: "Administrador",
+  COMPLIANCE_OFFICER: "Oficial de Cumplimiento",
+  ECE_OC_ADMIN: "Admin ECE/OC",
+  ASSESSOR: "Evaluador",
+  INSTRUCTOR: "Instructor",
+  SUPERVISOR: "Supervisor",
+  TRAINEE: "Participante",
 };
 
-function getInitials(firstName: string | null, lastName: string | null, email: string): string {
+function getInitials(
+  firstName: string | null,
+  lastName: string | null,
+  email: string,
+): string {
   if (firstName && lastName) {
     return `${firstName[0]}${lastName[0]}`.toUpperCase();
   }
@@ -71,7 +81,10 @@ function getInitials(firstName: string | null, lastName: string | null, email: s
   return email.substring(0, 2).toUpperCase();
 }
 
-function getFullName(firstName: string | null, lastName: string | null): string {
+function getFullName(
+  firstName: string | null,
+  lastName: string | null,
+): string {
   if (firstName && lastName) {
     return `${firstName} ${lastName}`;
   }
@@ -81,18 +94,18 @@ function getFullName(firstName: string | null, lastName: string | null): string 
   if (lastName) {
     return lastName;
   }
-  return '—';
+  return "—";
 }
 
 const columns: ColumnDef<User>[] = [
   {
-    id: 'avatar',
-    header: '',
+    id: "avatar",
+    header: "",
     cell: ({ row }) => {
       const initials = getInitials(
         row.original.firstName,
         row.original.lastName,
-        row.original.email
+        row.original.email,
       );
       return (
         <Avatar className="h-8 w-8">
@@ -104,23 +117,26 @@ const columns: ColumnDef<User>[] = [
     },
   },
   {
-    accessorKey: 'fullName',
-    header: 'Full Name',
+    accessorKey: "fullName",
+    header: "Full Name",
     cell: ({ row }) => {
-      const fullName = getFullName(row.original.firstName, row.original.lastName);
+      const fullName = getFullName(
+        row.original.firstName,
+        row.original.lastName,
+      );
       return <div className="font-medium">{fullName}</div>;
     },
   },
   {
-    accessorKey: 'email',
-    header: 'Email',
+    accessorKey: "email",
+    header: "Email",
     cell: ({ row }) => (
       <div className="text-muted-foreground">{row.original.email}</div>
     ),
   },
   {
-    accessorKey: 'role',
-    header: 'Role',
+    accessorKey: "role",
+    header: "Role",
     cell: ({ row }) => {
       const role = row.original.role;
       return (
@@ -131,8 +147,8 @@ const columns: ColumnDef<User>[] = [
     },
   },
   {
-    accessorKey: 'curp',
-    header: 'CURP',
+    accessorKey: "curp",
+    header: "CURP",
     cell: ({ row }) => (
       <div className="font-mono text-xs">
         {row.original.curp || <span className="text-muted-foreground">—</span>}
@@ -140,15 +156,15 @@ const columns: ColumnDef<User>[] = [
     ),
   },
   {
-    accessorKey: 'status',
-    header: 'Status',
+    accessorKey: "status",
+    header: "Status",
     cell: ({ row }) => {
       const status = row.original.status;
-      const isActive = status === 'ACTIVE';
+      const isActive = status === "ACTIVE";
       return (
         <Badge
-          variant={isActive ? 'default' : 'secondary'}
-          className={isActive ? 'bg-green-500' : ''}
+          variant={isActive ? "default" : "secondary"}
+          className={isActive ? "bg-green-500" : ""}
         >
           {status}
         </Badge>
@@ -156,9 +172,9 @@ const columns: ColumnDef<User>[] = [
     },
   },
   {
-    id: 'actions',
-    header: '',
-    cell: ({ row }) => (
+    id: "actions",
+    header: "",
+    cell: ({ row: _row }) => (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" size="icon" className="h-8 w-8">
@@ -184,9 +200,9 @@ interface UsersTableProps {
   onCreateUser?: () => void;
 }
 
-export function UsersTable({ onCreateUser }: UsersTableProps) {
+export function UsersTable({ onCreateUser: _onCreateUser }: UsersTableProps) {
   const [page, setPage] = useState(1);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
   const [roleFilter, setRoleFilter] = useState<Role | undefined>();
   const limit = 10;
 
@@ -211,7 +227,7 @@ export function UsersTable({ onCreateUser }: UsersTableProps) {
         <div className="text-center space-y-2">
           <p className="text-destructive font-medium">Error loading users</p>
           <p className="text-sm text-muted-foreground">
-            {error instanceof Error ? error.message : 'Unknown error'}
+            {error instanceof Error ? error.message : "Unknown error"}
           </p>
         </div>
       </div>
@@ -234,7 +250,7 @@ export function UsersTable({ onCreateUser }: UsersTableProps) {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline">
-              {roleFilter ? roleLabels[roleFilter] : 'All Roles'}
+              {roleFilter ? roleLabels[roleFilter] : "All Roles"}
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
@@ -265,7 +281,7 @@ export function UsersTable({ onCreateUser }: UsersTableProps) {
                       ? null
                       : flexRender(
                           header.column.columnDef.header,
-                          header.getContext()
+                          header.getContext(),
                         )}
                   </TableHead>
                 ))}
@@ -275,7 +291,10 @@ export function UsersTable({ onCreateUser }: UsersTableProps) {
           <TableBody>
             {isLoading ? (
               <TableRow>
-                <TableCell colSpan={columns.length} className="h-24 text-center">
+                <TableCell
+                  colSpan={columns.length}
+                  className="h-24 text-center"
+                >
                   <div className="flex items-center justify-center">
                     <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></div>
                   </div>
@@ -288,7 +307,7 @@ export function UsersTable({ onCreateUser }: UsersTableProps) {
                     <TableCell key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
-                        cell.getContext()
+                        cell.getContext(),
                       )}
                     </TableCell>
                   ))}
@@ -296,7 +315,10 @@ export function UsersTable({ onCreateUser }: UsersTableProps) {
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={columns.length} className="h-24 text-center">
+                <TableCell
+                  colSpan={columns.length}
+                  className="h-24 text-center"
+                >
                   <div className="text-muted-foreground">No users found</div>
                 </TableCell>
               </TableRow>
@@ -310,11 +332,11 @@ export function UsersTable({ onCreateUser }: UsersTableProps) {
         <div className="text-sm text-muted-foreground">
           {data ? (
             <>
-              Showing {(page - 1) * limit + 1} to{' '}
+              Showing {(page - 1) * limit + 1} to{" "}
               {Math.min(page * limit, data.total)} of {data.total} users
             </>
           ) : (
-            'Loading...'
+            "Loading..."
           )}
         </div>
         <div className="flex items-center gap-2">

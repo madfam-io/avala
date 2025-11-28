@@ -1,6 +1,6 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaService } from '../../database/prisma.service';
-import { Portfolio, Artifact } from '@avala/db';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { PrismaService } from "../../database/prisma.service";
+import { Portfolio, Artifact } from "@avala/db";
 
 /**
  * PortfolioService
@@ -26,7 +26,7 @@ export class PortfolioService {
           include: {
             artifact: true,
           },
-          orderBy: { order: 'asc' },
+          orderBy: { order: "asc" },
         },
         trainee: {
           select: {
@@ -37,7 +37,7 @@ export class PortfolioService {
           },
         },
       },
-      orderBy: { createdAt: 'desc' },
+      orderBy: { createdAt: "desc" },
     });
   }
 
@@ -72,7 +72,7 @@ export class PortfolioService {
               },
             },
           },
-          orderBy: { order: 'asc' },
+          orderBy: { order: "asc" },
         },
         trainee: {
           select: {
@@ -87,9 +87,7 @@ export class PortfolioService {
     });
 
     if (!portfolio) {
-      throw new NotFoundException(
-        `Portfolio with ID ${portfolioId} not found`,
-      );
+      throw new NotFoundException(`Portfolio with ID ${portfolioId} not found`);
     }
 
     return portfolio;
@@ -99,7 +97,7 @@ export class PortfolioService {
    * Create artifact with hash for integrity
    */
   async createArtifact(
-    tenantId: string,
+    _tenantId: string,
     traineeId: string,
     data: {
       type: string;
@@ -143,7 +141,7 @@ export class PortfolioService {
     // Get current max order
     const lastItem = await tenantClient.portfolioArtifact.findFirst({
       where: { portfolioId },
-      orderBy: { order: 'desc' },
+      orderBy: { order: "desc" },
     });
 
     const order = lastItem ? lastItem.order + 1 : 0;
@@ -165,8 +163,10 @@ export class PortfolioService {
    * Get portfolio export (for DC-3 or ECE/OC dictamen)
    */
   async exportPortfolio(tenantId: string, portfolioId: string) {
-    const portfolio = await this.findById(tenantId, portfolioId);
+    // findById includes artifacts relation
+    const portfolio = (await this.findById(tenantId, portfolioId)) as any;
 
+    const artifacts = portfolio.artifacts || [];
     return {
       portfolio: {
         id: portfolio.id,
@@ -176,7 +176,7 @@ export class PortfolioService {
         createdAt: portfolio.createdAt,
         updatedAt: portfolio.updatedAt,
       },
-      artifacts: portfolio.artifacts.map((pa) => ({
+      artifacts: artifacts.map((pa: any) => ({
         id: pa.artifact.id,
         type: pa.artifact.type,
         ref: pa.artifact.ref,
@@ -188,10 +188,9 @@ export class PortfolioService {
         order: pa.order,
       })),
       integrity: {
-        totalArtifacts: portfolio.artifacts.length,
-        signedArtifacts: portfolio.artifacts.filter(
-          (pa) => pa.artifact.signedAt,
-        ).length,
+        totalArtifacts: artifacts.length,
+        signedArtifacts: artifacts.filter((pa: any) => pa.artifact.signedAt)
+          .length,
         exportedAt: new Date().toISOString(),
       },
     };

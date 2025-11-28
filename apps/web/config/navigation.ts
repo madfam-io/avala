@@ -9,10 +9,10 @@ import {
   TrendingUp,
   GraduationCap,
   Award,
-  Certificate,
+  FileBadge,
   type LucideIcon,
-} from 'lucide-react';
-import { Role } from '@avala/db';
+} from "lucide-react";
+import { Role } from "@avala/db";
 
 export interface NavItem {
   title: string;
@@ -36,102 +36,102 @@ export interface NavItem {
  */
 
 const ALL_ROLES: Role[] = [
-  'ADMIN',
-  'COMPLIANCE_OFFICER',
-  'ECE_OC_ADMIN',
-  'ASSESSOR',
-  'INSTRUCTOR',
-  'SUPERVISOR',
-  'TRAINEE',
+  "ADMIN",
+  "COMPLIANCE_OFFICER",
+  "ECE_OC_ADMIN",
+  "ASSESSOR",
+  "INSTRUCTOR",
+  "SUPERVISOR",
+  "TRAINEE",
 ];
 
 export const navigation: NavItem[] = [
   // Universal - All Users
   {
-    title: 'Dashboard',
-    href: '/dashboard',
+    title: "Dashboard",
+    href: "/dashboard",
     icon: Home,
-    description: 'Overview and quick actions',
+    description: "Overview and quick actions",
     roles: ALL_ROLES,
   },
 
   // Admin Section
   {
-    title: 'Users',
-    href: '/dashboard/users',
+    title: "Users",
+    href: "/dashboard/users",
     icon: Users,
-    description: 'Manage users and roles',
-    roles: ['ADMIN'],
+    description: "Manage users and roles",
+    roles: ["ADMIN"],
   },
   {
-    title: 'Tenants',
-    href: '/dashboard/tenants',
+    title: "Tenants",
+    href: "/dashboard/tenants",
     icon: Building2,
-    description: 'Tenant management',
-    roles: ['ADMIN'],
+    description: "Tenant management",
+    roles: ["ADMIN"],
   },
 
   // Compliance Section
   {
-    title: 'Compliance',
-    href: '/dashboard/compliance',
+    title: "Compliance",
+    href: "/dashboard/compliance",
     icon: FileCheck,
-    description: 'DC-3, SIRCE, LFT plans',
-    roles: ['ADMIN', 'COMPLIANCE_OFFICER'],
+    description: "DC-3, SIRCE, LFT plans",
+    roles: ["ADMIN", "COMPLIANCE_OFFICER"],
   },
 
   // Instructor Section
   {
-    title: 'My Courses',
-    href: '/dashboard/courses',
+    title: "My Courses",
+    href: "/dashboard/courses",
     icon: BookOpen,
-    description: 'Manage your courses',
-    roles: ['ADMIN', 'INSTRUCTOR', 'SUPERVISOR'],
+    description: "Manage your courses",
+    roles: ["ADMIN", "INSTRUCTOR", "SUPERVISOR"],
   },
   {
-    title: 'Assessments',
-    href: '/dashboard/assessments',
+    title: "Assessments",
+    href: "/dashboard/assessments",
     icon: ClipboardCheck,
-    description: 'Create and grade assessments',
-    roles: ['ADMIN', 'INSTRUCTOR', 'ASSESSOR'],
+    description: "Create and grade assessments",
+    roles: ["ADMIN", "INSTRUCTOR", "ASSESSOR"],
   },
   {
-    title: 'Trainee Progress',
-    href: '/dashboard/progress',
+    title: "Trainee Progress",
+    href: "/dashboard/progress",
     icon: TrendingUp,
-    description: 'Monitor trainee advancement',
-    roles: ['ADMIN', 'INSTRUCTOR', 'SUPERVISOR'],
+    description: "Monitor trainee advancement",
+    roles: ["ADMIN", "INSTRUCTOR", "SUPERVISOR"],
   },
 
   // Trainee Section
   {
-    title: 'My Learning Path',
-    href: '/dashboard/learning',
+    title: "My Learning Path",
+    href: "/dashboard/learning",
     icon: GraduationCap,
-    description: 'Your courses and progress',
-    roles: ['TRAINEE'],
+    description: "Your courses and progress",
+    roles: ["TRAINEE"],
   },
   {
-    title: 'My Badges',
-    href: '/dashboard/badges',
+    title: "My Badges",
+    href: "/dashboard/badges",
     icon: Award,
-    description: 'Earned credentials',
-    roles: ['TRAINEE'],
+    description: "Earned credentials",
+    roles: ["TRAINEE"],
   },
   {
-    title: 'My Certificates',
-    href: '/dashboard/certificates',
-    icon: Certificate,
-    description: 'DC-3 and certifications',
-    roles: ['TRAINEE'],
+    title: "My Certificates",
+    href: "/dashboard/certificates",
+    icon: FileBadge,
+    description: "DC-3 and certifications",
+    roles: ["TRAINEE"],
   },
 
   // Settings - All Users
   {
-    title: 'Settings',
-    href: '/dashboard/settings',
+    title: "Settings",
+    href: "/dashboard/settings",
     icon: Settings,
-    description: 'Account preferences',
+    description: "Account preferences",
     roles: ALL_ROLES,
   },
 ];
@@ -148,7 +148,7 @@ export function getNavigationForRole(role: Role): NavItem[] {
  */
 export function hasAccessToRoute(role: Role, pathname: string): boolean {
   // Dashboard root is accessible to all
-  if (pathname === '/dashboard') {
+  if (pathname === "/dashboard") {
     return true;
   }
 

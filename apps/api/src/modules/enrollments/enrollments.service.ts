@@ -1,7 +1,7 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaService } from '../../database/prisma.service';
-import { CourseEnrollmentStatus } from '@prisma/client';
-import { MailService } from '../mail/mail.service';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { PrismaService } from "../../database/prisma.service";
+import { CourseEnrollmentStatus } from "@avala/db";
+import { MailService } from "../mail/mail.service";
 
 /**
  * EnrollmentsService
@@ -28,10 +28,10 @@ export class EnrollmentsService {
         modules: {
           include: {
             lessons: {
-              orderBy: { order: 'asc' },
+              orderBy: { order: "asc" },
             },
           },
-          orderBy: { order: 'asc' },
+          orderBy: { order: "asc" },
         },
       },
     });
@@ -118,14 +118,14 @@ export class EnrollmentsService {
     try {
       await this.mailService.sendEnrollmentEmail({
         email: completeEnrollment.user.email,
-        firstName: completeEnrollment.user.firstName || 'Usuario',
+        firstName: completeEnrollment.user.firstName || "Usuario",
         courseTitle: course.title,
         courseCode: course.code,
         durationHours: course.durationHours || 0,
       });
     } catch (error) {
       // Log email error but don't fail enrollment
-      console.error('Failed to send enrollment email:', error);
+      console.error("Failed to send enrollment email:", error);
     }
 
     return {
@@ -167,21 +167,23 @@ export class EnrollmentsService {
         },
       },
       orderBy: {
-        enrolledAt: 'desc',
+        enrolledAt: "desc",
       },
     });
 
     return enrollments.map((enrollment) => {
       const totalLessons = enrollment.progress.length;
       const completedLessons = enrollment.progress.filter(
-        (p) => p.status === 'COMPLETED',
+        (p) => p.status === "COMPLETED",
       ).length;
       const inProgressLessons = enrollment.progress.filter(
-        (p) => p.status === 'IN_PROGRESS',
+        (p) => p.status === "IN_PROGRESS",
       ).length;
 
       const progressPercentage =
-        totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
+        totalLessons > 0
+          ? Math.round((completedLessons / totalLessons) * 100)
+          : 0;
 
       return {
         enrollmentId: enrollment.id,
@@ -197,7 +199,8 @@ export class EnrollmentsService {
           totalLessons,
           completedLessons,
           inProgressLessons,
-          notStartedLessons: totalLessons - completedLessons - inProgressLessons,
+          notStartedLessons:
+            totalLessons - completedLessons - inProgressLessons,
           percentage: progressPercentage,
         },
       };
@@ -219,10 +222,10 @@ export class EnrollmentsService {
             modules: {
               include: {
                 lessons: {
-                  orderBy: { order: 'asc' },
+                  orderBy: { order: "asc" },
                 },
               },
-              orderBy: { order: 'asc' },
+              orderBy: { order: "asc" },
             },
           },
         },
@@ -262,7 +265,7 @@ export class EnrollmentsService {
                 viewedAt: lessonProgress.viewedAt,
               }
             : {
-                status: 'NOT_STARTED',
+                status: "NOT_STARTED",
                 completedAt: null,
                 viewedAt: null,
               },
@@ -271,7 +274,7 @@ export class EnrollmentsService {
 
       const totalLessons = lessons.length;
       const completedLessons = lessons.filter(
-        (l) => l.progress.status === 'COMPLETED',
+        (l) => l.progress.status === "COMPLETED",
       ).length;
 
       return {
@@ -292,7 +295,7 @@ export class EnrollmentsService {
 
     const totalLessons = enrollment.progress.length;
     const completedLessons = enrollment.progress.filter(
-      (p) => p.status === 'COMPLETED',
+      (p) => p.status === "COMPLETED",
     ).length;
 
     return {

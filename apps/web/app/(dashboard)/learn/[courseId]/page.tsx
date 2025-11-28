@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { apiClient } from '@/lib/api-client';
-import { useToast } from '@/hooks/use-toast';
+import { Suspense, useEffect, useState, use } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { apiClient } from "@/lib/api-client";
+import { useToast } from "@/hooks/use-toast";
 import {
   ChevronLeft,
   ChevronRight,
@@ -17,10 +17,10 @@ import {
   PlayCircle,
   BookOpen,
   Video,
-} from 'lucide-react';
+} from "lucide-react";
 
 interface LessonProgress {
-  status: 'NOT_STARTED' | 'IN_PROGRESS' | 'COMPLETED';
+  status: "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
   completedAt: string | null;
   viewedAt: string | null;
 }
@@ -52,7 +52,7 @@ interface EnrollmentProgress {
   courseId: string;
   courseTitle: string;
   courseCode: string;
-  status: 'IN_PROGRESS' | 'COMPLETED';
+  status: "IN_PROGRESS" | "COMPLETED";
   enrolledAt: string;
   completedAt: string | null;
   progress: {
@@ -63,32 +63,160 @@ interface EnrollmentProgress {
   modules: Module[];
 }
 
-/**
- * Learning Player Page
- * Phase 3-A: Enrollment & Learning Player
- * Features:
- * - Module/lesson sidebar navigation
- * - Video player and lesson content
- * - Previous/Next navigation
- * - Mark lesson as complete
- * - Progress tracking
- */
-export default function LearnPage({ params }: { params: { courseId: string } }) {
+function LearnContent({ courseId: _courseId }: { courseId: string }) {
+  // _courseId is the route param for URL structure, enrollment uses query param
+  void _courseId; // Suppress unused variable warning
   const router = useRouter();
   const searchParams = useSearchParams();
   const { toast } = useToast();
 
-  const enrollmentId = searchParams.get('enrollment');
+  const enrollmentId = searchParams.get("enrollment");
   const [enrollment, setEnrollment] = useState<EnrollmentProgress | null>(null);
   const [currentLessonId, setCurrentLessonId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isCompleting, setIsCompleting] = useState(false);
 
+  const fetchEnrollment = async () => {
+    if (!enrollmentId) return;
+
+    try {
+      setIsLoading(true);
+      const data = await apiClient.get<EnrollmentProgress>(
+        `/enrollments/${enrollmentId}`,
+      );
+      setEnrollment(data);
+    } catch (error) {
+      console.error("Failed to fetch enrollment:", error);
+      toast({
+        title: "Error",
+        description: "Failed to load course",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const findFirstIncompleteLesson = (): Lesson | null => {
+    if (!enrollment) return null;
+
+    for (const courseModule of enrollment.modules) {
+      for (const lesson of courseModule.lessons) {
+        if (lesson.progress.status !== "COMPLETED") {
+          return lesson;
+        }
+      }
+    }
+    return null;
+  };
+
+  const getCurrentLesson = (): Lesson | null => {
+    if (!enrollment || !currentLessonId) return null;
+
+    for (const courseModule of enrollment.modules) {
+      const lesson = courseModule.lessons.find((l) => l.id === currentLessonId);
+      if (lesson) return lesson;
+    }
+    return null;
+  };
+
+  const getCurrentModule = (): Module | null => {
+    if (!enrollment || !currentLessonId) return null;
+
+    return (
+      enrollment.modules.find((m) =>
+        m.lessons.some((l) => l.id === currentLessonId),
+      ) || null
+    );
+  };
+
+  const getAdjacentLessons = (): {
+    previous: Lesson | null;
+    next: Lesson | null;
+  } => {
+    if (!enrollment) return { previous: null, next: null };
+
+    const allLessons = enrollment.modules.flatMap((m) => m.lessons);
+    const currentIndex = allLessons.findIndex((l) => l.id === currentLessonId);
+
+    if (currentIndex === -1) return { previous: null, next: null };
+
+    return {
+      previous: currentIndex > 0 ? allLessons[currentIndex - 1] : null,
+      next:
+        currentIndex < allLessons.length - 1
+          ? allLessons[currentIndex + 1]
+          : null,
+    };
+  };
+
+  const handleSelectLesson = async (lessonId: string) => {
+    if (!enrollmentId) return;
+
+    try {
+      // Mark as in progress when viewed
+      await apiClient.post(
+        `/enrollments/${enrollmentId}/lessons/${lessonId}/start`,
+        {},
+      );
+      setCurrentLessonId(lessonId);
+      // Refresh to update progress
+      fetchEnrollment();
+    } catch (error) {
+      console.error("Failed to start lesson:", error);
+    }
+  };
+
+  const handleCompleteLesson = async () => {
+    if (!enrollmentId || !currentLessonId) return;
+
+    try {
+      setIsCompleting(true);
+      const result = await apiClient.post<{ enrollmentCompleted?: boolean }>(
+        `/enrollments/${enrollmentId}/lessons/${currentLessonId}/complete`,
+        {},
+      );
+
+      toast({
+        title: "Success",
+        description: result?.enrollmentCompleted
+          ? "Lesson completed! You have finished the entire course!"
+          : "Lesson marked as complete",
+      });
+
+      // Move to next lesson if available
+      const { next } = getAdjacentLessons();
+      if (next) {
+        setCurrentLessonId(next.id);
+      }
+
+      fetchEnrollment();
+    } catch (error) {
+      const err = error as Error & { message?: string };
+      console.error("Failed to complete lesson:", error);
+      toast({
+        title: "Error",
+        description: err.message || "Failed to complete lesson",
+        variant: "destructive",
+      });
+    } finally {
+      setIsCompleting(false);
+    }
+  };
+
+  const handleNavigate = (direction: "previous" | "next") => {
+    const { previous, next } = getAdjacentLessons();
+    const targetLesson = direction === "previous" ? previous : next;
+    if (targetLesson) {
+      handleSelectLesson(targetLesson.id);
+    }
+  };
+
   useEffect(() => {
     if (enrollmentId) {
       fetchEnrollment();
     }
-  }, [enrollmentId]);
+  }, [enrollmentId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (enrollment && !currentLessonId) {
@@ -101,129 +229,7 @@ export default function LearnPage({ params }: { params: { courseId: string } }) 
         setCurrentLessonId(enrollment.modules[0].lessons[0].id);
       }
     }
-  }, [enrollment, currentLessonId]);
-
-  const fetchEnrollment = async () => {
-    if (!enrollmentId) return;
-
-    try {
-      setIsLoading(true);
-      const data = await apiClient.get<EnrollmentProgress>(`/enrollments/${enrollmentId}`);
-      setEnrollment(data);
-    } catch (error) {
-      console.error('Failed to fetch enrollment:', error);
-      toast({
-        title: 'Error',
-        description: 'Failed to load course',
-        variant: 'destructive',
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const findFirstIncompleteLesson = (): Lesson | null => {
-    if (!enrollment) return null;
-
-    for (const module of enrollment.modules) {
-      for (const lesson of module.lessons) {
-        if (lesson.progress.status !== 'COMPLETED') {
-          return lesson;
-        }
-      }
-    }
-    return null;
-  };
-
-  const getCurrentLesson = (): Lesson | null => {
-    if (!enrollment || !currentLessonId) return null;
-
-    for (const module of enrollment.modules) {
-      const lesson = module.lessons.find((l) => l.id === currentLessonId);
-      if (lesson) return lesson;
-    }
-    return null;
-  };
-
-  const getCurrentModule = (): Module | null => {
-    if (!enrollment || !currentLessonId) return null;
-
-    return (
-      enrollment.modules.find((m) => m.lessons.some((l) => l.id === currentLessonId)) || null
-    );
-  };
-
-  const getAdjacentLessons = (): { previous: Lesson | null; next: Lesson | null } => {
-    if (!enrollment) return { previous: null, next: null };
-
-    const allLessons = enrollment.modules.flatMap((m) => m.lessons);
-    const currentIndex = allLessons.findIndex((l) => l.id === currentLessonId);
-
-    if (currentIndex === -1) return { previous: null, next: null };
-
-    return {
-      previous: currentIndex > 0 ? allLessons[currentIndex - 1] : null,
-      next: currentIndex < allLessons.length - 1 ? allLessons[currentIndex + 1] : null,
-    };
-  };
-
-  const handleSelectLesson = async (lessonId: string) => {
-    if (!enrollmentId) return;
-
-    try {
-      // Mark as in progress when viewed
-      await apiClient.post(`/enrollments/${enrollmentId}/lessons/${lessonId}/start`, {});
-      setCurrentLessonId(lessonId);
-      // Refresh to update progress
-      fetchEnrollment();
-    } catch (error) {
-      console.error('Failed to start lesson:', error);
-    }
-  };
-
-  const handleCompleteLesson = async () => {
-    if (!enrollmentId || !currentLessonId) return;
-
-    try {
-      setIsCompleting(true);
-      const result = await apiClient.post(
-        `/enrollments/${enrollmentId}/lessons/${currentLessonId}/complete`,
-        {},
-      );
-
-      toast({
-        title: 'Success',
-        description: result.enrollmentCompleted
-          ? 'Lesson completed! You have finished the entire course!'
-          : 'Lesson marked as complete',
-      });
-
-      // Move to next lesson if available
-      const { next } = getAdjacentLessons();
-      if (next) {
-        setCurrentLessonId(next.id);
-      }
-
-      fetchEnrollment();
-    } catch (error: any) {
-      console.error('Failed to complete lesson:', error);
-      toast({
-        title: 'Error',
-        description: error.message || 'Failed to complete lesson',
-        variant: 'destructive',
-      });
-    } finally {
-      setIsCompleting(false);
-    }
-  };
-
-  const handleNavigate = (direction: 'previous' | 'next') => {
-    const { previous, next } = getAdjacentLessons();
-    const targetLesson = direction === 'previous' ? previous : next;
-    if (targetLesson) {
-      handleSelectLesson(targetLesson.id);
-    }
-  };
+  }, [enrollment, currentLessonId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (isLoading) {
     return (
@@ -242,7 +248,10 @@ export default function LearnPage({ params }: { params: { courseId: string } }) 
             <p className="text-sm text-muted-foreground mt-2">
               Please enroll in this course to start learning
             </p>
-            <Button className="mt-4" onClick={() => router.push('/dashboard/learning')}>
+            <Button
+              className="mt-4"
+              onClick={() => router.push("/dashboard/learning")}
+            >
               Go to My Learning
             </Button>
           </CardContent>
@@ -265,7 +274,7 @@ export default function LearnPage({ params }: { params: { courseId: string } }) 
             <Button
               variant="ghost"
               size="sm"
-              onClick={() => router.push('/dashboard/learning')}
+              onClick={() => router.push("/dashboard/learning")}
             >
               <ChevronLeft className="h-4 w-4 mr-1" />
               Back
@@ -275,17 +284,21 @@ export default function LearnPage({ params }: { params: { courseId: string } }) 
             <Badge variant="outline" className="mb-1">
               {enrollment.courseCode}
             </Badge>
-            <h2 className="font-semibold text-lg line-clamp-2">{enrollment.courseTitle}</h2>
+            <h2 className="font-semibold text-lg line-clamp-2">
+              {enrollment.courseTitle}
+            </h2>
           </div>
           <div className="space-y-1">
             <div className="flex items-center justify-between text-sm">
               <span className="text-muted-foreground">Course Progress</span>
-              <span className="font-medium">{enrollment.progress.percentage}%</span>
+              <span className="font-medium">
+                {enrollment.progress.percentage}%
+              </span>
             </div>
             <Progress value={enrollment.progress.percentage} className="h-2" />
             <p className="text-xs text-muted-foreground">
-              {enrollment.progress.completedLessons} of {enrollment.progress.totalLessons} lessons
-              completed
+              {enrollment.progress.completedLessons} of{" "}
+              {enrollment.progress.totalLessons} lessons completed
             </p>
           </div>
         </div>
@@ -298,14 +311,16 @@ export default function LearnPage({ params }: { params: { courseId: string } }) 
                 <div className="flex items-center justify-between">
                   <h3 className="font-medium text-sm">{module.title}</h3>
                   <Badge variant="secondary" className="text-xs">
-                    {module.progress.completedLessons}/{module.progress.totalLessons}
+                    {module.progress.completedLessons}/
+                    {module.progress.totalLessons}
                   </Badge>
                 </div>
                 <div className="space-y-1 pl-2">
                   {module.lessons.map((lesson, index) => {
                     const isActive = lesson.id === currentLessonId;
-                    const isCompleted = lesson.progress.status === 'COMPLETED';
-                    const isInProgress = lesson.progress.status === 'IN_PROGRESS';
+                    const isCompleted = lesson.progress.status === "COMPLETED";
+                    const isInProgress =
+                      lesson.progress.status === "IN_PROGRESS";
 
                     return (
                       <button
@@ -313,8 +328,8 @@ export default function LearnPage({ params }: { params: { courseId: string } }) 
                         onClick={() => handleSelectLesson(lesson.id)}
                         className={`w-full flex items-center gap-2 p-2 rounded-md text-sm text-left transition-colors ${
                           isActive
-                            ? 'bg-primary text-primary-foreground'
-                            : 'hover:bg-muted'
+                            ? "bg-primary text-primary-foreground"
+                            : "hover:bg-muted"
                         }`}
                       >
                         {isCompleted ? (
@@ -345,13 +360,18 @@ export default function LearnPage({ params }: { params: { courseId: string } }) 
             <div className="p-6 border-b">
               <div className="flex items-start justify-between">
                 <div className="space-y-1">
-                  <p className="text-sm text-muted-foreground">{currentModule?.title}</p>
+                  <p className="text-sm text-muted-foreground">
+                    {currentModule?.title}
+                  </p>
                   <h1 className="text-2xl font-bold">{currentLesson.title}</h1>
                 </div>
-                {currentLesson.progress.status !== 'COMPLETED' && (
-                  <Button onClick={handleCompleteLesson} disabled={isCompleting}>
+                {currentLesson.progress.status !== "COMPLETED" && (
+                  <Button
+                    onClick={handleCompleteLesson}
+                    disabled={isCompleting}
+                  >
                     {isCompleting ? (
-                      'Completing...'
+                      "Completing..."
                     ) : (
                       <>
                         <CheckCircle2 className="mr-2 h-4 w-4" />
@@ -371,10 +391,13 @@ export default function LearnPage({ params }: { params: { courseId: string } }) 
                   <Card>
                     <CardContent className="p-0">
                       <div className="aspect-video bg-black rounded-lg overflow-hidden flex items-center justify-center">
-                        {currentLesson.videoUrl.includes('youtube.com') ||
-                        currentLesson.videoUrl.includes('youtu.be') ? (
+                        {currentLesson.videoUrl.includes("youtube.com") ||
+                        currentLesson.videoUrl.includes("youtu.be") ? (
                           <iframe
-                            src={currentLesson.videoUrl.replace('watch?v=', 'embed/')}
+                            src={currentLesson.videoUrl.replace(
+                              "watch?v=",
+                              "embed/",
+                            )}
                             className="w-full h-full"
                             allowFullScreen
                             title={currentLesson.title}
@@ -415,7 +438,9 @@ export default function LearnPage({ params }: { params: { courseId: string } }) 
                   <Card>
                     <CardContent className="py-12 text-center">
                       <BookOpen className="h-12 w-12 mx-auto mb-4 opacity-50 text-muted-foreground" />
-                      <p className="text-muted-foreground">No content available for this lesson</p>
+                      <p className="text-muted-foreground">
+                        No content available for this lesson
+                      </p>
                     </CardContent>
                   </Card>
                 )}
@@ -427,19 +452,22 @@ export default function LearnPage({ params }: { params: { courseId: string } }) 
               <div className="flex items-center justify-between max-w-4xl mx-auto">
                 <Button
                   variant="outline"
-                  onClick={() => handleNavigate('previous')}
+                  onClick={() => handleNavigate("previous")}
                   disabled={!previous}
                 >
                   <ChevronLeft className="mr-2 h-4 w-4" />
                   Previous
                 </Button>
                 <div className="text-sm text-muted-foreground">
-                  Lesson {enrollment.modules.flatMap((m) => m.lessons).findIndex((l) => l.id === currentLessonId) + 1} of{' '}
-                  {enrollment.progress.totalLessons}
+                  Lesson{" "}
+                  {enrollment.modules
+                    .flatMap((m) => m.lessons)
+                    .findIndex((l) => l.id === currentLessonId) + 1}{" "}
+                  of {enrollment.progress.totalLessons}
                 </div>
                 <Button
                   variant="outline"
-                  onClick={() => handleNavigate('next')}
+                  onClick={() => handleNavigate("next")}
                   disabled={!next}
                 >
                   Next
@@ -463,5 +491,37 @@ export default function LearnPage({ params }: { params: { courseId: string } }) 
         )}
       </div>
     </div>
+  );
+}
+
+function LoadingFallback() {
+  return (
+    <div className="flex items-center justify-center h-screen">
+      <div className="text-muted-foreground">Loading course...</div>
+    </div>
+  );
+}
+
+/**
+ * Learning Player Page
+ * Phase 3-A: Enrollment & Learning Player
+ * Features:
+ * - Module/lesson sidebar navigation
+ * - Video player and lesson content
+ * - Previous/Next navigation
+ * - Mark lesson as complete
+ * - Progress tracking
+ */
+export default function LearnPage({
+  params,
+}: {
+  params: Promise<{ courseId: string }>;
+}) {
+  const { courseId } = use(params);
+
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <LearnContent courseId={courseId} />
+    </Suspense>
   );
 }

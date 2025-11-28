@@ -2,7 +2,9 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "module": "commonjs",
-    "declaration": true,
+    "composite": false,
+    "declaration": false,
+    "declarationMap": false,
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -14,6 +16,7 @@
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": false,
+    "strictPropertyInitialization": false,
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
@@ -22,6 +25,6 @@
       "@avala/db": ["../../packages/db/src"]
     }
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "../../packages/db/src/**/*"],
   "exclude": ["node_modules", "dist", "test"]
 }

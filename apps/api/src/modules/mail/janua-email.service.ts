@@ -10,11 +10,11 @@
  * - Welcome emails for LMS users
  */
 
-import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import { HttpService } from '@nestjs/axios';
-import { firstValueFrom } from 'rxjs';
-import { AxiosError } from 'axios';
+import { Injectable, Logger, OnModuleInit } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
+import { HttpService } from "@nestjs/axios";
+import { firstValueFrom } from "rxjs";
+import { AxiosError, AxiosResponse } from "axios";
 
 // ============================================================================
 // Types
@@ -62,15 +62,15 @@ export interface SendTemplateEmailOptions {
 
 export const JANUA_TEMPLATES = {
   // Authentication
-  AUTH_WELCOME: 'auth/welcome',
-  AUTH_PASSWORD_RESET: 'auth/password-reset',
-  AUTH_EMAIL_VERIFICATION: 'auth/email-verification',
+  AUTH_WELCOME: "auth/welcome",
+  AUTH_PASSWORD_RESET: "auth/password-reset",
+  AUTH_EMAIL_VERIFICATION: "auth/email-verification",
 
   // Transactional (Avala-specific)
-  TRANSACTIONAL_CERTIFICATE: 'transactional/certificate',
+  TRANSACTIONAL_CERTIFICATE: "transactional/certificate",
 
   // Notifications
-  NOTIFICATION_ALERT: 'notification/alert',
+  NOTIFICATION_ALERT: "notification/alert",
 } as const;
 
 // ============================================================================
@@ -82,7 +82,7 @@ export class JanuaEmailService implements OnModuleInit {
   private readonly logger = new Logger(JanuaEmailService.name);
   private readonly baseUrl: string;
   private readonly apiKey: string;
-  private readonly sourceApp = 'avala';
+  private readonly sourceApp = "avala";
   private isAvailable = false;
 
   constructor(
@@ -90,10 +90,10 @@ export class JanuaEmailService implements OnModuleInit {
     private readonly httpService: HttpService,
   ) {
     this.baseUrl = this.configService.get<string>(
-      'JANUA_API_URL',
-      'https://api.janua.dev',
+      "JANUA_API_URL",
+      "https://api.janua.dev",
     );
-    this.apiKey = this.configService.get<string>('JANUA_INTERNAL_API_KEY', '');
+    this.apiKey = this.configService.get<string>("JANUA_INTERNAL_API_KEY", "");
   }
 
   async onModuleInit() {
@@ -105,7 +105,9 @@ export class JanuaEmailService implements OnModuleInit {
    */
   async checkHealth(): Promise<boolean> {
     if (!this.apiKey) {
-      this.logger.warn('JANUA_INTERNAL_API_KEY not configured, Janua email service disabled');
+      this.logger.warn(
+        "JANUA_INTERNAL_API_KEY not configured, Janua email service disabled",
+      );
       this.isAvailable = false;
       return false;
     }
@@ -118,13 +120,15 @@ export class JanuaEmailService implements OnModuleInit {
         }),
       );
 
-      this.isAvailable = response.data?.status === 'healthy';
+      this.isAvailable = response.data?.status === "healthy";
       this.logger.log(
-        `Janua email service: ${this.isAvailable ? 'available' : 'unavailable'}`,
+        `Janua email service: ${this.isAvailable ? "available" : "unavailable"}`,
       );
       return this.isAvailable;
     } catch (error) {
-      this.logger.warn('Janua email service health check failed, will use SMTP fallback');
+      this.logger.warn(
+        "Janua email service health check failed, will use SMTP fallback",
+      );
       this.isAvailable = false;
       return false;
     }
@@ -139,8 +143,8 @@ export class JanuaEmailService implements OnModuleInit {
 
   private getHeaders(): Record<string, string> {
     return {
-      'Content-Type': 'application/json',
-      'X-Internal-API-Key': this.apiKey,
+      "Content-Type": "application/json",
+      "X-Internal-API-Key": this.apiKey,
     };
   }
 
@@ -149,7 +153,7 @@ export class JanuaEmailService implements OnModuleInit {
    */
   async sendEmail(
     options: SendEmailOptions,
-    sourceType: string = 'notification',
+    sourceType: string = "notification",
   ): Promise<JanuaEmailResponse> {
     try {
       const recipients = Array.isArray(options.to) ? options.to : [options.to];
@@ -160,7 +164,7 @@ export class JanuaEmailService implements OnModuleInit {
         html: options.html,
         text: options.text,
         from_email: options.from_email,
-        from_name: options.from_name || 'AVALA LMS',
+        from_name: options.from_name || "AVALA LMS",
         reply_to: options.reply_to,
         attachments: options.attachments,
         tags: options.tags,
@@ -168,17 +172,17 @@ export class JanuaEmailService implements OnModuleInit {
         source_type: sourceType,
       };
 
-      const response = await firstValueFrom(
-        this.httpService.post(
+      const response = (await firstValueFrom(
+        this.httpService.post<JanuaEmailResponse>(
           `${this.baseUrl}/api/v1/internal/email/send`,
           payload,
           { headers: this.getHeaders(), timeout: 30000 },
         ),
-      );
+      )) as AxiosResponse<JanuaEmailResponse>;
 
       if (response.data.success) {
         this.logger.log(
-          `Email sent via Janua: to=${recipients.join(',')}, type=${sourceType}`,
+          `Email sent via Janua: to=${recipients.join(",")}, type=${sourceType}`,
         );
       }
 
@@ -186,9 +190,9 @@ export class JanuaEmailService implements OnModuleInit {
     } catch (error) {
       const axiosError = error as AxiosError;
       const errorMessage =
-        axiosError.response?.data?.['detail'] ||
+        axiosError.response?.data?.["detail"] ||
         axiosError.message ||
-        'Unknown error';
+        "Unknown error";
 
       this.logger.error(`Failed to send email via Janua: ${errorMessage}`);
       return { success: false, error: errorMessage };
@@ -200,7 +204,7 @@ export class JanuaEmailService implements OnModuleInit {
    */
   async sendTemplateEmail(
     options: SendTemplateEmailOptions,
-    sourceType: string = 'notification',
+    sourceType: string = "notification",
   ): Promise<JanuaEmailResponse> {
     try {
       const recipients = Array.isArray(options.to) ? options.to : [options.to];
@@ -211,24 +215,24 @@ export class JanuaEmailService implements OnModuleInit {
         variables: options.variables,
         subject: options.subject,
         from_email: options.from_email,
-        from_name: options.from_name || 'AVALA LMS',
+        from_name: options.from_name || "AVALA LMS",
         reply_to: options.reply_to,
         tags: options.tags,
         source_app: this.sourceApp,
         source_type: sourceType,
       };
 
-      const response = await firstValueFrom(
-        this.httpService.post(
+      const response = (await firstValueFrom(
+        this.httpService.post<JanuaEmailResponse>(
           `${this.baseUrl}/api/v1/internal/email/send-template`,
           payload,
           { headers: this.getHeaders(), timeout: 30000 },
         ),
-      );
+      )) as AxiosResponse<JanuaEmailResponse>;
 
       if (response.data.success) {
         this.logger.log(
-          `Template email sent via Janua: to=${recipients.join(',')}, template=${options.template}`,
+          `Template email sent via Janua: to=${recipients.join(",")}, template=${options.template}`,
         );
       }
 
@@ -236,9 +240,9 @@ export class JanuaEmailService implements OnModuleInit {
     } catch (error) {
       const axiosError = error as AxiosError;
       const errorMessage =
-        axiosError.response?.data?.['detail'] ||
+        axiosError.response?.data?.["detail"] ||
         axiosError.message ||
-        'Unknown error';
+        "Unknown error";
 
       this.logger.error(
         `Failed to send template email via Janua: ${errorMessage}`,
@@ -265,12 +269,15 @@ export class JanuaEmailService implements OnModuleInit {
         template: JANUA_TEMPLATES.AUTH_WELCOME,
         variables: {
           user_name: firstName,
-          app_name: tenantName || 'AVALA LMS',
-          login_url: this.configService.get('NEXT_PUBLIC_APP_URL', 'https://app.avala.mx'),
-          support_email: 'soporte@avala.mx',
+          app_name: tenantName || "AVALA LMS",
+          login_url: this.configService.get(
+            "NEXT_PUBLIC_APP_URL",
+            "https://app.avala.mx",
+          ),
+          support_email: "soporte@avala.mx",
         },
       },
-      'onboarding',
+      "onboarding",
     );
   }
 
@@ -285,7 +292,10 @@ export class JanuaEmailService implements OnModuleInit {
     courseCode: string,
     durationHours: number,
   ): Promise<JanuaEmailResponse> {
-    const appUrl = this.configService.get('NEXT_PUBLIC_APP_URL', 'https://app.avala.mx');
+    const appUrl = this.configService.get(
+      "NEXT_PUBLIC_APP_URL",
+      "https://app.avala.mx",
+    );
 
     const html = `
       <!DOCTYPE html>
@@ -333,7 +343,7 @@ export class JanuaEmailService implements OnModuleInit {
         subject: `Inscripción Confirmada: ${courseTitle}`,
         html,
       },
-      'enrollment',
+      "enrollment",
     );
   }
 
@@ -348,7 +358,7 @@ export class JanuaEmailService implements OnModuleInit {
     pdfBuffer: Buffer,
   ): Promise<JanuaEmailResponse> {
     // Convert PDF to base64
-    const pdfBase64 = pdfBuffer.toString('base64');
+    const pdfBase64 = pdfBuffer.toString("base64");
 
     return this.sendTemplateEmail(
       {
@@ -357,19 +367,19 @@ export class JanuaEmailService implements OnModuleInit {
         variables: {
           certificate_name: `Constancia DC-3: ${courseTitle}`,
           recipient_name: firstName,
-          download_url: `${this.configService.get('NEXT_PUBLIC_APP_URL')}/certificates/${folio}`,
-          issue_date: new Date().toLocaleDateString('es-MX'),
+          download_url: `${this.configService.get("NEXT_PUBLIC_APP_URL")}/certificates/${folio}`,
+          issue_date: new Date().toLocaleDateString("es-MX"),
         },
         subject: `Constancia DC-3 Disponible: ${courseTitle}`,
         attachments: [
           {
             filename: `DC3-${folio}.pdf`,
             content: pdfBase64,
-            content_type: 'application/pdf',
+            content_type: "application/pdf",
           },
         ],
       },
-      'certificate',
+      "certificate",
     );
   }
 
@@ -381,7 +391,7 @@ export class JanuaEmailService implements OnModuleInit {
     firstName: string,
     resetToken: string,
   ): Promise<JanuaEmailResponse> {
-    const resetUrl = `${this.configService.get('NEXT_PUBLIC_APP_URL')}/reset-password?token=${resetToken}`;
+    const resetUrl = `${this.configService.get("NEXT_PUBLIC_APP_URL")}/reset-password?token=${resetToken}`;
 
     return this.sendTemplateEmail(
       {
@@ -390,11 +400,11 @@ export class JanuaEmailService implements OnModuleInit {
         variables: {
           user_name: firstName,
           reset_link: resetUrl,
-          expires_in: '1 hora',
-          app_name: 'AVALA LMS',
+          expires_in: "1 hora",
+          app_name: "AVALA LMS",
         },
       },
-      'auth',
+      "auth",
     );
   }
 }

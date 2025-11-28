@@ -1,7 +1,7 @@
-import { Injectable, Logger } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import * as nodemailer from 'nodemailer';
-import { Transporter } from 'nodemailer';
+import { Injectable, Logger } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
+import * as nodemailer from "nodemailer";
+import { Transporter } from "nodemailer";
 
 /**
  * MailService
@@ -16,13 +16,13 @@ export class MailService {
   constructor(private readonly configService: ConfigService) {
     // Configure SMTP transport (defaults to Mailhog for development)
     this.transporter = nodemailer.createTransport({
-      host: this.configService.get<string>('SMTP_HOST', 'localhost'),
-      port: this.configService.get<number>('SMTP_PORT', 1025),
+      host: this.configService.get<string>("SMTP_HOST", "localhost"),
+      port: this.configService.get<number>("SMTP_PORT", 1025),
       secure: false, // true for 465, false for other ports
-      auth: this.configService.get<string>('SMTP_USER')
+      auth: this.configService.get<string>("SMTP_USER")
         ? {
-            user: this.configService.get<string>('SMTP_USER'),
-            pass: this.configService.get<string>('SMTP_PASS'),
+            user: this.configService.get<string>("SMTP_USER"),
+            pass: this.configService.get<string>("SMTP_PASS"),
           }
         : undefined,
       tls: {
@@ -31,7 +31,7 @@ export class MailService {
     });
 
     this.logger.log(
-      `Mail service initialized with SMTP host: ${this.configService.get<string>('SMTP_HOST', 'localhost')}:${this.configService.get<number>('SMTP_PORT', 1025)}`
+      `Mail service initialized with SMTP host: ${this.configService.get<string>("SMTP_HOST", "localhost")}:${this.configService.get<number>("SMTP_PORT", 1025)}`,
     );
   }
 
@@ -56,8 +56,8 @@ export class MailService {
     try {
       const info = await this.transporter.sendMail({
         from: this.configService.get<string>(
-          'SMTP_FROM',
-          '"AVALA LMS" <noreply@avala.app>'
+          "SMTP_FROM",
+          '"AVALA LMS" <noreply@avala.app>',
         ),
         to,
         subject,
@@ -65,9 +65,15 @@ export class MailService {
         attachments,
       });
 
-      this.logger.log(`Email sent to ${to}: ${subject} (ID: ${info.messageId})`);
+      this.logger.log(
+        `Email sent to ${to}: ${subject} (ID: ${info.messageId})`,
+      );
     } catch (error) {
-      this.logger.error(`Failed to send email to ${to}: ${error.message}`, error.stack);
+      const err = error as Error;
+      this.logger.error(
+        `Failed to send email to ${to}: ${err.message}`,
+        err.stack,
+      );
       throw error;
     }
   }
@@ -111,7 +117,7 @@ export class MailService {
       firstName,
       courseTitle,
       courseCode,
-      durationHours
+      durationHours,
     );
 
     await this.sendEmail({ to: email, subject, html });
@@ -144,7 +150,7 @@ export class MailService {
         {
           filename: `DC3-${folio}.pdf`,
           content: pdfBuffer,
-          contentType: 'application/pdf',
+          contentType: "application/pdf",
         },
       ],
     });
@@ -184,7 +190,7 @@ export class MailService {
                 <li>Seguir tu progreso de aprendizaje</li>
               </ul>
               <p>¡Comienza tu camino de aprendizaje hoy mismo!</p>
-              <a href="${this.configService.get<string>('NEXT_PUBLIC_APP_URL', 'http://localhost:3000')}/login" class="button">
+              <a href="${this.configService.get<string>("NEXT_PUBLIC_APP_URL", "http://localhost:3000")}/login" class="button">
                 Iniciar Sesión
               </a>
             </div>
@@ -205,7 +211,7 @@ export class MailService {
     firstName: string,
     courseTitle: string,
     courseCode: string,
-    durationHours: number
+    durationHours: number,
   ): string {
     return `
       <!DOCTYPE html>
@@ -237,7 +243,7 @@ export class MailService {
               </div>
               <p>Puedes comenzar tu capacitación de inmediato desde la sección "Mi Aprendizaje".</p>
               <p>Al completar todas las lecciones, recibirás tu Constancia de Competencias DC-3 oficial.</p>
-              <a href="${this.configService.get<string>('NEXT_PUBLIC_APP_URL', 'http://localhost:3000')}/dashboard/learning" class="button">
+              <a href="${this.configService.get<string>("NEXT_PUBLIC_APP_URL", "http://localhost:3000")}/dashboard/learning" class="button">
                 Ir a Mi Aprendizaje
               </a>
             </div>
@@ -257,7 +263,7 @@ export class MailService {
   private getCertificateTemplate(
     firstName: string,
     courseTitle: string,
-    folio: string
+    folio: string,
   ): string {
     return `
       <!DOCTYPE html>

@@ -1,14 +1,20 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Badge } from '@/components/ui/badge';
-import { CurriculumBuilder } from '@/components/courses/curriculum-builder';
-import { apiClient } from '@/lib/api-client';
-import { BookOpen, Settings, Info, Loader2 } from 'lucide-react';
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Badge } from "@/components/ui/badge";
+import { CurriculumBuilder } from "@/components/courses/curriculum-builder";
+import { apiClient } from "@/lib/api-client";
+import { BookOpen, Settings, Info, Loader2 } from "lucide-react";
 
 interface Course {
   id: string;
@@ -39,7 +45,7 @@ export default function CourseBuilderPage() {
 
   const [course, setCourse] = useState<Course | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState('curriculum');
+  const [activeTab, setActiveTab] = useState("curriculum");
 
   useEffect(() => {
     fetchCourse();
@@ -51,7 +57,7 @@ export default function CourseBuilderPage() {
       const data = await apiClient.get<Course>(`/courses/${courseId}`);
       setCourse(data);
     } catch (error) {
-      console.error('Failed to fetch course:', error);
+      console.error("Failed to fetch course:", error);
     } finally {
       setIsLoading(false);
     }
@@ -59,10 +65,10 @@ export default function CourseBuilderPage() {
 
   const handlePublish = async () => {
     try {
-      await apiClient.put(`/courses/${courseId}`, { status: 'PUBLISHED' });
+      await apiClient.put(`/courses/${courseId}`, { status: "PUBLISHED" });
       fetchCourse(); // Refresh to show updated status
     } catch (error) {
-      console.error('Failed to publish course:', error);
+      console.error("Failed to publish course:", error);
     }
   };
 
@@ -80,7 +86,7 @@ export default function CourseBuilderPage() {
         <div className="text-center">
           <p className="text-lg font-semibold">Course not found</p>
           <p className="text-sm text-muted-foreground mt-2">
-            The course you're looking for doesn't exist or has been deleted.
+            {"The course you're looking for doesn't exist or has been deleted."}
           </p>
         </div>
       </div>
@@ -93,8 +99,12 @@ export default function CourseBuilderPage() {
       <div className="flex items-start justify-between">
         <div className="flex-1">
           <div className="flex items-center gap-3">
-            <h1 className="text-3xl font-bold tracking-tight">{course.title}</h1>
-            <Badge variant={course.status === 'PUBLISHED' ? 'default' : 'secondary'}>
+            <h1 className="text-3xl font-bold tracking-tight">
+              {course.title}
+            </h1>
+            <Badge
+              variant={course.status === "PUBLISHED" ? "default" : "secondary"}
+            >
               {course.status}
             </Badge>
           </div>
@@ -107,16 +117,15 @@ export default function CourseBuilderPage() {
             </span>
             {course.standards.length > 0 && (
               <span className="text-sm text-muted-foreground">
-                Aligned with {course.standards.length} EC standard{course.standards.length !== 1 ? 's' : ''}
+                Aligned with {course.standards.length} EC standard
+                {course.standards.length !== 1 ? "s" : ""}
               </span>
             )}
           </div>
         </div>
         <div className="flex gap-2">
-          {course.status !== 'PUBLISHED' && (
-            <Button onClick={handlePublish}>
-              Publish Course
-            </Button>
+          {course.status !== "PUBLISHED" && (
+            <Button onClick={handlePublish}>Publish Course</Button>
           )}
         </div>
       </div>
@@ -151,13 +160,15 @@ export default function CourseBuilderPage() {
               <div>
                 <label className="text-sm font-medium">Description</label>
                 <p className="text-sm text-muted-foreground mt-1">
-                  {course.description || 'No description provided'}
+                  {course.description || "No description provided"}
                 </p>
               </div>
 
               {course.standards.length > 0 && (
                 <div>
-                  <label className="text-sm font-medium">Aligned Standards</label>
+                  <label className="text-sm font-medium">
+                    Aligned Standards
+                  </label>
                   <div className="flex flex-wrap gap-2 mt-2">
                     {course.standards.map((standard) => (
                       <Badge key={standard.id} variant="outline">

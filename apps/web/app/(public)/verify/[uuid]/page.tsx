@@ -1,10 +1,19 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { CheckCircle2, XCircle, Loader2, Shield, Award, Calendar, Clock, Building } from 'lucide-react';
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import {
+  CheckCircle2,
+  XCircle,
+  Loader2,
+  Shield,
+  Award,
+  Calendar,
+  Clock,
+  Building,
+} from "lucide-react";
 
 interface CertificateVerification {
   valid: boolean;
@@ -44,7 +53,8 @@ export default function CertificateVerificationPage() {
   const params = useParams();
   const uuid = params.uuid as string;
 
-  const [verification, setVerification] = useState<CertificateVerification | null>(null);
+  const [verification, setVerification] =
+    useState<CertificateVerification | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -60,14 +70,14 @@ export default function CertificateVerificationPage() {
       setError(null);
 
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000'}/certificates/public/${uuid}`
+        `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000"}/certificates/public/${uuid}`,
       );
 
       if (!response.ok) {
         if (response.status === 404) {
           setVerification({ valid: false });
         } else {
-          throw new Error('Failed to verify certificate');
+          throw new Error("Failed to verify certificate");
         }
         return;
       }
@@ -75,18 +85,18 @@ export default function CertificateVerificationPage() {
       const data = await response.json();
       setVerification(data);
     } catch (err: any) {
-      console.error('Verification error:', err);
-      setError(err.message || 'Failed to verify certificate');
+      console.error("Verification error:", err);
+      setError(err.message || "Failed to verify certificate");
     } finally {
       setIsLoading(false);
     }
   };
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('es-MX', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
+    return new Date(dateString).toLocaleDateString("es-MX", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
     });
   };
 
@@ -97,7 +107,9 @@ export default function CertificateVerificationPage() {
           <CardContent className="py-12">
             <div className="flex flex-col items-center justify-center space-y-4">
               <Loader2 className="h-12 w-12 animate-spin text-blue-600" />
-              <p className="text-muted-foreground">Verificando certificado...</p>
+              <p className="text-muted-foreground">
+                Verificando certificado...
+              </p>
             </div>
           </CardContent>
         </Card>
@@ -112,7 +124,9 @@ export default function CertificateVerificationPage() {
           <CardContent className="py-12">
             <div className="flex flex-col items-center justify-center space-y-4">
               <XCircle className="h-16 w-16 text-red-600" />
-              <h2 className="text-xl font-bold text-red-900">Error de Verificación</h2>
+              <h2 className="text-xl font-bold text-red-900">
+                Error de Verificación
+              </h2>
               <p className="text-sm text-red-700 text-center">{error}</p>
             </div>
           </CardContent>
@@ -129,11 +143,13 @@ export default function CertificateVerificationPage() {
           <CardContent className="py-12">
             <div className="flex flex-col items-center justify-center space-y-4">
               <XCircle className="h-16 w-16 text-red-600" />
-              <h2 className="text-xl font-bold text-red-900">Certificado No Válido</h2>
+              <h2 className="text-xl font-bold text-red-900">
+                Certificado No Válido
+              </h2>
               <p className="text-sm text-red-700 text-center">
                 {verification?.certificate?.revokedAt
-                  ? `Este certificado ha sido revocado. Razón: ${verification.certificate.revokedReason || 'No especificada'}`
-                  : 'El certificado no fue encontrado o ha expirado.'}
+                  ? `Este certificado ha sido revocado. Razón: ${verification.certificate.revokedReason || "No especificada"}`
+                  : "El certificado no fue encontrado o ha expirado."}
               </p>
               <p className="text-xs text-muted-foreground">
                 ID de Verificación: {uuid}
@@ -156,7 +172,9 @@ export default function CertificateVerificationPage() {
               <Shield className="h-12 w-12 text-green-600" />
             </div>
           </div>
-          <h1 className="text-3xl font-bold text-green-900">Certificado Válido</h1>
+          <h1 className="text-3xl font-bold text-green-900">
+            Certificado Válido
+          </h1>
           <p className="text-muted-foreground">
             Constancia de Competencias DC-3 Verificada
           </p>
@@ -169,7 +187,8 @@ export default function CertificateVerificationPage() {
               <CheckCircle2 className="h-6 w-6 text-green-600" />
               <div>
                 <p className="font-semibold text-green-900">
-                  Certificado Emitido por {verification.tenant?.name || 'AVALA LMS'}
+                  Certificado Emitido por{" "}
+                  {verification.tenant?.name || "AVALA LMS"}
                 </p>
                 <p className="text-sm text-green-700">
                   Folio: {verification.certificate?.folio}
@@ -222,20 +241,21 @@ export default function CertificateVerificationPage() {
                 {verification.course?.durationHours} horas de capacitación
               </span>
             </div>
-            {verification.course?.ecCodes && verification.course.ecCodes.length > 0 && (
-              <div>
-                <p className="text-sm text-muted-foreground mb-2">
-                  Estándares de Competencia (EC)
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {verification.course.ecCodes.map((code) => (
-                    <Badge key={code} variant="secondary">
-                      {code}
-                    </Badge>
-                  ))}
+            {verification.course?.ecCodes &&
+              verification.course.ecCodes.length > 0 && (
+                <div>
+                  <p className="text-sm text-muted-foreground mb-2">
+                    Estándares de Competencia (EC)
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {verification.course.ecCodes.map((code) => (
+                      <Badge key={code} variant="secondary">
+                        {code}
+                      </Badge>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
           </CardContent>
         </Card>
 

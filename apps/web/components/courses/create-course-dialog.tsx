@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
+import { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
 import {
   Dialog,
   DialogContent,
@@ -11,37 +11,40 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { Checkbox } from '@/components/ui/checkbox';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { Loader2, Award } from 'lucide-react';
-import { apiClient } from '@/lib/api-client';
-import { useToast } from '@/hooks/use-toast';
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "@/components/ui/checkbox";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Loader2, Award } from "lucide-react";
+import { apiClient } from "@/lib/api-client";
+import { useToast } from "@/hooks/use-toast";
 
 const createCourseSchema = z.object({
   code: z
     .string()
-    .min(1, 'Course code is required')
-    .max(50, 'Course code must be less than 50 characters')
-    .regex(/^[A-Z0-9-_]+$/i, 'Course code can only contain letters, numbers, hyphens, and underscores'),
+    .min(1, "Course code is required")
+    .max(50, "Course code must be less than 50 characters")
+    .regex(
+      /^[A-Z0-9-_]+$/i,
+      "Course code can only contain letters, numbers, hyphens, and underscores",
+    ),
   title: z
     .string()
-    .min(1, 'Title is required')
-    .max(200, 'Title must be less than 200 characters'),
+    .min(1, "Title is required")
+    .max(200, "Title must be less than 200 characters"),
   description: z
     .string()
-    .max(1000, 'Description must be less than 1000 characters')
+    .max(1000, "Description must be less than 1000 characters")
     .optional()
-    .or(z.literal('')),
+    .or(z.literal("")),
   durationHours: z
-    .number({ invalid_type_error: 'Duration must be a number' })
-    .int('Duration must be a whole number')
-    .min(1, 'Duration must be at least 1 hour')
-    .max(1000, 'Duration must be less than 1000 hours'),
+    .number({ invalid_type_error: "Duration must be a number" })
+    .int("Duration must be a whole number")
+    .min(1, "Duration must be at least 1 hour")
+    .max(1000, "Duration must be less than 1000 hours"),
 });
 
 type CreateCourseFormData = z.infer<typeof createCourseSchema>;
@@ -61,7 +64,10 @@ interface CreateCourseDialogProps {
   onOpenChange: (open: boolean) => void;
 }
 
-export function CreateCourseDialog({ open, onOpenChange }: CreateCourseDialogProps) {
+export function CreateCourseDialog({
+  open,
+  onOpenChange,
+}: CreateCourseDialogProps) {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [standards, setStandards] = useState<CompetencyStandard[]>([]);
@@ -73,7 +79,6 @@ export function CreateCourseDialog({ open, onOpenChange }: CreateCourseDialogPro
     handleSubmit,
     formState: { errors },
     reset,
-    setValue,
   } = useForm<CreateCourseFormData>({
     resolver: zodResolver(createCourseSchema),
     defaultValues: {
@@ -91,14 +96,14 @@ export function CreateCourseDialog({ open, onOpenChange }: CreateCourseDialogPro
   const fetchStandards = async () => {
     try {
       setIsLoadingStandards(true);
-      const data = await apiClient.get<CompetencyStandard[]>('/ec');
+      const data = await apiClient.get<CompetencyStandard[]>("/ec");
       setStandards(data);
     } catch (error) {
-      console.error('Failed to fetch competency standards:', error);
+      console.error("Failed to fetch competency standards:", error);
       toast({
-        title: 'Error',
-        description: 'Failed to load competency standards',
-        variant: 'destructive',
+        title: "Error",
+        description: "Failed to load competency standards",
+        variant: "destructive",
       });
     } finally {
       setIsLoadingStandards(false);
@@ -109,7 +114,7 @@ export function CreateCourseDialog({ open, onOpenChange }: CreateCourseDialogPro
     setSelectedStandardIds((prev) =>
       prev.includes(standardId)
         ? prev.filter((id) => id !== standardId)
-        : [...prev, standardId]
+        : [...prev, standardId],
     );
   };
 
@@ -122,13 +127,14 @@ export function CreateCourseDialog({ open, onOpenChange }: CreateCourseDialogPro
         title: data.title,
         description: data.description || undefined,
         durationHours: data.durationHours,
-        competencyStandardIds: selectedStandardIds.length > 0 ? selectedStandardIds : undefined,
+        competencyStandardIds:
+          selectedStandardIds.length > 0 ? selectedStandardIds : undefined,
       };
 
-      await apiClient.post('/courses', payload);
+      await apiClient.post("/courses", payload);
 
       toast({
-        title: 'Success',
+        title: "Success",
         description: `Course "${data.title}" created successfully`,
       });
 
@@ -140,11 +146,12 @@ export function CreateCourseDialog({ open, onOpenChange }: CreateCourseDialogPro
       // Trigger a refresh of the course catalog
       window.location.reload();
     } catch (error: any) {
-      console.error('Failed to create course:', error);
+      console.error("Failed to create course:", error);
       toast({
-        title: 'Error',
-        description: error.message || 'Failed to create course. Please try again.',
-        variant: 'destructive',
+        title: "Error",
+        description:
+          error.message || "Failed to create course. Please try again.",
+        variant: "destructive",
       });
     } finally {
       setIsSubmitting(false);
@@ -165,7 +172,8 @@ export function CreateCourseDialog({ open, onOpenChange }: CreateCourseDialogPro
         <DialogHeader>
           <DialogTitle>Create New Course</DialogTitle>
           <DialogDescription>
-            Create a training course and optionally align it with CONOCER competency standards (EC).
+            Create a training course and optionally align it with CONOCER
+            competency standards (EC).
           </DialogDescription>
         </DialogHeader>
 
@@ -177,7 +185,7 @@ export function CreateCourseDialog({ open, onOpenChange }: CreateCourseDialogPro
             </Label>
             <Input
               id="code"
-              {...register('code')}
+              {...register("code")}
               placeholder="ALINEACION-001"
               className="font-mono"
             />
@@ -196,7 +204,7 @@ export function CreateCourseDialog({ open, onOpenChange }: CreateCourseDialogPro
             </Label>
             <Input
               id="title"
-              {...register('title')}
+              {...register("title")}
               placeholder="Instructor Certification Prep"
             />
             {errors.title && (
@@ -209,12 +217,14 @@ export function CreateCourseDialog({ open, onOpenChange }: CreateCourseDialogPro
             <Label htmlFor="description">Description</Label>
             <Textarea
               id="description"
-              {...register('description')}
+              {...register("description")}
               placeholder="Describe the course objectives and target audience..."
               rows={3}
             />
             {errors.description && (
-              <p className="text-xs text-destructive">{errors.description.message}</p>
+              <p className="text-xs text-destructive">
+                {errors.description.message}
+              </p>
             )}
           </div>
 
@@ -226,13 +236,15 @@ export function CreateCourseDialog({ open, onOpenChange }: CreateCourseDialogPro
             <Input
               id="durationHours"
               type="number"
-              {...register('durationHours', { valueAsNumber: true })}
+              {...register("durationHours", { valueAsNumber: true })}
               placeholder="40"
               min="1"
               max="1000"
             />
             {errors.durationHours && (
-              <p className="text-xs text-destructive">{errors.durationHours.message}</p>
+              <p className="text-xs text-destructive">
+                {errors.durationHours.message}
+              </p>
             )}
             <p className="text-xs text-muted-foreground">
               Total course duration in hours (required for DC-3 compliance)
@@ -246,11 +258,14 @@ export function CreateCourseDialog({ open, onOpenChange }: CreateCourseDialogPro
               {isLoadingStandards ? (
                 <div className="flex items-center justify-center py-4">
                   <Loader2 className="h-4 w-4 animate-spin mr-2" />
-                  <span className="text-sm text-muted-foreground">Loading standards...</span>
+                  <span className="text-sm text-muted-foreground">
+                    Loading standards...
+                  </span>
                 </div>
               ) : standards.length === 0 ? (
                 <p className="text-sm text-muted-foreground text-center py-4">
-                  No competency standards available. Add standards first to link them to courses.
+                  No competency standards available. Add standards first to link
+                  them to courses.
                 </p>
               ) : (
                 <ScrollArea className="h-[200px]">
@@ -328,7 +343,7 @@ export function CreateCourseDialog({ open, onOpenChange }: CreateCourseDialogPro
                   Creating...
                 </>
               ) : (
-                'Create Course'
+                "Create Course"
               )}
             </Button>
           </DialogFooter>

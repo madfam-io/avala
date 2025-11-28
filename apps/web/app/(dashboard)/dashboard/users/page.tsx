@@ -1,11 +1,17 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { UsersTable } from '@/components/users/users-table';
-import { CreateUserDialog } from '@/components/users/create-user-dialog';
-import { UserPlus } from 'lucide-react';
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { UsersTable } from "@/components/users/users-table";
+import { CreateUserDialog } from "@/components/users/create-user-dialog";
+import { UserPlus } from "lucide-react";
 
 /**
  * Users Management Page
@@ -25,7 +31,7 @@ export default function UsersPage() {
         <div>
           <h1 className="text-3xl font-bold tracking-tight">User Management</h1>
           <p className="text-muted-foreground mt-1">
-            Manage your organization's users, roles, and permissions
+            {"Manage your organization's users, roles, and permissions"}
           </p>
         </div>
         <Button onClick={() => setIsCreateDialogOpen(true)}>
