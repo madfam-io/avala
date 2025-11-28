@@ -40,10 +40,10 @@ export async function generateMetadata({
         title: `${center.nombre} - Centro de Evaluación`,
         description: `Centro de evaluación en ${location || "México"} con ${center.ecStandards.length} estándares.`,
         type: "website",
-        url: `https://avala.mx/explorar/centros/${id}`,
+        url: `https://avala.studio/explorar/centros/${id}`,
       },
       alternates: {
-        canonical: `https://avala.mx/explorar/centros/${id}`,
+        canonical: `https://avala.studio/explorar/centros/${id}`,
       },
     };
   } catch {
@@ -80,12 +80,12 @@ export default async function CenterDetailPage({ params }: PageProps) {
       <CenterJsonLd center={center} />
       <BreadcrumbJsonLd
         items={[
-          { name: "Inicio", url: "https://avala.mx" },
-          { name: "Explorar", url: "https://avala.mx/explorar" },
-          { name: "Centros", url: "https://avala.mx/explorar/centros" },
+          { name: "Inicio", url: "https://avala.studio" },
+          { name: "Explorar", url: "https://avala.studio/explorar" },
+          { name: "Centros", url: "https://avala.studio/explorar/centros" },
           {
             name: center.nombre,
-            url: `https://avala.mx/explorar/centros/${center.id}`,
+            url: `https://avala.studio/explorar/centros/${center.id}`,
           },
         ]}
       />

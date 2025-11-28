@@ -3,7 +3,7 @@
 # Full-stack deployment configuration
 # ================================
 
-version: '3.8'
+version: "3.8"
 
 services:
   # PostgreSQL Database
@@ -34,12 +34,12 @@ services:
     container_name: avala-mailhog
     restart: unless-stopped
     ports:
-      - "1025:1025"  # SMTP port
-      - "8025:8025"  # Web UI port
+      - "1025:1025" # SMTP port
+      - "8025:8025" # Web UI port
     networks:
       - avala-network
     profiles:
-      - dev  # Only run in development mode
+      - dev # Only run in development mode
 
   # NestJS API Backend
   api:
@@ -61,7 +61,7 @@ services:
       SMTP_PORT: ${SMTP_PORT:-1025}
       SMTP_USER: ${SMTP_USER:-}
       SMTP_PASS: ${SMTP_PASS:-}
-      SMTP_FROM: ${SMTP_FROM:-"AVALA LMS" <noreply@avala.app>}
+      SMTP_FROM: ${SMTP_FROM:-"AVALA LMS" <noreply@avala.studio>}
 
       # App URLs
       NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-http://localhost:3000}

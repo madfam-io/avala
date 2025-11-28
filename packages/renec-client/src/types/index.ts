@@ -194,7 +194,7 @@ export const DEFAULT_CONFIG: RenecClientConfig = {
   politeDelayMs: [600, 1200],
   retries: 3,
   timeoutSec: 30,
-  userAgent: "AVALA-RenecClient/1.0 (+https://avala.mx)",
+  userAgent: "AVALA-RenecClient/1.0 (+https://avala.studio)",
 };
 
 // ============================================

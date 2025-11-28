@@ -40,7 +40,7 @@ async function rateLimitedRequest<T>(fn: () => Promise<T>): Promise<T> {
 
   if (timeSinceLastRequest < GEOCODING_CONFIG.rateLimitMs) {
     await new Promise((resolve) =>
-      setTimeout(resolve, GEOCODING_CONFIG.rateLimitMs - timeSinceLastRequest)
+      setTimeout(resolve, GEOCODING_CONFIG.rateLimitMs - timeSinceLastRequest),
     );
   }
 
@@ -67,7 +67,7 @@ function buildQueryString(input: GeocodingInput): string {
  * Geocode using OpenStreetMap Nominatim (free, no API key required)
  */
 async function geocodeWithNominatim(
-  query: string
+  query: string,
 ): Promise<GeocodingResult | null> {
   try {
     const url = new URL("https://nominatim.openstreetmap.org/search");
@@ -78,7 +78,7 @@ async function geocodeWithNominatim(
 
     const response = await fetch(url.toString(), {
       headers: {
-        "User-Agent": "Avala/1.0 (https://avala.mx)",
+        "User-Agent": "Avala/1.0 (https://avala.studio)",
       },
     });
 
@@ -110,7 +110,7 @@ async function geocodeWithNominatim(
  * Geocode using Google Maps API (requires API key)
  */
 async function geocodeWithGoogle(
-  query: string
+  query: string,
 ): Promise<GeocodingResult | null> {
   const { googleApiKey } = GEOCODING_CONFIG;
 
@@ -164,7 +164,7 @@ async function geocodeWithGoogle(
  * Geocode using Mapbox API (requires token)
  */
 async function geocodeWithMapbox(
-  query: string
+  query: string,
 ): Promise<GeocodingResult | null> {
   const { mapboxToken } = GEOCODING_CONFIG;
 
@@ -174,7 +174,7 @@ async function geocodeWithMapbox(
 
   try {
     const url = new URL(
-      `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(query)}.json`
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(query)}.json`,
     );
     url.searchParams.set("access_token", mapboxToken);
     url.searchParams.set("country", "mx");
@@ -212,7 +212,7 @@ async function geocodeWithMapbox(
  * Main geocoding function with provider fallback
  */
 export async function geocode(
-  input: GeocodingInput
+  input: GeocodingInput,
 ): Promise<GeocodingResult | null> {
   const query = buildQueryString(input);
 
@@ -253,7 +253,7 @@ export async function geocode(
  */
 export async function geocodeCenter(
   prisma: PrismaClient,
-  centerId: string
+  centerId: string,
 ): Promise<boolean> {
   try {
     const center = await prisma.renecCenter.findUnique({
@@ -307,7 +307,7 @@ export async function geocodeAllCenters(
   options: {
     batchSize?: number;
     onProgress?: (processed: number, total: number) => void;
-  } = {}
+  } = {},
 ): Promise<{ processed: number; geocoded: number; failed: number }> {
   const { batchSize = 100, onProgress } = options;
 
@@ -349,7 +349,7 @@ export async function geocodeAllCenters(
 
     // Log progress every batch
     console.log(
-      `Geocoding progress: ${processed}/${total} (${geocoded} success, ${failed} failed)`
+      `Geocoding progress: ${processed}/${total} (${geocoded} success, ${failed} failed)`,
     );
   }
 

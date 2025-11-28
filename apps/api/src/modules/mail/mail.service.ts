@@ -57,7 +57,7 @@ export class MailService {
       const info = await this.transporter.sendMail({
         from: this.configService.get<string>(
           "SMTP_FROM",
-          '"AVALA LMS" <noreply@avala.app>',
+          '"AVALA LMS" <noreply@avala.studio>',
         ),
         to,
         subject,

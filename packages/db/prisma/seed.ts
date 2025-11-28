@@ -279,12 +279,14 @@ async function main() {
     data: {
       tenantId: tenant.id,
       ownerId: instructor.id,
+      code: "CURSO-EC0217-001",
       title: "Formación de Instructores Internos",
       description:
         "Curso para desarrollar competencias de instructores conforme EC0217.01",
       version: "1.0",
       status: "PUBLISHED",
       ecCodes: ["EC0217.01"],
+      durationHours: 40,
       publishedAt: new Date(),
       standards: {
         connect: [{ id: ec0217.id }],

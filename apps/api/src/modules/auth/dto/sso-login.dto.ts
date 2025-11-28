@@ -1,25 +1,25 @@
-import { IsOptional, IsString } from 'class-validator';
-import { ApiPropertyOptional } from '@nestjs/swagger';
+import { IsOptional, IsString } from "class-validator";
+import { ApiPropertyOptional } from "@nestjs/swagger";
 
 export class SsoLoginDto {
   @ApiPropertyOptional({
-    description: 'Tenant slug for organization-specific login',
-    example: 'acme-corp',
+    description: "Tenant slug for organization-specific login",
+    example: "acme-corp",
   })
   @IsOptional()
   @IsString()
   tenantSlug?: string;
 
   @ApiPropertyOptional({
-    description: 'State parameter for CSRF protection',
+    description: "State parameter for CSRF protection",
   })
   @IsOptional()
   @IsString()
   state?: string;
 
   @ApiPropertyOptional({
-    description: 'Redirect URL after successful authentication',
-    example: 'https://app.avala.mx/dashboard',
+    description: "Redirect URL after successful authentication",
+    example: "https://app.avala.studio/dashboard",
   })
   @IsOptional()
   @IsString()

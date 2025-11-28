@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://avala.mx";
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://avala.studio";
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
 interface ECStandard {

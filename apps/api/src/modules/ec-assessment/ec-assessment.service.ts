@@ -6,7 +6,7 @@ import {
   ForbiddenException,
 } from "@nestjs/common";
 import { PrismaService } from "../../database/prisma.service";
-import { Prisma, QuizCategory, SimulationType } from "@avala/db";
+import { QuizCategory, SimulationType } from "@avala/db";
 import {
   CreateECAssessmentDto,
   UpdateECAssessmentDto,

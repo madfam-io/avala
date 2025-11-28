@@ -272,9 +272,9 @@ export class JanuaEmailService implements OnModuleInit {
           app_name: tenantName || "AVALA LMS",
           login_url: this.configService.get(
             "NEXT_PUBLIC_APP_URL",
-            "https://app.avala.mx",
+            "https://app.avala.studio",
           ),
-          support_email: "soporte@avala.mx",
+          support_email: "soporte@avala.studio",
         },
       },
       "onboarding",
@@ -294,7 +294,7 @@ export class JanuaEmailService implements OnModuleInit {
   ): Promise<JanuaEmailResponse> {
     const appUrl = this.configService.get(
       "NEXT_PUBLIC_APP_URL",
-      "https://app.avala.mx",
+      "https://app.avala.studio",
     );
 
     const html = `

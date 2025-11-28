@@ -45,7 +45,7 @@ export function ECJsonLd({ ec }: { ec: ECDetail }) {
         : undefined,
     },
     inLanguage: "es-MX",
-    url: `https://avala.mx/explorar/estandares/${ec.id}`,
+    url: `https://avala.studio/explorar/estandares/${ec.id}`,
   };
 
   return <JsonLd data={data} />;
@@ -88,7 +88,7 @@ export function CertifierJsonLd({
     email: certifier.email || undefined,
     url:
       certifier.sitioWeb ||
-      `https://avala.mx/explorar/certificadores/${certifier.id}`,
+      `https://avala.studio/explorar/certificadores/${certifier.id}`,
     sameAs: certifier.sitioWeb ? [certifier.sitioWeb] : undefined,
   };
 
@@ -134,7 +134,7 @@ export function CenterJsonLd({
         : undefined,
     telephone: center.telefono || undefined,
     email: center.email || undefined,
-    url: `https://avala.mx/explorar/centros/${center.id}`,
+    url: `https://avala.studio/explorar/centros/${center.id}`,
     makesOffer: center.ecStandards.map((ec) => ({
       "@type": "Offer",
       itemOffered: {
@@ -173,13 +173,13 @@ export function OrganizationJsonLd() {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "Avala",
-    url: "https://avala.mx",
-    logo: "https://avala.mx/logo.png",
+    url: "https://avala.studio",
+    logo: "https://avala.studio/logo.png",
     description:
       "Plataforma de certificación de competencias laborales en México. Prepárate y certifícate en estándares CONOCER.",
     contactPoint: {
       "@type": "ContactPoint",
-      email: "hola@avala.mx",
+      email: "hola@avala.studio",
       contactType: "customer service",
       availableLanguage: "Spanish",
     },

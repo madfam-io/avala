@@ -41,10 +41,10 @@ export async function generateMetadata({
         title: `${certifier.razonSocial} - Certificador CONOCER`,
         description: `${tipoFull} con ${certifier.ecCount} estándares acreditados.`,
         type: "website",
-        url: `https://avala.mx/explorar/certificadores/${id}`,
+        url: `https://avala.studio/explorar/certificadores/${id}`,
       },
       alternates: {
-        canonical: `https://avala.mx/explorar/certificadores/${id}`,
+        canonical: `https://avala.studio/explorar/certificadores/${id}`,
       },
     };
   } catch {
@@ -72,15 +72,15 @@ export default async function CertifierDetailPage({ params }: PageProps) {
       <CertifierJsonLd certifier={certifier} />
       <BreadcrumbJsonLd
         items={[
-          { name: "Inicio", url: "https://avala.mx" },
-          { name: "Explorar", url: "https://avala.mx/explorar" },
+          { name: "Inicio", url: "https://avala.studio" },
+          { name: "Explorar", url: "https://avala.studio/explorar" },
           {
             name: "Certificadores",
-            url: "https://avala.mx/explorar/certificadores",
+            url: "https://avala.studio/explorar/certificadores",
           },
           {
             name: certifier.razonSocial,
-            url: `https://avala.mx/explorar/certificadores/${certifier.id}`,
+            url: `https://avala.studio/explorar/certificadores/${certifier.id}`,
           },
         ]}
       />

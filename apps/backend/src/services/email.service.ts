@@ -10,8 +10,8 @@ import type { Lead } from "@prisma/client";
 // Email configuration from environment
 const EMAIL_CONFIG = {
   enabled: process.env.EMAIL_ENABLED === "true",
-  from: process.env.EMAIL_FROM || "noreply@avala.mx",
-  notifyTo: process.env.LEAD_NOTIFY_EMAIL || "ventas@avala.mx",
+  from: process.env.EMAIL_FROM || "noreply@avala.studio",
+  notifyTo: process.env.LEAD_NOTIFY_EMAIL || "ventas@avala.studio",
   provider: process.env.EMAIL_PROVIDER || "console", // 'console' | 'resend' | 'sendgrid'
   apiKey: process.env.EMAIL_API_KEY || "",
 };
@@ -302,17 +302,17 @@ export async function sendLeadWelcomeEmail(lead: Lead): Promise<boolean> {
       <p>Mientras tanto, puedes seguir explorando los estándares de competencia disponibles:</p>
 
       <p style="text-align: center; margin: 30px 0;">
-        <a href="https://avala.mx/explorar" class="btn">Explorar Estándares</a>
+        <a href="https://avala.studio/explorar" class="btn">Explorar Estándares</a>
       </p>
 
-      <p>¿Tienes alguna pregunta? Responde a este correo o escríbenos a <a href="mailto:hola@avala.mx">hola@avala.mx</a></p>
+      <p>¿Tienes alguna pregunta? Responde a este correo o escríbenos a <a href="mailto:hola@avala.studio">hola@avala.studio</a></p>
 
       <p>¡Nos vemos pronto!</p>
       <p><strong>El equipo de Avala</strong></p>
     </div>
     <div class="footer">
       <p>Avala - Plataforma de Certificación de Competencias</p>
-      <p>Este correo fue enviado a ${lead.email} porque te registraste en avala.mx</p>
+      <p>Este correo fue enviado a ${lead.email} porque te registraste en avala.studio</p>
     </div>
   </div>
 </body>
@@ -331,9 +331,9 @@ Gracias por tu interés en certificarte con nosotros. Hemos recibido tu informac
 - Te ayudaremos a elegir el mejor camino de certificación
 - Podrás comenzar tu preparación de inmediato
 
-Mientras tanto, puedes seguir explorando: https://avala.mx/explorar
+Mientras tanto, puedes seguir explorando: https://avala.studio/explorar
 
-¿Preguntas? Escríbenos a hola@avala.mx
+¿Preguntas? Escríbenos a hola@avala.studio
 
 ¡Nos vemos pronto!
 El equipo de Avala
