@@ -21,6 +21,7 @@
     "db:migrate:deploy": "prisma migrate deploy",
     "db:seed": "tsx prisma/seed.ts",
     "db:seed:ec": "tsx prisma/seed-ec0217.ts",
+    "db:seed:renec": "tsx prisma/seed-renec.ts",
     "db:studio": "prisma studio",
     "clean": "rm -rf .turbo dist node_modules"
   },

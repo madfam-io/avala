@@ -1,5 +1,6 @@
 import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
+import { ScheduleModule } from "@nestjs/schedule";
 import { APP_INTERCEPTOR } from "@nestjs/core";
 import { DatabaseModule } from "./database/database.module";
 import { TenantInterceptor } from "./common/interceptors/tenant.interceptor";
@@ -45,6 +46,9 @@ import { ECAssessmentModule } from "./modules/ec-assessment/ec-assessment.module
       isGlobal: true,
       envFilePath: [".env.local", ".env"],
     }),
+
+    // Scheduling (for RENEC harvest cron jobs)
+    ScheduleModule.forRoot(),
 
     // Database
     DatabaseModule,

@@ -1,0 +1,102 @@
+{
+  "generated_at": "2025-11-28T12:46:23.576187",
+  "extraction_summary": {
+    "total_ecs_processed": 1477,
+    "ecs_with_certifiers": 1111,
+    "ecs_without_certifiers": 366,
+    "total_certifier_relationships": 7573
+  },
+  "ece_registry_stats": {
+    "unique_certifiers": 482,
+    "avg_ecs_per_certifier": 15.71,
+    "max_ecs_per_certifier": 334,
+    "certifiers_with_1_ec": 9,
+    "certifiers_with_5plus_ecs": 359,
+    "certifiers_with_10plus_ecs": 214
+  },
+  "ccap_registry_stats": {
+    "unique_courses_or_centers": 340
+  },
+  "top_20_certifiers": [
+    {
+      "name": "ICEMéxico",
+      "ec_count": 334
+    },
+    {
+      "name": "Organismo de Certificación Laboral Mexicana, S.C.",
+      "ec_count": 159
+    },
+    {
+      "name": "Grupo Becas Para la Educación y Servicios de Salud JB S.A.S. de C.V.",
+      "ec_count": 106
+    },
+    {
+      "name": "CV CAPACI-VISION S.A.S. DE C.V.",
+      "ec_count": 98
+    },
+    {
+      "name": "Colegio Nacional de Educación Profesional Técnica",
+      "ec_count": 97
+    },
+    {
+      "name": "Fundación México para el Desarrollo Sustentable Humano y Social, A.C.",
+      "ec_count": 92
+    },
+    {
+      "name": "Gente de Alto Impacto, A.C.",
+      "ec_count": 90
+    },
+    {
+      "name": "Asociación Guanajuatense para el Desarrollo, Entidad de Certificación, A.C.",
+      "ec_count": 89
+    },
+    {
+      "name": "Dirección General de Centros de Formación para el Trabajo",
+      "ec_count": 87
+    },
+    {
+      "name": "Instituto de Capacitación y Educación para el Trabajo, A.C.",
+      "ec_count": 82
+    },
+    {
+      "name": "Servicios Integrales para la Calidad y la Competencia Organizacional, S.C.",
+      "ec_count": 82
+    },
+    {
+      "name": "Asociación Nacional de Bienestar y Desarrollo Organizacional, A.C.",
+      "ec_count": 81
+    },
+    {
+      "name": "Instituto Nacional para el Desarrollo y la Capacitación Corporativa, S.C.",
+      "ec_count": 81
+    },
+    {
+      "name": "Instituto de Administración Pública del Estado de Chiapas, A.C.",
+      "ec_count": 74
+    },
+    {
+      "name": "Capacitación Humanidad y Servicio a la Salud, S.C.",
+      "ec_count": 73
+    },
+    {
+      "name": "Secretaría de Desarrollo Económico Sustentable del Gobierno del Estado de Guanajuato",
+      "ec_count": 67
+    },
+    {
+      "name": "Universidad Tecnológica de Tijuana",
+      "ec_count": 67
+    },
+    {
+      "name": "Instituto Mexicano Naturales Ain Spa, S. C.",
+      "ec_count": 64
+    },
+    {
+      "name": "EduCS",
+      "ec_count": 63
+    },
+    {
+      "name": "Asociación Trainmar, S.C.",
+      "ec_count": 62
+    }
+  ]
+}

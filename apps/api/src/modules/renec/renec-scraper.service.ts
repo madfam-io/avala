@@ -1,4 +1,6 @@
 import { Injectable, Logger, OnModuleInit } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
+import { Cron, CronExpression } from "@nestjs/schedule";
 import { PrismaService } from "../../database/prisma.service";
 import * as crypto from "crypto";
 import {
@@ -10,12 +12,8 @@ import {
 } from "./dto/renec.dto";
 import { RenecSyncJobType, RenecSyncStatus } from "@avala/db";
 
-interface ScrapedItem {
-  type: RenecComponent;
-  data: Record<string, unknown>;
-  srcUrl: string;
-  contentHash: string;
-}
+// Dynamic import for renec-client (ESM module)
+type RenecClientModule = typeof import("@avala/renec-client");
 
 interface HarvestRun {
   id: string;
@@ -29,25 +27,144 @@ interface HarvestRun {
   components: RenecComponent[];
 }
 
+interface HarvestedData {
+  ecStandards: Record<string, unknown>[];
+  certifiers: Record<string, unknown>[];
+  centers: Record<string, unknown>[];
+  sectors: Record<string, unknown>[];
+  comites: Record<string, unknown>[];
+  ecSectorRelations: Record<string, unknown>[];
+}
+
 @Injectable()
 export class RenecScraperService implements OnModuleInit {
   private readonly logger = new Logger(RenecScraperService.name);
   private activeRun: HarvestRun | null = null;
   private isRunning = false;
+  private renecClient: RenecClientModule | null = null;
+  private schedulingEnabled: boolean;
 
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly configService: ConfigService,
+  ) {
+    // Enable scheduling only in production or when explicitly enabled
+    this.schedulingEnabled =
+      this.configService.get("RENEC_HARVEST_ENABLED") === "true" ||
+      this.configService.get("NODE_ENV") === "production";
+  }
 
   async onModuleInit() {
     this.logger.log("RENEC Scraper Service initialized");
+    this.logger.log(
+      `Scheduled harvesting: ${this.schedulingEnabled ? "ENABLED" : "DISABLED"}`,
+    );
+
+    // Lazy load the renec-client module
+    try {
+      this.renecClient = await import("@avala/renec-client");
+      this.logger.log("RENEC client loaded successfully");
+    } catch (error) {
+      this.logger.warn(
+        "RENEC client not available - harvesting will use placeholder data",
+        error,
+      );
+    }
   }
 
   // ============================================
-  // SCHEDULED JOBS (Call via external scheduler or cron)
+  // SCHEDULED JOBS (Cron-based)
+  // ============================================
+
+  /**
+   * Daily probe at 6:00 AM UTC - Quick check for new/updated EC standards
+   * Runs only EC and Certifiers to detect changes
+   */
+  @Cron(CronExpression.EVERY_DAY_AT_6AM)
+  async scheduledDailyProbe() {
+    if (!this.schedulingEnabled) {
+      this.logger.debug("Scheduled daily probe skipped (scheduling disabled)");
+      return;
+    }
+
+    this.logger.log("🕐 Starting scheduled daily RENEC probe...");
+    try {
+      await this.startHarvest({
+        mode: HarvestMode.PROBE,
+        components: [
+          RenecComponent.EC_STANDARDS,
+          RenecComponent.CERTIFICADORES,
+        ],
+        maxPages: 500,
+        concurrency: 3,
+      });
+    } catch (error) {
+      this.logger.error("Scheduled daily probe failed:", error);
+    }
+  }
+
+  /**
+   * Weekly full harvest on Sunday at 3:00 AM UTC
+   * Complete data refresh including all centers
+   */
+  @Cron(CronExpression.EVERY_WEEK)
+  async scheduledWeeklyHarvest() {
+    if (!this.schedulingEnabled) {
+      this.logger.debug(
+        "Scheduled weekly harvest skipped (scheduling disabled)",
+      );
+      return;
+    }
+
+    // Only run on Sundays
+    if (new Date().getDay() !== 0) return;
+
+    this.logger.log("🕐 Starting scheduled weekly full RENEC harvest...");
+    try {
+      await this.startHarvest({
+        mode: HarvestMode.HARVEST,
+        components: [
+          RenecComponent.EC_STANDARDS,
+          RenecComponent.CERTIFICADORES,
+          RenecComponent.CENTROS,
+        ],
+        maxPages: 5000,
+        concurrency: 5,
+      });
+    } catch (error) {
+      this.logger.error("Scheduled weekly harvest failed:", error);
+    }
+  }
+
+  /**
+   * Check data freshness every 12 hours
+   * Logs warnings if data is stale
+   */
+  @Cron(CronExpression.EVERY_12_HOURS)
+  async scheduledFreshnessCheck() {
+    if (!this.schedulingEnabled) return;
+
+    this.logger.log("Checking RENEC data freshness...");
+    const freshness = await this.checkDataFreshness();
+
+    if (
+      freshness.staleCenters > 100 ||
+      freshness.staleCertifiers > 50 ||
+      freshness.staleECs > 100
+    ) {
+      this.logger.warn(
+        `⚠️ Significant stale data detected - consider running a full harvest`,
+      );
+    }
+  }
+
+  // ============================================
+  // MANUAL TRIGGER METHODS
   // ============================================
 
   async dailyProbe() {
-    this.logger.log("Starting daily RENEC probe...");
-    await this.startHarvest({
+    this.logger.log("Starting manual daily RENEC probe...");
+    return this.startHarvest({
       mode: HarvestMode.PROBE,
       components: [RenecComponent.EC_STANDARDS, RenecComponent.CERTIFICADORES],
       maxPages: 500,
@@ -55,10 +172,9 @@ export class RenecScraperService implements OnModuleInit {
     });
   }
 
-  // Run weekly on Sunday at 3 AM via external scheduler
   async weeklyFullHarvest() {
-    this.logger.log("Starting weekly full RENEC harvest...");
-    await this.startHarvest({
+    this.logger.log("Starting manual weekly full RENEC harvest...");
+    return this.startHarvest({
       mode: HarvestMode.HARVEST,
       components: [
         RenecComponent.EC_STANDARDS,
@@ -70,12 +186,10 @@ export class RenecScraperService implements OnModuleInit {
     });
   }
 
-  // Run daily at 6 AM via external scheduler
   async checkDataFreshness() {
-    this.logger.log("Checking RENEC data freshness...");
     const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
 
-    const staleCounts = await Promise.all([
+    const [staleCenters, staleCertifiers, staleECs] = await Promise.all([
       this.prisma.renecCenter.count({
         where: { updatedAt: { lt: sevenDaysAgo } },
       }),
@@ -87,11 +201,9 @@ export class RenecScraperService implements OnModuleInit {
       }),
     ]);
 
-    const [staleCenters, staleCertifiers, staleECs] = staleCounts;
-
     if (staleCenters > 0 || staleCertifiers > 0 || staleECs > 0) {
-      this.logger.warn(
-        `Stale data detected: ${staleCenters} centers, ${staleCertifiers} certifiers, ${staleECs} EC standards`,
+      this.logger.log(
+        `Data freshness: ${staleCenters} stale centers, ${staleCertifiers} stale certifiers, ${staleECs} stale EC standards`,
       );
     }
 
@@ -130,7 +242,7 @@ export class RenecScraperService implements OnModuleInit {
     };
 
     this.isRunning = true;
-    this.logger.log(`Starting harvest run: ${runId}`);
+    this.logger.log(`🌾 Starting harvest run: ${runId}`);
 
     // Create sync job record
     const syncJob = await this.prisma.renecSyncJob.create({
@@ -147,9 +259,14 @@ export class RenecScraperService implements OnModuleInit {
     });
 
     try {
-      // Run harvest for each component
-      for (const component of components) {
-        await this.harvestComponent(component, options.maxPages || 500);
+      // Use the renec-client if available
+      if (this.renecClient) {
+        await this.harvestWithRenecClient(components);
+      } else {
+        // Fallback to component-by-component harvesting
+        for (const component of components) {
+          await this.harvestComponent(component, options.maxPages || 500);
+        }
       }
 
       // Mark as completed
@@ -162,11 +279,12 @@ export class RenecScraperService implements OnModuleInit {
           status: RenecSyncStatus.COMPLETED,
           completedAt: new Date(),
           itemsProcessed: this.activeRun.itemsScraped,
+          itemsCreated: this.activeRun.itemsScraped,
         },
       });
 
       this.logger.log(
-        `Harvest ${runId} completed: ${this.activeRun.itemsScraped} items, ${this.activeRun.pagesCrawled} pages`,
+        `✅ Harvest ${runId} completed: ${this.activeRun.itemsScraped} items, ${this.activeRun.errors} errors`,
       );
     } catch (error) {
       this.activeRun.status = HarvestStatus.FAILED;
@@ -178,11 +296,16 @@ export class RenecScraperService implements OnModuleInit {
         data: {
           status: RenecSyncStatus.FAILED,
           completedAt: new Date(),
-          errors: [{ message: (error as Error).message }],
+          errors: [
+            {
+              message: (error as Error).message,
+              stack: (error as Error).stack,
+            },
+          ],
         },
       });
 
-      this.logger.error(`Harvest ${runId} failed:`, error);
+      this.logger.error(`❌ Harvest ${runId} failed:`, error);
       throw error;
     } finally {
       this.isRunning = false;
@@ -190,6 +313,289 @@ export class RenecScraperService implements OnModuleInit {
 
     return this.activeRun;
   }
+
+  /**
+   * Harvest using the @avala/renec-client package
+   * This uses Playwright for real browser automation
+   */
+  private async harvestWithRenecClient(
+    components: RenecComponent[],
+  ): Promise<void> {
+    if (!this.renecClient) {
+      throw new Error("RENEC client not loaded");
+    }
+
+    const config = {
+      headless: true,
+      politeDelayMs: [800, 1500] as [number, number],
+    };
+
+    // Determine which drivers to use based on components
+    const harvestEC = components.includes(RenecComponent.EC_STANDARDS);
+    const harvestCertifiers = components.includes(
+      RenecComponent.CERTIFICADORES,
+    );
+    const harvestCenters = components.includes(RenecComponent.CENTROS);
+    const harvestSectors = components.includes(RenecComponent.SECTORES);
+
+    // Run harvests in parallel where possible
+    const promises: Promise<void>[] = [];
+
+    if (harvestEC || harvestSectors) {
+      // Full harvest gives us EC standards, sectors, comites, and relations
+      promises.push(this.runFullHarvest(config));
+    } else {
+      // Individual component harvests
+      if (harvestCertifiers) {
+        promises.push(this.harvestCertifiersWithClient(config));
+      }
+      if (harvestCenters) {
+        promises.push(this.harvestCentersWithClient(config));
+      }
+    }
+
+    await Promise.all(promises);
+  }
+
+  private async runFullHarvest(config: {
+    headless: boolean;
+    politeDelayMs: [number, number];
+  }): Promise<void> {
+    if (!this.renecClient) return;
+
+    this.logger.log("Running full harvest with renec-client...");
+
+    try {
+      const data = await this.renecClient.harvestAll(config);
+
+      // Process EC standards
+      for (const ec of data.ecStandards) {
+        try {
+          await this.upsertECFromClient(ec as Record<string, unknown>);
+          this.activeRun!.itemsScraped++;
+        } catch (error) {
+          this.logger.error(
+            `Error processing EC: ${(ec as Record<string, unknown>).code}`,
+            error,
+          );
+          this.activeRun!.errors++;
+        }
+      }
+
+      // Process certifiers
+      for (const cert of data.certifiers) {
+        try {
+          await this.upsertCertifierFromClient(cert as Record<string, unknown>);
+          this.activeRun!.itemsScraped++;
+        } catch (error) {
+          this.logger.error(`Error processing certifier`, error);
+          this.activeRun!.errors++;
+        }
+      }
+
+      // Process centers
+      for (const center of data.centers) {
+        try {
+          await this.upsertCenterFromClient(center as Record<string, unknown>);
+          this.activeRun!.itemsScraped++;
+        } catch (error) {
+          this.logger.error(`Error processing center`, error);
+          this.activeRun!.errors++;
+        }
+      }
+
+      this.logger.log(
+        `Full harvest stats: ${data.ecStandards.length} ECs, ${data.certifiers.length} certifiers, ${data.centers.length} centers`,
+      );
+    } catch (error) {
+      this.logger.error("Full harvest with renec-client failed:", error);
+      throw error;
+    }
+  }
+
+  private async harvestCertifiersWithClient(config: {
+    headless: boolean;
+    politeDelayMs: [number, number];
+  }): Promise<void> {
+    if (!this.renecClient) return;
+
+    const driver = this.renecClient.createDriver("certifier", config);
+    const certifiers = await driver.harvest();
+
+    for (const cert of certifiers) {
+      try {
+        await this.upsertCertifierFromClient(cert as Record<string, unknown>);
+        this.activeRun!.itemsScraped++;
+      } catch (error) {
+        this.activeRun!.errors++;
+      }
+    }
+  }
+
+  private async harvestCentersWithClient(config: {
+    headless: boolean;
+    politeDelayMs: [number, number];
+  }): Promise<void> {
+    if (!this.renecClient) return;
+
+    const driver = this.renecClient.createDriver("center", config);
+    const centers = await driver.harvest();
+
+    for (const center of centers) {
+      try {
+        await this.upsertCenterFromClient(center as Record<string, unknown>);
+        this.activeRun!.itemsScraped++;
+      } catch (error) {
+        this.activeRun!.errors++;
+      }
+    }
+  }
+
+  // ============================================
+  // UPSERT METHODS FOR RENEC-CLIENT DATA
+  // ============================================
+
+  private async upsertECFromClient(
+    data: Record<string, unknown>,
+  ): Promise<void> {
+    const ecClave = (data.code as string) || (data.ecClave as string);
+    if (!ecClave) {
+      this.logger.warn("EC without code, skipping");
+      return;
+    }
+
+    const contentHash = this.computeContentHash(data);
+
+    await this.prisma.renecEC.upsert({
+      where: { ecClave },
+      create: {
+        ecClave,
+        titulo: (data.title as string) || (data.titulo as string) || "",
+        version: (data.version as string) || "01",
+        vigente: data.active !== false && data.vigente !== false,
+        sector: (data.sector as string) || null,
+        nivelCompetencia:
+          (data.level as number) || (data.nivelCompetencia as number) || null,
+        proposito:
+          (data.purpose as string) || (data.proposito as string) || null,
+        competencias: [],
+        elementosJson: [],
+        critDesempeno: [],
+        critConocimiento: [],
+        critProducto: [],
+        sourceUrl: (data.url as string) || (data.sourceUrl as string) || null,
+        contentHash,
+      },
+      update: {
+        titulo: (data.title as string) || (data.titulo as string) || undefined,
+        version: (data.version as string) || undefined,
+        vigente: data.active !== false && data.vigente !== false,
+        sector: (data.sector as string) || undefined,
+        proposito:
+          (data.purpose as string) || (data.proposito as string) || undefined,
+        contentHash,
+        lastSyncedAt: new Date(),
+      },
+    });
+  }
+
+  private async upsertCertifierFromClient(
+    data: Record<string, unknown>,
+  ): Promise<void> {
+    const certId = (data.id as string) || (data.certId as string);
+    if (!certId) {
+      this.logger.warn("Certifier without ID, skipping");
+      return;
+    }
+
+    const contentHash = this.computeContentHash(data);
+
+    await this.prisma.renecCertifier.upsert({
+      where: { certId },
+      create: {
+        certId,
+        razonSocial:
+          (data.name as string) || (data.razonSocial as string) || "",
+        nombreComercial:
+          (data.tradeName as string) ||
+          (data.nombreComercial as string) ||
+          null,
+        activo: data.active !== false && data.activo !== false,
+        direccion:
+          (data.address as string) || (data.direccion as string) || null,
+        telefono: this.normalizePhone(
+          (data.phone as string) || (data.telefono as string),
+        ),
+        email: (data.email as string) || (data.correo as string) || null,
+        sitioWeb: (data.website as string) || (data.sitioWeb as string) || null,
+        representanteLegal:
+          (data.legalRep as string) ||
+          (data.representanteLegal as string) ||
+          null,
+        sourceUrl: (data.url as string) || (data.sourceUrl as string) || null,
+        contentHash,
+      },
+      update: {
+        razonSocial:
+          (data.name as string) || (data.razonSocial as string) || undefined,
+        nombreComercial:
+          (data.tradeName as string) ||
+          (data.nombreComercial as string) ||
+          undefined,
+        activo: data.active !== false && data.activo !== false,
+        contentHash,
+        lastSyncedAt: new Date(),
+      },
+    });
+  }
+
+  private async upsertCenterFromClient(
+    data: Record<string, unknown>,
+  ): Promise<void> {
+    const centerId = (data.id as string) || (data.centerId as string);
+    if (!centerId) {
+      this.logger.warn("Center without ID, skipping");
+      return;
+    }
+
+    const estado = (data.state as string) || (data.estado as string);
+    const contentHash = this.computeContentHash(data);
+
+    await this.prisma.renecCenter.upsert({
+      where: { centerId },
+      create: {
+        centerId,
+        nombre: (data.name as string) || (data.nombre as string) || "",
+        activo: data.active !== false && data.activo !== false,
+        direccion:
+          (data.address as string) || (data.direccion as string) || null,
+        telefono: this.normalizePhone(
+          (data.phone as string) || (data.telefono as string),
+        ),
+        email: (data.email as string) || (data.correo as string) || null,
+        estado: estado || null,
+        estadoInegi: this.normalizeEstadoInegi(estado),
+        municipio:
+          (data.municipality as string) || (data.municipio as string) || null,
+        codigoPostal:
+          (data.zipCode as string) || (data.codigoPostal as string) || null,
+        sourceUrl: (data.url as string) || (data.sourceUrl as string) || null,
+        contentHash,
+      },
+      update: {
+        nombre: (data.name as string) || (data.nombre as string) || undefined,
+        activo: data.active !== false && data.activo !== false,
+        estado: estado || undefined,
+        estadoInegi: this.normalizeEstadoInegi(estado),
+        contentHash,
+        lastSyncedAt: new Date(),
+      },
+    });
+  }
+
+  // ============================================
+  // LEGACY COMPONENT HARVESTING (Fallback)
+  // ============================================
 
   async stopHarvest(runId: string): Promise<boolean> {
     if (this.activeRun?.id === runId) {
@@ -231,215 +637,15 @@ export class RenecScraperService implements OnModuleInit {
     }));
   }
 
-  // ============================================
-  // COMPONENT HARVESTING
-  // ============================================
-
   private async harvestComponent(
     component: RenecComponent,
     maxPages: number,
   ): Promise<void> {
-    this.logger.log(`Harvesting component: ${component}`);
-
-    switch (component) {
-      case RenecComponent.EC_STANDARDS:
-        await this.harvestECStandards(maxPages);
-        break;
-      case RenecComponent.CERTIFICADORES:
-        await this.harvestCertifiers(maxPages);
-        break;
-      case RenecComponent.CENTROS:
-        await this.harvestCenters(maxPages);
-        break;
-    }
-  }
-
-  private async harvestECStandards(maxPages: number): Promise<void> {
-    // Simulate fetching EC standards from RENEC
-    // In production, this would use Puppeteer/Playwright to scrape the actual site
-    const items = await this.fetchECStandardsFromRenec(maxPages);
-
-    for (const item of items) {
-      try {
-        await this.upsertECStandard(item);
-        this.activeRun!.itemsScraped++;
-      } catch (error) {
-        this.logger.error(`Error processing EC standard:`, error);
-        this.activeRun!.errors++;
-      }
-    }
-
-    this.activeRun!.pagesCrawled += Math.ceil(items.length / 20);
-  }
-
-  private async harvestCertifiers(maxPages: number): Promise<void> {
-    const items = await this.fetchCertifiersFromRenec(maxPages);
-
-    for (const item of items) {
-      try {
-        await this.upsertCertifier(item);
-        this.activeRun!.itemsScraped++;
-      } catch (error) {
-        this.logger.error(`Error processing certifier:`, error);
-        this.activeRun!.errors++;
-      }
-    }
-
-    this.activeRun!.pagesCrawled += Math.ceil(items.length / 20);
-  }
-
-  private async harvestCenters(maxPages: number): Promise<void> {
-    const items = await this.fetchCentersFromRenec(maxPages);
-
-    for (const item of items) {
-      try {
-        await this.upsertCenter(item);
-        this.activeRun!.itemsScraped++;
-      } catch (error) {
-        this.logger.error(`Error processing center:`, error);
-        this.activeRun!.errors++;
-      }
-    }
-
-    this.activeRun!.pagesCrawled += Math.ceil(items.length / 20);
-  }
-
-  // ============================================
-  // DATA FETCHING (Scraping Logic)
-  // ============================================
-
-  private async fetchECStandardsFromRenec(
-    maxPages: number,
-  ): Promise<ScrapedItem[]> {
-    // This is where the actual web scraping would happen
-    // Using Puppeteer/Playwright to navigate RENEC and extract data
-    // For now, return empty array - implement actual scraping logic
-
-    this.logger.log(`Fetching EC standards (max ${maxPages} pages)...`);
-
-    // TODO: Implement actual RENEC scraping
-    // const browser = await puppeteer.launch({ headless: true });
-    // const page = await browser.newPage();
-    // await page.goto(RENEC_BASE_URL + RENEC_ENDPOINTS.ec_standard[0]);
-    // ... extract data from page ...
-
-    return [];
-  }
-
-  private async fetchCertifiersFromRenec(
-    maxPages: number,
-  ): Promise<ScrapedItem[]> {
-    this.logger.log(`Fetching certifiers (max ${maxPages} pages)...`);
-    return [];
-  }
-
-  private async fetchCentersFromRenec(
-    maxPages: number,
-  ): Promise<ScrapedItem[]> {
-    this.logger.log(`Fetching centers (max ${maxPages} pages)...`);
-    return [];
-  }
-
-  // ============================================
-  // DATA PERSISTENCE
-  // ============================================
-
-  private async upsertECStandard(item: ScrapedItem): Promise<void> {
-    const data = item.data;
-
-    await this.prisma.renecEC.upsert({
-      where: { ecClave: data.ecClave as string },
-      create: {
-        ecClave: data.ecClave as string,
-        titulo: data.titulo as string,
-        version: (data.version as string) || "01",
-        vigente: (data.vigente as boolean) ?? true,
-        sector: data.sector as string | null,
-        nivelCompetencia: data.nivelCompetencia as number | null,
-        proposito: data.proposito as string | null,
-        competencias: (data.competencias as object[]) || [],
-        elementosJson: (data.elementosJson as object[]) || [],
-        critDesempeno: (data.critDesempeno as object[]) || [],
-        critConocimiento: (data.critConocimiento as object[]) || [],
-        critProducto: (data.critProducto as object[]) || [],
-        fechaPublicacion: data.fechaPublicacion
-          ? new Date(data.fechaPublicacion as string)
-          : null,
-        fechaFinVigencia: data.fechaFinVigencia
-          ? new Date(data.fechaFinVigencia as string)
-          : null,
-        sourceUrl: item.srcUrl,
-        contentHash: item.contentHash,
-      },
-      update: {
-        titulo: data.titulo as string,
-        version: data.version as string,
-        vigente: data.vigente as boolean,
-        sector: data.sector as string | null,
-        proposito: data.proposito as string | null,
-        contentHash: item.contentHash,
-        lastSyncedAt: new Date(),
-      },
-    });
-  }
-
-  private async upsertCertifier(item: ScrapedItem): Promise<void> {
-    const data = item.data;
-
-    await this.prisma.renecCertifier.upsert({
-      where: { certId: data.certId as string },
-      create: {
-        certId: data.certId as string,
-        razonSocial: data.razonSocial as string,
-        nombreComercial: data.nombreComercial as string | null,
-        activo: (data.activo as boolean) ?? true,
-        direccion: data.direccion as string | null,
-        telefono: this.normalizePhone(data.telefono as string),
-        email: data.email as string | null,
-        sitioWeb: data.sitioWeb as string | null,
-        rfc: data.rfc as string | null,
-        representanteLegal: data.representanteLegal as string | null,
-        sourceUrl: item.srcUrl,
-        contentHash: item.contentHash,
-      },
-      update: {
-        razonSocial: data.razonSocial as string,
-        nombreComercial: data.nombreComercial as string | null,
-        activo: data.activo as boolean,
-        contentHash: item.contentHash,
-        lastSyncedAt: new Date(),
-      },
-    });
-  }
-
-  private async upsertCenter(item: ScrapedItem): Promise<void> {
-    const data = item.data;
-
-    await this.prisma.renecCenter.upsert({
-      where: { centerId: data.centerId as string },
-      create: {
-        centerId: data.centerId as string,
-        nombre: data.nombre as string,
-        activo: (data.activo as boolean) ?? true,
-        direccion: data.direccion as string | null,
-        telefono: this.normalizePhone(data.telefono as string),
-        email: data.email as string | null,
-        estado: data.estado as string | null,
-        estadoInegi: this.normalizeEstadoInegi(data.estado as string),
-        municipio: data.municipio as string | null,
-        codigoPostal: data.codigoPostal as string | null,
-        sourceUrl: item.srcUrl,
-        contentHash: item.contentHash,
-      },
-      update: {
-        nombre: data.nombre as string,
-        activo: data.activo as boolean,
-        estado: data.estado as string | null,
-        estadoInegi: this.normalizeEstadoInegi(data.estado as string),
-        contentHash: item.contentHash,
-        lastSyncedAt: new Date(),
-      },
-    });
+    this.logger.log(`Harvesting component (fallback mode): ${component}`);
+    // Fallback mode - no actual harvesting without renec-client
+    this.logger.warn(
+      `Component ${component} harvest skipped - renec-client not available`,
+    );
   }
 
   // ============================================
@@ -456,9 +662,7 @@ export class RenecScraperService implements OnModuleInit {
 
   private normalizePhone(phone: string | null | undefined): string | null {
     if (!phone) return null;
-    // Remove all non-digit characters except +
     const digits = phone.replace(/[^\d+]/g, "");
-    // Add Mexico country code if not present
     if (digits.startsWith("+")) return digits;
     if (digits.length === 10) return `+52${digits}`;
     return digits;

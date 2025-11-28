@@ -1,0 +1,202 @@
+[
+  {
+    "type": "sector",
+    "data": {
+      "sectorId": "SCIAN-01",
+      "nombre": "ACTIVIDADES LEGISLATIVAS, GUBERNAMENTALES, DE IMPARTICIÓN DE JUSTICIA Y DE ORGANISMOS INTERNACIONALES Y EXTRATERRITORIALES",
+      "srcUrl": "https://conocer.gob.mx/conocer/#/sectoresProductivos",
+      "extractedAt": "2025-11-28T08:38:04.618Z",
+      "contentHash": "24359aa89cd180f256ec29b87ebfebdb86cd5e80a76fa7ba246cecfe35c5b82a"
+    }
+  },
+  {
+    "type": "sector",
+    "data": {
+      "sectorId": "SCIAN-02",
+      "nombre": "AGRICULTURA, CRÍA Y EXPLOTACIÓN DE ANIMALES, APROVECHAMIENTO FORESTAL, PESCA Y CAZA",
+      "srcUrl": "https://conocer.gob.mx/conocer/#/sectoresProductivos",
+      "extractedAt": "2025-11-28T08:38:04.619Z",
+      "contentHash": "847e73bf5bbc9edd543ffcf549e702dc480901c67acea1987321f8d7a2e6b840"
+    }
+  },
+  {
+    "type": "sector",
+    "data": {
+      "sectorId": "SCIAN-03",
+      "nombre": "COMERCIO AL POR MAYOR",
+      "srcUrl": "https://conocer.gob.mx/conocer/#/sectoresProductivos",
+      "extractedAt": "2025-11-28T08:38:04.619Z",
+      "contentHash": "88828decbdeaf20253e1ee4ae69387c01e728e33ccecee9ec5a7c7bbce498716"
+    }
+  },
+  {
+    "type": "sector",
+    "data": {
+      "sectorId": "SCIAN-04",
+      "nombre": "COMERCIO AL POR MENOR",
+      "srcUrl": "https://conocer.gob.mx/conocer/#/sectoresProductivos",
+      "extractedAt": "2025-11-28T08:38:04.619Z",
+      "contentHash": "98a26ea2be308d0609ea7c9afecc8160b118ec405ad3edfe0d6cbfd305361f1d"
+    }
+  },
+  {
+    "type": "sector",
+    "data": {
+      "sectorId": "SCIAN-05",
+      "nombre": "CONSTRUCCIÓN",
+      "srcUrl": "https://conocer.gob.mx/conocer/#/sectoresProductivos",
+      "extractedAt": "2025-11-28T08:38:04.619Z",
+      "contentHash": "8af6190a05eb9daac68174095058de485e5b0a9ace233c3ab2c58d1a3a7eaf52"
+    }
+  },
+  {
+    "type": "sector",
+    "data": {
+      "sectorId": "SCIAN-06",
+      "nombre": "CORPORATIVOS",
+      "srcUrl": "https://conocer.gob.mx/conocer/#/sectoresProductivos",
+      "extractedAt": "2025-11-28T08:38:04.619Z",
+      "contentHash": "39c0dfc5ba8a45f91256d171bebfa9a920a6731ab76dc286481cfd1ed288650d"
+    }
+  },
+  {
+    "type": "sector",
+    "data": {
+      "sectorId": "SCIAN-07",
+      "nombre": "GENERACIÓN, TRANSMISIÓN, DISTRIBUCIÓN Y COMERCIALIZACIÓN DE ENERGÍA ELÉCTRICA, SUMINISTRO DE AGUA Y DE GAS NATURAL POR DUCTOS AL CONSUMIDOR FINAL",
+      "srcUrl": "https://conocer.gob.mx/conocer/#/sectoresProductivos",
+      "extractedAt": "2025-11-28T08:38:04.619Z",
+      "contentHash": "49945fcd6f3425cc491eb7569acdf561eb5c3e3559fccaf8be7f552fb589deb0"
+    }
+  },
+  {
+    "type": "sector",
+    "data": {
+      "sectorId": "SCIAN-08",
+      "nombre": "INDUSTRIAS MANUFACTURERAS",
+      "srcUrl": "https://conocer.gob.mx/conocer/#/sectoresProductivos",
+      "extractedAt": "2025-11-28T08:38:04.619Z",
+      "contentHash": "7e626379d64879c54407f47febf92fbc490fed47eb9692e0a8c72049216cae7b"
+    }
+  },
+  {
+    "type": "sector",
+    "data": {
+      "sectorId": "SCIAN-09",
+      "nombre": "INFORMACIÓN EN MEDIOS MASIVOS",
+      "srcUrl": "https://conocer.gob.mx/conocer/#/sectoresProductivos",
+      "extractedAt": "2025-11-28T08:38:04.619Z",
+      "contentHash": "49a32de59097e8aabfd7f61000c3d3479365ae6ab2a068bf82390596324228c4"
+    }
+  },
+  {
+    "type": "sector",
+    "data": {
+      "sectorId": "SCIAN-10",
+      "nombre": "MINERÍA",
+      "srcUrl": "https://conocer.gob.mx/conocer/#/sectoresProductivos",
+      "extractedAt": "2025-11-28T08:38:04.619Z",
+      "contentHash": "1dd0859009e8ae52ee470e5b6bbbf0146a656ef39d61e106ba6b9dc3f0f8196a"
+    }
+  },
+  {
+    "type": "sector",
+    "data": {
+      "sectorId": "SCIAN-11",
+      "nombre": "OTROS SERVICIOS EXCEPTO ACTIVIDADES GUBERNAMENTALES",
+      "srcUrl": "https://conocer.gob.mx/conocer/#/sectoresProductivos",
+      "extractedAt": "2025-11-28T08:38:04.619Z",
+      "contentHash": "270b37c0bf263bb15bd5e4e348bb615b9b6d9d2293efc5d167b5a21eed4c9085"
+    }
+  },
+  {
+    "type": "sector",
+    "data": {
+      "sectorId": "SCIAN-12",
+      "nombre": "SERVICIOS DE ALOJAMIENTO TEMPORAL Y DE PREPARACIÓN DE ALIMENTOS Y BEBIDAS",
+      "srcUrl": "https://conocer.gob.mx/conocer/#/sectoresProductivos",
+      "extractedAt": "2025-11-28T08:38:04.619Z",
+      "contentHash": "450c3202e56ad6438bba06571cd57ba333e162ef0caf1706c405125cfa8f686d"
+    }
+  },
+  {
+    "type": "sector",
+    "data": {
+      "sectorId": "SCIAN-13",
+      "nombre": "SERVICIOS DE APOYO A LOS NEGOCIOS Y MANEJO DE RESIDUOS, Y SERVICIOS DE REMEDIACIÓN",
+      "srcUrl": "https://conocer.gob.mx/conocer/#/sectoresProductivos",
+      "extractedAt": "2025-11-28T08:38:04.619Z",
+      "contentHash": "c9ea817eb5db64d68ed37079efc262f92f087a276eede94875d27ed3c5fbd102"
+    }
+  },
+  {
+    "type": "sector",
+    "data": {
+      "sectorId": "SCIAN-14",
+      "nombre": "SERVICIOS DE ESPARCIMIENTO CULTURALES Y DEPORTIVOS, Y OTROS SERVICIOS RECREATIVOS",
+      "srcUrl": "https://conocer.gob.mx/conocer/#/sectoresProductivos",
+      "extractedAt": "2025-11-28T08:38:04.619Z",
+      "contentHash": "f1d30cec5cc57cbd40c861887c25dd8a086e67a685054fc51baf6dc2b9fe9538"
+    }
+  },
+  {
+    "type": "sector",
+    "data": {
+      "sectorId": "SCIAN-15",
+      "nombre": "SERVICIOS DE SALUD Y DE ASISTENCIA SOCIAL",
+      "srcUrl": "https://conocer.gob.mx/conocer/#/sectoresProductivos",
+      "extractedAt": "2025-11-28T08:38:04.619Z",
+      "contentHash": "4d182409c8ef4bc1b6632f233932906919f96cd651040f717bcfb199d4caf744"
+    }
+  },
+  {
+    "type": "sector",
+    "data": {
+      "sectorId": "SCIAN-16",
+      "nombre": "SERVICIOS EDUCATIVOS",
+      "srcUrl": "https://conocer.gob.mx/conocer/#/sectoresProductivos",
+      "extractedAt": "2025-11-28T08:38:04.619Z",
+      "contentHash": "fd27706e5ea7078cac77b8042ebe7f50b38dae645645b95beb94fa75a0d2bb9e"
+    }
+  },
+  {
+    "type": "sector",
+    "data": {
+      "sectorId": "SCIAN-17",
+      "nombre": "SERVICIOS FINANCIEROS Y DE SEGUROS",
+      "srcUrl": "https://conocer.gob.mx/conocer/#/sectoresProductivos",
+      "extractedAt": "2025-11-28T08:38:04.619Z",
+      "contentHash": "b1b0002e30632b41b1aacd8f8f64f1345aa99abbb3034c08f9db8c78f494aca7"
+    }
+  },
+  {
+    "type": "sector",
+    "data": {
+      "sectorId": "SCIAN-18",
+      "nombre": "SERVICIOS INMOBILIARIOS Y DE ALQUILER DE BIENES MUEBLES E INTANGIBLES",
+      "srcUrl": "https://conocer.gob.mx/conocer/#/sectoresProductivos",
+      "extractedAt": "2025-11-28T08:38:04.619Z",
+      "contentHash": "b4e237e594046700427131e8c2ed75c8100aedd2216eb32d44f7ef319dd66c34"
+    }
+  },
+  {
+    "type": "sector",
+    "data": {
+      "sectorId": "SCIAN-19",
+      "nombre": "SERVICIOS PROFESIONALES, CIENTÍFICOS Y TÉCNICOS",
+      "srcUrl": "https://conocer.gob.mx/conocer/#/sectoresProductivos",
+      "extractedAt": "2025-11-28T08:38:04.619Z",
+      "contentHash": "40e9942c55acf2e6afd4893e1d878efb5544f9653f0d2892c70aeb24ce846f2c"
+    }
+  },
+  {
+    "type": "sector",
+    "data": {
+      "sectorId": "SCIAN-20",
+      "nombre": "TRANSPORTES, CORREOS Y ALMACENAMIENTO",
+      "srcUrl": "https://conocer.gob.mx/conocer/#/sectoresProductivos",
+      "extractedAt": "2025-11-28T08:38:04.619Z",
+      "contentHash": "2aea08ecb5b40b6e45cce79d4d99963efa96e5a0cad0ef851704f319015962d5"
+    }
+  }
+]

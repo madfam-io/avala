@@ -1,0 +1,12 @@
+export { MarketingNav } from "./marketing-nav";
+export { MarketingFooter } from "./marketing-footer";
+export { Hero } from "./hero";
+export { TrustBar } from "./trust-bar";
+export { ProblemSolution } from "./problem-solution";
+export { ProductModules } from "./product-modules";
+export { ECHighlight } from "./ec-highlight";
+export { AudienceSegments } from "./audience-segments";
+export { Testimonials } from "./testimonials";
+export { PricingPreview } from "./pricing-preview";
+export { FAQ } from "./faq";
+export { FinalCTA } from "./final-cta";

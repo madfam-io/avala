@@ -56,6 +56,9 @@ services:
       JWT_SECRET: ${JWT_SECRET:-your-super-secret-jwt-key-change-in-production}
       JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-7d}
 
+      # RENEC Harvest Scheduling
+      RENEC_HARVEST_ENABLED: ${RENEC_HARVEST_ENABLED:-true}
+
       # SMTP (Mailhog for dev, real SMTP in production)
       SMTP_HOST: ${SMTP_HOST:-mailhog}
       SMTP_PORT: ${SMTP_PORT:-1025}
@@ -103,10 +106,43 @@ services:
     networks:
       - avala-network
 
+  # RENEC Harvest Worker (runs scheduled harvests with Playwright)
+  # This service handles browser-based scraping of RENEC data
+  harvest-worker:
+    build:
+      context: .
+      dockerfile: packages/renec-client/Dockerfile
+    container_name: avala-harvest-worker
+    restart: unless-stopped
+    environment:
+      # Database
+      DATABASE_URL: postgresql://${POSTGRES_USER:-avala}:${POSTGRES_PASSWORD:-avala_secure_password}@postgres:5432/${POSTGRES_DB:-avala_prod}?schema=public
+
+      # Harvest settings
+      HARVEST_OUTPUT_DIR: /app/data/renec
+      HARVEST_HEADLESS: "true"
+
+      # Node
+      NODE_ENV: production
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - avala-network
+    volumes:
+      - harvest_data:/app/data/renec
+    profiles:
+      - harvest # Only run when harvest profile is active
+    # Run harvest on startup and exit (for one-time seeding)
+    # For scheduled harvests, the API service handles cron jobs
+    command: sh -c "cd /app/packages/renec-client && node dist/cli.js --output /app/data/renec"
+
 networks:
   avala-network:
     driver: bridge
 
 volumes:
   postgres_data:
+    driver: local
+  harvest_data:
     driver: local

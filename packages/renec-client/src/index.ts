@@ -42,6 +42,9 @@ export function createDriver(type: DriverType, config?: DriverConfig) {
   }
 }
 
+// Extracted data access
+export * as data from "./data";
+
 // Full harvest orchestrator
 export async function harvestAll(config?: DriverConfig) {
   const ecDriver = new ECDriver(config);

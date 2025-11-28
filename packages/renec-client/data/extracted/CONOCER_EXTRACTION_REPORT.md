@@ -1,0 +1,180 @@
+# CONOCER/RENEC Data Extraction Report
+
+**Generated**: 2025-11-28 12:46:23
+**Status**: ✅ Complete
+
+---
+
+## Executive Summary
+
+This report summarizes the comprehensive data extraction from the Mexican CONOCER (Consejo Nacional de Normalización y Certificación de Competencias Laborales) RENEC system.
+
+### Key Metrics
+
+| Metric | Value |
+|--------|-------|
+| EC Standards Catalogued | 1,477 |
+| Committees Extracted | 581 |
+| ECs Processed for Details | 1,477 |
+| Unique Certifiers (ECEs) | 482 |
+| Unique Courses/CCAPs | 340 |
+| Certifier-EC Relationships | 7,573 |
+| Course-EC Relationships | 398 |
+
+---
+
+## 1. EC Standards (Estándares de Competencia)
+
+**Total**: 1,477 standards extracted from API
+
+EC Standards define the competencies that can be certified. Each standard specifies:
+- Required knowledge and skills
+- Performance criteria
+- Evaluation methods
+
+### Sample Standards
+
+| Code | Title |
+|------|-------|
+| EC0001 | Prestación de servicios de traducción de textos de lengua... |
+| EC0002 | Asistencia primaria de un evento adverso |
+| EC0004 | Preparación de órganos para ajuste en banco |
+| EC0007 | Preparación del diferencial para su mantenimiento |
+| EC0008 | Desarmado del boguie |
+| EC0009 | Asesoría y suministro de crédito en instituciones de ahor... |
+| EC0010 | Prestación de servicios estéticos corporales |
+| EC0011 | Elaboración de documentos mediante un procesador de textos |
+| EC0012 | Elaboración de presentaciones gráficas mediante herramien... |
+| EC0013 | Elaboración de libros mediante el uso de procesadores de ... |
+
+*...and 1,467 more standards*
+
+
+---
+
+## 2. Committees (Comités de Gestión por Competencias)
+
+**Total**: 581 committees extracted
+
+Committees are industry groups that develop and maintain EC standards for their sector.
+
+### Committee Statistics
+
+
+---
+
+## 3. ECE Registry (Entidades Certificadoras y Evaluadoras)
+
+**Unique Certifiers**: 482
+
+ECEs are authorized organizations that can evaluate and certify individuals against EC standards.
+
+### ECE Statistics
+
+| Metric | Value |
+|--------|-------|
+| Unique ECEs | 482 |
+| Avg ECs per ECE | 15.71 |
+| Max ECs per ECE | 334 |
+| ECEs with 1 EC only | 9 |
+| ECEs with 5+ ECs | 359 |
+| ECEs with 10+ ECs | 214 |
+
+### Top Certifiers by EC Coverage
+
+| Rank | Certifier | ECs |
+|------|-----------|-----|
+| 1 | ICEMéxico | 334 |
+| 2 | Organismo de Certificación Laboral Mexicana, S.C. | 159 |
+| 3 | Grupo Becas Para la Educación y Servicios de Salud JB S... | 106 |
+| 4 | CV CAPACI-VISION S.A.S. DE C.V. | 98 |
+| 5 | Colegio Nacional de Educación Profesional Técnica | 97 |
+| 6 | Fundación México para el Desarrollo Sustentable Humano ... | 92 |
+| 7 | Gente de Alto Impacto, A.C. | 90 |
+| 8 | Asociación Guanajuatense para el Desarrollo, Entidad de... | 89 |
+| 9 | Dirección General de Centros de Formación para el Traba... | 87 |
+| 10 | Instituto de Capacitación y Educación para el Trabajo, ... | 82 |
+| 11 | Servicios Integrales para la Calidad y la Competencia O... | 82 |
+| 12 | Asociación Nacional de Bienestar y Desarrollo Organizac... | 81 |
+| 13 | Instituto Nacional para el Desarrollo y la Capacitación... | 81 |
+| 14 | Instituto de Administración Pública del Estado de Chiap... | 74 |
+| 15 | Capacitación Humanidad y Servicio a la Salud, S.C. | 73 |
+
+
+---
+
+## 4. CCAP/Course Registry
+
+**Unique Entries**: 340
+
+Training centers and courses associated with EC standards.
+
+---
+
+## 5. Data Quality
+
+### Extraction Status
+
+| Status | Count |
+|--------|-------|
+| Successfully Processed | 1,477 |
+| Failed/Skipped | 0 |
+| ECs with Certifiers | 1,111 |
+| ECs without Certifiers | 366 |
+
+
+
+---
+
+## 6. Output Files
+
+All extracted data is stored in `data/extracted/`:
+
+| File | Description | Records |
+|------|-------------|---------|
+| `ec_standards_api.json` | All EC standards from API | 1,477 |
+| `committees_complete.json` | All committees with EC mappings | 581 |
+| `ec_certifiers_all.json` | EC detail extraction results | 1,477 |
+| `master_ece_registry.json` | Deduplicated ECE registry | 482 |
+| `master_ccap_registry.json` | Deduplicated CCAP registry | 340 |
+| `ec_ece_matrix.json` | EC-to-ECE relationship matrix | 1,477 |
+| `registry_stats.json` | Computed statistics | - |
+
+---
+
+## 7. Usage Notes
+
+### Finding Certifiers for an EC
+
+```python
+import json
+
+# Load the matrix
+with open('ec_ece_matrix.json') as f:
+    matrix = json.load(f)['matrix']
+
+# Look up certifiers for EC0217.01
+ec_info = matrix.get('EC0217.01')
+print(f"ECE IDs: {ec_info['ece_ids']}")
+print(f"Count: {ec_info['ece_count']}")
+```
+
+### Finding ECs for a Certifier
+
+```python
+import json
+
+# Load ECE registry
+with open('master_ece_registry.json') as f:
+    registry = json.load(f)['registry']
+
+# Find certifier by name (partial match)
+for ece in registry:
+    if 'CONALEP' in ece['canonical_name'].upper():
+        print(f"{ece['canonical_name']}: {ece['ec_count']} ECs")
+        print(f"EC codes: {ece['ec_codes'][:10]}...")
+```
+
+---
+
+*Report generated by RENEC Harvester - Avala Project*

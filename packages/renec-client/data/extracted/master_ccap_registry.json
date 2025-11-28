@@ -1,0 +1,3419 @@
+{
+  "generated_at": "2025-11-28T12:46:23.576187",
+  "description": "Master registry of CCAPs and training courses",
+  "total_count": 340,
+  "registry": [
+    {
+      "id": "CCAP-00001",
+      "canonical_name": "ELABORACIÓN DE PERITAJE EN HECHOS DE TRÁNSITO TERRESTRE",
+      "alternate_names": [],
+      "normalized_key": "elaboración de peritaje en hechos de tránsito terrestre",
+      "ec_codes": [
+        "EC0765",
+        "EC0801"
+      ],
+      "ec_count": 2
+    },
+    {
+      "id": "CCAP-00002",
+      "canonical_name": "FORMACIÓN BÁSICA DE OFICIALES DE SEGURIDAD (FOBOS)",
+      "alternate_names": [],
+      "normalized_key": "formación básica de oficiales de seguridad (fobos)",
+      "ec_codes": [
+        "EC0060",
+        "EC0573"
+      ],
+      "ec_count": 2
+    },
+    {
+      "id": "CCAP-00003",
+      "canonical_name": "MANEJO DE PROCESADOR DE TEXTOS DIGITALES, HOJAS DE CÁLCULO DIGITALES, PRESENTACIONES DIGITALES",
+      "alternate_names": [],
+      "normalized_key": "manejo de procesador de textos digitales hojas de cálculo digitales presentaciones digitales",
+      "ec_codes": [
+        "EC0107",
+        "EC0109"
+      ],
+      "ec_count": 2
+    },
+    {
+      "id": "CCAP-00004",
+      "canonical_name": "MESERO PROFESIONAL",
+      "alternate_names": [],
+      "normalized_key": "mesero profesional",
+      "ec_codes": [
+        "EC0038",
+        "EC0042"
+      ],
+      "ec_count": 2
+    },
+    {
+      "id": "CCAP-00005",
+      "canonical_name": "MICROSOFT EXCEL 2007 (BÁSICO)",
+      "alternate_names": [],
+      "normalized_key": "microsoft excel 2007 (básico)",
+      "ec_codes": [
+        "EC0013",
+        "EC0108"
+      ],
+      "ec_count": 2
+    },
+    {
+      "id": "CCAP-00006",
+      "canonical_name": "MICROSOFT EXCEL 2010 (BÁSICO)",
+      "alternate_names": [],
+      "normalized_key": "microsoft excel 2010 (básico)",
+      "ec_codes": [
+        "EC0013",
+        "EC0108"
+      ],
+      "ec_count": 2
+    },
+    {
+      "id": "CCAP-00007",
+      "canonical_name": "MICROSOFT POWER POINT 2007 (BÁSICO)",
+      "alternate_names": [],
+      "normalized_key": "microsoft power point 2007 (básico)",
+      "ec_codes": [
+        "EC0012",
+        "EC0109"
+      ],
+      "ec_count": 2
+    },
+    {
+      "id": "CCAP-00008",
+      "canonical_name": "MICROSOFT POWER POINT 2010 (BÁSICO)",
+      "alternate_names": [],
+      "normalized_key": "microsoft power point 2010 (básico)",
+      "ec_codes": [
+        "EC0012",
+        "EC0109"
+      ],
+      "ec_count": 2
+    },
+    {
+      "id": "CCAP-00009",
+      "canonical_name": "MICROSOFT WORD 2007 (BÁSICO)",
+      "alternate_names": [],
+      "normalized_key": "microsoft word 2007 (básico)",
+      "ec_codes": [
+        "EC0011",
+        "EC0107"
+      ],
+      "ec_count": 2
+    },
+    {
+      "id": "CCAP-00010",
+      "canonical_name": "MICROSOFT WORD 2010 (BÁSICO)",
+      "alternate_names": [],
+      "normalized_key": "microsoft word 2010 (básico)",
+      "ec_codes": [
+        "EC0011",
+        "EC0107"
+      ],
+      "ec_count": 2
+    },
+    {
+      "id": "CCAP-00011",
+      "canonical_name": "23 HERRAMIENTAS PARA LA ADMINISTRACIÓN DE PROYECTOS DE CONSTRUCCIÓN BY AXIOMA",
+      "alternate_names": [],
+      "normalized_key": "23 herramientas para la administración de proyectos de construcción by axioma",
+      "ec_codes": [
+        "EC0935"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00012",
+      "canonical_name": "ACEPTACIÓN DE RIESGOS EN CULTIVOS DE GRANOS BÁSICOS",
+      "alternate_names": [],
+      "normalized_key": "aceptación de riesgos en cultivos de granos básicos",
+      "ec_codes": [
+        "EC0922"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00013",
+      "canonical_name": "ACTIVIDADES EN EL SERVICIO DEL ASEO Y ALIMENTACIÓN EN EL HOGAR",
+      "alternate_names": [],
+      "normalized_key": "actividades en el servicio del aseo y alimentación en el hogar",
+      "ec_codes": [
+        "EC0561"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00014",
+      "canonical_name": "ADMINISTRACIÓN DE CONDOMINIOS",
+      "alternate_names": [],
+      "normalized_key": "administración de condominios",
+      "ec_codes": [
+        "EC0112"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00015",
+      "canonical_name": "ADMINISTRACIÓN DE CONTRATOS, NÓMINAS Y SEGURIDAD SOCIAL",
+      "alternate_names": [],
+      "normalized_key": "administración de contratos nóminas y seguridad social",
+      "ec_codes": [
+        "EC0422"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00016",
+      "canonical_name": "ADMINISTRACIÓN DE HOTELES",
+      "alternate_names": [],
+      "normalized_key": "administración de hoteles",
+      "ec_codes": [
+        "EC0047"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00017",
+      "canonical_name": "ADMINISTRACIÓN DE LA OBRA PÚBLICA MUNICIPAL",
+      "alternate_names": [],
+      "normalized_key": "administración de la obra pública municipal",
+      "ec_codes": [
+        "EC0625"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00018",
+      "canonical_name": "ADMINISTRACIÓN DE LOS SERVICIOS PÚBLICOS MUNICIPALES",
+      "alternate_names": [],
+      "normalized_key": "administración de los servicios públicos municipales",
+      "ec_codes": [
+        "EC0775"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00019",
+      "canonical_name": "ALINEACIÓN AL ESTÁNDAR DE COMPETENCIA EC0046 SERVICIOS COSMETOLÓGICOS FACIALES",
+      "alternate_names": [],
+      "normalized_key": "alineación al estándar de competencia ec0046 servicios cosmetológicos faciales",
+      "ec_codes": [
+        "EC0046"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00020",
+      "canonical_name": "ALINEACIÓN AL ESTÁNDAR DE COMPETENCIA EC0217.01 IMPARTICIÓN DE CURSOS DE FORMACIÓN DEL CAPITAL HUMANO DE MANERA PRESENCIAL GRUPAL",
+      "alternate_names": [],
+      "normalized_key": "alineación al estándar de competencia ec021701 impartición de cursos de formación del capital humano de manera presencial grupal",
+      "ec_codes": [
+        "EC0217.01"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00021",
+      "canonical_name": "ALINEACIÓN AL ESTÁNDAR ECO902 APLICACIÓN DE MASAJE DRENAJE LINFÁTICO MANUAL",
+      "alternate_names": [],
+      "normalized_key": "alineación al estándar eco902 aplicación de masaje drenaje linfático manual",
+      "ec_codes": [
+        "EC0902"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00022",
+      "canonical_name": "ALINEACIÓN AL ESTÁNDAR EN APLICACIÓN DE MASAJE SUECO",
+      "alternate_names": [],
+      "normalized_key": "alineación al estándar en aplicación de masaje sueco",
+      "ec_codes": [
+        "EC0901"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00023",
+      "canonical_name": "ALINEACIÓN AL ESTÁNDAR EN APLICACIÓN DE MASAJE TEJIDO PROFUNDO",
+      "alternate_names": [],
+      "normalized_key": "alineación al estándar en aplicación de masaje tejido profundo",
+      "ec_codes": [
+        "EC0899"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00024",
+      "canonical_name": "ALINEACIÓN AL ESTÁNDAR EN LA APLICACIÓN DE MASAJE CON PIEDRAS CALIENTES",
+      "alternate_names": [],
+      "normalized_key": "alineación al estándar en la aplicación de masaje con piedras calientes",
+      "ec_codes": [
+        "EC1048"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00025",
+      "canonical_name": "ALINEACIÓN AL ESTÁNDAR EN LA APLICACIÓN DE MASAJE DE REFLEXOTERAPIA PODAL",
+      "alternate_names": [],
+      "normalized_key": "alineación al estándar en la aplicación de masaje de reflexoterapia podal",
+      "ec_codes": [
+        "EC1049"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00026",
+      "canonical_name": "ALINEACIÓN AL ESTÁNDAR SERVICIOS ESTÉTICOS CORPORALES",
+      "alternate_names": [],
+      "normalized_key": "alineación al estándar servicios estéticos corporales",
+      "ec_codes": [
+        "EC0010"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00027",
+      "canonical_name": "ANÁLISIS DE INFORMACIÓN PARA EL DESARROLLO DE PRODUCTOS DE INTELIGENCIA",
+      "alternate_names": [],
+      "normalized_key": "análisis de información para el desarrollo de productos de inteligencia",
+      "ec_codes": [
+        "EC0329"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00028",
+      "canonical_name": "APLICACIÓN DE LA METODOLOGÍA ACR EN EL ANÁLISIS DE INCIDENTES",
+      "alternate_names": [],
+      "normalized_key": "aplicación de la metodología acr en el análisis de incidentes",
+      "ec_codes": [
+        "EC0479"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00029",
+      "canonical_name": "APLICACIÓN DE MASAJE HOLÍSTICO",
+      "alternate_names": [],
+      "normalized_key": "aplicación de masaje holístico",
+      "ec_codes": [
+        "EC0900"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00030",
+      "canonical_name": "ARCHIVO DE CONCENTRACIÓN",
+      "alternate_names": [],
+      "normalized_key": "archivo de concentración",
+      "ec_codes": [
+        "EC0624"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00031",
+      "canonical_name": "ARCHIVO EN TRÁMITE",
+      "alternate_names": [],
+      "normalized_key": "archivo en trámite",
+      "ec_codes": [
+        "EC0549"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00032",
+      "canonical_name": "ASESORÍA DE SERVICIOS TURÍSTICOS EN AGENCIAS DE VIAJES",
+      "alternate_names": [],
+      "normalized_key": "asesoría de servicios turísticos en agencias de viajes",
+      "ec_codes": [
+        "EC0868"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00033",
+      "canonical_name": "ASESORÍA PARA LA ORGANIZACIÓN VECINAL EN ZONAS HABITACIONALES",
+      "alternate_names": [],
+      "normalized_key": "asesoría para la organización vecinal en zonas habitacionales",
+      "ec_codes": [
+        "EC0036"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00034",
+      "canonical_name": "ASISTENCIA PRIMARIA ANTE UN EVENTO ADVERSO",
+      "alternate_names": [],
+      "normalized_key": "asistencia primaria ante un evento adverso",
+      "ec_codes": [
+        "EC0002"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00035",
+      "canonical_name": "ASISTENCIA PRIMARIA DE UN EVENTO ADVERSO",
+      "alternate_names": [],
+      "normalized_key": "asistencia primaria de un evento adverso",
+      "ec_codes": [
+        "EC0002"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00036",
+      "canonical_name": "ASISTENCIA Y APOYO EN EL CUIDADO BÁSICO DE LA PERSONA ADULTA MAYOR EN DOMICILIO",
+      "alternate_names": [],
+      "normalized_key": "asistencia y apoyo en el cuidado básico de la persona adulta mayor en domicilio",
+      "ec_codes": [
+        "EC0669"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00037",
+      "canonical_name": "ATENCION COMENSALES",
+      "alternate_names": [],
+      "normalized_key": "atencion comensales",
+      "ec_codes": [
+        "EC0038"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00038",
+      "canonical_name": "ATENCIÓN A CLIENTES",
+      "alternate_names": [],
+      "normalized_key": "atención a clientes",
+      "ec_codes": [
+        "EC0305"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00039",
+      "canonical_name": "ATENCIÓN A COMENSALES",
+      "alternate_names": [],
+      "normalized_key": "atención a comensales",
+      "ec_codes": [
+        "EC0038"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00040",
+      "canonical_name": "ATENCIÓN A COMENSALES EN SERVICIO DE ESPECIALIDADES",
+      "alternate_names": [],
+      "normalized_key": "atención a comensales en servicio de especialidades",
+      "ec_codes": [
+        "EC0016"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00041",
+      "canonical_name": "ATENCIÓN A COMENSALES EN SERVICIOS ESPECIALES",
+      "alternate_names": [],
+      "normalized_key": "atención a comensales en servicios especiales",
+      "ec_codes": [
+        "EC0016"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00042",
+      "canonical_name": "ATENCIÓN AL CIUDADANO EN EL SECTOR PÚBLICO",
+      "alternate_names": [],
+      "normalized_key": "atención al ciudadano en el sector público",
+      "ec_codes": [
+        "EC0105"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00043",
+      "canonical_name": "ATENCIÓN AL HUÉSPED DURANTE SU ALOJAMIENTO EC0828",
+      "alternate_names": [],
+      "normalized_key": "atención al huésped durante su alojamiento ec0828",
+      "ec_codes": [
+        "EC0828"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00044",
+      "canonical_name": "ATENCIÓN AL HUÉSPED PARA SU REGISTRO Y ESTANCIA EN EL HOTEL",
+      "alternate_names": [],
+      "normalized_key": "atención al huésped para su registro y estancia en el hotel",
+      "ec_codes": [
+        "EC0045"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00045",
+      "canonical_name": "ATENCIÓN DE PRIMER CONTACTO PARA LA BÚSQUEDA DE PERSONAS DESAPARECIDAS Y NO LOCALIZADAS",
+      "alternate_names": [],
+      "normalized_key": "atención de primer contacto para la búsqueda de personas desaparecidas y no localizadas",
+      "ec_codes": [
+        "EC1235"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00046",
+      "canonical_name": "ATENCIÓN DE PRIMEROS AUXILIOS A LA PERSONA AFECTADA / LESIONADA",
+      "alternate_names": [],
+      "normalized_key": "atención de primeros auxilios a la persona afectada / lesionada",
+      "ec_codes": [
+        "EC0585"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00047",
+      "canonical_name": "ATENCIÓN IN SITU AL VISITANTE DURANTE DURANTE RECORRIDOS TURÍSTICOS",
+      "alternate_names": [],
+      "normalized_key": "atención in situ al visitante durante durante recorridos turísticos",
+      "ec_codes": [
+        "EC0072"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00048",
+      "canonical_name": "ATENCIÓN IN SITU AL VISITANTE DURANTE RECORRIDOS TURÍSTICOS EC0072",
+      "alternate_names": [],
+      "normalized_key": "atención in situ al visitante durante recorridos turísticos ec0072",
+      "ec_codes": [
+        "EC0072"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00049",
+      "canonical_name": "ATENCIÓN IN SITU DURANTE RECORRIDOS TURÍSTICOS",
+      "alternate_names": [],
+      "normalized_key": "atención in situ durante recorridos turísticos",
+      "ec_codes": [
+        "EC0072"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00050",
+      "canonical_name": "ATENCIÓN PRIMARIA EN UN EVENTO ADVERSO",
+      "alternate_names": [],
+      "normalized_key": "atención primaria en un evento adverso",
+      "ec_codes": [
+        "EC0002"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00051",
+      "canonical_name": "AUXILIAR DE ENFERMERÍA",
+      "alternate_names": [],
+      "normalized_key": "auxiliar de enfermería",
+      "ec_codes": [
+        "EC0616"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00052",
+      "canonical_name": "AUXILIAR DE RECURSOS HUMANOS",
+      "alternate_names": [],
+      "normalized_key": "auxiliar de recursos humanos",
+      "ec_codes": [
+        "EC0422"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00053",
+      "canonical_name": "AUXILIAR EN SERVICIOS Y ESTABLECIMIENTOS VETERINARIOS",
+      "alternate_names": [],
+      "normalized_key": "auxiliar en servicios y establecimientos veterinarios",
+      "ec_codes": [
+        "EC0678"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00054",
+      "canonical_name": "AUXILIAR Y MEDICINA PREVENTIVA",
+      "alternate_names": [],
+      "normalized_key": "auxiliar y medicina preventiva",
+      "ec_codes": [
+        "EC0616"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00055",
+      "canonical_name": "BRIGADAS DE PRIMEROS AUXILIOS",
+      "alternate_names": [],
+      "normalized_key": "brigadas de primeros auxilios",
+      "ec_codes": [
+        "EC0585"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00056",
+      "canonical_name": "BUENAS PRÁCTICAS DE HIGIENE EN EL PROCESO DE ALIMENTOS,  BEBIDAS O SUPLEMENTOS ALIMENTICIOS.",
+      "alternate_names": [],
+      "normalized_key": "buenas prácticas de higiene en el proceso de alimentos bebidas o suplementos alimenticios",
+      "ec_codes": [
+        "EC0081"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00057",
+      "canonical_name": "BUSINESS ENGLISH COURSE",
+      "alternate_names": [],
+      "normalized_key": "business english course",
+      "ec_codes": [
+        "EC0679"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00058",
+      "canonical_name": "CAPACITACIÓN TÉCNICO BÁSICO G.W.O.",
+      "alternate_names": [],
+      "normalized_key": "capacitación técnico básico gwo",
+      "ec_codes": [
+        "EC0530"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00059",
+      "canonical_name": "CERTIFICACIÓN EN APLICACIÓN DE EXTENSIONES DE PESTAÑAS",
+      "alternate_names": [],
+      "normalized_key": "certificación en aplicación de extensiones de pestañas",
+      "ec_codes": [
+        "EC0611"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00060",
+      "canonical_name": "CERTIFICACIÓN GREEN BELT",
+      "alternate_names": [],
+      "normalized_key": "certificación green belt",
+      "ec_codes": [
+        "EC0264"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00061",
+      "canonical_name": "CERTIFICACIÓN MEXICANA DE COACHING",
+      "alternate_names": [],
+      "normalized_key": "certificación mexicana de coaching",
+      "ec_codes": [
+        "EC0204"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00062",
+      "canonical_name": "COLABORACIÓN EN LA APLICACIÓN DEL PROCEDIMIENTO ABREVIADO COMO FORMA DE TERMINACIÓN ANTICIPADA DEL PROCESO PENAL",
+      "alternate_names": [],
+      "normalized_key": "colaboración en la aplicación del procedimiento abreviado como forma de terminación anticipada del proceso penal",
+      "ec_codes": [
+        "EC1093"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00063",
+      "canonical_name": "COMO FORMALIZAR NUESTRO NEGOCIO.",
+      "alternate_names": [],
+      "normalized_key": "como formalizar nuestro negocio",
+      "ec_codes": [
+        "EC0839"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00064",
+      "canonical_name": "COMPETENCIAS DEL TUTOR PARA CURSOS EN LÍNEA",
+      "alternate_names": [],
+      "normalized_key": "competencias del tutor para cursos en línea",
+      "ec_codes": [
+        "EC0019"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00065",
+      "canonical_name": "COMUNICACIÓN Y ATENCIÓN AL CLIENTE EN HOSTELERÍA Y TURISMO",
+      "alternate_names": [],
+      "normalized_key": "comunicación y atención al cliente en hostelería y turismo",
+      "ec_codes": [
+        "EC0047"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00066",
+      "canonical_name": "CONCILIACIÓN PARA LA SOLUCIÓN DE CONFLICTOS EN MATERIA LABORAL INDIVIDUAL",
+      "alternate_names": [],
+      "normalized_key": "conciliación para la solución de conflictos en materia laboral individual",
+      "ec_codes": [
+        "EC1374"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00067",
+      "canonical_name": "CONFORMADO DE LÁMINA DE ACERO EN CARROCERÍA DE AUTOMÓVILES",
+      "alternate_names": [],
+      "normalized_key": "conformado de lámina de acero en carrocería de automóviles",
+      "ec_codes": [
+        "EC0803"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00068",
+      "canonical_name": "CONOCIENDO A LAS SOCIEDADES MERCANTILES.",
+      "alternate_names": [],
+      "normalized_key": "conociendo a las sociedades mercantiles",
+      "ec_codes": [
+        "EC0754"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00069",
+      "canonical_name": "CONOCIENDO LOS TÍTULOS Y OPERACIONES DE CRÉDITO",
+      "alternate_names": [],
+      "normalized_key": "conociendo los títulos y operaciones de crédito",
+      "ec_codes": [
+        "EC0754"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00070",
+      "canonical_name": "CONSULTOR ESPECIALIZADO EN HERRAMIENTAS DE FAMILY & EDUCATIONAL COACHING",
+      "alternate_names": [],
+      "normalized_key": "consultor especializado en herramientas de family & educational coaching",
+      "ec_codes": [
+        "EC0249"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00071",
+      "canonical_name": "CONSULTORÍA A PYMES, CURSO ALINEADO AL ESTÁNDAR EC0359",
+      "alternate_names": [],
+      "normalized_key": "consultoría a pymes curso alineado al estándar ec0359",
+      "ec_codes": [
+        "EC0359"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00072",
+      "canonical_name": "CONTABILIDAD ELECTRÓNICA Y ASPEL-COI",
+      "alternate_names": [],
+      "normalized_key": "contabilidad electrónica y aspel-coi",
+      "ec_codes": [
+        "EC0744"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00073",
+      "canonical_name": "CONTABILIDAD PARA NO CONTADORES",
+      "alternate_names": [],
+      "normalized_key": "contabilidad para no contadores",
+      "ec_codes": [
+        "EC0374"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00074",
+      "canonical_name": "COORDINACIÓN DE GRUPOS TÉCNICOS Y DESARROLLO DE ESTÁNDARES DE COMPETENCIA",
+      "alternate_names": [],
+      "normalized_key": "coordinación de grupos técnicos y desarrollo de estándares de competencia",
+      "ec_codes": [
+        "EC0074"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00075",
+      "canonical_name": "COORDINACIÓN DE LOS SERVICIOS DE ALIMENTOS Y BEBIDAS",
+      "alternate_names": [],
+      "normalized_key": "coordinación de los servicios de alimentos y bebidas",
+      "ec_codes": [
+        "EC0042"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00076",
+      "canonical_name": "COORDINACIÓN DE LOS SERVICIOS DE ALIMENTOS Y BEBIDAS EC0042",
+      "alternate_names": [],
+      "normalized_key": "coordinación de los servicios de alimentos y bebidas ec0042",
+      "ec_codes": [
+        "EC0042"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00077",
+      "canonical_name": "COORDINACIÓN DE LOS SERVICIOS DE LIMPIEZA DE HABITACIONES Y ÁREAS DE ESTANCIA PARA ALOJAMIENTO TEMPORAL",
+      "alternate_names": [],
+      "normalized_key": "coordinación de los servicios de limpieza de habitaciones y áreas de estancia para alojamiento temporal",
+      "ec_codes": [
+        "EC0044"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00078",
+      "canonical_name": "COORDINACIÓN DE LOS SERVICIOS DE LIMPIEZA DE HABITACIONES Y ÁREAS DE ESTANCIA PARA AMAS DE LLAVES",
+      "alternate_names": [],
+      "normalized_key": "coordinación de los servicios de limpieza de habitaciones y áreas de estancia para amas de llaves",
+      "ec_codes": [
+        "EC0044"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00079",
+      "canonical_name": "COORDINACIÓN DE SERVICIOS DE HOSPEDAJE EC0832",
+      "alternate_names": [],
+      "normalized_key": "coordinación de servicios de hospedaje ec0832",
+      "ec_codes": [
+        "EC0832"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00080",
+      "canonical_name": "CUIDADOS AUXILIARES EN ENFERMERÍA",
+      "alternate_names": [],
+      "normalized_key": "cuidados auxiliares en enfermería",
+      "ec_codes": [
+        "EC0616"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00081",
+      "canonical_name": "CURSO BÁSICO DE MICROPIGMENTACIÓN (TÉCNICAS MICROBLADING Y MAGIC SHADING)",
+      "alternate_names": [],
+      "normalized_key": "curso básico de micropigmentación (técnicas microblading y magic shading)",
+      "ec_codes": [
+        "EC1045"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00082",
+      "canonical_name": "CURSO BÁSICO DEL VINO PARA LAS PERSONAS QUE MANEJAN DE FORMA PRÁCTICA EL VINO EN ESTABLECIMIENTOS DE VENTA Y CONSUMO",
+      "alternate_names": [],
+      "normalized_key": "curso básico del vino para las personas que manejan de forma práctica el vino en establecimientos de venta y consumo",
+      "ec_codes": [
+        "EC0314"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00083",
+      "canonical_name": "CURSO BÁSICO LEAN MANUFACTURING",
+      "alternate_names": [],
+      "normalized_key": "curso básico lean manufacturing",
+      "ec_codes": [
+        "EC1189"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00084",
+      "canonical_name": "CURSO BÁSICO PARA USO DE EQUIPO MÉDICO E INSTRUMENTAL EN CENTROS DE ATENCIÓN MÉDICA",
+      "alternate_names": [],
+      "normalized_key": "curso básico para uso de equipo médico e instrumental en centros de atención médica",
+      "ec_codes": [
+        "EC0793"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00085",
+      "canonical_name": "CURSO DE ALINEACIÓN AL EC1084 PREPARACIÓN DE GASTRONOMÍA MEXICANA POPULAR Y TRADICIONAL",
+      "alternate_names": [],
+      "normalized_key": "curso de alineación al ec1084 preparación de gastronomía mexicana popular y tradicional",
+      "ec_codes": [
+        "EC1084"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00086",
+      "canonical_name": "CURSO DE ALINEACIÓN PARA CATADOR Y/O MAESTRO CATADOR",
+      "alternate_names": [],
+      "normalized_key": "curso de alineación para catador y/o maestro catador",
+      "ec_codes": [
+        "EC1456"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00087",
+      "canonical_name": "CURSO DE ALINEACIÓN PARA EL ESTÁNDAR DE ADMINISTRACIÓN DE CONDOMINIOS",
+      "alternate_names": [],
+      "normalized_key": "curso de alineación para el estándar de administración de condominios",
+      "ec_codes": [
+        "EC0112"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00088",
+      "canonical_name": "CURSO DE ALINEACIÓN PARA INSTALADORES DE CALENTADORES SOLARES DE AGUA TERMOSIFÓNICOS EN VIVIENDA SUSTENTABLE CON BASE EN EL EC-0325",
+      "alternate_names": [],
+      "normalized_key": "curso de alineación para instaladores de calentadores solares de agua termosifónicos en vivienda sustentable con base en el ec-0325",
+      "ec_codes": [
+        "EC0325"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00089",
+      "canonical_name": "CURSO DE ATENCIÓN DE INCENDIOS QUE INVOLUCRAN MATERIALES, PRODUCTOS Y SUSTANCIAS QUÍMICAS.",
+      "alternate_names": [],
+      "normalized_key": "curso de atención de incendios que involucran materiales productos y sustancias químicas",
+      "ec_codes": [
+        "EC0290"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00090",
+      "canonical_name": "CURSO DE CAPACITACIÓN BASADO EN EL ESTÁNDAR DE COMPETENCIA EC0772",
+      "alternate_names": [],
+      "normalized_key": "curso de capacitación basado en el estándar de competencia ec0772",
+      "ec_codes": [
+        "EC0772"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00091",
+      "canonical_name": "CURSO DE CAPACITACIÓN CON BASE EN EL ESTÁNDAR DE COMPETENCIA EC1319 \"INTERPRETACIÓN DE CONFERENCIA DE LENGUA DE SEÑAS MEXICANA <> ESPAÑOL\"",
+      "alternate_names": [],
+      "normalized_key": "curso de capacitación con base en el estándar de competencia ec1319 \"interpretación de conferencia de lengua de señas mexicana <> español\"",
+      "ec_codes": [
+        "EC1319"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00092",
+      "canonical_name": "CURSO DE CAPACITACIÓN PARA EVALUADORES DE INDEPENDIENTES DE LA ECE DEL CCGM",
+      "alternate_names": [],
+      "normalized_key": "curso de capacitación para evaluadores de independientes de la ece del ccgm",
+      "ec_codes": [
+        "EC0076"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00093",
+      "canonical_name": "CURSO DE IMPLEMENTACIÓN DE ACCIONES DE RESPUESTA A EMERGENCIAS EN PLANTAS INDUSTRIALES.",
+      "alternate_names": [],
+      "normalized_key": "curso de implementación de acciones de respuesta a emergencias en plantas industriales",
+      "ec_codes": [
+        "EC0291"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00094",
+      "canonical_name": "CURSO DE INGLES",
+      "alternate_names": [],
+      "normalized_key": "curso de ingles",
+      "ec_codes": [
+        "EC0679"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00095",
+      "canonical_name": "CURSO DE INGLES PROFESIONAL Y DE CERTIFICACIÓN INTERNACIONAL",
+      "alternate_names": [],
+      "normalized_key": "curso de ingles profesional y de certificación internacional",
+      "ec_codes": [
+        "EC0679"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00096",
+      "canonical_name": "CURSO DE INGLÉS PROFESIONAL Y DE CERTIFICACIÓN INTERNACIONAL",
+      "alternate_names": [],
+      "normalized_key": "curso de inglés profesional y de certificación internacional",
+      "ec_codes": [
+        "EC0974"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00097",
+      "canonical_name": "CURSO DE MAQUILLAJE CORRECTIVO EN LOS MEDIOS MASIVOS DE COMUNICACIÓN",
+      "alternate_names": [],
+      "normalized_key": "curso de maquillaje correctivo en los medios masivos de comunicación",
+      "ec_codes": [
+        "EC0569"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00098",
+      "canonical_name": "CURSO DE MICROBLADING",
+      "alternate_names": [],
+      "normalized_key": "curso de microblading",
+      "ec_codes": [
+        "EC1045"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00099",
+      "canonical_name": "CURSO DE MICROPIGMENTACIÓN ESTÉTICA FACIAL",
+      "alternate_names": [],
+      "normalized_key": "curso de micropigmentación estética facial",
+      "ec_codes": [
+        "EC0715.01"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00100",
+      "canonical_name": "CURSO DE RESPUESTA A EMERGENCIAS QUE INVOLUCRAN MATERIALES PELIGROSOS",
+      "alternate_names": [],
+      "normalized_key": "curso de respuesta a emergencias que involucran materiales peligrosos",
+      "ec_codes": [
+        "EC0252"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00101",
+      "canonical_name": "CURSO TEÓRICO PRÁCTICO DE CAPTACIÓN PLUVIAL Y PROMOCIÓN DE LA CULTURA DEL AGUA",
+      "alternate_names": [],
+      "normalized_key": "curso teórico práctico de captación pluvial y promoción de la cultura del agua",
+      "ec_codes": [
+        "EC0180"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00102",
+      "canonical_name": "DE PRINCIPIANTE A EXPERTO EN LA COMERCIALIZACIÓN DE BIENES INMUEBLES",
+      "alternate_names": [],
+      "normalized_key": "de principiante a experto en la comercialización de bienes inmuebles",
+      "ec_codes": [
+        "EC0110.02"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00103",
+      "canonical_name": "DECLARACIÓN ANUAL ISR PERSONAS MORALES.",
+      "alternate_names": [],
+      "normalized_key": "declaración anual isr personas morales",
+      "ec_codes": [
+        "EC0839"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00104",
+      "canonical_name": "DEEP TISSUE",
+      "alternate_names": [],
+      "normalized_key": "deep tissue",
+      "ec_codes": [
+        "EC0899"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00105",
+      "canonical_name": "DERECHO LABORAL Y CÁLCULO DE NÓMINAS",
+      "alternate_names": [],
+      "normalized_key": "derecho laboral y cálculo de nóminas",
+      "ec_codes": [
+        "EC0383"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00106",
+      "canonical_name": "DESARROLLO DE HABILIDADES GERENCIALES",
+      "alternate_names": [],
+      "normalized_key": "desarrollo de habilidades gerenciales",
+      "ec_codes": [
+        "EC0009"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00107",
+      "canonical_name": "DESARROLLO DE HABILIDADES PARA LA MEJORA CONTINUA",
+      "alternate_names": [],
+      "normalized_key": "desarrollo de habilidades para la mejora continua",
+      "ec_codes": [
+        "EC0301"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00108",
+      "canonical_name": "DESARROLLO ORGANIZACIONAL, GENERACIONAL Y EVALUACIÓN PERSONAL",
+      "alternate_names": [],
+      "normalized_key": "desarrollo organizacional generacional y evaluación personal",
+      "ec_codes": [
+        "EC0381"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00109",
+      "canonical_name": "DESARROLLO RURAL: ALTERNATIVA DE NEGOCIO PARA LA TRANSFORMACIÓN SOCIAL",
+      "alternate_names": [],
+      "normalized_key": "desarrollo rural alternativa de negocio para la transformación social",
+      "ec_codes": [
+        "EC0020"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00110",
+      "canonical_name": "DETERMINACIÓN DE IMPUESTOS SOBRE LA RENTA PARA PERSONAS FÍSICAS, BAJO EL REGIMEN DE INGRESOS POR SALARIOS",
+      "alternate_names": [],
+      "normalized_key": "determinación de impuestos sobre la renta para personas físicas bajo el regimen de ingresos por salarios",
+      "ec_codes": [
+        "EC0839"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00111",
+      "canonical_name": "DIPLOMADO COMO COACH Y FACILITADOR DE APRENDIZAJE",
+      "alternate_names": [],
+      "normalized_key": "diplomado como coach y facilitador de aprendizaje",
+      "ec_codes": [
+        "EC0204"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00112",
+      "canonical_name": "DIPLOMADO DE COSMETOLOGÍA FACIAL CLÍNICA",
+      "alternate_names": [],
+      "normalized_key": "diplomado de cosmetología facial clínica",
+      "ec_codes": [
+        "EC0046"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00113",
+      "canonical_name": "DIPLOMADO DE CUIDADORES GERONTOLÓGICOS",
+      "alternate_names": [],
+      "normalized_key": "diplomado de cuidadores gerontológicos",
+      "ec_codes": [
+        "EC0669"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00114",
+      "canonical_name": "DIPLOMADO DE MAQUILLAJE PROFESIONAL",
+      "alternate_names": [],
+      "normalized_key": "diplomado de maquillaje profesional",
+      "ec_codes": [
+        "EC0859"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00115",
+      "canonical_name": "DIPLOMADO DE NOMINAS Y SEGURIDAD SOCIAL",
+      "alternate_names": [],
+      "normalized_key": "diplomado de nominas y seguridad social",
+      "ec_codes": [
+        "EC0383"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00116",
+      "canonical_name": "DIPLOMADO DESARROLLO RURAL: ALTERNATIVA DE NEGOCIO PARA LA TRANSFORMACIÓN SOCIAL",
+      "alternate_names": [],
+      "normalized_key": "diplomado desarrollo rural alternativa de negocio para la transformación social",
+      "ec_codes": [
+        "EC0070"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00117",
+      "canonical_name": "DIPLOMADO EN AGRICULTURA URBANA",
+      "alternate_names": [],
+      "normalized_key": "diplomado en agricultura urbana",
+      "ec_codes": [
+        "EC0557"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00118",
+      "canonical_name": "DIPLOMADO EN CONSEJERÍA TERAPÉUTICA EN DROGODEPENDENCIA BAJO MODELO DE COMUNIDAD TERAPÉUTICA",
+      "alternate_names": [],
+      "normalized_key": "diplomado en consejería terapéutica en drogodependencia bajo modelo de comunidad terapéutica",
+      "ec_codes": [
+        "EC0548"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00119",
+      "canonical_name": "DIPLOMADO EN FOTOGRAFÍA PARA PRINCIPIANTES",
+      "alternate_names": [],
+      "normalized_key": "diplomado en fotografía para principiantes",
+      "ec_codes": [
+        "EC0873"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00120",
+      "canonical_name": "DIPLOMADO EN MICROSOFT EXCEL",
+      "alternate_names": [],
+      "normalized_key": "diplomado en microsoft excel",
+      "ec_codes": [
+        "EC0108"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00121",
+      "canonical_name": "DIPLOMADO EN MICROSOFT POWER POINT",
+      "alternate_names": [],
+      "normalized_key": "diplomado en microsoft power point",
+      "ec_codes": [
+        "EC0109"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00122",
+      "canonical_name": "DIPLOMADO EN MICROSOFT WORD",
+      "alternate_names": [],
+      "normalized_key": "diplomado en microsoft word",
+      "ec_codes": [
+        "EC0107"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00123",
+      "canonical_name": "DISEÑADOR DE CURSOS PRESENCIALES",
+      "alternate_names": [],
+      "normalized_key": "diseñador de cursos presenciales",
+      "ec_codes": [
+        "EC0301"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00124",
+      "canonical_name": "DISEÑO DE CURSOS DE CAPACITACIÓN EN LÍNEA",
+      "alternate_names": [],
+      "normalized_key": "diseño de cursos de capacitación en línea",
+      "ec_codes": [
+        "EC0050"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00125",
+      "canonical_name": "DISEÑO DE CURSOS DE FORMACIÓN DEL CAPITAL HUMANO DE MANERA PRESENCIAL GRUPAL, SUS INSTRUMENTOS DE EVALUACIÓN Y MANUALES DEL CURSO.",
+      "alternate_names": [],
+      "normalized_key": "diseño de cursos de formación del capital humano de manera presencial grupal sus instrumentos de evaluación y manuales del curso",
+      "ec_codes": [
+        "EC0301"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00126",
+      "canonical_name": "DISEÑO DE CURSOS DE FORMACIÓN DEL CAPITAL HUMANO DE MANERA PRESENCIAL GRUPAL, SUS INTRUMENTOS DE EVALUACIÓN Y MANUALES DEL CURSO",
+      "alternate_names": [],
+      "normalized_key": "diseño de cursos de formación del capital humano de manera presencial grupal sus intrumentos de evaluación y manuales del curso",
+      "ec_codes": [
+        "EC0301"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00127",
+      "canonical_name": "DISEÑO DE CURSOS DE FORMACIÓN, SUS INSTRUMENTOS DE EVALUACIÓN Y MANUALES DEL CURSO",
+      "alternate_names": [],
+      "normalized_key": "diseño de cursos de formación sus instrumentos de evaluación y manuales del curso",
+      "ec_codes": [
+        "EC0301"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00128",
+      "canonical_name": "DISEÑO DE CURSOS PRESENCIALES",
+      "alternate_names": [],
+      "normalized_key": "diseño de cursos presenciales",
+      "ec_codes": [
+        "EC0301"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00129",
+      "canonical_name": "DISEÑO DE CURSOS Y MATERIALES DIDÁCTICOS PARA ENTORNOS VIRTUALES",
+      "alternate_names": [],
+      "normalized_key": "diseño de cursos y materiales didácticos para entornos virtuales",
+      "ec_codes": [
+        "EC0050"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00130",
+      "canonical_name": "DISEÑO DE CURSOS, SUS INSTRUMENTOS DE EVALUACIÓN Y MANUALES DEL CURSO, CON MÉTODO EC0301 CONOCER-SEP.",
+      "alternate_names": [],
+      "normalized_key": "diseño de cursos sus instrumentos de evaluación y manuales del curso con método ec0301 conocer-sep",
+      "ec_codes": [
+        "EC0301"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00131",
+      "canonical_name": "DISEÑO DE PROYECTOS SOCIO-PRODUCTIVOS CON BASE EN EL MODELO DE EMPRENDEDORES PARA LA EDUCACIÓN MEDIA SUPERIOR",
+      "alternate_names": [],
+      "normalized_key": "diseño de proyectos socio-productivos con base en el modelo de emprendedores para la educación media superior",
+      "ec_codes": [
+        "EC0996"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00132",
+      "canonical_name": "DISPOSICIONES ACTUALES SOBRE PREVENCIÓN DE LAVADO DE DINERO.",
+      "alternate_names": [],
+      "normalized_key": "disposiciones actuales sobre prevención de lavado de dinero",
+      "ec_codes": [
+        "EC0839"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00133",
+      "canonical_name": "DONATARIAS, A.C. Y PERSONAS MORALES SIN FINES DE LUCRO.",
+      "alternate_names": [],
+      "normalized_key": "donatarias ac y personas morales sin fines de lucro",
+      "ec_codes": [
+        "EC0839"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00134",
+      "canonical_name": "EC1425 \"DETECCIÓN DE POSIBLES VÍCTIMAS DE TRATA DE PERSONAS DURANTE LAS DILIGENCIAS MIGRATORIAS EN EL MARCO DE PROTECCIÓN A LOS DERECHOS HUMANOS\"",
+      "alternate_names": [],
+      "normalized_key": "ec1425 \"detección de posibles víctimas de trata de personas durante las diligencias migratorias en el marco de protección a los derechos humanos\"",
+      "ec_codes": [
+        "EC1425"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00135",
+      "canonical_name": "EJECUCIÓN DE LAS ATRIBUCIONES DE LA CONTRALORÍA MUNICIPAL",
+      "alternate_names": [],
+      "normalized_key": "ejecución de las atribuciones de la contraloría municipal",
+      "ec_codes": [
+        "EC0777"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00136",
+      "canonical_name": "EJECUCIÓN DE LAS ATRIBUCIONES DE LA HACIENDA PÚBLICA MUNICIPAL",
+      "alternate_names": [],
+      "normalized_key": "ejecución de las atribuciones de la hacienda pública municipal",
+      "ec_codes": [
+        "EC0689"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00137",
+      "canonical_name": "EJECUCIÓN DE SESIONES DE COACHING.",
+      "alternate_names": [],
+      "normalized_key": "ejecución de sesiones de coaching",
+      "ec_codes": [
+        "EC0204"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00138",
+      "canonical_name": "EJECUCIÓN DE SESIONES EN CLÍNICA TRANSDISCIPLINARIA",
+      "alternate_names": [],
+      "normalized_key": "ejecución de sesiones en clínica transdisciplinaria",
+      "ec_codes": [
+        "EC0204"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00139",
+      "canonical_name": "EJECUTIVO A",
+      "alternate_names": [],
+      "normalized_key": "ejecutivo a",
+      "ec_codes": [
+        "EC0108"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00140",
+      "canonical_name": "EJECUTIVO B",
+      "alternate_names": [],
+      "normalized_key": "ejecutivo b",
+      "ec_codes": [
+        "EC0108"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00141",
+      "canonical_name": "EJECUTIVO C",
+      "alternate_names": [],
+      "normalized_key": "ejecutivo c",
+      "ec_codes": [
+        "EC0108"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00142",
+      "canonical_name": "ELABORACIÓN DE DOCUMENTOS MEDIANTE UN PROCESADOR DE TEXTOS",
+      "alternate_names": [],
+      "normalized_key": "elaboración de documentos mediante un procesador de textos",
+      "ec_codes": [
+        "EC0011"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00143",
+      "canonical_name": "ELABORACIÓN DE INVESTIGACIÓN DE MERCADOS CUANTITATIVA",
+      "alternate_names": [],
+      "normalized_key": "elaboración de investigación de mercados cuantitativa",
+      "ec_codes": [
+        "EC0373"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00144",
+      "canonical_name": "ELABORACIÓN DE LIBROS MEDIANTE EL USO DE PROCESADORES DE CÁLCULO",
+      "alternate_names": [],
+      "normalized_key": "elaboración de libros mediante el uso de procesadores de cálculo",
+      "ec_codes": [
+        "EC0013"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00145",
+      "canonical_name": "ELABORACIÓN DE LIBROS MEDIANTE EL USO DE PROCESADORES DE HOJA DE CÁLCULO",
+      "alternate_names": [],
+      "normalized_key": "elaboración de libros mediante el uso de procesadores de hoja de cálculo",
+      "ec_codes": [
+        "EC0013"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00146",
+      "canonical_name": "ELABORACIÓN DE PRESENTACIONES GRÁFICAS MEDIANTE HERRAMIENTAS DE CÓMPUTO.",
+      "alternate_names": [],
+      "normalized_key": "elaboración de presentaciones gráficas mediante herramientas de cómputo",
+      "ec_codes": [
+        "EC0012"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00147",
+      "canonical_name": "ELABORACIÓN DE PROGRAMAS DE ASEGURAMIENTO EN CULTIVOS DE GRANOS BÁSICOS",
+      "alternate_names": [],
+      "normalized_key": "elaboración de programas de aseguramiento en cultivos de granos básicos",
+      "ec_codes": [
+        "EC0923"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00148",
+      "canonical_name": "ENGLISH DISCOVERIES",
+      "alternate_names": [],
+      "normalized_key": "english discoveries",
+      "ec_codes": [
+        "EC0679"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00149",
+      "canonical_name": "ENSAMBLAJE E INSTALACIÓN DE PANELES FOTOVOLTAICOS RESIDENCIALES",
+      "alternate_names": [],
+      "normalized_key": "ensamblaje e instalación de paneles fotovoltaicos residenciales",
+      "ec_codes": [
+        "EC0586.01"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00150",
+      "canonical_name": "ENTENDIDO AL IVA Y SU APLICACIÓN.",
+      "alternate_names": [],
+      "normalized_key": "entendido al iva y su aplicación",
+      "ec_codes": [
+        "EC0839"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00151",
+      "canonical_name": "ENTRENAMIENTO POTENTOR",
+      "alternate_names": [],
+      "normalized_key": "entrenamiento potentor",
+      "ec_codes": [
+        "EC0315"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00152",
+      "canonical_name": "ENVASADO DE CONSERVAS ALIMENTICIAS",
+      "alternate_names": [],
+      "normalized_key": "envasado de conservas alimenticias",
+      "ec_codes": [
+        "EC0138"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00153",
+      "canonical_name": "ENVEJECIMIENTO SALUDABLE LIDERAZGO Y EMPRENDIMIENTO 50CRAL",
+      "alternate_names": [],
+      "normalized_key": "envejecimiento saludable liderazgo y emprendimiento 50cral",
+      "ec_codes": [
+        "EC0669"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00154",
+      "canonical_name": "ESTIMULACIÓN TEMPRANA INTEGRAL CON EL NUEVO MODELO EDUCATIVO 2017",
+      "alternate_names": [],
+      "normalized_key": "estimulación temprana integral con el nuevo modelo educativo 2017",
+      "ec_codes": [
+        "EC0435"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00155",
+      "canonical_name": "EVALUACIÓN DE COMPETENCIAS Y VERIFICACIÓN INTERNA",
+      "alternate_names": [],
+      "normalized_key": "evaluación de competencias y verificación interna",
+      "ec_codes": [
+        "EC0076"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00156",
+      "canonical_name": "EVALUACIÓN DE LA COMPETENCIA DE CANDIDATOS CON BASE EN ESTÁNDARES DE COMPETENCIA",
+      "alternate_names": [],
+      "normalized_key": "evaluación de la competencia de candidatos con base en estándares de competencia",
+      "ec_codes": [
+        "EC0038"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00157",
+      "canonical_name": "EVALUACIÓN FORMATIVA, \"UNA ESTRATEGIA PARA LA MEJORA CONTINUA\"",
+      "alternate_names": [],
+      "normalized_key": "evaluación formativa \"una estrategia para la mejora continua\"",
+      "ec_codes": [
+        "EC0564"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00158",
+      "canonical_name": "EXCEL INTERMEDIO",
+      "alternate_names": [],
+      "normalized_key": "excel intermedio",
+      "ec_codes": [
+        "EC0108"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00159",
+      "canonical_name": "EXCELENCIA EN EL SERVICIO",
+      "alternate_names": [],
+      "normalized_key": "excelencia en el servicio",
+      "ec_codes": [
+        "EC0038"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00160",
+      "canonical_name": "FINANZAS PERSONALES.",
+      "alternate_names": [
+        "FINANZAS PERSONALES"
+      ],
+      "normalized_key": "finanzas personales",
+      "ec_codes": [
+        "EC0754"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00161",
+      "canonical_name": "FORMACION DE PERSONAL DE VIGILANCIA",
+      "alternate_names": [],
+      "normalized_key": "formacion de personal de vigilancia",
+      "ec_codes": [
+        "EC0060"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00162",
+      "canonical_name": "FORMACIÓN DE ANALISTAS DE INTELIGENCIA",
+      "alternate_names": [],
+      "normalized_key": "formación de analistas de inteligencia",
+      "ec_codes": [
+        "EC0329"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00163",
+      "canonical_name": "FORMACIÓN DE AUDITORES DE LOS SISTEMAS DE GESTIÓN DEL RIESGO",
+      "alternate_names": [],
+      "normalized_key": "formación de auditores de los sistemas de gestión del riesgo",
+      "ec_codes": [
+        "EC0536"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00164",
+      "canonical_name": "FORMACIÓN DE COORDINADORES DE SERVICIOS DE VIGILANCIA",
+      "alternate_names": [],
+      "normalized_key": "formación de coordinadores de servicios de vigilancia",
+      "ec_codes": [
+        "EC0061"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00165",
+      "canonical_name": "FORMACIÓN DE EVALUADORES EN COMPETENCIAS",
+      "alternate_names": [],
+      "normalized_key": "formación de evaluadores en competencias",
+      "ec_codes": [
+        "EC0076"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00166",
+      "canonical_name": "FORMACIÓN DE INSTRUCTORES",
+      "alternate_names": [],
+      "normalized_key": "formación de instructores",
+      "ec_codes": [
+        "EC0217.01"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00167",
+      "canonical_name": "FORMACIÓN DE INSTRUCTORES/CAPACITADORES PARA IMPARTIR CURSOS DE MANERA PRESENCIAL GRUPAL, CON BASE EN PRINCIPIOS DIDÁCTICOS Y METODOLÓGICOS DEL EC0217.01",
+      "alternate_names": [],
+      "normalized_key": "formación de instructores/capacitadores para impartir cursos de manera presencial grupal con base en principios didácticos y metodológicos del ec021701",
+      "ec_codes": [
+        "EC0217.01"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00168",
+      "canonical_name": "FORMACIÓN DE MONITORISTAS PARA SEGURIDAD",
+      "alternate_names": [],
+      "normalized_key": "formación de monitoristas para seguridad",
+      "ec_codes": [
+        "EC0023"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00169",
+      "canonical_name": "FORMACIÓN DE OPERADOR DE RETROEXCAVADORA CON BASE EN EL EC DEL CONOCER 452",
+      "alternate_names": [],
+      "normalized_key": "formación de operador de retroexcavadora con base en el ec del conocer 452",
+      "ec_codes": [
+        "EC0452"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00170",
+      "canonical_name": "FORMACIÓN EN DISEÑO  DE CURSOS CON BASE EN ESTÁNDAR DE COMPETENCIA",
+      "alternate_names": [],
+      "normalized_key": "formación en diseño de cursos con base en estándar de competencia",
+      "ec_codes": [
+        "EC0301"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00171",
+      "canonical_name": "FORMACIÓN EN DISEÑO DE CURSOS D23 CON BASE EN ESTÁNDARES DE COMPETENCIA",
+      "alternate_names": [],
+      "normalized_key": "formación en diseño de cursos d23 con base en estándares de competencia",
+      "ec_codes": [
+        "EC0050"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00172",
+      "canonical_name": "FORMACIÓN PARA FACILITADORES DEL AUTOCONOCIMIENTO PROFUNDO",
+      "alternate_names": [],
+      "normalized_key": "formación para facilitadores del autoconocimiento profundo",
+      "ec_codes": [
+        "EC0446"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00173",
+      "canonical_name": "FORMACIÓN/ACTUALIZACIÓN DOCENTE Y DE INSTRUCTORES PARA EL DISEÑO DE CURSOS, DIPLOMADOS Y PROGRAMAS CURRICULARES CON BASE EN EL EC0301",
+      "alternate_names": [],
+      "normalized_key": "formación/actualización docente y de instructores para el diseño de cursos diplomados y programas curriculares con base en el ec0301",
+      "ec_codes": [
+        "EC0301"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00174",
+      "canonical_name": "FORMACIÓN/ACTUALIZACIÓN DOCENTE Y DE INSTRUCTORES PARA LA IMPARTICIÓN DE CURSOS/CLASES DE FORMACIÓN DEL CAPITAL HUMANO, CON BASE EN EC0217.01",
+      "alternate_names": [],
+      "normalized_key": "formación/actualización docente y de instructores para la impartición de cursos/clases de formación del capital humano con base en ec021701",
+      "ec_codes": [
+        "EC0217.01"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00175",
+      "canonical_name": "FORMULACIÓN DE PROYECTOS DE INVERSIÓN",
+      "alternate_names": [],
+      "normalized_key": "formulación de proyectos de inversión",
+      "ec_codes": [
+        "EC0020"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00176",
+      "canonical_name": "FORMULACIÓN DE PROYECTOS PRODUCTIVOS EN EL SECTOR RURAL",
+      "alternate_names": [],
+      "normalized_key": "formulación de proyectos productivos en el sector rural",
+      "ec_codes": [
+        "EC0020"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00177",
+      "canonical_name": "FORTALECIMIENTO DE LAS CAPACIDADES DE INSPECCIÓN Y VIGILANCIA PARA INSPECTORES AMBIENTALES",
+      "alternate_names": [],
+      "normalized_key": "fortalecimiento de las capacidades de inspección y vigilancia para inspectores ambientales",
+      "ec_codes": [
+        "EC1094"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00178",
+      "canonical_name": "FRANCESERO",
+      "alternate_names": [],
+      "normalized_key": "francesero",
+      "ec_codes": [
+        "EC0950"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00179",
+      "canonical_name": "FUNCIONAMIENTO E INTEGRACIÓN DE LA COMISIÓN MIXTA DE CAPACITACIÓN, ADIESTRAMIENTO Y PRODUCTIVIDAD.",
+      "alternate_names": [],
+      "normalized_key": "funcionamiento e integración de la comisión mixta de capacitación adiestramiento y productividad",
+      "ec_codes": [
+        "EC0581"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00180",
+      "canonical_name": "FUNDAMENTOS Y ESTRATEGIAS DE LIDERAZGO PARA LA SEGURIDAD PÚBLICA",
+      "alternate_names": [],
+      "normalized_key": "fundamentos y estrategias de liderazgo para la seguridad pública",
+      "ec_codes": [
+        "EC0401"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00181",
+      "canonical_name": "GASTRONOMÍA",
+      "alternate_names": [],
+      "normalized_key": "gastronomía",
+      "ec_codes": [
+        "EC0127"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00182",
+      "canonical_name": "GERENCIA SPA",
+      "alternate_names": [],
+      "normalized_key": "gerencia spa",
+      "ec_codes": [
+        "EC0186"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00183",
+      "canonical_name": "GESTIÓN DE LA PARTICIPACIÓN VOLUNTARIA DE LOS INTERVINIENTES EN LOS MECANISMOS ALTERNATIVOS DE SOLUCIÓN DE CONTROVERSIAS EN MATERIA PENAL.",
+      "alternate_names": [],
+      "normalized_key": "gestión de la participación voluntaria de los intervinientes en los mecanismos alternativos de solución de controversias en materia penal",
+      "ec_codes": [
+        "EC1096"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00184",
+      "canonical_name": "GESTIÓN ESTRATÉGICA PARA LA MEJORA CONTINUA INSTITUCIONAL",
+      "alternate_names": [],
+      "normalized_key": "gestión estratégica para la mejora continua institucional",
+      "ec_codes": [
+        "EC0150"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00185",
+      "canonical_name": "HABILIDADES PARA EJERCER UNA DOCENCIA IDÓNEA",
+      "alternate_names": [],
+      "normalized_key": "habilidades para ejercer una docencia idónea",
+      "ec_codes": [
+        "EC0454"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00186",
+      "canonical_name": "HERRAMIENTAS PARA EL DESARROLLO DE MATERIALES DIDÁCTICOS DIGITALES",
+      "alternate_names": [],
+      "normalized_key": "herramientas para el desarrollo de materiales didácticos digitales",
+      "ec_codes": [
+        "EC0564"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00187",
+      "canonical_name": "HIGIENE ALIMENTARIA",
+      "alternate_names": [],
+      "normalized_key": "higiene alimentaria",
+      "ec_codes": [
+        "EC0081"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00188",
+      "canonical_name": "IMPARTICIÓN DE CURSOS DE FORMACIÓN DEL CAPITAL HUMANO DE MANERA PRESENCIAL GRUPAL",
+      "alternate_names": [],
+      "normalized_key": "impartición de cursos de formación del capital humano de manera presencial grupal",
+      "ec_codes": [
+        "EC0217.01"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00189",
+      "canonical_name": "IMPARTICIÓN DE CURSOS DE FORMACIÓN PRESENCIALES",
+      "alternate_names": [],
+      "normalized_key": "impartición de cursos de formación presenciales",
+      "ec_codes": [
+        "EC0217.01"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00190",
+      "canonical_name": "IMPARTICIÓN DE PROGRAMAS COMUNITARIOS",
+      "alternate_names": [],
+      "normalized_key": "impartición de programas comunitarios",
+      "ec_codes": [
+        "EC0806"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00191",
+      "canonical_name": "IMPARTIDOR DE CURSOS PRESENCIALES",
+      "alternate_names": [],
+      "normalized_key": "impartidor de cursos presenciales",
+      "ec_codes": [
+        "EC0217.01"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00192",
+      "canonical_name": "IMPLEMENTACIÓN DE BUENAS PRÁCTICAS EN PRIMER RESPONDIENTE PARA LA PROTECCIÓN DE LA EMPRESA",
+      "alternate_names": [],
+      "normalized_key": "implementación de buenas prácticas en primer respondiente para la protección de la empresa",
+      "ec_codes": [
+        "EC0626"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00193",
+      "canonical_name": "IMPUESTOS EN PERSONAS FÍSICAS.",
+      "alternate_names": [],
+      "normalized_key": "impuestos en personas físicas",
+      "ec_codes": [
+        "EC0839"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00194",
+      "canonical_name": "INDUCCIÓN AL EC0247 \"PRESTACIÓN DE SERVICIOS DE CONSULTORÍA EN GESTIÓN ORGANIZACIONAL\"",
+      "alternate_names": [],
+      "normalized_key": "inducción al ec0247 \"prestación de servicios de consultoría en gestión organizacional\"",
+      "ec_codes": [
+        "EC0247"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00195",
+      "canonical_name": "INFRACCIONES Y DELITOS FISCALES.",
+      "alternate_names": [],
+      "normalized_key": "infracciones y delitos fiscales",
+      "ec_codes": [
+        "EC0839"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00196",
+      "canonical_name": "INSCRIPCIÓN DE ACTOS Y HECHOS JURÍDICOS RELATIVOS AL ESTADO CIVIL DE LAS PERSONAS",
+      "alternate_names": [],
+      "normalized_key": "inscripción de actos y hechos jurídicos relativos al estado civil de las personas",
+      "ec_codes": [
+        "EC0778"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00197",
+      "canonical_name": "INSPECCIÓN DE CAMPO EN LA PRODUCCIÓN DE SEMILLAS CALIFICADAS CON ALCANCE AL CULTIVO DE MAÍZ",
+      "alternate_names": [],
+      "normalized_key": "inspección de campo en la producción de semillas calificadas con alcance al cultivo de maíz",
+      "ec_codes": [
+        "EC0275"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00198",
+      "canonical_name": "INSPECCIÓN DE SEGURIDAD EN LA OPERACIÓN DE POLIPASTOS",
+      "alternate_names": [],
+      "normalized_key": "inspección de seguridad en la operación de polipastos",
+      "ec_codes": [
+        "EC0201"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00199",
+      "canonical_name": "INSPECCIÓN Y MANTENIMIENTO DE POLIPASTOS MANUALES",
+      "alternate_names": [],
+      "normalized_key": "inspección y mantenimiento de polipastos manuales",
+      "ec_codes": [
+        "EC1004"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00200",
+      "canonical_name": "INSPECCIÓN Y MANTENIMIENTO DE POLIPASTOS MOTORIZADOS",
+      "alternate_names": [],
+      "normalized_key": "inspección y mantenimiento de polipastos motorizados",
+      "ec_codes": [
+        "EC1004"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00201",
+      "canonical_name": "INSPECCIÓN, USO SEGURO, ÁNGULOS DE REDUCCIÓN Y CÁLCULO DE TENSIONES EN EL IZAJE DE CARGAS",
+      "alternate_names": [],
+      "normalized_key": "inspección uso seguro ángulos de reducción y cálculo de tensiones en el izaje de cargas",
+      "ec_codes": [
+        "EC0857"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00202",
+      "canonical_name": "INSTALACIÓN DE SISTEMA DE CALENTAMIENTO SOLAR DE AGUA TEMOSIFÓNICO EN VIVIENDA SUSTENTABLE",
+      "alternate_names": [],
+      "normalized_key": "instalación de sistema de calentamiento solar de agua temosifónico en vivienda sustentable",
+      "ec_codes": [
+        "EC0325"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00203",
+      "canonical_name": "INSTALACIÓN DE SISTEMAS FOTOVOLTAICOS INTERCONECTADOS, ALINEADO AL ESTÁNDAR DE COMPETENCIA EC0586.01 DEL CONOCER",
+      "alternate_names": [],
+      "normalized_key": "instalación de sistemas fotovoltaicos interconectados alineado al estándar de competencia ec058601 del conocer",
+      "ec_codes": [
+        "EC0586.01"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00204",
+      "canonical_name": "INSTALACIÓN DEL SISTEMA DE CALENTAMIENTO SOLAR DE AGUA DE CIRCULACIÓN FORZADA CON TERMOTANQUE",
+      "alternate_names": [],
+      "normalized_key": "instalación del sistema de calentamiento solar de agua de circulación forzada con termotanque",
+      "ec_codes": [
+        "EC0473"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00205",
+      "canonical_name": "INTEGRACIÓN DE LA ACUPUNTURA EN LA MEJORA DE HABITOS A BASE DE UNA NUTRICIÓN ADECUADA",
+      "alternate_names": [],
+      "normalized_key": "integración de la acupuntura en la mejora de habitos a base de una nutrición adecuada",
+      "ec_codes": [
+        "EC0933"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00206",
+      "canonical_name": "INTEGRANDO TECNOLOGÍAS A LOS PROCESOS EDUCATIVOS",
+      "alternate_names": [],
+      "normalized_key": "integrando tecnologías a los procesos educativos",
+      "ec_codes": [
+        "EC0235"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00207",
+      "canonical_name": "INTERVENCIÓN PEDAGÓGICA PARA EL DESARROLLO RURAL",
+      "alternate_names": [],
+      "normalized_key": "intervención pedagógica para el desarrollo rural",
+      "ec_codes": [
+        "EC0049"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00208",
+      "canonical_name": "INTRODUCCIÓN A LA CAPTACIÓN Y AL APROVECHAMIENTO DE AGUA DE LLUVIA (AMSCALL-INTRO-001)",
+      "alternate_names": [],
+      "normalized_key": "introducción a la captación y al aprovechamiento de agua de lluvia (amscall-intro-001)",
+      "ec_codes": [
+        "EC0180"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00209",
+      "canonical_name": "INTRODUCCIÓN A LA COMPUTACIÓN 2012 (INFORMÁTICA E INTERNET)",
+      "alternate_names": [],
+      "normalized_key": "introducción a la computación 2012 (informática e internet)",
+      "ec_codes": [
+        "EC0190"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00210",
+      "canonical_name": "INTRODUCCIÓN A LA INFORMÁTICA",
+      "alternate_names": [],
+      "normalized_key": "introducción a la informática",
+      "ec_codes": [
+        "EC0156"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00211",
+      "canonical_name": "INTRODUCCIÓN A LAS VENTAS",
+      "alternate_names": [],
+      "normalized_key": "introducción a las ventas",
+      "ec_codes": [
+        "EC0094"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00212",
+      "canonical_name": "INVESTIGACIÓN DE DELITOS COMETIDOS CONTRA LA LIBERTAD DE EXPRESIÓN BAJO EL ENFOQUE DIFERENCIAL Y ESPECIALIZADO",
+      "alternate_names": [],
+      "normalized_key": "investigación de delitos cometidos contra la libertad de expresión bajo el enfoque diferencial y especializado",
+      "ec_codes": [
+        "EC1103"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00213",
+      "canonical_name": "JEFE DE COMEDOR",
+      "alternate_names": [],
+      "normalized_key": "jefe de comedor",
+      "ec_codes": [
+        "EC0038"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00214",
+      "canonical_name": "LANZADOR DE CONCRETO",
+      "alternate_names": [],
+      "normalized_key": "lanzador de concreto",
+      "ec_codes": [
+        "EC0502"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00215",
+      "canonical_name": "LEAN MANUFACTURING",
+      "alternate_names": [],
+      "normalized_key": "lean manufacturing",
+      "ec_codes": [
+        "EC0354"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00216",
+      "canonical_name": "LEGALIDAD Y PREVENCIÓN DE LA CORRUPCIÓN EN LA ADMINISTRACIÓN PÚBLICA",
+      "alternate_names": [],
+      "normalized_key": "legalidad y prevención de la corrupción en la administración pública",
+      "ec_codes": [
+        "EC0500"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00217",
+      "canonical_name": "LIDERAZGO EDUCATIVO PARA GESTIONAR UNA INSTITUCIÓN ESCOLAR DE CALIDAD",
+      "alternate_names": [],
+      "normalized_key": "liderazgo educativo para gestionar una institución escolar de calidad",
+      "ec_codes": [
+        "EC0507"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00218",
+      "canonical_name": "LIDERAZGO EN EL SERVICIO PÚBLICO",
+      "alternate_names": [],
+      "normalized_key": "liderazgo en el servicio público",
+      "ec_codes": [
+        "EC0401"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00219",
+      "canonical_name": "LIDERAZGO PARA LA AUTONOMÍA DE GESTIÓN ESCOLAR",
+      "alternate_names": [],
+      "normalized_key": "liderazgo para la autonomía de gestión escolar",
+      "ec_codes": [
+        "EC0507"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00220",
+      "canonical_name": "LIDERAZGO Y AUDITORÍA AMBIENTAL PARA LA COMPETITIVIDAD",
+      "alternate_names": [],
+      "normalized_key": "liderazgo y auditoría ambiental para la competitividad",
+      "ec_codes": [
+        "EC0910"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00221",
+      "canonical_name": "LIMPIEZA DE COCINAS INDUSTRIALES",
+      "alternate_names": [],
+      "normalized_key": "limpieza de cocinas industriales",
+      "ec_codes": [
+        "EC0126"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00222",
+      "canonical_name": "LIMPIEZA Y DESINFECCIÓN EN ESTABLECIMIENTOS DE SALUD",
+      "alternate_names": [],
+      "normalized_key": "limpieza y desinfección en establecimientos de salud",
+      "ec_codes": [
+        "EC0248"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00223",
+      "canonical_name": "MAESTRO DE MEZCAL ARTESANAL",
+      "alternate_names": [],
+      "normalized_key": "maestro de mezcal artesanal",
+      "ec_codes": [
+        "EC0313"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00224",
+      "canonical_name": "MANEJO DE PROCESADOR DE TEXTOS DIGITALES",
+      "alternate_names": [],
+      "normalized_key": "manejo de procesador de textos digitales",
+      "ec_codes": [
+        "EC0107"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00225",
+      "canonical_name": "MANEJO DE PROCESADOR DE TEXTOS DIGITALES, HOJAS ELECTRÓNICAS DIGITALES Y PRESENTACIONES DIGITALES",
+      "alternate_names": [],
+      "normalized_key": "manejo de procesador de textos digitales hojas electrónicas digitales y presentaciones digitales",
+      "ec_codes": [
+        "EC0108"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00226",
+      "canonical_name": "MANEJO DE PROCESADORES DE PRESENTACIONES DIGITALES",
+      "alternate_names": [],
+      "normalized_key": "manejo de procesadores de presentaciones digitales",
+      "ec_codes": [
+        "EC0109"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00227",
+      "canonical_name": "MANEJO DEL PROCESADOR DE HOJAS DE CALCULO DIGITALES",
+      "alternate_names": [],
+      "normalized_key": "manejo del procesador de hojas de calculo digitales",
+      "ec_codes": [
+        "EC0108"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00228",
+      "canonical_name": "MANEJO DEL PROCESADOR DE HOJAS DE CÁLCULO DIGITALES",
+      "alternate_names": [],
+      "normalized_key": "manejo del procesador de hojas de cálculo digitales",
+      "ec_codes": [
+        "EC0108"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00229",
+      "canonical_name": "MANEJO HIGIENICO DE ALIMENTOS",
+      "alternate_names": [],
+      "normalized_key": "manejo higienico de alimentos",
+      "ec_codes": [
+        "EC0081"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00230",
+      "canonical_name": "MANEJO HIGIÉNICO DE ALIMENTO",
+      "alternate_names": [],
+      "normalized_key": "manejo higiénico de alimento",
+      "ec_codes": [
+        "EC0081"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00231",
+      "canonical_name": "MANEJO HIGIÉNICO DE ALIMENTOS",
+      "alternate_names": [],
+      "normalized_key": "manejo higiénico de alimentos",
+      "ec_codes": [
+        "EC0081"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00232",
+      "canonical_name": "MANEJO HIGIÉNICO DE LOS ALIMENTOS",
+      "alternate_names": [],
+      "normalized_key": "manejo higiénico de los alimentos",
+      "ec_codes": [
+        "EC0081"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00233",
+      "canonical_name": "MANEJO HIGIÉNICO E INOCUIDAD DE LOS ALIMENTOS",
+      "alternate_names": [],
+      "normalized_key": "manejo higiénico e inocuidad de los alimentos",
+      "ec_codes": [
+        "EC0081"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00234",
+      "canonical_name": "MANEJO INTEGRAL DE PLAGAS PARA LA SEGURIDAD E INOCUIDAD DEL PRODUCTO",
+      "alternate_names": [],
+      "normalized_key": "manejo integral de plagas para la seguridad e inocuidad del producto",
+      "ec_codes": [
+        "EC0303"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00235",
+      "canonical_name": "MAQUILLAJE CORRECTIVO PARA LOS MEDIOS DE COMUNICACIÓN (AUDIOVISUALES)",
+      "alternate_names": [],
+      "normalized_key": "maquillaje correctivo para los medios de comunicación (audiovisuales)",
+      "ec_codes": [
+        "EC0569"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00236",
+      "canonical_name": "MAQUILLAJE DE CARACTERIZACIÓN Y EFECTOS ESPECIALES",
+      "alternate_names": [],
+      "normalized_key": "maquillaje de caracterización y efectos especiales",
+      "ec_codes": [
+        "EC0569"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00237",
+      "canonical_name": "MAQUILLAJE PROFESIONAL",
+      "alternate_names": [],
+      "normalized_key": "maquillaje profesional",
+      "ec_codes": [
+        "EC0046"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00238",
+      "canonical_name": "MAQUINADOS CNC (CONTROL NUMÉRICO) PARA EL SECTOR AERONÁUTICO",
+      "alternate_names": [],
+      "normalized_key": "maquinados cnc (control numérico) para el sector aeronáutico",
+      "ec_codes": [
+        "EC0607"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00239",
+      "canonical_name": "MASAJE AYURVEDA ABHYANGA",
+      "alternate_names": [],
+      "normalized_key": "masaje ayurveda abhyanga",
+      "ec_codes": [
+        "EC0883"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00240",
+      "canonical_name": "MASAJE DRENAJE LINFÁTICO MANUAL",
+      "alternate_names": [],
+      "normalized_key": "masaje drenaje linfático manual",
+      "ec_codes": [
+        "EC0902"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00241",
+      "canonical_name": "MASAJE DRENAJE LINFÁTICO MANUAL ESTANDARIZADO",
+      "alternate_names": [],
+      "normalized_key": "masaje drenaje linfático manual estandarizado",
+      "ec_codes": [
+        "EC0902"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00242",
+      "canonical_name": "MASAJE HOLÍSTICO",
+      "alternate_names": [],
+      "normalized_key": "masaje holístico",
+      "ec_codes": [
+        "EC0900"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00243",
+      "canonical_name": "MASAJE HOLÍSTICO ESTANDARIZADO",
+      "alternate_names": [],
+      "normalized_key": "masaje holístico estandarizado",
+      "ec_codes": [
+        "EC0900"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00244",
+      "canonical_name": "MASAJE SHIATSU",
+      "alternate_names": [],
+      "normalized_key": "masaje shiatsu",
+      "ec_codes": [
+        "EC0143"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00245",
+      "canonical_name": "MASAJE SUECO",
+      "alternate_names": [],
+      "normalized_key": "masaje sueco",
+      "ec_codes": [
+        "EC0901"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00246",
+      "canonical_name": "MASAJE SUECO ESTANDARIZADO",
+      "alternate_names": [],
+      "normalized_key": "masaje sueco estandarizado",
+      "ec_codes": [
+        "EC0901"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00247",
+      "canonical_name": "MASAJE TEJIDO PROFUNDO ESTANDARIZADO",
+      "alternate_names": [],
+      "normalized_key": "masaje tejido profundo estandarizado",
+      "ec_codes": [
+        "EC0899"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00248",
+      "canonical_name": "MASTER IN LEADERSHIP AND ORGANIZATIONAL DEVELOPMENT WITH COACHING",
+      "alternate_names": [],
+      "normalized_key": "master in leadership and organizational development with coaching",
+      "ec_codes": [
+        "EC0204"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00249",
+      "canonical_name": "MASTER MEZCALIER NIVEL 4",
+      "alternate_names": [],
+      "normalized_key": "master mezcalier nivel 4",
+      "ec_codes": [
+        "EC0313"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00250",
+      "canonical_name": "MICROSOFT EXCEL",
+      "alternate_names": [],
+      "normalized_key": "microsoft excel",
+      "ec_codes": [
+        "EC0108"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00251",
+      "canonical_name": "MICROSOFT OUTLOOK 2007",
+      "alternate_names": [],
+      "normalized_key": "microsoft outlook 2007",
+      "ec_codes": [
+        "EC0157"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00252",
+      "canonical_name": "MICROSOFT OUTLOOK 2010",
+      "alternate_names": [],
+      "normalized_key": "microsoft outlook 2010",
+      "ec_codes": [
+        "EC0157"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00253",
+      "canonical_name": "MIXOLOGÍA INTERNACIONAL",
+      "alternate_names": [],
+      "normalized_key": "mixología internacional",
+      "ec_codes": [
+        "EC0128"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00254",
+      "canonical_name": "NORMATIVIDAD ANTICORRUPCIÓN Y RESPONSABILIDAD DE LOS SERVIDORES PÚBLICOS",
+      "alternate_names": [],
+      "normalized_key": "normatividad anticorrupción y responsabilidad de los servidores públicos",
+      "ec_codes": [
+        "EC0500"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00255",
+      "canonical_name": "OPERACIÓN DE CARGADOR FRONTA CON BASE EN EL EC DEL CONOCER 526",
+      "alternate_names": [],
+      "normalized_key": "operación de cargador fronta con base en el ec del conocer 526",
+      "ec_codes": [
+        "EC0526"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00256",
+      "canonical_name": "OPERACIÓN DE FONDOS DE ASEGURAMIENTO AGRÍCOLA",
+      "alternate_names": [],
+      "normalized_key": "operación de fondos de aseguramiento agrícola",
+      "ec_codes": [
+        "EC0130"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00257",
+      "canonical_name": "OPERACIÓN DE GRÚA MÓVIL  CON BASE EN EL EC DEL CONOCER",
+      "alternate_names": [],
+      "normalized_key": "operación de grúa móvil con base en el ec del conocer",
+      "ec_codes": [
+        "EC0531"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00258",
+      "canonical_name": "OPERACIÓN DE GRÚA VIAJERA CON BASE EN EL EC DEL CONOCER",
+      "alternate_names": [],
+      "normalized_key": "operación de grúa viajera con base en el ec del conocer",
+      "ec_codes": [
+        "EC0201"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00259",
+      "canonical_name": "OPERACIÓN DE MONTACARGAS HORIZONTAL CON BASE EN EL EC DEL CONOCER 200",
+      "alternate_names": [],
+      "normalized_key": "operación de montacargas horizontal con base en el ec del conocer 200",
+      "ec_codes": [
+        "EC0200"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00260",
+      "canonical_name": "OPERACIÓN DE PLATAFORMA DE TRABAJO MÓVIL PARA ELEVACIÓN DE PERSONAL CON BASE EN EL EC DEL CONOCER",
+      "alternate_names": [],
+      "normalized_key": "operación de plataforma de trabajo móvil para elevación de personal con base en el ec del conocer",
+      "ec_codes": [
+        "EC0590"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00261",
+      "canonical_name": "OPERACIÓN DE VEHÍCULO DE EMERGENCIA",
+      "alternate_names": [],
+      "normalized_key": "operación de vehículo de emergencia",
+      "ec_codes": [
+        "EC0532"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00262",
+      "canonical_name": "OPERACIÓN SEGURA DE MONTACARGAS HORIZONTAL",
+      "alternate_names": [],
+      "normalized_key": "operación segura de montacargas horizontal",
+      "ec_codes": [
+        "EC0200"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00263",
+      "canonical_name": "OPERACIÓN SEGURA DE MONTACARGAS HORIZONTAL\tPRESENCIAL",
+      "alternate_names": [],
+      "normalized_key": "operación segura de montacargas horizontal presencial",
+      "ec_codes": [
+        "EC0200"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00264",
+      "canonical_name": "OPERACIÓN SEGURA DE MONTACARGAS NIVEL INTERMEDIO",
+      "alternate_names": [],
+      "normalized_key": "operación segura de montacargas nivel intermedio",
+      "ec_codes": [
+        "EC0288"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00265",
+      "canonical_name": "OPERADOR DE VEHÍCULO DE EMERGENCIA",
+      "alternate_names": [],
+      "normalized_key": "operador de vehículo de emergencia",
+      "ec_codes": [
+        "EC0532"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00266",
+      "canonical_name": "PENSIONES POR RETIRO IMSS",
+      "alternate_names": [],
+      "normalized_key": "pensiones por retiro imss",
+      "ec_codes": [
+        "EC0485"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00267",
+      "canonical_name": "PENSIONES, SU PROYECCIÓN, CÁLCULO Y MODALIDADES BAJO EL RÉGIMEN DEL IMSS",
+      "alternate_names": [],
+      "normalized_key": "pensiones su proyección cálculo y modalidades bajo el régimen del imss",
+      "ec_codes": [
+        "EC0485"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00268",
+      "canonical_name": "PINTADO DE PLÁSTICOS EN CARROCERÍA DE AUTOMÓVILES",
+      "alternate_names": [],
+      "normalized_key": "pintado de plásticos en carrocería de automóviles",
+      "ec_codes": [
+        "EC0807"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00269",
+      "canonical_name": "PLANEACIÓN DE CONDOMINIOS",
+      "alternate_names": [],
+      "normalized_key": "planeación de condominios",
+      "ec_codes": [
+        "EC0112"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00270",
+      "canonical_name": "PLANEACIÓN DIDÁCTICA 1 \"ESTRUCTURA DE LA PLANEACIÓN Y ARMADO DE EVIDENCIAS DE ENSEÑANZA\"",
+      "alternate_names": [],
+      "normalized_key": "planeación didáctica 1 \"estructura de la planeación y armado de evidencias de enseñanza\"",
+      "ec_codes": [
+        "EC0447"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00271",
+      "canonical_name": "PLANEACIÓN DIDÁCTICA 2 \"ARGUMENTACIÓN DE LA PLANEACIÓN Y ESTABLECIMIENTO DE LA EVALUACIÓN EDUCATIVA\"",
+      "alternate_names": [],
+      "normalized_key": "planeación didáctica 2 \"argumentación de la planeación y establecimiento de la evaluación educativa\"",
+      "ec_codes": [
+        "EC0447"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00272",
+      "canonical_name": "PLANEACIÓN ESTRATÉGICA , RECLUTAMIENTO Y SELECCIÓN DE TALENTO",
+      "alternate_names": [],
+      "normalized_key": "planeación estratégica  reclutamiento y selección de talento",
+      "ec_codes": [
+        "EC0306"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00273",
+      "canonical_name": "POWERPOINT INTERMEDIO",
+      "alternate_names": [],
+      "normalized_key": "powerpoint intermedio",
+      "ec_codes": [
+        "EC0109"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00274",
+      "canonical_name": "PREPARACION Y SERVICIO DE BEBIDAS",
+      "alternate_names": [],
+      "normalized_key": "preparacion y servicio de bebidas",
+      "ec_codes": [
+        "EC0128"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00275",
+      "canonical_name": "PREPARACIÓN DE ALIMENTOS",
+      "alternate_names": [],
+      "normalized_key": "preparación de alimentos",
+      "ec_codes": [
+        "EC0127"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00276",
+      "canonical_name": "PREPARACIÓN DE BEBIDAS CON BASE DE CAFÉ",
+      "alternate_names": [],
+      "normalized_key": "preparación de bebidas con base de café",
+      "ec_codes": [
+        "EC0622"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00277",
+      "canonical_name": "PREPARACIÓN DE HABITACIONES PARA ALOJAMIENTO TEMPORAL",
+      "alternate_names": [],
+      "normalized_key": "preparación de habitaciones para alojamiento temporal",
+      "ec_codes": [
+        "EC0043"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00278",
+      "canonical_name": "PREPARACIÓN DE HABITACIONES PARA ALOJAMIENTO TEMPORAL (CAMARISTAS)",
+      "alternate_names": [],
+      "normalized_key": "preparación de habitaciones para alojamiento temporal (camaristas)",
+      "ec_codes": [
+        "EC0043"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00279",
+      "canonical_name": "PREPARACIÓN Y SERVICIO DE BEBIDAS",
+      "alternate_names": [],
+      "normalized_key": "preparación y servicio de bebidas",
+      "ec_codes": [
+        "EC0128"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00280",
+      "canonical_name": "PREPARACIÓN Y SERVICIO DE BEBIDAS BASADO EN EL EC0128",
+      "alternate_names": [],
+      "normalized_key": "preparación y servicio de bebidas basado en el ec0128",
+      "ec_codes": [
+        "EC0128"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00281",
+      "canonical_name": "PRESERVACIÓN DEL LUGAR DEL HECHO LA ESCENA DEL CRIMEN O DEL HALLAZGO Y CADENA DE CUSTODIA",
+      "alternate_names": [],
+      "normalized_key": "preservación del lugar del hecho la escena del crimen o del hallazgo y cadena de custodia",
+      "ec_codes": [
+        "EC0626"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00282",
+      "canonical_name": "PRESTACIÓN DE LOS SERVICIOS DE HOTELERÍA EC0667",
+      "alternate_names": [],
+      "normalized_key": "prestación de los servicios de hotelería ec0667",
+      "ec_codes": [
+        "EC0667"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00283",
+      "canonical_name": "PRESTACIÓN DE SERVICIOS COSMETOLÓGICOS CORPORALES",
+      "alternate_names": [],
+      "normalized_key": "prestación de servicios cosmetológicos corporales",
+      "ec_codes": [
+        "EC0010"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00284",
+      "canonical_name": "PRESTACIÓN DE SERVICIOS COSMETOLÓGICOS FACIALES",
+      "alternate_names": [],
+      "normalized_key": "prestación de servicios cosmetológicos faciales",
+      "ec_codes": [
+        "EC0046"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00285",
+      "canonical_name": "PRESTACIÓN DE SERVICIOS DE ATENCIÓN A CLIENTES",
+      "alternate_names": [],
+      "normalized_key": "prestación de servicios de atención a clientes",
+      "ec_codes": [
+        "EC0305"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00286",
+      "canonical_name": "PRESTACIÓN DE SERVICIOS DE CONSULTORÍA EN GESTIÓN ORGANIZACIONAL",
+      "alternate_names": [],
+      "normalized_key": "prestación de servicios de consultoría en gestión organizacional",
+      "ec_codes": [
+        "EC0247"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00287",
+      "canonical_name": "PRESTACIÓN DEL SERVICIO DE RECEPCIÓN Y ATENCIÓN AL HUÉSPED PARA ALOJAMIENTO TEMPORAL.",
+      "alternate_names": [],
+      "normalized_key": "prestación del servicio de recepción y atención al huésped para alojamiento temporal",
+      "ec_codes": [
+        "EC0045"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00288",
+      "canonical_name": "PRESTACIÓN DEL SERVICIO DE RECEPCIÓN Y ATENCIÓN AL HUÉSPED PARA SU ALOJAMIENTO TEMPORAL",
+      "alternate_names": [],
+      "normalized_key": "prestación del servicio de recepción y atención al huésped para su alojamiento temporal",
+      "ec_codes": [
+        "EC0045"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00289",
+      "canonical_name": "PRIMER RESPONDIENTE EN PRIMEROS AUXILIOS",
+      "alternate_names": [],
+      "normalized_key": "primer respondiente en primeros auxilios",
+      "ec_codes": [
+        "EC0585"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00290",
+      "canonical_name": "PRIMEROS AUXILIOS",
+      "alternate_names": [],
+      "normalized_key": "primeros auxilios",
+      "ec_codes": [
+        "EC0585"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00291",
+      "canonical_name": "PRIMEROS AUXILIOS (SOPORTE DE VIDA)",
+      "alternate_names": [],
+      "normalized_key": "primeros auxilios (soporte de vida)",
+      "ec_codes": [
+        "EC0585"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00292",
+      "canonical_name": "PRIMEROS AUXILIOS EN LA ATENCIÓN BÁSICA PREHOSPITALARIA",
+      "alternate_names": [],
+      "normalized_key": "primeros auxilios en la atención básica prehospitalaria",
+      "ec_codes": [
+        "EC0585"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00293",
+      "canonical_name": "PRINCIPALES APPS EDUCATIVAS DE DISPOSITIVOS MÓVILES",
+      "alternate_names": [],
+      "normalized_key": "principales apps educativas de dispositivos móviles",
+      "ec_codes": [
+        "EC0337"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00294",
+      "canonical_name": "PROGRAMA NACIONAL DE CAPACITACIÓN EN CONSEJERÍA Y TERAPIAS ALTERNATIVAS PARA TRATAMIENTOS EN ADICCIONES",
+      "alternate_names": [],
+      "normalized_key": "programa nacional de capacitación en consejería y terapias alternativas para tratamientos en adicciones",
+      "ec_codes": [
+        "EC0548"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00295",
+      "canonical_name": "PROMOCIÓN DE LA APLICACIÓN DE LAS REGLAS MÍNIMAS DE LAS NACIONES  UNIDAS PARA EL TRATAMIENTO DE LOS RECLUSOS “REGLAS NELSON MANDELA”  EN EL SISTEMA PENITENCIARIO\tPRESENCIAL",
+      "alternate_names": [],
+      "normalized_key": "promoción de la aplicación de las reglas mínimas de las naciones unidas para el tratamiento de los reclusos “reglas nelson mandela” en el sistema penitenciario presencial",
+      "ec_codes": [
+        "EC1104"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00296",
+      "canonical_name": "PROMOCIÓN DE LA ATENCIÓN DE LAS VÍCTIMAS DE TORTURA DE ACUERDO CON EL PROTOCOLO DE ESTAMBUL",
+      "alternate_names": [],
+      "normalized_key": "promoción de la atención de las víctimas de tortura de acuerdo con el protocolo de estambul",
+      "ec_codes": [
+        "EC1105"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00297",
+      "canonical_name": "PROMOCIÓN DE LOS PRINCIPIOS Y DERECHOS DEL SISTEMA INTEGRAL DE JUSTICIA PENAL PARA ADOLESCENTES",
+      "alternate_names": [],
+      "normalized_key": "promoción de los principios y derechos del sistema integral de justicia penal para adolescentes",
+      "ec_codes": [
+        "EC1106"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00298",
+      "canonical_name": "PROMOCIÓN DEL AHORRO EN EL DESEMPEÑO INTEGRAL DE LOS SISTEMAS ENERGÉTICOS DE LA VIVIENDA",
+      "alternate_names": [],
+      "normalized_key": "promoción del ahorro en el desempeño integral de los sistemas energéticos de la vivienda",
+      "ec_codes": [
+        "EC0431"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00299",
+      "canonical_name": "PROPORCIONAR SERVICIO DE CONSULTORÍA GENERAL.",
+      "alternate_names": [],
+      "normalized_key": "proporcionar servicio de consultoría general",
+      "ec_codes": [
+        "EC0249"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00300",
+      "canonical_name": "PROPORCIONAR SERVICIOS DE CONSULTORÍA A PYME'S",
+      "alternate_names": [],
+      "normalized_key": "proporcionar servicios de consultoría a pyme's",
+      "ec_codes": [
+        "EC0359"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00301",
+      "canonical_name": "PROPORCIONAR SERVICIOS DE CONSULTORÍA A PYME´S",
+      "alternate_names": [],
+      "normalized_key": "proporcionar servicios de consultoría a pyme´s",
+      "ec_codes": [
+        "EC0359"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00302",
+      "canonical_name": "PROPORCIONAR SERVICIOS DE CONSULTORÍA GENERAL",
+      "alternate_names": [],
+      "normalized_key": "proporcionar servicios de consultoría general",
+      "ec_codes": [
+        "EC0249"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00303",
+      "canonical_name": "PROYECTOS CON BIOGÁS. DESARROLLO SOSTENIBLE PARA EL SECTOR AGROPECUARIO",
+      "alternate_names": [],
+      "normalized_key": "proyectos con biogás desarrollo sostenible para el sector agropecuario",
+      "ec_codes": [
+        "EC1128"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00304",
+      "canonical_name": "RECEPCIONISTA DE HOTELES",
+      "alternate_names": [],
+      "normalized_key": "recepcionista de hoteles",
+      "ec_codes": [
+        "EC0045"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00305",
+      "canonical_name": "RECEPCIONISTA PROFESIONAL",
+      "alternate_names": [],
+      "normalized_key": "recepcionista profesional",
+      "ec_codes": [
+        "EC0047"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00306",
+      "canonical_name": "RECLUTAMIENTO, SELECCIÓN Y DISEÑO DE COMPETENCIAS DEL TALENTO ORGANIZACIONAL",
+      "alternate_names": [],
+      "normalized_key": "reclutamiento selección y diseño de competencias del talento organizacional",
+      "ec_codes": [
+        "EC0306"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00307",
+      "canonical_name": "REFLEXOLOGÍA PODAL",
+      "alternate_names": [],
+      "normalized_key": "reflexología podal",
+      "ec_codes": [
+        "EC1049"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00308",
+      "canonical_name": "RÉGIMEN DE INCORPORACIÓN FISCAL (RIF).",
+      "alternate_names": [],
+      "normalized_key": "régimen de incorporación fiscal (rif)",
+      "ec_codes": [
+        "EC0839"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00309",
+      "canonical_name": "SEMINARIO DE DERECHO FISCAL.",
+      "alternate_names": [],
+      "normalized_key": "seminario de derecho fiscal",
+      "ec_codes": [
+        "EC0839"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00310",
+      "canonical_name": "SEMINARIO DE INVERSORES FOTOVOLTAICOS DE CONEXIÓN A RED, FRONIUS SNAPINVERTER",
+      "alternate_names": [],
+      "normalized_key": "seminario de inversores fotovoltaicos de conexión a red fronius snapinverter",
+      "ec_codes": [
+        "EC0586.01"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00311",
+      "canonical_name": "SEMINARIO EN INTELIGENCIA FINANCIERA",
+      "alternate_names": [],
+      "normalized_key": "seminario en inteligencia financiera",
+      "ec_codes": [
+        "EC0754"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00312",
+      "canonical_name": "SERVICIO DE ATENCIÓN AL CLIENTE",
+      "alternate_names": [],
+      "normalized_key": "servicio de atención al cliente",
+      "ec_codes": [
+        "EC0305"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00313",
+      "canonical_name": "SERVICIOS COSMETOLOGICOS FACIALES ESTANDARIZADO",
+      "alternate_names": [],
+      "normalized_key": "servicios cosmetologicos faciales estandarizado",
+      "ec_codes": [
+        "EC0046"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00314",
+      "canonical_name": "SERVICIOS DE CONSULTORÍA EN DESARROLLO ORGANIZACIONAL Y HUMANO",
+      "alternate_names": [],
+      "normalized_key": "servicios de consultoría en desarrollo organizacional y humano",
+      "ec_codes": [
+        "EC0249"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00315",
+      "canonical_name": "SISTEMA DASIEN",
+      "alternate_names": [],
+      "normalized_key": "sistema dasien",
+      "ec_codes": [
+        "EC0513"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00316",
+      "canonical_name": "SISTEMA DE CONTROL INTERNO; MODELO ESTÁNDAR DE CONTROL INTERNO Y ADMINISTRACIÓN DE RIESGOS",
+      "alternate_names": [],
+      "normalized_key": "sistema de control interno modelo estándar de control interno y administración de riesgos",
+      "ec_codes": [
+        "EC0176"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00317",
+      "canonical_name": "SISTEMA DE PERMISOS PARA TRABAJOS CON RIESGOS",
+      "alternate_names": [],
+      "normalized_key": "sistema de permisos para trabajos con riesgos",
+      "ec_codes": [
+        "EC0659"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00318",
+      "canonical_name": "SOSTENIBILIDAD URBANA, LA ADMINISTRACIÓN DEL DESARROLLO URBANO Y ORDENAMIENTO TERRITORIAL MUNICIPAL",
+      "alternate_names": [],
+      "normalized_key": "sostenibilidad urbana la administración del desarrollo urbano y ordenamiento territorial municipal",
+      "ec_codes": [
+        "EC0978"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00319",
+      "canonical_name": "SUPERVISIÓN DE LA OPERACIÓN DEL FONDO DE ASEGURAMIENTO AGROPECUARIO",
+      "alternate_names": [],
+      "normalized_key": "supervisión de la operación del fondo de aseguramiento agropecuario",
+      "ec_codes": [
+        "EC0129"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00320",
+      "canonical_name": "SUPERVISIÓN DE LAS CONDICIONES DE REGISTRO Y ESTANCIA AL HUÉSPED",
+      "alternate_names": [],
+      "normalized_key": "supervisión de las condiciones de registro y estancia al huésped",
+      "ec_codes": [
+        "EC0047"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00321",
+      "canonical_name": "SUPERVISIÓN DE LAS CONDICIONES DE REGISTRO Y ESTANCIA DEL HUÉSPED",
+      "alternate_names": [],
+      "normalized_key": "supervisión de las condiciones de registro y estancia del huésped",
+      "ec_codes": [
+        "EC0047"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00322",
+      "canonical_name": "SUPERVISIÓN DE LAS CONDICIONES DE REGISTRO Y ESTANCIA DEL HUÉSPED EC0047",
+      "alternate_names": [],
+      "normalized_key": "supervisión de las condiciones de registro y estancia del huésped ec0047",
+      "ec_codes": [
+        "EC0047"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00323",
+      "canonical_name": "SUPERVISIÓN DE SERVICIOS DE SEGURIDAD (SUPSEG)",
+      "alternate_names": [],
+      "normalized_key": "supervisión de servicios de seguridad (supseg)",
+      "ec_codes": [
+        "EC0574"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00324",
+      "canonical_name": "SUPERVISOR DE CONCRETO LANZADO",
+      "alternate_names": [],
+      "normalized_key": "supervisor de concreto lanzado",
+      "ec_codes": [
+        "EC0502"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00325",
+      "canonical_name": "TALLER DE ALINEACIÓN AL ESTÁNDAR DE COMPETENCIA EC0782",
+      "alternate_names": [],
+      "normalized_key": "taller de alineación al estándar de competencia ec0782",
+      "ec_codes": [
+        "EC0782"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00326",
+      "canonical_name": "TRABAJO EN ALTURAS PAR ANDAMIOS TIPO TORRE O ESTRUCTURA",
+      "alternate_names": [],
+      "normalized_key": "trabajo en alturas par andamios tipo torre o estructura",
+      "ec_codes": [
+        "EC0591"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00327",
+      "canonical_name": "TRABAJO EN ALTURAS PARA PLATAFORMAS MECÁNICAS",
+      "alternate_names": [],
+      "normalized_key": "trabajo en alturas para plataformas mecánicas",
+      "ec_codes": [
+        "EC0590"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00328",
+      "canonical_name": "TRATAMIENTOS CORPORALES ESTANDARIZADO",
+      "alternate_names": [],
+      "normalized_key": "tratamientos corporales estandarizado",
+      "ec_codes": [
+        "EC0010"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00329",
+      "canonical_name": "TUTORÍA EN LA EDUCACIÓN MEDIA SUPERIOR Y SUPERIOR",
+      "alternate_names": [],
+      "normalized_key": "tutoría en la educación media superior y superior",
+      "ec_codes": [
+        "EC0477"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00330",
+      "canonical_name": "TÉCNICAS DE LEVANTAMIENTO DE INFORMACIÓN EN CAMPO PARA PERITAJES EN MATERIA AMBIENTAL Y ELABORACIÓN DE DICTÁMENES EN MATERIA AMBIENTAL",
+      "alternate_names": [],
+      "normalized_key": "técnicas de levantamiento de información en campo para peritajes en materia ambiental y elaboración de dictámenes en materia ambiental",
+      "ec_codes": [
+        "EC0878"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00331",
+      "canonical_name": "TÉCNICAS DE NEURO-NEGOCIACIÓN",
+      "alternate_names": [],
+      "normalized_key": "técnicas de neuro-negociación",
+      "ec_codes": [
+        "EC0619"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00332",
+      "canonical_name": "TÉCNICO BÁSICO DE TERAPIA FÍSICA",
+      "alternate_names": [],
+      "normalized_key": "técnico básico de terapia física",
+      "ec_codes": [
+        "EC0899"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00333",
+      "canonical_name": "USO DE INGLES TÉCNICO PARA INDUSTRIAS PETROLERAS (PERFORACIÓN MARINA)",
+      "alternate_names": [],
+      "normalized_key": "uso de ingles técnico para industrias petroleras (perforación marina)",
+      "ec_codes": [
+        "EC0679"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00334",
+      "canonical_name": "USO EDUCATIVO DE DISPOSITIVOS MÓVILES",
+      "alternate_names": [],
+      "normalized_key": "uso educativo de dispositivos móviles",
+      "ec_codes": [
+        "EC0337"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00335",
+      "canonical_name": "USO, MANEJO Y ADMINISTRACIÓN DEL PORTAL DEL SAT Y FACTURACIÓN ELECTRÓNICA.",
+      "alternate_names": [],
+      "normalized_key": "uso manejo y administración del portal del sat y facturación electrónica",
+      "ec_codes": [
+        "EC0839"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00336",
+      "canonical_name": "VALUACIÓN DE DAÑOS EN AUTOMÓVILES",
+      "alternate_names": [],
+      "normalized_key": "valuación de daños en automóviles",
+      "ec_codes": [
+        "EC0672"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00337",
+      "canonical_name": "VALUACIÓN DEL INVENTARIO Y LA DETERMINACIÓN DEL COSTO DE LO VENDIDO",
+      "alternate_names": [],
+      "normalized_key": "valuación del inventario y la determinación del costo de lo vendido",
+      "ec_codes": [
+        "EC0704"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00338",
+      "canonical_name": "VERIFICACIÓN DE LAS CONDICIONES DE SEGURIDAD E HIGIENE EN LOS CENTROS DE TRABAJO",
+      "alternate_names": [],
+      "normalized_key": "verificación de las condiciones de seguridad e higiene en los centros de trabajo",
+      "ec_codes": [
+        "EC0391.01"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00339",
+      "canonical_name": "VERIFICACIÓN EXTERNA DE LA OPERACIÓN DE LOS CENTROS DE EVALUACIÓN Y EVALUADORES INDEPENDIENTES",
+      "alternate_names": [],
+      "normalized_key": "verificación externa de la operación de los centros de evaluación y evaluadores independientes",
+      "ec_codes": [
+        "EC0091"
+      ],
+      "ec_count": 1
+    },
+    {
+      "id": "CCAP-00340",
+      "canonical_name": "WORD INTERMEDIO",
+      "alternate_names": [],
+      "normalized_key": "word intermedio",
+      "ec_codes": [
+        "EC0107"
+      ],
+      "ec_count": 1
+    }
+  ]
+}

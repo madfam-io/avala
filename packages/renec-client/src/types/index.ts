@@ -212,38 +212,56 @@ export const VALIDATION_PATTERNS = {
 } as const;
 
 // ============================================
-// RENEC Endpoints
+// RENEC Endpoints (Updated Nov 2024 - New Angular SPA)
 // ============================================
 
+/**
+ * New CONOCER portal uses Angular SPA with hash-based routing
+ * Base URL: https://conocer.gob.mx/conocer/
+ *
+ * The SPA loads data via API calls - we need to intercept these
+ * or interact with the rendered Angular components
+ */
 export const RENEC_ENDPOINTS = {
-  ec: {
-    active: "/RENEC/controlador.do?comp=ESLACT",
-    inactive: "/RENEC/controlador.do?comp=ESLINACT",
-    historical: "/RENEC/controlador.do?comp=ESLHIST",
-    new: "/RENEC/controlador.do?comp=ECNew",
-    search: "/RENEC/controlador.do?comp=ES",
-    detail: "/RENEC/controlador.do?comp=EC&ec=",
+  // New SPA routes (hash-based)
+  spa: {
+    base: "/conocer/",
+    renec: "/conocer/#/renec",
+    sectors: "/conocer/#/sectoresProductivos",
+    occupations: "/conocer/#/sectoresOrganizacionales",
+    ecDetail: "/conocer/#/detalleEstandar/", // + ecId
   },
-  certifier: {
-    eceList: "/RENEC/controlador.do?comp=ECE",
-    ocList: "/RENEC/controlador.do?comp=OC",
-    detail: "/RENEC/controlador.do?comp=CERT&id=",
+  // Legacy endpoints (may redirect to homepage - kept for reference)
+  legacy: {
+    ec: {
+      active: "/RENEC/controlador.do?comp=ESLACT",
+      inactive: "/RENEC/controlador.do?comp=ESLINACT",
+      historical: "/RENEC/controlador.do?comp=ESLHIST",
+      new: "/RENEC/controlador.do?comp=ECNew",
+      search: "/RENEC/controlador.do?comp=ES",
+      detail: "/RENEC/controlador.do?comp=EC&ec=",
+    },
+    certifier: {
+      eceList: "/RENEC/controlador.do?comp=ECE",
+      ocList: "/RENEC/controlador.do?comp=OC",
+      detail: "/RENEC/controlador.do?comp=CERT&id=",
+    },
+    center: {
+      list: "/RENEC/controlador.do?comp=CE",
+      detail: "/RENEC/controlador.do?comp=CE&id=",
+    },
+    sector: {
+      list: "/RENEC/controlador.do?comp=SECTORES",
+      detail: "/RENEC/controlador.do?comp=SECTOR&id=",
+      comites: "/RENEC/controlador.do?comp=SECTOR_COMITES&id=",
+    },
+    comite: {
+      list: "/RENEC/controlador.do?comp=COMITES",
+      detail: "/RENEC/controlador.do?comp=COMITE&id=",
+      standards: "/RENEC/controlador.do?comp=COMITE_EC&id=",
+    },
+    irHub: "/RENEC/controlador.do?comp=IR",
   },
-  center: {
-    list: "/RENEC/controlador.do?comp=CE",
-    detail: "/RENEC/controlador.do?comp=CE&id=",
-  },
-  sector: {
-    list: "/RENEC/controlador.do?comp=SECTORES",
-    detail: "/RENEC/controlador.do?comp=SECTOR&id=",
-    comites: "/RENEC/controlador.do?comp=SECTOR_COMITES&id=",
-  },
-  comite: {
-    list: "/RENEC/controlador.do?comp=COMITES",
-    detail: "/RENEC/controlador.do?comp=COMITE&id=",
-    standards: "/RENEC/controlador.do?comp=COMITE_EC&id=",
-  },
-  irHub: "/RENEC/controlador.do?comp=IR",
 } as const;
 
 // ============================================

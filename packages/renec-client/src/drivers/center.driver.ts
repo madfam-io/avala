@@ -27,7 +27,7 @@ export class CenterDriver extends BaseDriver {
   }
 
   getStartUrls(): string[] {
-    return [this.buildUrl(RENEC_ENDPOINTS.center.list)];
+    return [this.buildUrl(RENEC_ENDPOINTS.legacy.center.list)];
   }
 
   async parse(html: string, url: string): Promise<ExtractedItem[]> {
@@ -46,7 +46,7 @@ export class CenterDriver extends BaseDriver {
           if (centerData?.centroId) {
             // Fetch detail page
             const detailUrl = this.buildUrl(
-              `${RENEC_ENDPOINTS.center.detail}${centerData.centroId}`,
+              `${RENEC_ENDPOINTS.legacy.center.detail}${centerData.centroId}`,
             );
 
             try {

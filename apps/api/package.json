@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@avala/db": "workspace:*",
+    "@avala/renec-client": "workspace:*",
     "@nestjs/axios": "^4.0.1",
     "@nestjs/common": "^10.4.15",
     "@nestjs/config": "^3.3.0",

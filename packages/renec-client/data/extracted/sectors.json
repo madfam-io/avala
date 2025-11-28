@@ -1,0 +1,90 @@
+[
+  {
+    "nombre": "ACTIVIDADES LEGISLATIVAS, GUBERNAMENTALES, DE IMPARTICIÓN DE JUSTICIA Y DE ORGANISMOS INTERNACIONALES Y EXTRATERRITORIALES",
+    "tipo": "productivo"
+  },
+  {
+    "nombre": "AGRICULTURA, CRÍA Y EXPLOTACIÓN DE ANIMALES, APROVECHAMIENTO FORESTAL, PESCA Y CAZA",
+    "tipo": "productivo"
+  },
+  {
+    "nombre": "COMERCIO AL POR MAYOR",
+    "tipo": "productivo"
+  },
+  {
+    "nombre": "COMERCIO AL POR MENOR",
+    "tipo": "productivo"
+  },
+  {
+    "nombre": "CONSTRUCCIÓN",
+    "tipo": "productivo"
+  },
+  {
+    "nombre": "CORPORATIVOS",
+    "tipo": "productivo"
+  },
+  {
+    "nombre": "GENERACIÓN, TRANSMISIÓN, DISTRIBUCIÓN Y COMERCIALIZACIÓN DE ENERGÍA ELÉCTRICA, SUMINISTRO DE AGUA Y DE GAS NATURAL POR DUCTOS AL CONSUMIDOR FINAL",
+    "tipo": "productivo"
+  },
+  {
+    "nombre": "INDUSTRIAS MANUFACTURERAS",
+    "tipo": "productivo"
+  },
+  {
+    "nombre": "INFORMACIÓN EN MEDIOS MASIVOS",
+    "tipo": "productivo"
+  },
+  {
+    "nombre": "MINERÍA",
+    "tipo": "productivo"
+  },
+  {
+    "nombre": "OTROS SERVICIOS EXCEPTO ACTIVIDADES GUBERNAMENTALES",
+    "tipo": "productivo"
+  },
+  {
+    "nombre": "SERVICIOS DE ALOJAMIENTO TEMPORAL Y DE PREPARACIÓN DE ALIMENTOS Y BEBIDAS",
+    "tipo": "productivo"
+  },
+  {
+    "nombre": "SERVICIOS DE APOYO A LOS NEGOCIOS Y MANEJO DE RESIDUOS, Y SERVICIOS DE REMEDIACIÓN",
+    "tipo": "productivo"
+  },
+  {
+    "nombre": "SERVICIOS DE ESPARCIMIENTO CULTURALES Y DEPORTIVOS, Y OTROS SERVICIOS RECREATIVOS",
+    "tipo": "productivo"
+  },
+  {
+    "nombre": "SERVICIOS DE SALUD Y DE ASISTENCIA SOCIAL",
+    "tipo": "productivo"
+  },
+  {
+    "nombre": "SERVICIOS EDUCATIVOS",
+    "tipo": "productivo"
+  },
+  {
+    "nombre": "SERVICIOS FINANCIEROS Y DE SEGUROS",
+    "tipo": "productivo"
+  },
+  {
+    "nombre": "SERVICIOS INMOBILIARIOS Y DE ALQUILER DE BIENES MUEBLES E INTANGIBLES",
+    "tipo": "productivo"
+  },
+  {
+    "nombre": "SERVICIOS PROFESIONALES, CIENTÍFICOS Y TÉCNICOS",
+    "tipo": "productivo"
+  },
+  {
+    "nombre": "TRANSPORTES, CORREOS Y ALMACENAMIENTO",
+    "tipo": "productivo"
+  },
+  {
+    "nombre": "ESTÁNDARES DE COMPETENCIA TRANSVERSALES",
+    "tipo": "productivo"
+  },
+  {
+    "nombre": "ESTÁNDARES DE MARCA (ECM)",
+    "tipo": "productivo"
+  }
+]

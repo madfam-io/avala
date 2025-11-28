@@ -30,8 +30,8 @@ export class CertifierDriver extends BaseDriver {
 
   getStartUrls(): string[] {
     return [
-      this.buildUrl(RENEC_ENDPOINTS.certifier.eceList),
-      this.buildUrl(RENEC_ENDPOINTS.certifier.ocList),
+      this.buildUrl(RENEC_ENDPOINTS.legacy.certifier.eceList),
+      this.buildUrl(RENEC_ENDPOINTS.legacy.certifier.ocList),
     ];
   }
 
@@ -57,7 +57,7 @@ export class CertifierDriver extends BaseDriver {
           if (certData?.certId) {
             // Fetch detail page
             const detailUrl = this.buildUrl(
-              `${RENEC_ENDPOINTS.certifier.detail}${certData.certId}`,
+              `${RENEC_ENDPOINTS.legacy.certifier.detail}${certData.certId}`,
             );
 
             try {

@@ -1,0 +1,3363 @@
+[
+  {
+    "nombre": "de Atención de Asuntos Indígenas",
+    "ecCount": 7,
+    "ecCodigos": [
+      "EC0001",
+      "EC0015",
+      "EC0079",
+      "EC0196",
+      "EC0220",
+      "EC1085",
+      "EC1249"
+    ]
+  },
+  {
+    "nombre": "de la Administración Pública del Gobierno del Estado de Chiapas",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC0002",
+      "EC0666"
+    ]
+  },
+  {
+    "nombre": "del Sistema de Transporte Colectivo",
+    "ecCount": 26,
+    "ecCodigos": [
+      "EC0004",
+      "EC0007",
+      "EC0008",
+      "EC0147",
+      "EC0195",
+      "EC0262",
+      "EC0309",
+      "EC0310",
+      "EC0311",
+      "EC0312",
+      "EC0382",
+      "EC0498",
+      "EC0499",
+      "EC0770",
+      "EC0771",
+      "EC0936",
+      "EC0937",
+      "EC1144",
+      "EC1146",
+      "EC1147",
+      "EC1148",
+      "EC1149",
+      "EC1192",
+      "EC1193",
+      "EC1251",
+      "EC1669"
+    ]
+  },
+  {
+    "nombre": "del Sector del Ahorro y Crédito Popular",
+    "ecCount": 3,
+    "ecCodigos": [
+      "EC0009",
+      "EC0030",
+      "EC0455"
+    ]
+  },
+  {
+    "nombre": "de Masajes y Servicios de SPA",
+    "ecCount": 26,
+    "ecCodigos": [
+      "EC0010",
+      "EC0046",
+      "EC0143",
+      "EC0183",
+      "EC0186",
+      "EC0205",
+      "EC0816",
+      "EC0883",
+      "EC0899",
+      "EC0900",
+      "EC0901",
+      "EC0902",
+      "EC0967",
+      "EC0977",
+      "EC1048",
+      "EC1049",
+      "EC1260",
+      "EC1343",
+      "EC1347",
+      "EC1413",
+      "EC1447",
+      "EC1503",
+      "EC1540",
+      "EC1560",
+      "EC1582",
+      "EC1651"
+    ]
+  },
+  {
+    "nombre": "de Tecnologías de la Información y Comunicaciones",
+    "ecCount": 10,
+    "ecCodigos": [
+      "EC0011",
+      "EC0012",
+      "EC0013",
+      "EC0107",
+      "EC0108",
+      "EC0109",
+      "EC0156",
+      "EC0157",
+      "EC0160",
+      "EC1653"
+    ]
+  },
+  {
+    "nombre": "de la Industria Restaurantera Nacional",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC0016",
+      "EC0314"
+    ]
+  },
+  {
+    "nombre": "de la Industria Azucarera",
+    "ecCount": 8,
+    "ecCodigos": [
+      "EC0017",
+      "EC0018",
+      "EC0031",
+      "EC0980",
+      "EC1108",
+      "EC1109",
+      "EC1174",
+      "EC1584"
+    ]
+  },
+  {
+    "nombre": "del Sector Rural (Agropecuario, Pesquero, Forestal, Ambiental y de Alimentación)",
+    "ecCount": 49,
+    "ecCodigos": [
+      "EC0019",
+      "EC0020",
+      "EC0067",
+      "EC0068",
+      "EC0069",
+      "EC0070",
+      "EC0093",
+      "EC0174",
+      "EC0175",
+      "EC0197",
+      "EC0222",
+      "EC0224",
+      "EC0225",
+      "EC0228",
+      "EC0271",
+      "EC0272",
+      "EC0275",
+      "EC0316",
+      "EC0438",
+      "EC0439",
+      "EC0446",
+      "EC0456",
+      "EC0481",
+      "EC0508",
+      "EC0556",
+      "EC0557",
+      "EC0578",
+      "EC0579",
+      "EC0595",
+      "EC0596",
+      "EC0597",
+      "EC0598",
+      "EC0599",
+      "EC0627",
+      "EC0794",
+      "EC0817",
+      "EC0818",
+      "EC0819",
+      "EC0820",
+      "EC0821",
+      "EC0911",
+      "EC0912",
+      "EC0979",
+      "EC1058",
+      "EC1154",
+      "EC1155",
+      "EC1173",
+      "EC1496",
+      "EC1570"
+    ]
+  },
+  {
+    "nombre": "Del Sector de Seguridad Privada",
+    "ecCount": 16,
+    "ecCodigos": [
+      "EC0023",
+      "EC0058",
+      "EC0059",
+      "EC0060",
+      "EC0061",
+      "EC0062",
+      "EC0063",
+      "EC0087",
+      "EC0213",
+      "EC0293",
+      "EC0329",
+      "EC0536",
+      "EC0684",
+      "EC0876",
+      "EC1262",
+      "EC1544"
+    ]
+  },
+  {
+    "nombre": "de Asistencia Social",
+    "ecCount": 15,
+    "ecCodigos": [
+      "EC0025",
+      "EC0028",
+      "EC0334",
+      "EC0335",
+      "EC0435",
+      "EC0665",
+      "EC0669",
+      "EC0866",
+      "EC0934",
+      "EC0963",
+      "EC0966",
+      "EC1140",
+      "EC1319",
+      "EC1400",
+      "EC1571 "
+    ]
+  },
+  {
+    "nombre": "del Instituto del Fondo Nacional de la Vivienda para los Trabajadores (INFONAVIT)",
+    "ecCount": 9,
+    "ecCodigos": [
+      "EC0036",
+      "EC0487",
+      "EC0903.02",
+      "EC0939.02",
+      "EC0940.02",
+      "EC0941.01",
+      "EC0943",
+      "EC0944",
+      "EC1443"
+    ]
+  },
+  {
+    "nombre": "del Sector Turismo",
+    "ecCount": 14,
+    "ecCodigos": [
+      "EC0038",
+      "EC0042",
+      "EC0043",
+      "EC0044",
+      "EC0045",
+      "EC0047",
+      "EC0126",
+      "EC0127",
+      "EC0128",
+      "EC0585",
+      "EC0621",
+      "EC0895",
+      "EC1392",
+      "EC1456"
+    ]
+  },
+  {
+    "nombre": "de la Asociación Mexicana de Capacitación de Personal y Empresarial, A.C.",
+    "ecCount": 10,
+    "ecCodigos": [
+      "EC0049",
+      "EC0050",
+      "EC0217.01",
+      "EC0301",
+      "EC1205",
+      "EC1264",
+      "EC1398",
+      "EC1466",
+      "EC1585",
+      "EC1608"
+    ]
+  },
+  {
+    "nombre": "de Auditoría a Obra Pública",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0051"
+    ]
+  },
+  {
+    "nombre": "del Sector Óptico",
+    "ecCount": 4,
+    "ecCodigos": [
+      "EC0052",
+      "EC0053",
+      "EC0054",
+      "EC0056"
+    ]
+  },
+  {
+    "nombre": "de la Asociación Mexicana de Empresas del Ramo de Instalaciones para la Construcción, A.C.",
+    "ecCount": 7,
+    "ecCodigos": [
+      "EC0065",
+      "EC0118",
+      "EC0443",
+      "EC0985",
+      "EC1178",
+      "EC1187",
+      "EC1642"
+    ]
+  },
+  {
+    "nombre": "de Servicios Turísticos en Aguascalientes",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0072"
+    ]
+  },
+  {
+    "nombre": "del Consejo Nacional de Normalización y Certificación de Competencias Laborales (CONOCER)",
+    "ecCount": 5,
+    "ecCodigos": [
+      "EC0074",
+      "EC0076",
+      "EC0091",
+      "EC0862",
+      "EC1237"
+    ]
+  },
+  {
+    "nombre": "Turismo / Industria Restaurantera Nacional",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0081"
+    ]
+  },
+  {
+    "nombre": "de Cobranza Extrajudicial y Judicial",
+    "ecCount": 4,
+    "ecCodigos": [
+      "EC0083.01",
+      "EC0281.01",
+      "EC0282.01",
+      "EC1541"
+    ]
+  },
+  {
+    "nombre": "con fines de Evaluación y Certificación para Educación Básica",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0084"
+    ]
+  },
+  {
+    "nombre": "para la Logística y la Cadena de Suministros en México",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0089"
+    ]
+  },
+  {
+    "nombre": "de Comercio",
+    "ecCount": 7,
+    "ecCodigos": [
+      "EC0094",
+      "EC0095",
+      "EC0096",
+      "EC0098",
+      "EC0114",
+      "EC0116",
+      "EC1286"
+    ]
+  },
+  {
+    "nombre": "de la Administración Pública del Municipio de Monterrey",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC0105",
+      "EC0938"
+    ]
+  },
+  {
+    "nombre": "de la Asociación Mexicana de Profesionales Inmobiliarios, A. C.",
+    "ecCount": 6,
+    "ecCodigos": [
+      "EC0110.02",
+      "EC0112",
+      "EC0277.01",
+      "EC0471",
+      "EC1254",
+      "EC1564"
+    ]
+  },
+  {
+    "nombre": "de la Sociedad de la Información y el Conocimiento",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0113"
+    ]
+  },
+  {
+    "nombre": "De la Cámara Nacional de la Industria Editorial Mexicana",
+    "ecCount": 11,
+    "ecCodigos": [
+      "EC0120.01",
+      "EC0486",
+      "EC0538.01",
+      "EC0957",
+      "EC1166",
+      "EC1191",
+      "EC1207",
+      "EC1263",
+      "EC1302",
+      "EC1418",
+      "EC1562"
+    ]
+  },
+  {
+    "nombre": "de Tecnologías de la Información y la Comunicación para la Educación del ILCE.",
+    "ecCount": 11,
+    "ecCodigos": [
+      "EC0121.01",
+      "EC0336",
+      "EC0337",
+      "EC0541",
+      "EC0935",
+      "EC1074",
+      "EC1158",
+      "EC1201",
+      "EC1202",
+      "EC1258",
+      "EC1410"
+    ]
+  },
+  {
+    "nombre": "de los Fondos de Aseguramiento Agropecuario",
+    "ecCount": 4,
+    "ecCodigos": [
+      "EC0129",
+      "EC0130",
+      "EC0922",
+      "EC0923"
+    ]
+  },
+  {
+    "nombre": "de la Asociación Nacional de Farmacias de México",
+    "ecCount": 6,
+    "ecCodigos": [
+      "EC0135",
+      "EC0136",
+      "EC0583",
+      "EC0584",
+      "EC1288",
+      "EC1289"
+    ]
+  },
+  {
+    "nombre": "de Desarrollo Social en Espacios Públicos",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0137"
+    ]
+  },
+  {
+    "nombre": "de Conservas Alimenticias",
+    "ecCount": 4,
+    "ecCodigos": [
+      "EC0138",
+      "EC0288",
+      "EC0469",
+      "EC0480"
+    ]
+  },
+  {
+    "nombre": "del Sector Hídrico",
+    "ecCount": 23,
+    "ecCodigos": [
+      "EC0140",
+      "EC0141",
+      "EC0145",
+      "EC0149",
+      "EC0153",
+      "EC0154",
+      "EC0180",
+      "EC0208",
+      "EC0209",
+      "EC0210",
+      "EC0214",
+      "EC0215",
+      "EC0216",
+      "EC0237",
+      "EC0317",
+      "EC0318",
+      "EC0319",
+      "EC0349",
+      "EC0440",
+      "EC0913",
+      "EC0914",
+      "EC1110",
+      "EC1156"
+    ]
+  },
+  {
+    "nombre": "de Controladores de Plagas / Asociación Nacional de Controladores de Plagas Urbanas, A.C.",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0146"
+    ]
+  },
+  {
+    "nombre": "de Gestión e Innovación Educativa de la Educación Básica",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0150"
+    ]
+  },
+  {
+    "nombre": "de Sociedades Cooperativas \"Polos de Desarrollo Regional\"",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0155"
+    ]
+  },
+  {
+    "nombre": "Guardia Nacional",
+    "ecCount": 55,
+    "ecCodigos": [
+      "EC0162",
+      "EC0179",
+      "EC0255",
+      "EC0259",
+      "EC0294",
+      "EC0295",
+      "EC0296",
+      "EC0298",
+      "EC0299",
+      "EC0509.01",
+      "EC0510",
+      "EC0512",
+      "EC0534",
+      "EC0535",
+      "EC0542",
+      "EC0543",
+      "EC0544.01",
+      "EC0545",
+      "EC0546",
+      "EC0547",
+      "EC0550",
+      "EC0551",
+      "EC0592",
+      "EC0593",
+      "EC0593.01",
+      "EC0609",
+      "EC0655.01",
+      "EC0656",
+      "EC0757",
+      "EC0758",
+      "EC0759",
+      "EC0760",
+      "EC0795",
+      "EC0799",
+      "EC0800",
+      "EC0927",
+      "EC0928",
+      "EC0929",
+      "EC1054",
+      "EC1055",
+      "EC1196",
+      "EC1197",
+      "EC1199",
+      "EC1247",
+      "EC1499",
+      "EC1538",
+      "EC1578",
+      "EC1593",
+      "EC1616",
+      "EC1645",
+      "EC1648",
+      "EC1673",
+      "EC1675",
+      "EC1676",
+      "EC1677"
+    ]
+  },
+  {
+    "nombre": "en Control Interno de la Administración Pública Federal",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0176"
+    ]
+  },
+  {
+    "nombre": "de la Federación Nacional de Sindicatos Independientes",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0182"
+    ]
+  },
+  {
+    "nombre": "de Servicios Turísticos en Bahía de Banderas",
+    "ecCount": 4,
+    "ecCodigos": [
+      "EC0184",
+      "EC0206",
+      "EC0612",
+      "EC0620"
+    ]
+  },
+  {
+    "nombre": "de Inclusión Laboral",
+    "ecCount": 3,
+    "ecCodigos": [
+      "EC0185",
+      "EC0189",
+      "EC0190"
+    ]
+  },
+  {
+    "nombre": "de la Cámara Mexicana de la Industria de la Construcción",
+    "ecCount": 34,
+    "ecCodigos": [
+      "EC0192",
+      "EC0219.01",
+      "EC0244",
+      "EC0320",
+      "EC0322",
+      "EC0324",
+      "EC0326",
+      "EC0351",
+      "EC0352",
+      "EC0368",
+      "EC0407",
+      "EC0410.01",
+      "EC0411",
+      "EC0445",
+      "EC0451",
+      "EC0452",
+      "EC0466",
+      "EC0472",
+      "EC0501",
+      "EC0502",
+      "EC0503",
+      "EC0523",
+      "EC0524",
+      "EC0525",
+      "EC0526",
+      "EC0527",
+      "EC0528",
+      "EC0635",
+      "EC0636",
+      "EC0822",
+      "EC0823",
+      "EC0824",
+      "EC0825",
+      "EC0984"
+    ]
+  },
+  {
+    "nombre": "de la Cámara Mexicana de la Industria del Embellecimiento Físico",
+    "ecCount": 19,
+    "ecCodigos": [
+      "EC0193",
+      "EC0211",
+      "EC0429",
+      "EC1045",
+      "EC1047",
+      "EC1136",
+      "EC1232",
+      "EC1277",
+      "EC1278",
+      "EC1313",
+      "EC1336",
+      "EC1391",
+      "EC1444",
+      "EC1463",
+      "EC1539",
+      "EC1575",
+      "EC1576",
+      "EC1604",
+      "EC1654"
+    ]
+  },
+  {
+    "nombre": "Para la Logística y la Cadena de Suministros en México / De la Cámara Mexicana de la Industria de la Construcción",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0200"
+    ]
+  },
+  {
+    "nombre": "de Grúas y Dispositivos para Elevación e Izaje de Nuevo León",
+    "ecCount": 6,
+    "ecCodigos": [
+      "EC0201",
+      "EC0531",
+      "EC0590",
+      "EC0680",
+      "EC0857",
+      "EC1280"
+    ]
+  },
+  {
+    "nombre": "de Maniobras e Intervensiones Terrestres con Equipo de Levante del Estado de Tabasco",
+    "ecCount": 3,
+    "ecCodigos": [
+      "EC0202",
+      "EC0203",
+      "EC0949"
+    ]
+  },
+  {
+    "nombre": "de Servicios de Coaching",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0204"
+    ]
+  },
+  {
+    "nombre": "de las Franquicias PEMEX",
+    "ecCount": 3,
+    "ecCodigos": [
+      "EC0218",
+      "EC0227",
+      "EC0253"
+    ]
+  },
+  {
+    "nombre": "del Clúster Automotriz de Nuevo León",
+    "ecCount": 7,
+    "ecCodigos": [
+      "EC0231",
+      "EC0233",
+      "EC0467",
+      "EC1175",
+      "EC1176",
+      "EC1281",
+      "EC1300"
+    ]
+  },
+  {
+    "nombre": "del Deporte",
+    "ecCount": 25,
+    "ecCodigos": [
+      "EC0232",
+      "EC0394",
+      "EC0474",
+      "EC0475",
+      "EC0476",
+      "EC0639",
+      "EC0640",
+      "EC0641",
+      "EC0642",
+      "EC0643",
+      "EC0781",
+      "EC0890",
+      "EC0893",
+      "EC0915",
+      "EC0917",
+      "EC1071",
+      "EC1114",
+      "EC1115",
+      "EC1372",
+      "EC1379",
+      "EC1380",
+      "EC1431",
+      "EC1432",
+      "EC1433",
+      "EC1515"
+    ]
+  },
+  {
+    "nombre": "del Instituto Tecnológico y de Estudios Superiores de Monterrey",
+    "ecCount": 8,
+    "ecCodigos": [
+      "EC0234",
+      "EC0327",
+      "EC0529",
+      "EC0565",
+      "EC0566",
+      "EC0773",
+      "EC0993",
+      "EC1072"
+    ]
+  },
+  {
+    "nombre": "de Educación Media Superior y Superior del Estado de Morelos",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0235"
+    ]
+  },
+  {
+    "nombre": "de la Industria Automotriz a Nivel Nacional",
+    "ecCount": 9,
+    "ecCodigos": [
+      "EC0241",
+      "EC0264",
+      "EC0520",
+      "EC0521",
+      "EC0632",
+      "EC0981",
+      "EC1177",
+      "EC1279",
+      "EC1342"
+    ]
+  },
+  {
+    "nombre": "del Transporte Público del Distrito Federal",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0246"
+    ]
+  },
+  {
+    "nombre": "de la Cámara Nacional de la Industria de Transformación",
+    "ecCount": 5,
+    "ecCodigos": [
+      "EC0247",
+      "EC0537",
+      "EC0768",
+      "EC1344",
+      "EC1451"
+    ]
+  },
+  {
+    "nombre": "de Higiene de Hospitales",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0248"
+    ]
+  },
+  {
+    "nombre": "del Sector de Consultoría",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC0249",
+      "EC0359"
+    ]
+  },
+  {
+    "nombre": "de la Asociación Nacional de la Industria Química",
+    "ecCount": 4,
+    "ecCodigos": [
+      "EC0252",
+      "EC0290",
+      "EC0291",
+      "EC0879"
+    ]
+  },
+  {
+    "nombre": "de Centros de Contacto y Teleservicios",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0254"
+    ]
+  },
+  {
+    "nombre": "de ProMéxico",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0258"
+    ]
+  },
+  {
+    "nombre": "para la Igualdad de Género",
+    "ecCount": 5,
+    "ecCodigos": [
+      "EC0263",
+      "EC0308",
+      "EC0433",
+      "EC0497",
+      "EC0539"
+    ]
+  },
+  {
+    "nombre": "de la Confederación Nacional Campesina",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0274"
+    ]
+  },
+  {
+    "nombre": "de Logística Portuaria en Veracruz",
+    "ecCount": 12,
+    "ecCodigos": [
+      "EC0283.01",
+      "EC1226",
+      "EC1227",
+      "EC1228",
+      "EC1359",
+      "EC1360",
+      "EC1361",
+      "EC1362",
+      "EC1446",
+      "EC1548",
+      "EC1549",
+      "EC1565"
+    ]
+  },
+  {
+    "nombre": "de Maquilas Teta Kawi",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0285"
+    ]
+  },
+  {
+    "nombre": "del Sector Cinematográfico Público Federal",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0292"
+    ]
+  },
+  {
+    "nombre": "de Comercio, Industria y Servicios de Baja California",
+    "ecCount": 19,
+    "ecCodigos": [
+      "EC0302",
+      "EC0304",
+      "EC0357",
+      "EC0363",
+      "EC0373",
+      "EC0374",
+      "EC0377",
+      "EC0388",
+      "EC0423",
+      "EC0614",
+      "EC0674",
+      "EC0675",
+      "EC0763",
+      "EC1044",
+      "EC1134",
+      "EC1165",
+      "EC1189",
+      "EC1485",
+      "EC1487"
+    ]
+  },
+  {
+    "nombre": "de Control de Fauna Urbana Nociva de Occidente",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC0303",
+      "EC0956"
+    ]
+  },
+  {
+    "nombre": "de la Asociación Mexicana de Capacitación de Personal y Empresarial, A.C. / de la Cámara Nacional de la Industria de Transformación",
+    "ecCount": 3,
+    "ecCodigos": [
+      "EC0305",
+      "EC1137",
+      "EC1138"
+    ]
+  },
+  {
+    "nombre": "de ManpowerGroup",
+    "ecCount": 19,
+    "ecCodigos": [
+      "EC0306",
+      "EC0315",
+      "EC0358",
+      "EC0381",
+      "EC0383",
+      "EC0389",
+      "EC0513",
+      "EC0553.01",
+      "EC0554.01",
+      "EC0811",
+      "EC0962",
+      "EC1186",
+      "EC1188",
+      "EC1190",
+      "EC1223",
+      "EC1261",
+      "EC1309",
+      "EC1609",
+      "EC1639"
+    ]
+  },
+  {
+    "nombre": "de la Cruz Roja Mexicana I.A.P.",
+    "ecCount": 5,
+    "ecCodigos": [
+      "EC0307.01",
+      "EC1369",
+      "EC1371.01",
+      "EC1402",
+      "EC1403"
+    ]
+  },
+  {
+    "nombre": "de Servicio de Mezcal",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC0313",
+      "EC0623"
+    ]
+  },
+  {
+    "nombre": "del Instituto del Fondo Nacional de la Vivienda para los Trabajadores/de Energía Renovable y Eficiencia Energética",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC0325",
+      "EC0431"
+    ]
+  },
+  {
+    "nombre": "de la Asociación Interdisciplinaria de Salud Ocupacional e Higiene de México, A.C.",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC0330",
+      "EC0861"
+    ]
+  },
+  {
+    "nombre": "del Sector Apícola",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0341"
+    ]
+  },
+  {
+    "nombre": "de la Asociación Mexicana de Cafés y Cafeterías de Especialidad, A.C.",
+    "ecCount": 3,
+    "ecCodigos": [
+      "EC0350",
+      "EC0622",
+      "EC1488"
+    ]
+  },
+  {
+    "nombre": "de Reynosa Asociación de Maquiladoras y Manufactureras, A.C. INDEX Reynosa",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0354"
+    ]
+  },
+  {
+    "nombre": "de la Formación para el Trabajo",
+    "ecCount": 29,
+    "ecCodigos": [
+      "EC0360",
+      "EC0362",
+      "EC0366",
+      "EC0372",
+      "EC0454",
+      "EC0563",
+      "EC0564",
+      "EC0568",
+      "EC0569",
+      "EC0570",
+      "EC0571",
+      "EC0616",
+      "EC0678",
+      "EC0679",
+      "EC0792",
+      "EC0793",
+      "EC0873",
+      "EC0874",
+      "EC0920",
+      "EC0971",
+      "EC0972",
+      "EC0973",
+      "EC0974",
+      "EC1159",
+      "EC1393",
+      "EC1506",
+      "EC1583",
+      "EC1587",
+      "EC1668"
+    ]
+  },
+  {
+    "nombre": "del Congreso del Trabajo",
+    "ecCount": 14,
+    "ecCodigos": [
+      "EC0361.01",
+      "EC0485",
+      "EC0491",
+      "EC0514",
+      "EC0611",
+      "EC0613.01",
+      "EC0659",
+      "EC0783",
+      "EC0784",
+      "EC0863",
+      "EC0870",
+      "EC0924",
+      "EC0948",
+      "EC1627"
+    ]
+  },
+  {
+    "nombre": "del Sector Minero de México",
+    "ecCount": 12,
+    "ecCodigos": [
+      "EC0364",
+      "EC0390",
+      "EC0417",
+      "EC0436",
+      "EC0437",
+      "EC0894",
+      "EC0976",
+      "EC1027",
+      "EC1028",
+      "EC1129",
+      "EC1183",
+      "EC1388"
+    ]
+  },
+  {
+    "nombre": "de la Productividad y Trabajo Decente",
+    "ecCount": 5,
+    "ecCodigos": [
+      "EC0376",
+      "EC0424",
+      "EC0492",
+      "EC0661",
+      "EC0891"
+    ]
+  },
+  {
+    "nombre": "del Sector Logístico de San Luis Potosí",
+    "ecCount": 11,
+    "ecCodigos": [
+      "EC0384.01",
+      "EC0478",
+      "EC0532",
+      "EC0591",
+      "EC1229",
+      "EC1283",
+      "EC1619",
+      "EC1657",
+      "EC1658",
+      "EC1659",
+      "EC1660"
+    ]
+  },
+  {
+    "nombre": "de la Universidad del Valle de Atemajac (UNIVA)",
+    "ecCount": 3,
+    "ecCodigos": [
+      "EC0385.01",
+      "EC0724",
+      "EC0946"
+    ]
+  },
+  {
+    "nombre": "de la Secretaría del Trabajo y Previsión Social",
+    "ecCount": 10,
+    "ecCodigos": [
+      "EC0391.01",
+      "EC0397.01",
+      "EC0449.01",
+      "EC0470",
+      "EC0493",
+      "EC0494",
+      "EC0495",
+      "EC0496",
+      "EC1374",
+      "EC1427"
+    ]
+  },
+  {
+    "nombre": "de Servicios Aduanales",
+    "ecCount": 4,
+    "ecCodigos": [
+      "EC0396.01",
+      "EC0432",
+      "EC0634",
+      "EC1445"
+    ]
+  },
+  {
+    "nombre": "de la Administración Pública Federal",
+    "ecCount": 7,
+    "ecCodigos": [
+      "EC0398",
+      "EC0400",
+      "EC0401",
+      "EC0402",
+      "EC0428",
+      "EC0500",
+      "EC1053.01"
+    ]
+  },
+  {
+    "nombre": "de la Asociación Mexicana de Distribuidores de Automotores, A.C. (AMDA)",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC0404",
+      "EC0465"
+    ]
+  },
+  {
+    "nombre": "de la Cámara Nacional de la Industria de Desarrollo y Promoción de la Vivienda",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC0406",
+      "EC0589"
+    ]
+  },
+  {
+    "nombre": "de Holcim de México",
+    "ecCount": 4,
+    "ecCodigos": [
+      "EC0408",
+      "EC0453",
+      "EC0522",
+      "EC0681"
+    ]
+  },
+  {
+    "nombre": "de Energía Renovable y Eficiencia Energética",
+    "ecCount": 14,
+    "ecCodigos": [
+      "EC0412",
+      "EC0413",
+      "EC0414",
+      "EC0416",
+      "EC0473",
+      "EC0530",
+      "EC1076",
+      "EC1077",
+      "EC1128",
+      "EC1180",
+      "EC1181",
+      "EC1528",
+      "EC1547",
+      "EC1641"
+    ]
+  },
+  {
+    "nombre": "de la Procuraduría General de Justicia del Estado de México",
+    "ecCount": 3,
+    "ecCodigos": [
+      "EC0419",
+      "EC0420",
+      "EC0421"
+    ]
+  },
+  {
+    "nombre": "de la Asociación Mexicana en Dirección de Recursos Humanos (AMEDIRH)",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0422"
+    ]
+  },
+  {
+    "nombre": "de Servicios de bomberos, rescate, atención de emergencia y desastres",
+    "ecCount": 4,
+    "ecCodigos": [
+      "EC0426.01",
+      "EC0555",
+      "EC0882",
+      "EC1404"
+    ]
+  },
+  {
+    "nombre": "de Liverpool",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0441"
+    ]
+  },
+  {
+    "nombre": "del Consejo Nacional de Fomento Educativo",
+    "ecCount": 4,
+    "ecCodigos": [
+      "EC0444",
+      "EC0833",
+      "EC0847",
+      "EC0854"
+    ]
+  },
+  {
+    "nombre": "de Editorial Santillana",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC0447",
+      "EC0507"
+    ]
+  },
+  {
+    "nombre": "del Sector del Desarrollo Empresarial de Jalisco",
+    "ecCount": 3,
+    "ecCodigos": [
+      "EC0448",
+      "EC0515",
+      "EC0516"
+    ]
+  },
+  {
+    "nombre": "de la Industria Hipotecaria",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0458"
+    ]
+  },
+  {
+    "nombre": "de Movilidad y Transportes del Estado de Puebla",
+    "ecCount": 7,
+    "ecCodigos": [
+      "EC0459.01",
+      "EC0460.01",
+      "EC0461.01",
+      "EC0814",
+      "EC0815",
+      "EC0867",
+      "EC1291"
+    ]
+  },
+  {
+    "nombre": "de la Administración Pública del Estado de México",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0462"
+    ]
+  },
+  {
+    "nombre": "de la Función Catastral y Registral del Estado de Puebla",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC0463",
+      "EC0464"
+    ]
+  },
+  {
+    "nombre": "de la Comisión Federal para la Protección contra Riesgos Sanitarios y el Sector Farmacéutico",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0468"
+    ]
+  },
+  {
+    "nombre": "del Sector Educativo en el Estado de Puebla",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0477"
+    ]
+  },
+  {
+    "nombre": "de Atención a Contingencias de Petróleos Mexicanos",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0479"
+    ]
+  },
+  {
+    "nombre": "del Museo Interactivo de Economía MIDE",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0482"
+    ]
+  },
+  {
+    "nombre": "Servicio de Protección Federal",
+    "ecCount": 3,
+    "ecCodigos": [
+      "EC0483",
+      "EC0558",
+      "EC0559"
+    ]
+  },
+  {
+    "nombre": "de Colgate Palmolive y la Asociación Nacional de Distribuidores de Medicinas",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0484"
+    ]
+  },
+  {
+    "nombre": "de la Secretaría de Comunicaciones y Transportes",
+    "ecCount": 9,
+    "ecCodigos": [
+      "EC0488",
+      "EC0519",
+      "EC0580",
+      "EC1091",
+      "EC1098",
+      "EC1099",
+      "EC1100",
+      "EC1101",
+      "EC1102"
+    ]
+  },
+  {
+    "nombre": "de la Cámara México-Alemana de Comercio e Industria A.C.",
+    "ecCount": 13,
+    "ecCodigos": [
+      "EC0490",
+      "EC0517",
+      "EC0540",
+      "EC0650",
+      "EC0657",
+      "EC0667",
+      "EC0671",
+      "EC0810",
+      "EC0887.01",
+      "EC0959",
+      "EC1253",
+      "EC1282",
+      "EC1530"
+    ]
+  },
+  {
+    "nombre": "del Sector de la Construcción en el Estado de Nuevo Léon",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC0504",
+      "EC0505"
+    ]
+  },
+  {
+    "nombre": "de Refrigeración y Climatización",
+    "ecCount": 3,
+    "ecCodigos": [
+      "EC0506",
+      "EC1389",
+      "EC1390"
+    ]
+  },
+  {
+    "nombre": "de la Universidad de Monterrey",
+    "ecCount": 3,
+    "ecCodigos": [
+      "EC0518",
+      "EC0567",
+      "EC1266"
+    ]
+  },
+  {
+    "nombre": "del Sector de Gases Combustibles",
+    "ecCount": 3,
+    "ecCodigos": [
+      "EC0533",
+      "EC0587",
+      "EC0588"
+    ]
+  },
+  {
+    "nombre": "de la  Prevención y Atención de las Adicciones",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC0548",
+      "EC0897"
+    ]
+  },
+  {
+    "nombre": "de Acceso a la Información Pública y Administración de Archivos Públicos",
+    "ecCount": 7,
+    "ecCodigos": [
+      "EC0549",
+      "EC0624",
+      "EC0776",
+      "EC0888.01",
+      "EC0909",
+      "EC1428",
+      "EC1477"
+    ]
+  },
+  {
+    "nombre": "de Trabajo y cuidado en el hogar",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0561"
+    ]
+  },
+  {
+    "nombre": "del Tecnológico Nacional de México",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC0562",
+      "EC0772"
+    ]
+  },
+  {
+    "nombre": "del Grupo CAPSIESA",
+    "ecCount": 3,
+    "ecCodigos": [
+      "EC0572",
+      "EC0573",
+      "EC0574"
+    ]
+  },
+  {
+    "nombre": "de la Industria de la Confección y  del Vestido en Hidalgo",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC0575",
+      "EC0608"
+    ]
+  },
+  {
+    "nombre": "de la Industria Metalmecánica en Hidalgo",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC0576",
+      "EC0577"
+    ]
+  },
+  {
+    "nombre": "de la Productividad y Competitividad Laboral",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC0581",
+      "EC0617"
+    ]
+  },
+  {
+    "nombre": "de Comercio, Industria y Servicios de Baja California / de Energía Renovable y Eficiencia Energética / del Instituto del Fondo Nacional de la Vivienda para los Trabajadores (INFONAVIT)",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0586.01"
+    ]
+  },
+  {
+    "nombre": "en Protección Civil con Enfoque en Gestión Integral de Riesgos",
+    "ecCount": 7,
+    "ecCodigos": [
+      "EC0594",
+      "EC0610",
+      "EC0860.01",
+      "EC0907",
+      "EC0908.01",
+      "EC1092",
+      "EC1097"
+    ]
+  },
+  {
+    "nombre": "de Roshfrans",
+    "ecCount": 3,
+    "ecCodigos": [
+      "EC0600",
+      "EC0601",
+      "EC0602"
+    ]
+  },
+  {
+    "nombre": "de  Educación de Aguascalientes",
+    "ecCount": 3,
+    "ecCodigos": [
+      "EC0603",
+      "EC0604",
+      "EC0730"
+    ]
+  },
+  {
+    "nombre": "de la Educación de los Adultos",
+    "ecCount": 3,
+    "ecCodigos": [
+      "EC0605",
+      "EC1454",
+      "EC1455"
+    ]
+  },
+  {
+    "nombre": "del Sector Aeroespacial en México",
+    "ecCount": 4,
+    "ecCodigos": [
+      "EC0606",
+      "EC0607",
+      "EC0951",
+      "EC0952"
+    ]
+  },
+  {
+    "nombre": "de la Red de Universidades La Salle",
+    "ecCount": 3,
+    "ecCodigos": [
+      "EC0615",
+      "EC0618",
+      "EC1073"
+    ]
+  },
+  {
+    "nombre": "para el Desarrollo de Competencias Transversales",
+    "ecCount": 3,
+    "ecCodigos": [
+      "EC0619",
+      "EC0945",
+      "EC1008"
+    ]
+  },
+  {
+    "nombre": "de la Administración Pública Municipal",
+    "ecCount": 6,
+    "ecCodigos": [
+      "EC0625",
+      "EC0689",
+      "EC0775",
+      "EC0777",
+      "EC0778",
+      "EC0978"
+    ]
+  },
+  {
+    "nombre": "del Sistema de Justicia Penal Adversarial",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC0626",
+      "EC1081"
+    ]
+  },
+  {
+    "nombre": "de Riegos Agrícolas Tecnificados con Aguas Residuales Tratadas",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0628"
+    ]
+  },
+  {
+    "nombre": "del Colegio Nacional de Educación Profesional Técnica",
+    "ecCount": 8,
+    "ecCodigos": [
+      "EC0629",
+      "EC0630",
+      "EC0631",
+      "EC0647",
+      "EC0648",
+      "EC0886",
+      "EC1125",
+      "EC1310"
+    ]
+  },
+  {
+    "nombre": "de la Asociación Mexicana de Capacitación de Personal y Empresarial A.C/Cámara Nacional de la Industria de la Transformación CANACINTRA",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC0633",
+      "EC0774"
+    ]
+  },
+  {
+    "nombre": "del Instituto Nacional de la Infraestructura Física Educativa",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0637"
+    ]
+  },
+  {
+    "nombre": "de Desarrollo, Profesionalización e Investigación Educativa del Estado de Chihuahua",
+    "ecCount": 5,
+    "ecCodigos": [
+      "EC0644",
+      "EC0646",
+      "EC0855",
+      "EC1230",
+      "EC1270"
+    ]
+  },
+  {
+    "nombre": "de la Secretaría de Educación Pública del Estado de Puebla",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC0645",
+      "EC0919"
+    ]
+  },
+  {
+    "nombre": "de Nacional Financiera",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0649"
+    ]
+  },
+  {
+    "nombre": "de Seguridad, Protección y Logística del Estado Mayor Presidencial",
+    "ecCount": 7,
+    "ecCodigos": [
+      "EC0654",
+      "EC0683",
+      "EC0904",
+      "EC0925",
+      "EC0926",
+      "EC0968",
+      "EC0969"
+    ]
+  },
+  {
+    "nombre": "del Poder Judicial del Estado de México",
+    "ecCount": 10,
+    "ecCodigos": [
+      "EC0658",
+      "EC1037",
+      "EC1038",
+      "EC1039",
+      "EC1040",
+      "EC1512",
+      "EC1513",
+      "EC1514",
+      "EC1520",
+      "EC1523"
+    ]
+  },
+  {
+    "nombre": "de la Industria del Taxímetro",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0662"
+    ]
+  },
+  {
+    "nombre": "de Controladores de Plagas / Asociación de Controladores de Plagas del Anáhuac, A.C.",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0663"
+    ]
+  },
+  {
+    "nombre": "de Valuación del Nacional Monte de Piedad",
+    "ecCount": 3,
+    "ecCodigos": [
+      "EC0664",
+      "EC0865",
+      "EC1182"
+    ]
+  },
+  {
+    "nombre": "del Banco del Ahorro Nacional y de Servicios Financieros S. N. C.",
+    "ecCount": 5,
+    "ecCodigos": [
+      "EC0670",
+      "EC0753",
+      "EC0754",
+      "EC0755",
+      "EC0856"
+    ]
+  },
+  {
+    "nombre": "del Centro de Experimentación y Seguridad Vial México, CESVI México, S.A.",
+    "ecCount": 8,
+    "ecCodigos": [
+      "EC0672",
+      "EC0673",
+      "EC0761",
+      "EC0765",
+      "EC0801",
+      "EC0803",
+      "EC0807",
+      "EC0869.01"
+    ]
+  },
+  {
+    "nombre": "de Empresas y Organizaciones que utilizan la Metodología KWT",
+    "ecCount": 3,
+    "ecCodigos": [
+      "EC0677",
+      "EC0808",
+      "EC0932"
+    ]
+  },
+  {
+    "nombre": "de Planeación, Ejecución y Gestión de la Estrategia",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC0682.01",
+      "EC1305"
+    ]
+  },
+  {
+    "nombre": "del Instituto Mexicano del Seguro Social",
+    "ecCount": 6,
+    "ecCodigos": [
+      "EC0685",
+      "EC1200.01",
+      "EC1268",
+      "EC1364",
+      "EC1552",
+      "EC1633"
+    ]
+  },
+  {
+    "nombre": "de 6 Pasos de la Salud",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0686"
+    ]
+  },
+  {
+    "nombre": "del Sistema Nacional de Certificación Turística",
+    "ecCount": 4,
+    "ecCodigos": [
+      "EC0687",
+      "EC0868",
+      "EC0877",
+      "EC0896"
+    ]
+  },
+  {
+    "nombre": "de la Universidad Autónoma de Nuevo León",
+    "ecCount": 11,
+    "ecCodigos": [
+      "EC0688",
+      "EC0864",
+      "EC0999",
+      "EC1117",
+      "EC1122",
+      "EC1334",
+      "EC1356",
+      "EC1357",
+      "EC1358",
+      "EC1542",
+      "EC1588"
+    ]
+  },
+  {
+    "nombre": "del Servicio Postal Mexicano",
+    "ecCount": 16,
+    "ecCodigos": [
+      "EC0690",
+      "EC0691",
+      "EC0692",
+      "EC0694",
+      "EC0695",
+      "EC0696",
+      "EC0697",
+      "EC0698",
+      "EC0699",
+      "EC0700",
+      "EC0701",
+      "EC0702",
+      "EC0703",
+      "EC0704",
+      "EC0705",
+      "EC0706"
+    ]
+  },
+  {
+    "nombre": "de la Subprocuraduría de Inspección Industrial de la Procuraduría Federal de Protección al Ambiente",
+    "ecCount": 4,
+    "ecCodigos": [
+      "EC0693",
+      "EC0878",
+      "EC0910",
+      "EC1094"
+    ]
+  },
+  {
+    "nombre": "del Consejo Empresarial Mexicano de Comercio Exterior, Inversión y Tecnología",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0707"
+    ]
+  },
+  {
+    "nombre": "de la Compañía  Sherwin-Williams",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0708"
+    ]
+  },
+  {
+    "nombre": "de ROTOPLAS",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0709"
+    ]
+  },
+  {
+    "nombre": "de los Colegios de Estudios Científicos y Tecnológicos",
+    "ecCount": 70,
+    "ecCodigos": [
+      "EC0711",
+      "EC0712",
+      "EC0713",
+      "EC0714",
+      "EC0716",
+      "EC0717",
+      "EC0718",
+      "EC0719",
+      "EC0720",
+      "EC0721",
+      "EC0722",
+      "EC0723",
+      "EC0725",
+      "EC0726",
+      "EC0727",
+      "EC0728",
+      "EC0729",
+      "EC0731",
+      "EC0732",
+      "EC0733",
+      "EC0734",
+      "EC0735",
+      "EC0736",
+      "EC0737",
+      "EC0738",
+      "EC0739",
+      "EC0740",
+      "EC0741",
+      "EC0742",
+      "EC0743",
+      "EC0744",
+      "EC0745",
+      "EC0746",
+      "EC0747",
+      "EC0748",
+      "EC0749",
+      "EC0750",
+      "EC0751",
+      "EC0752",
+      "EC0787",
+      "EC0788",
+      "EC0789",
+      "EC0790",
+      "EC0791",
+      "EC0826",
+      "EC0827",
+      "EC0828",
+      "EC0829",
+      "EC0830",
+      "EC0831",
+      "EC0832",
+      "EC0834",
+      "EC0835",
+      "EC0836",
+      "EC0837",
+      "EC0838",
+      "EC0839",
+      "EC0840",
+      "EC0841",
+      "EC0842",
+      "EC0843",
+      "EC0844",
+      "EC0845",
+      "EC0846",
+      "EC0848",
+      "EC0849",
+      "EC0850",
+      "EC0851",
+      "EC0852",
+      "EC0853"
+    ]
+  },
+  {
+    "nombre": "del Congreso del Trabajo / de la Cámara Mexicana de la Industria del Embellecimiento Físico",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0715.01"
+    ]
+  },
+  {
+    "nombre": "de Grupo Nacional Provincial, S.A.B",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0762"
+    ]
+  },
+  {
+    "nombre": "del Sector de la Industria de Protección Contra Incendios",
+    "ecCount": 4,
+    "ecCodigos": [
+      "EC0764",
+      "EC0767.01",
+      "EC0955",
+      "EC1490"
+    ]
+  },
+  {
+    "nombre": "de Servicios Técnicos, Educativos y de Apoyos a los Negocios",
+    "ecCount": 5,
+    "ecCodigos": [
+      "EC0766",
+      "EC0859",
+      "EC0998",
+      "EC1139",
+      "EC1617"
+    ]
+  },
+  {
+    "nombre": "de Centros de Integración Juvenil",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC0769",
+      "EC1632"
+    ]
+  },
+  {
+    "nombre": "de la Administración Publica Municipal Para la Igualdad de Género",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0779"
+    ]
+  },
+  {
+    "nombre": "de ANUIES- FESE",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC0782",
+      "EC1566"
+    ]
+  },
+  {
+    "nombre": "de la Secretaría de Educación del Estado de Hidalgo",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC0785",
+      "EC0786"
+    ]
+  },
+  {
+    "nombre": "del Sistema Mexicano de Metrología, Normalización, Evaluación de la Conformidad y Acreditación",
+    "ecCount": 3,
+    "ecCodigos": [
+      "EC0802",
+      "EC0805",
+      "EC0858"
+    ]
+  },
+  {
+    "nombre": "de Servicios Funerarios",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0804"
+    ]
+  },
+  {
+    "nombre": "de Sustentabilidad de la CANACINTRA",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC0806",
+      "EC1664"
+    ]
+  },
+  {
+    "nombre": "de Novartis",
+    "ecCount": 5,
+    "ecCodigos": [
+      "EC0809",
+      "EC1206",
+      "EC1248",
+      "EC1412",
+      "EC1448"
+    ]
+  },
+  {
+    "nombre": "de Conductores del Autotransporte Federal y Transporte Privado / del Autotransporte Federal de Pasaje y Turismo",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC0813.01",
+      "EC1086"
+    ]
+  },
+  {
+    "nombre": "de la Industria de la Confección",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC0871",
+      "EC0872"
+    ]
+  },
+  {
+    "nombre": "de Rehabilitación Física y/o Terapéutica, Asistida con Equinos y con Medios Alternativos",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0875"
+    ]
+  },
+  {
+    "nombre": "UNIVERSIDAD POPULAR AUTÓNOMA DEL ESTADO DE PUEBLA, A.C.",
+    "ecCount": 6,
+    "ecCodigos": [
+      "EC0884",
+      "EC0892.01",
+      "EC0975",
+      "EC1394.01",
+      "EC1464",
+      "EC1561"
+    ]
+  },
+  {
+    "nombre": "de la Universidad Iberoamericana",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC0885",
+      "EC1118"
+    ]
+  },
+  {
+    "nombre": "del Instituto Politécnico Nacional",
+    "ecCount": 3,
+    "ecCodigos": [
+      "EC0889",
+      "EC0947",
+      "EC1378"
+    ]
+  },
+  {
+    "nombre": "de las Artes Gráficas",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC0898",
+      "EC0930"
+    ]
+  },
+  {
+    "nombre": "de la Dirección General de la Policía Auxiliar de la Ciudad de México.",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC0905",
+      "EC0906"
+    ]
+  },
+  {
+    "nombre": "para la Promoción, Formación y Desarrollo de Habilidades en el ajedrez",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC0916",
+      "EC0918"
+    ]
+  },
+  {
+    "nombre": "de la Asociación Mexicana de Abaco, S.C.",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC0921",
+      "EC1007"
+    ]
+  },
+  {
+    "nombre": "de Servicios en Centros Ecuestres",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0931"
+    ]
+  },
+  {
+    "nombre": "de Nutrición Natural para la Promoción de Hábitos Saludables y Equilibrados",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0933"
+    ]
+  },
+  {
+    "nombre": "de Cemex",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0942"
+    ]
+  },
+  {
+    "nombre": "de la Industria Panificadora",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0950"
+    ]
+  },
+  {
+    "nombre": "de Kidzania de México",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC0953",
+      "EC0958"
+    ]
+  },
+  {
+    "nombre": "para el mantenimiento, limpieza, asepsia e higiene de bienes muebles e inmuebles",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC0960.01",
+      "EC0961"
+    ]
+  },
+  {
+    "nombre": "de la Geriatría",
+    "ecCount": 7,
+    "ecCodigos": [
+      "EC0964.01",
+      "EC0965.01",
+      "EC1141",
+      "EC1142",
+      "EC1208",
+      "EC1209",
+      "EC1519.01"
+    ]
+  },
+  {
+    "nombre": "del Consejo Estatal Agroalimentario de Guanajuato",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC0982",
+      "EC0983"
+    ]
+  },
+  {
+    "nombre": "de la Subsecretaría de Educación Media Superior",
+    "ecCount": 41,
+    "ecCodigos": [
+      "EC0986",
+      "EC0987",
+      "EC0988",
+      "EC0990",
+      "EC0992",
+      "EC0994",
+      "EC0995",
+      "EC0996",
+      "EC0997",
+      "EC1001",
+      "EC1002",
+      "EC1003",
+      "EC1004",
+      "EC1005",
+      "EC1006",
+      "EC1009",
+      "EC1010",
+      "EC1011",
+      "EC1012",
+      "EC1013",
+      "EC1014",
+      "EC1015",
+      "EC1016",
+      "EC1017",
+      "EC1018",
+      "EC1019",
+      "EC1020",
+      "EC1021",
+      "EC1022",
+      "EC1023",
+      "EC1024",
+      "EC1025",
+      "EC1026",
+      "EC1116",
+      "EC1119",
+      "EC1120",
+      "EC1121",
+      "EC1123",
+      "EC1126",
+      "EC1127",
+      "EC1569"
+    ]
+  },
+  {
+    "nombre": "de la Benemérita Universidad Autónoma de Puebla",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0989"
+    ]
+  },
+  {
+    "nombre": "de la Universidad del Valle de México",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC0991"
+    ]
+  },
+  {
+    "nombre": "Universidad Abierta y a Distancia de México",
+    "ecCount": 3,
+    "ecCodigos": [
+      "EC1000",
+      "EC1210",
+      "EC1568"
+    ]
+  },
+  {
+    "nombre": "de la Agencia Nacional de Seguridad Industrial y de Protección al Medio Ambiente del Sector Hidrocarburos (ASEA)",
+    "ecCount": 8,
+    "ecCodigos": [
+      "EC1029",
+      "EC1030",
+      "EC1035",
+      "EC1036",
+      "EC1131.01",
+      "EC1132",
+      "EC1354",
+      "EC1731"
+    ]
+  },
+  {
+    "nombre": "de Yoga Especializado",
+    "ecCount": 3,
+    "ecCodigos": [
+      "EC1041",
+      "EC1042",
+      "EC1043"
+    ]
+  },
+  {
+    "nombre": "de Pirotecnia",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1046"
+    ]
+  },
+  {
+    "nombre": "de Conductores de Autotransporte Federal y Transporte Privado",
+    "ecCount": 5,
+    "ecCodigos": [
+      "EC1051",
+      "EC1145",
+      "EC1215",
+      "EC1231",
+      "EC1238"
+    ]
+  },
+  {
+    "nombre": "de los Protocolos de Actuación de los Cuerpos Policiales del Estado de Puebla",
+    "ecCount": 4,
+    "ecCodigos": [
+      "EC1052",
+      "EC1150",
+      "EC1151",
+      "EC1153"
+    ]
+  },
+  {
+    "nombre": "para la Tutela de los Derechos de Acceso a la Información Pública y Protección de Datos Personales del Estado de México",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC1057",
+      "EC1171"
+    ]
+  },
+  {
+    "nombre": "de la SAGARPA",
+    "ecCount": 12,
+    "ecCodigos": [
+      "EC1059",
+      "EC1060",
+      "EC1061",
+      "EC1062",
+      "EC1063",
+      "EC1064",
+      "EC1065",
+      "EC1066",
+      "EC1067",
+      "EC1068",
+      "EC1069",
+      "EC1070"
+    ]
+  },
+  {
+    "nombre": "de Innovación Educativa",
+    "ecCount": 5,
+    "ecCodigos": [
+      "EC1075",
+      "EC1124",
+      "EC1252",
+      "EC1365",
+      "EC1474"
+    ]
+  },
+  {
+    "nombre": "del Sector Hipotecario",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1078"
+    ]
+  },
+  {
+    "nombre": "de Petróleos Mexicanos (PEMEX)",
+    "ecCount": 27,
+    "ecCodigos": [
+      "EC1079",
+      "EC1080",
+      "EC1160",
+      "EC1161.01",
+      "EC1162",
+      "EC1163",
+      "EC1240",
+      "EC1241",
+      "EC1329",
+      "EC1330",
+      "EC1350",
+      "EC1351",
+      "EC1352",
+      "EC1406",
+      "EC1419",
+      "EC1435",
+      "EC1449",
+      "EC1457",
+      "EC1478",
+      "EC1479",
+      "EC1480",
+      "EC1481",
+      "EC1577",
+      "EC1606",
+      "EC1635",
+      "EC1636",
+      "EC1637"
+    ]
+  },
+  {
+    "nombre": "de Aeropuertos y Servicios Auxiliares",
+    "ecCount": 3,
+    "ecCodigos": [
+      "EC1082",
+      "EC1233",
+      "EC1234"
+    ]
+  },
+  {
+    "nombre": "del Sector de Ingeniería Biomédica",
+    "ecCount": 5,
+    "ecCodigos": [
+      "EC1083",
+      "EC1411",
+      "EC1414",
+      "EC1511",
+      "EC1665"
+    ]
+  },
+  {
+    "nombre": "del Conservatorio de la Cultura Gastronómica Mexicana",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC1084",
+      "EC1276"
+    ]
+  },
+  {
+    "nombre": "de Interjet",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1087"
+    ]
+  },
+  {
+    "nombre": "del Secretariado Ejecutivo del Sistema Nacional de Seguridad pública",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC1088",
+      "EC1152"
+    ]
+  },
+  {
+    "nombre": "en Procuración de Justicia",
+    "ecCount": 11,
+    "ecCodigos": [
+      "EC1089.01",
+      "EC1460",
+      "EC1462",
+      "EC1527",
+      "EC1558",
+      "EC1581",
+      "EC1602",
+      "EC1603",
+      "EC1614",
+      "EC1615",
+      "EC1678"
+    ]
+  },
+  {
+    "nombre": "En Sistema Penal y Derechos Humanos",
+    "ecCount": 8,
+    "ecCodigos": [
+      "EC1093",
+      "EC1096",
+      "EC1103",
+      "EC1104",
+      "EC1105",
+      "EC1106",
+      "EC1235",
+      "EC1292"
+    ]
+  },
+  {
+    "nombre": "de la Procuraduría Ambiental y del Ordenamiento Territorial de la CDMX",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1095"
+    ]
+  },
+  {
+    "nombre": "para el Cuidado de la Salud de las Personas",
+    "ecCount": 11,
+    "ecCodigos": [
+      "EC1133",
+      "EC1315.01",
+      "EC1317",
+      "EC1318.01",
+      "EC1346",
+      "EC1363",
+      "EC1486",
+      "EC1492",
+      "EC1505",
+      "EC1510",
+      "EC1618"
+    ]
+  },
+  {
+    "nombre": "de Flex",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC1135",
+      "EC1164"
+    ]
+  },
+  {
+    "nombre": "para la Atención Integral al Consumo de Sustancias Psicoactivas",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1143"
+    ]
+  },
+  {
+    "nombre": "de Universidad Popular Autónoma del Estado de Puebla / del Clúster Automotriz de Nuevo León",
+    "ecCount": 4,
+    "ecCodigos": [
+      "EC1157",
+      "EC1303",
+      "EC1304",
+      "EC1607"
+    ]
+  },
+  {
+    "nombre": "del Autotransporte Federal de Pasaje y Turismo",
+    "ecCount": 4,
+    "ecCodigos": [
+      "EC1167",
+      "EC1168",
+      "EC1169",
+      "EC1170"
+    ]
+  },
+  {
+    "nombre": "de la Comisión Ejecutiva de Atención a Víctimas",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1172"
+    ]
+  },
+  {
+    "nombre": "de la Secretaría de la Defensa Nacional",
+    "ecCount": 39,
+    "ecCodigos": [
+      "EC1184",
+      "EC1194",
+      "EC1195",
+      "EC1198",
+      "EC1216",
+      "EC1217",
+      "EC1218",
+      "EC1219",
+      "EC1220",
+      "EC1221",
+      "EC1242",
+      "EC1246",
+      "EC1290",
+      "EC1321",
+      "EC1322",
+      "EC1323",
+      "EC1324",
+      "EC1325",
+      "EC1339.01",
+      "EC1340",
+      "EC1341",
+      "EC1382",
+      "EC1383",
+      "EC1385",
+      "EC1408",
+      "EC1482",
+      "EC1497",
+      "EC1498",
+      "EC1500",
+      "EC1501",
+      "EC1502",
+      "EC1536",
+      "EC1579",
+      "EC1594",
+      "EC1646",
+      "EC1649",
+      "EC1650",
+      "EC1674",
+      "EC1719"
+    ]
+  },
+  {
+    "nombre": "para la generación de experiencias Educativas en Museos Interactivos",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1203"
+    ]
+  },
+  {
+    "nombre": "Periciales y de Investigación Forense",
+    "ecCount": 3,
+    "ecCodigos": [
+      "EC1204",
+      "EC1311",
+      "EC1312"
+    ]
+  },
+  {
+    "nombre": "de Instalaciones Superficiales de Producción y Sistemas Artificiales de Producción de Hidrocarburos",
+    "ecCount": 4,
+    "ecCodigos": [
+      "EC1211",
+      "EC1212",
+      "EC1213",
+      "EC1214"
+    ]
+  },
+  {
+    "nombre": "de la Auditoría Superior del Estado de Hidalgo",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1236"
+    ]
+  },
+  {
+    "nombre": "de la Secretaría Marina",
+    "ecCount": 3,
+    "ecCodigos": [
+      "EC1243",
+      "EC1244",
+      "EC1245"
+    ]
+  },
+  {
+    "nombre": "de la Secretaría del Trabajo del Estado de México",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1250"
+    ]
+  },
+  {
+    "nombre": "de la Confederación Revolucionaria de Obreros y Campesinos, CROC",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC1256",
+      "EC1439"
+    ]
+  },
+  {
+    "nombre": "de la Asociación Mexicana de Capacitación de Personal y Empresarial A.C. / ManpowerGroup",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1259"
+    ]
+  },
+  {
+    "nombre": "de la Asociación Mexicana de Capacitación de Personal y Empresarial A.C. / de Tecnologías de la Información y la Comunicación para la Educación del ILCE",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC1265",
+      "EC1307"
+    ]
+  },
+  {
+    "nombre": "del Sector Turismo /  del Sistema Nacional de Certificación Turística",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1267"
+    ]
+  },
+  {
+    "nombre": "para la Promoción, formación y desarrollo de habilidades en la competitividad laboral y para el bienestar personal y social",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1269"
+    ]
+  },
+  {
+    "nombre": "Modelos de Operación Cosmos del Sistema de Justicia Penal Acusatorio en el Estado de Querétaro",
+    "ecCount": 18,
+    "ecCodigos": [
+      "EC1271",
+      "EC1272",
+      "EC1273",
+      "EC1274",
+      "EC1275",
+      "EC1295",
+      "EC1296",
+      "EC1297",
+      "EC1298",
+      "EC1332",
+      "EC1333",
+      "EC1367",
+      "EC1368",
+      "EC1381",
+      "EC1384",
+      "EC1386",
+      "EC1387",
+      "EC1628"
+    ]
+  },
+  {
+    "nombre": "de Petróleos Mexicanos (PEMEX) / del Instituto Tecnológico y de Estudios Superiores de Monterrey (ITESM)",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1284"
+    ]
+  },
+  {
+    "nombre": "de la Asociación Nacional de Importadores y Exportadores de la República Mexicana, A.C.",
+    "ecCount": 3,
+    "ecCodigos": [
+      "EC1285",
+      "EC1524",
+      "EC1652"
+    ]
+  },
+  {
+    "nombre": "para la mejora en la cadena de suministros y prevención de la corrupción",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1287"
+    ]
+  },
+  {
+    "nombre": "del Instituto Mexiquense del Emprendedor",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1293"
+    ]
+  },
+  {
+    "nombre": "de Observancia y cumplimiento de la normatividad en materia de anticorrupción",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1294"
+    ]
+  },
+  {
+    "nombre": "de Inclusión y Accesibilidad en el Transporte Público",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1299"
+    ]
+  },
+  {
+    "nombre": "de la Asociación Nacional de Importadores y Exportadores de la República Mexicana A.C.",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1301"
+    ]
+  },
+  {
+    "nombre": "de Servicios de Valuación",
+    "ecCount": 4,
+    "ecCodigos": [
+      "EC1306",
+      "EC1349",
+      "EC1397",
+      "EC1465"
+    ]
+  },
+  {
+    "nombre": "de los Comités Interinstitucionales para la Evaluación de la Educación Superior, A.C.",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC1314",
+      "EC1320"
+    ]
+  },
+  {
+    "nombre": "para el Cuidado de la Salud de las Personas / para la Igualdad de Género",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1316"
+    ]
+  },
+  {
+    "nombre": "de la Coordinación Nacional Antisecuestro y Delitos de Alto Impacto",
+    "ecCount": 3,
+    "ecCodigos": [
+      "EC1326",
+      "EC1327",
+      "EC1328"
+    ]
+  },
+  {
+    "nombre": "de Movilidad de Vehículos Particulares de la CDMX",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1331"
+    ]
+  },
+  {
+    "nombre": "de Coparmex Metropolitano Estado de México",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1335"
+    ]
+  },
+  {
+    "nombre": "de Instituciones Educativas de la Sociedad Civil",
+    "ecCount": 5,
+    "ecCodigos": [
+      "EC1337",
+      "EC1338",
+      "EC1469",
+      "EC1638",
+      "EC1680"
+    ]
+  },
+  {
+    "nombre": "de Servicios Generales y de Alimentación para Comedores Institucionales",
+    "ecCount": 10,
+    "ecCodigos": [
+      "EC1345",
+      "EC1395",
+      "EC1484",
+      "EC1550",
+      "EC1589",
+      "EC1622",
+      "EC1623",
+      "EC1624",
+      "EC1625",
+      "EC1626"
+    ]
+  },
+  {
+    "nombre": "de Liderazgo, Innovación y Emprendimiento",
+    "ecCount": 3,
+    "ecCodigos": [
+      "EC1348",
+      "EC1416",
+      "EC1682"
+    ]
+  },
+  {
+    "nombre": "del Ecosistema STEM",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1353.01"
+    ]
+  },
+  {
+    "nombre": "del Instituto Nacional de Migración",
+    "ecCount": 9,
+    "ecCodigos": [
+      "EC1366",
+      "EC1425",
+      "EC1426",
+      "EC1518",
+      "EC1521",
+      "EC1522",
+      "EC1611",
+      "EC1612",
+      "EC1613"
+    ]
+  },
+  {
+    "nombre": "del CIATEC",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1370"
+    ]
+  },
+  {
+    "nombre": "de Saberes de Pueblos Originarios (Huehuetlamatiliztli)",
+    "ecCount": 6,
+    "ecCodigos": [
+      "EC1373",
+      "EC1375",
+      "EC1376",
+      "EC1377",
+      "EC1424",
+      "EC1472"
+    ]
+  },
+  {
+    "nombre": "de Genealogía e Historia Familiar",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1396"
+    ]
+  },
+  {
+    "nombre": "de Gobernanza, Cumplimiento e Integridad",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1399"
+    ]
+  },
+  {
+    "nombre": "de Sustentabilidad Comunitaria",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC1401",
+      "EC1551"
+    ]
+  },
+  {
+    "nombre": "de la Confederación de Trabajadores de México (CTM)",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC1405",
+      "EC1504"
+    ]
+  },
+  {
+    "nombre": "de la Secretaría de Seguridad Pública de Zacatecas",
+    "ecCount": 5,
+    "ecCodigos": [
+      "EC1407",
+      "EC1436",
+      "EC1437",
+      "EC1458",
+      "EC1459"
+    ]
+  },
+  {
+    "nombre": "Liderazgo, Innovación y Emprendimiento / Interinstitucionales para la Evaluación de la Educación Superior, A.C.",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1409"
+    ]
+  },
+  {
+    "nombre": "de Coca-Cola México",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1415"
+    ]
+  },
+  {
+    "nombre": "de Servicios de Podología",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1417"
+    ]
+  },
+  {
+    "nombre": "del Notariado Mexicano",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1420"
+    ]
+  },
+  {
+    "nombre": "de la Industria Fílmica y el Audiovisual (video)",
+    "ecCount": 3,
+    "ecCodigos": [
+      "EC1421",
+      "EC1422",
+      "EC1423"
+    ]
+  },
+  {
+    "nombre": "Sector de la Transformación Social",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1429"
+    ]
+  },
+  {
+    "nombre": "de Metrobús",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1430"
+    ]
+  },
+  {
+    "nombre": "de la Administración Pública del Estado de Hidalgo",
+    "ecCount": 4,
+    "ecCodigos": [
+      "EC1434",
+      "EC1473",
+      "EC1494",
+      "EC1666"
+    ]
+  },
+  {
+    "nombre": "de la Universidad Mexiquense de Seguridad",
+    "ecCount": 8,
+    "ecCodigos": [
+      "EC1438",
+      "EC1531",
+      "EC1532",
+      "EC1535",
+      "EC1537",
+      "EC1595",
+      "EC1596",
+      "EC1601"
+    ]
+  },
+  {
+    "nombre": "Consejo Nacional de Normalización y Certificación de Competencias Laborales (CONOCER) / Universidad Autónoma de Nuevo León",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1440"
+    ]
+  },
+  {
+    "nombre": "Conductores de Autotransporte Federal y Transporte Privado / Grúas y Dispositivos para Elevación e Izaje",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC1441",
+      "EC1442"
+    ]
+  },
+  {
+    "nombre": "del Sector Automotriz Comercial en Suspensión y Dirección",
+    "ecCount": 5,
+    "ecCodigos": [
+      "EC1450",
+      "EC1452",
+      "EC1470",
+      "EC1491",
+      "EC1679"
+    ]
+  },
+  {
+    "nombre": "de Protección Civil de Quintana Roo",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1453"
+    ]
+  },
+  {
+    "nombre": "de la Secretaría de Seguridad y Protección Ciudadana",
+    "ecCount": 3,
+    "ecCodigos": [
+      "EC1461",
+      "EC1483",
+      "EC1529"
+    ]
+  },
+  {
+    "nombre": "De Aparatología Estética, Cosmetología, Cosmiatría y Tratamientos Alternativos Corporales",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC1467",
+      "EC1468"
+    ]
+  },
+  {
+    "nombre": "para el Desarrollo de Habilidades y Formación de Capital Humano en el Estado de México",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1471"
+    ]
+  },
+  {
+    "nombre": "de Instituciones Educativas y Organizaciones de la Sociedad Civil con Enfoque Teológico",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC1475",
+      "EC1476"
+    ]
+  },
+  {
+    "nombre": "del Sector Asegurador en México",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1489"
+    ]
+  },
+  {
+    "nombre": "de Centros de Apuestas Remotas y Salas de Sorteos",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1493"
+    ]
+  },
+  {
+    "nombre": "del Fondo Nacional para el Fomento de las Artesanías",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC1495",
+      "EC1592"
+    ]
+  },
+  {
+    "nombre": "del Sector Automotriz Comercial en Suspensión y Dirección / Roshfrans",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1507"
+    ]
+  },
+  {
+    "nombre": "de Desarrollo BIM/MIC",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC1508",
+      "EC1590"
+    ]
+  },
+  {
+    "nombre": "del Clúster AgroAlimentario",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1509"
+    ]
+  },
+  {
+    "nombre": "de Artesanías en Chiapas",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1516"
+    ]
+  },
+  {
+    "nombre": "del INE",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1517"
+    ]
+  },
+  {
+    "nombre": "de la Fiscalía General de Estado de Guanajuato",
+    "ecCount": 5,
+    "ecCodigos": [
+      "EC1525",
+      "EC1526",
+      "EC1559",
+      "EC1598",
+      "EC1600"
+    ]
+  },
+  {
+    "nombre": "de Ciencias Policiales, Seguridad Pública y/o Ciudadana, así como Ciencias Periciales",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC1533",
+      "EC1534"
+    ]
+  },
+  {
+    "nombre": "de la Cámara México-Alemana de Comercio e Industria A.C. / de Energía Renovable y Eficiencia Energética",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1543"
+    ]
+  },
+  {
+    "nombre": "de la Cámara México-Alemana de Comercio e Industria A.C. / del Sector Empresarial",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1545"
+    ]
+  },
+  {
+    "nombre": "de la Asociación Mexicana de Capacitación de Personal y Empresarial A.C. / de la Federación Mexicana de Filosofía para Niños",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1546"
+    ]
+  },
+  {
+    "nombre": "de la Universidad Autónoma de Guadalajara",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1553"
+    ]
+  },
+  {
+    "nombre": "de Seguridad Pública y Espacios Libres de Violencia de Género",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC1554",
+      "EC1610"
+    ]
+  },
+  {
+    "nombre": "de la Atención Primaria de Salud",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC1555",
+      "EC1573"
+    ]
+  },
+  {
+    "nombre": "En Materia Anticorrupción",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1556"
+    ]
+  },
+  {
+    "nombre": "del Sistema Penitenciario Federal",
+    "ecCount": 3,
+    "ecCodigos": [
+      "EC1557",
+      "EC1580",
+      "EC1597"
+    ]
+  },
+  {
+    "nombre": "de Grupo CONAMAT",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC1563",
+      "EC1656"
+    ]
+  },
+  {
+    "nombre": "de Educación Durango",
+    "ecCount": 4,
+    "ecCodigos": [
+      "EC1567",
+      "EC1644",
+      "EC1671",
+      "EC1672"
+    ]
+  },
+  {
+    "nombre": "de Mejores Prácticas Corporativas en las Empresas Familiares",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1572"
+    ]
+  },
+  {
+    "nombre": "de Lotería Nacional",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1574"
+    ]
+  },
+  {
+    "nombre": "de la Construcción, Perforación y Mantenimiento de Instalaciones Marino-Terrestre del Sector Hidrocarburos",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1586"
+    ]
+  },
+  {
+    "nombre": "para la Reconstrucción del Tejido Social",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1591"
+    ]
+  },
+  {
+    "nombre": "de Investigación Criminal",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1599"
+    ]
+  },
+  {
+    "nombre": "de Seguridad de la Asociación de Bancos de México",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1605"
+    ]
+  },
+  {
+    "nombre": "de la Industria y Educación Musical en México",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1620"
+    ]
+  },
+  {
+    "nombre": "de Marketing en Entornos Analógicos y Digitales",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1621"
+    ]
+  },
+  {
+    "nombre": "del Fondo de la Vivienda del Instituto de Seguridad y Servicios Sociales de los Trabajadores del Estado de México (FOVISSSTE)",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1629"
+    ]
+  },
+  {
+    "nombre": "de Derechos Humanos e Igualdad",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC1630",
+      "EC1634"
+    ]
+  },
+  {
+    "nombre": "para una Movilidad segura y sostenible en el Transporte Público y Privado del Estado de México",
+    "ecCount": 2,
+    "ecCodigos": [
+      "EC1631",
+      "EC1686"
+    ]
+  },
+  {
+    "nombre": "de Turismo inclusivo",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1640"
+    ]
+  },
+  {
+    "nombre": "del Sistema Estatal de Protección de Derechos de las Niñas, Niños y Adolescentes de Querétaro",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1643"
+    ]
+  },
+  {
+    "nombre": "de Búsqueda de Personas Desaparecidas y No Localizadas",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1647"
+    ]
+  },
+  {
+    "nombre": "de la Cámara Nacional del Aluminio, (CANALUM)",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1655"
+    ]
+  },
+  {
+    "nombre": "de Trabajos de Acceso por Cuerdas (Rope Access)",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1661"
+    ]
+  },
+  {
+    "nombre": "de la Formación para el Trabajo / de Roshfrans",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1662"
+    ]
+  },
+  {
+    "nombre": "de Actividades Ecoturísticas",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1663"
+    ]
+  },
+  {
+    "nombre": "para la Inclusión y Asistencia de Personas con Discapacidad",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1667"
+    ]
+  },
+  {
+    "nombre": "de Derechos Humanos e Igualdad / de la Geriatría",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1670"
+    ]
+  },
+  {
+    "nombre": "de la planeación de eventos sociales y entretenimiento",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1681 "
+    ]
+  },
+  {
+    "nombre": "de Universidad de Guadalajara",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1683"
+    ]
+  },
+  {
+    "nombre": "de Profesionales del Entrenamiento del Básquetbol",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1685"
+    ]
+  },
+  {
+    "nombre": "de la Secretaría de Agricultura y Desarrollo Rural",
+    "ecCount": 1,
+    "ecCodigos": [
+      "EC1707"
+    ]
+  }
+]

@@ -1,14 +1,19 @@
 /**
- * Sector and Committee driver for RENEC data extraction
- * Extracts Sectores and Comités from CONOCER's RENEC system
+ * Sector and Committee driver for RENEC data extraction (Updated Nov 2025)
+ * Extracts Sectores and Comités from CONOCER's new Angular SPA
+ *
+ * The new portal uses:
+ * - #/sectoresProductivos for SCIAN productive sectors (20 total)
+ * - #/sectoresOrganizacionales for occupational sectors
  */
 
 import { BaseDriver, type ExtractedItem } from "./base.driver";
-import type { DriverConfig, Sector, Comite, ECSectorRelation } from "../types";
+import type { Sector, Comite, ECSectorRelation } from "../types";
+import { RENEC_ENDPOINTS } from "../types";
 import { cleanText, computeContentHash } from "../utils/helpers";
 
-// Extend RENEC endpoints for sectors/committees
-const SECTOR_ENDPOINTS = {
+// Legacy endpoints (kept for reference - may redirect to homepage)
+const LEGACY_SECTOR_ENDPOINTS = {
   sectores: "/RENEC/controlador.do?comp=SECTORES",
   sectorDetail: "/RENEC/controlador.do?comp=SECTOR&id=",
   comites: "/RENEC/controlador.do?comp=COMITES",
@@ -35,10 +40,302 @@ export class SectorDriver extends BaseDriver {
   }> = [];
 
   getStartUrls(): string[] {
-    return [
-      this.buildUrl(SECTOR_ENDPOINTS.sectores),
-      this.buildUrl(SECTOR_ENDPOINTS.comites),
+    // Use new SPA endpoints
+    return [this.buildUrl(RENEC_ENDPOINTS.spa.sectors)];
+  }
+
+  /**
+   * Override harvest for Angular SPA extraction
+   */
+  async harvest(): Promise<ExtractedItem[]> {
+    const items: ExtractedItem[] = [];
+
+    try {
+      await this.initBrowser();
+
+      // Extract productive sectors from new SPA
+      const sectorItems = await this.harvestProductiveSectors();
+      items.push(...sectorItems);
+
+      console.log(`[SectorDriver] Extracted ${items.length} sectors`);
+    } catch (error) {
+      this.logError("harvest", error as Error);
+    } finally {
+      await this.closeBrowser();
+    }
+
+    return items;
+  }
+
+  /**
+   * Extract productive sectors from #/sectoresProductivos
+   */
+  private async harvestProductiveSectors(): Promise<ExtractedItem[]> {
+    const items: ExtractedItem[] = [];
+
+    if (!this.page) return items;
+
+    try {
+      const url = this.buildUrl(RENEC_ENDPOINTS.spa.sectors);
+      console.log(`[SectorDriver] Navigating to: ${url}`);
+
+      await this.page.goto(url, { waitUntil: "networkidle" });
+
+      // Wait for Angular to render
+      await this.page.waitForTimeout(2000);
+
+      // Wait for sector content to appear - the page shows sector cards with paragraphs
+      const loaded = await this.page
+        .waitForSelector("main p, mat-card, .sector-card, table tbody tr", {
+          timeout: 15000,
+        })
+        .then(() => true)
+        .catch(() => false);
+
+      if (!loaded) {
+        console.warn("[SectorDriver] Sector content did not load");
+        return items;
+      }
+
+      // The sectors page shows cards with images and paragraph titles
+      // Structure: generic > generic > (img + paragraph with sector name)
+      // First try to find all paragraph elements that contain sector names
+      const sectorParagraphs = await this.page.$$("main p");
+      console.log(
+        `[SectorDriver] Found ${sectorParagraphs.length} paragraphs in main`,
+      );
+
+      // Filter to find sector name paragraphs (they're typically in ALL CAPS and longer than 10 chars)
+      const sectorNames: string[] = [];
+      for (const p of sectorParagraphs) {
+        const text = await p.textContent();
+        if (text) {
+          const trimmed = text.trim();
+          // Sector names are uppercase, exclude headers and short items
+          if (
+            trimmed.length > 5 &&
+            trimmed === trimmed.toUpperCase() &&
+            !trimmed.includes("SECTORES PRODUCTIVOS") &&
+            !trimmed.includes("SCIAN") &&
+            !trimmed.includes("ESTÁNDARES DE COMPETENCIA") &&
+            !trimmed.includes("ESTÁNDARES DE MARCA") &&
+            !trimmed.includes("¿QUÉ ES")
+          ) {
+            sectorNames.push(trimmed);
+          }
+        }
+      }
+
+      console.log(`[SectorDriver] Found ${sectorNames.length} sector names`);
+
+      // Create sector items from the names
+      for (let i = 0; i < sectorNames.length; i++) {
+        const nombre = sectorNames[i];
+        const sector: Record<string, unknown> = {
+          sectorId: `SCIAN-${String(i + 1).padStart(2, "0")}`,
+          nombre: cleanText(nombre),
+          srcUrl: url,
+          extractedAt: new Date().toISOString(),
+        };
+
+        sector.contentHash = computeContentHash(sector);
+
+        if (this.validateSector(sector)) {
+          items.push({ type: "sector", data: sector });
+          this.updateStats("itemsExtracted");
+        }
+      }
+
+      // If we found sectors, return early
+      if (items.length > 0) {
+        return items;
+      }
+
+      // Fallback: Try card format
+      const cards = await this.page.$$("mat-card, .sector-card, .mat-mdc-card");
+
+      if (cards.length > 0) {
+        console.log(`[SectorDriver] Found ${cards.length} sector cards`);
+
+        for (let i = 0; i < cards.length; i++) {
+          const card = cards[i];
+          try {
+            const sectorData = await this.page.evaluate((el) => {
+              const element = el as HTMLElement;
+              const title =
+                element.querySelector("mat-card-title, h2, h3, .title")
+                  ?.textContent || "";
+              const subtitle =
+                element.querySelector("mat-card-subtitle, .subtitle, p")
+                  ?.textContent || "";
+
+              // Try to extract count from subtitle
+              const countMatch = subtitle.match(/(\d+)\s*estándares?/i);
+              const count = countMatch
+                ? parseInt(countMatch[1], 10)
+                : undefined;
+
+              return {
+                nombre: title.trim(),
+                numEstandares: count,
+                descripcion: subtitle.trim(),
+              };
+            }, card);
+
+            if (sectorData.nombre) {
+              const sector: Record<string, unknown> = {
+                sectorId: `SCIAN-${i + 1}`,
+                nombre: cleanText(sectorData.nombre),
+                descripcion: sectorData.descripcion
+                  ? cleanText(sectorData.descripcion)
+                  : undefined,
+                numEstandares: sectorData.numEstandares,
+                srcUrl: url,
+                extractedAt: new Date().toISOString(),
+              };
+
+              sector.contentHash = computeContentHash(sector);
+
+              if (this.validateSector(sector)) {
+                items.push({ type: "sector", data: sector });
+                this.updateStats("itemsExtracted");
+              }
+            }
+          } catch {
+            continue;
+          }
+        }
+      }
+
+      // Pattern 2: Table rows
+      if (items.length === 0) {
+        const rows = await this.page.$$(
+          "table tbody tr, mat-row, .mat-mdc-row, [role='row']",
+        );
+
+        console.log(`[SectorDriver] Found ${rows.length} table rows`);
+
+        for (let i = 0; i < rows.length; i++) {
+          const row = rows[i];
+          try {
+            const rowData = await this.page.evaluate((el) => {
+              const element = el as HTMLElement;
+              const cells = element.querySelectorAll(
+                "td, mat-cell, .mat-mdc-cell, [role='cell'], [role='gridcell']",
+              );
+              const cellTexts: string[] = [];
+
+              cells.forEach((cell) => {
+                cellTexts.push(cell.textContent?.trim() || "");
+              });
+
+              return cellTexts;
+            }, row);
+
+            if (rowData.length > 0 && rowData[0]) {
+              const sector: Record<string, unknown> = {
+                sectorId: `SCIAN-${i + 1}`,
+                nombre: cleanText(rowData[0]),
+                numEstandares: rowData[1]
+                  ? parseInt(rowData[1].replace(/\D/g, ""), 10) || undefined
+                  : undefined,
+                srcUrl: url,
+                extractedAt: new Date().toISOString(),
+              };
+
+              sector.contentHash = computeContentHash(sector);
+
+              if (this.validateSector(sector)) {
+                items.push({ type: "sector", data: sector });
+                this.updateStats("itemsExtracted");
+              }
+            }
+          } catch {
+            continue;
+          }
+        }
+      }
+
+      // Pattern 3: List items
+      if (items.length === 0) {
+        const listItems = await this.page.$$(
+          "mat-list-item, .mat-list-item, .mat-mdc-list-item",
+        );
+
+        console.log(`[SectorDriver] Found ${listItems.length} list items`);
+
+        for (let i = 0; i < listItems.length; i++) {
+          const item = listItems[i];
+          try {
+            const text = await item.textContent();
+            if (text) {
+              const nombre = cleanText(text);
+              if (nombre && nombre.length > 3) {
+                const sector: Record<string, unknown> = {
+                  sectorId: `SCIAN-${i + 1}`,
+                  nombre,
+                  srcUrl: url,
+                  extractedAt: new Date().toISOString(),
+                };
+
+                sector.contentHash = computeContentHash(sector);
+
+                if (this.validateSector(sector)) {
+                  items.push({ type: "sector", data: sector });
+                  this.updateStats("itemsExtracted");
+                }
+              }
+            }
+          } catch {
+            continue;
+          }
+        }
+      }
+    } catch (error) {
+      this.logError("harvestProductiveSectors", error as Error);
+    }
+
+    return items;
+  }
+
+  /**
+   * Get the 20 known SCIAN productive sectors
+   * This is a fallback if scraping fails
+   */
+  getKnownSectors(): ExtractedItem[] {
+    const scianSectors = [
+      "Agricultura, cría y explotación de animales, aprovechamiento forestal, pesca y caza",
+      "Minería",
+      "Generación, transmisión y distribución de energía eléctrica, suministro de agua y de gas por ductos al consumidor final",
+      "Construcción",
+      "Industrias manufactureras",
+      "Comercio al por mayor",
+      "Comercio al por menor",
+      "Transportes, correos y almacenamiento",
+      "Información en medios masivos",
+      "Servicios financieros y de seguros",
+      "Servicios inmobiliarios y de alquiler de bienes muebles e intangibles",
+      "Servicios profesionales, científicos y técnicos",
+      "Corporativos",
+      "Servicios de apoyo a los negocios y manejo de desechos y servicios de remediación",
+      "Servicios educativos",
+      "Servicios de salud y de asistencia social",
+      "Servicios de esparcimiento culturales y deportivos, y otros servicios recreativos",
+      "Servicios de alojamiento temporal y de preparación de alimentos y bebidas",
+      "Otros servicios excepto actividades gubernamentales",
+      "Actividades legislativas, gubernamentales, de impartición de justicia y de organismos internacionales y extraterritoriales",
     ];
+
+    return scianSectors.map((nombre, i) => {
+      const sector: Record<string, unknown> = {
+        sectorId: `SCIAN-${i + 1}`,
+        nombre,
+        srcUrl: "https://conocer.gob.mx/conocer/#/sectoresProductivos",
+        extractedAt: new Date().toISOString(),
+      };
+      sector.contentHash = computeContentHash(sector);
+      return { type: "sector", data: sector };
+    });
   }
 
   async parse(html: string, url: string): Promise<ExtractedItem[]> {
@@ -190,7 +487,7 @@ export class SectorDriver extends BaseDriver {
     )) {
       try {
         const detailUrl = this.buildUrl(
-          SECTOR_ENDPOINTS.sectorDetail + request.id,
+          LEGACY_SECTOR_ENDPOINTS.sectorDetail + request.id,
         );
         const html = await this.fetchPage(detailUrl);
         const detail = await this.parseSectorDetail(detailUrl, {
@@ -203,7 +500,7 @@ export class SectorDriver extends BaseDriver {
 
         // Also fetch committees for this sector
         const comitesUrl = this.buildUrl(
-          SECTOR_ENDPOINTS.sectorComites + request.id,
+          LEGACY_SECTOR_ENDPOINTS.sectorComites + request.id,
         );
         try {
           await this.fetchPage(comitesUrl);
@@ -361,7 +658,7 @@ export class SectorDriver extends BaseDriver {
     )) {
       try {
         const detailUrl = this.buildUrl(
-          SECTOR_ENDPOINTS.comiteDetail + request.id,
+          LEGACY_SECTOR_ENDPOINTS.comiteDetail + request.id,
         );
         await this.fetchPage(detailUrl);
         const detail = await this.parseComiteDetail(detailUrl, {
@@ -443,7 +740,7 @@ export class SectorDriver extends BaseDriver {
           // Fetch detail page
           try {
             const detailUrl = this.buildUrl(
-              SECTOR_ENDPOINTS.comiteDetail + comiteId,
+              LEGACY_SECTOR_ENDPOINTS.comiteDetail + comiteId,
             );
             await this.fetchPage(detailUrl);
             const detail = await this.parseComiteDetail(detailUrl, {
