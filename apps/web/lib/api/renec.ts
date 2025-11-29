@@ -348,7 +348,56 @@ export async function searchEC(
 }
 
 export async function getEC(id: string): Promise<ECDetail> {
-  return fetchAPI<ECDetail>(`/ec-standards/${id}`);
+  // API returns accreditations/centerOfferings, transform to certifiers/centers
+  const raw = await fetchAPI<{
+    id: string;
+    ecClave: string;
+    titulo: string;
+    version: string;
+    vigente: boolean;
+    sector: string | null;
+    nivelCompetencia: number | null;
+    fechaPublicacion: string | null;
+    proposito: string | null;
+    lastSyncedAt: string;
+    competencias: unknown[];
+    elementosJson: unknown[];
+    critDesempeno: unknown[];
+    critConocimiento: unknown[];
+    critProducto: unknown[];
+    accreditations: Array<{
+      certifier: {
+        id: string;
+        certId: string;
+        razonSocial: string;
+        tipo: "ECE" | "OC";
+      };
+    }>;
+    centerOfferings: Array<{
+      center: {
+        id: string;
+        centerId: string;
+        nombre: string;
+        estado: string | null;
+      };
+    }>;
+  }>(`/ec-standards/${id}`);
+
+  return {
+    ...raw,
+    certifierCount: raw.accreditations?.length || 0,
+    centerCount: raw.centerOfferings?.length || 0,
+    certifiers: (raw.accreditations || []).map((a) => ({
+      id: a.certifier.id,
+      razonSocial: a.certifier.razonSocial,
+      tipo: a.certifier.tipo,
+    })),
+    centers: (raw.centerOfferings || []).map((o) => ({
+      id: o.center.id,
+      nombre: o.center.nombre,
+      estado: o.center.estado,
+    })),
+  };
 }
 
 export async function getECByCode(code: string): Promise<ECDetail> {

@@ -194,9 +194,14 @@ export class RenecService {
     return { data, total, skip: skip || 0, limit: limit || 100 };
   }
 
-  async getRenecECById(ecClave: string) {
-    const ecStandard = await this.prisma.renecEC.findUnique({
-      where: { ecClave },
+  async getRenecECById(idOrClave: string) {
+    // Try to find by UUID first, then by ecClave
+    const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(idOrClave);
+
+    const ecStandard = await this.prisma.renecEC.findFirst({
+      where: isUuid
+        ? { id: idOrClave }
+        : { ecClave: idOrClave },
       include: {
         centerOfferings: {
           include: { center: true },
@@ -208,7 +213,7 @@ export class RenecService {
     });
 
     if (!ecStandard) {
-      throw new NotFoundException(`EC Standard ${ecClave} not found`);
+      throw new NotFoundException(`EC Standard ${idOrClave} not found`);
     }
 
     return ecStandard;

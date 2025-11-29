@@ -370,15 +370,15 @@ export class RenecScraperService implements OnModuleInit {
       const data = await this.renecClient.harvestAll(config);
 
       // Process EC standards
+      // Data from renec-client is wrapped: { type: "ec_standard", data: {...} }
       for (const ec of data.ecStandards) {
         try {
-          await this.upsertECFromClient(
-            ec as unknown as Record<string, unknown>,
-          );
+          const ecData = (ec as { type: string; data: Record<string, unknown> }).data || ec;
+          await this.upsertECFromClient(ecData as Record<string, unknown>);
           this.activeRun!.itemsScraped++;
         } catch (error) {
           this.logger.error(
-            `Error processing EC: ${(ec as unknown as Record<string, unknown>).code}`,
+            `Error processing EC: ${((ec as { data?: Record<string, unknown> }).data?.ecClave || 'unknown')}`,
             error,
           );
           this.activeRun!.errors++;
@@ -388,9 +388,8 @@ export class RenecScraperService implements OnModuleInit {
       // Process certifiers
       for (const cert of data.certifiers) {
         try {
-          await this.upsertCertifierFromClient(
-            cert as unknown as Record<string, unknown>,
-          );
+          const certData = (cert as { type: string; data: Record<string, unknown> }).data || cert;
+          await this.upsertCertifierFromClient(certData as Record<string, unknown>);
           this.activeRun!.itemsScraped++;
         } catch (error) {
           this.logger.error(`Error processing certifier`, error);
@@ -401,9 +400,8 @@ export class RenecScraperService implements OnModuleInit {
       // Process centers
       for (const center of data.centers) {
         try {
-          await this.upsertCenterFromClient(
-            center as unknown as Record<string, unknown>,
-          );
+          const centerData = (center as { type: string; data: Record<string, unknown> }).data || center;
+          await this.upsertCenterFromClient(centerData as Record<string, unknown>);
           this.activeRun!.itemsScraped++;
         } catch (error) {
           this.logger.error(`Error processing center`, error);
