@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Linkedin, Twitter } from "lucide-react";
 
 const footerLinks = {
   producto: [
@@ -46,26 +45,6 @@ export function MarketingFooter() {
               Plataforma de capacitación alineada a EC/CONOCER con cumplimiento
               DC-3 automático y credenciales verificables.
             </p>
-            <div className="flex space-x-4 mt-4">
-              <a
-                href="https://linkedin.com/company/avala"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-foreground transition-colors"
-              >
-                <Linkedin className="h-5 w-5" />
-                <span className="sr-only">LinkedIn</span>
-              </a>
-              <a
-                href="https://twitter.com/avala_mx"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-foreground transition-colors"
-              >
-                <Twitter className="h-5 w-5" />
-                <span className="sr-only">Twitter</span>
-              </a>
-            </div>
           </div>
 
           {/* Producto */}

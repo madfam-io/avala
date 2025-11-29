@@ -14,27 +14,31 @@ import {
   ArrowRight,
 } from "lucide-react";
 
-// Sample EC data for the demo
+// Sample EC data for the demo (coverage is deterministic to avoid hydration mismatch)
 const sampleECs = [
   {
     code: "EC0217.01",
     title: "Impartición de cursos de formación del capital humano",
     certifiers: 371,
+    coverage: 82,
   },
   {
     code: "EC0301",
     title: "Diseño de cursos de formación del capital humano",
     certifiers: 245,
+    coverage: 75,
   },
   {
     code: "EC0366",
     title: "Desarrollo de cursos de formación en línea",
     certifiers: 156,
+    coverage: 68,
   },
   {
     code: "EC0076",
     title: "Evaluación de la competencia de candidatos",
     certifiers: 452,
+    coverage: 91,
   },
 ];
 
@@ -51,7 +55,7 @@ export function ECHighlight() {
   const filteredECs = sampleECs.filter(
     (ec) =>
       ec.code.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      ec.title.toLowerCase().includes(searchQuery.toLowerCase())
+      ec.title.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   return (
@@ -65,8 +69,7 @@ export function ECHighlight() {
                 Base de datos actualizada
               </Badge>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Nativo para{" "}
-                <span className="text-primary">CONOCER</span>
+                Nativo para <span className="text-primary">CONOCER</span>
               </h2>
               <p className="text-lg text-muted-foreground">
                 Accede a la base de datos más completa de Estándares de
@@ -156,7 +159,7 @@ export function ECHighlight() {
                       <div className="flex-1 h-1.5 bg-muted rounded-full overflow-hidden">
                         <div
                           className="h-full bg-gradient-to-r from-primary to-blue-500 rounded-full"
-                          style={{ width: `${Math.random() * 40 + 60}%` }}
+                          style={{ width: `${ec.coverage}%` }}
                         />
                       </div>
                       <ExternalLink className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />

@@ -8,6 +8,8 @@
 
 **Status:** Alpha • **Monorepo:** Turborepo + pnpm • **License:** © Innovaciones MADFAM S.A.S. de C.V. — All rights reserved
 
+[Documentation](./docs/INDEX.md) • [Setup Guide](./docs/setup/SETUP.md) • [Contributing](./CONTRIBUTING.md) • [Security](./SECURITY.md)
+
 </div>
 
 ---
@@ -25,6 +27,15 @@ AVALA is a SaaS platform to **design, deliver, evidence, and verify applied lear
 | **Avala Comply** | DC-3 generation, SIRCE exports, LFT plan snapshots |
 | **Avala Badges** | Open Badges 3.0 / VC issuance & verification |
 | **Avala Connect** | SSO/SCIM, HRIS & email/SMS integrations |
+
+### Key Features
+
+- ✅ **Multi-EC Training** - Support for multiple Estándares de Competencia in single tenant
+- ✅ **DC-3 Automation** - Generate STPS-compliant training certificates automatically
+- ✅ **SIRCE Integration** - Export data ready for government registry
+- ✅ **Open Badges 3.0** - Issue and verify portable digital credentials
+- ✅ **Gamification** - XP, levels, achievements, and leaderboards for engagement
+- ✅ **Interactive Demo** - Role-based demo for HR, Instructor, Trainee, and Executive personas
 
 ---
 
@@ -85,17 +96,37 @@ pnpm dev
 
 ---
 
+## Tech Stack
+
+| Layer | Technology | Version |
+|-------|------------|---------|
+| **Frontend** | Next.js, React, TypeScript | 15.1, 18.3, 5.7 |
+| **Styling** | Tailwind CSS, shadcn/ui | 3.4, latest |
+| **API** | NestJS, TypeScript, Prisma ORM | 10.4, 5.7, 6.x |
+| **Database** | PostgreSQL with Row-Level Security | 16+ |
+| **Cache** | Redis | 7+ |
+| **Storage** | S3-compatible (MinIO/AWS) | - |
+| **Auth** | JWT + Janua SSO integration | - |
+| **Testing** | Jest (API), Vitest (Web) | - |
+| **Monorepo** | Turborepo with pnpm workspaces | - |
+
+---
+
 ## Repository Structure
 
 ```
 avala/
 ├── apps/
-│   ├── api/                  # NestJS REST API
-│   │   ├── src/modules/      # Feature modules (auth, courses, ec-*, etc.)
+│   ├── api/                  # NestJS REST API (port 4900)
+│   │   ├── src/modules/      # Feature modules (auth, courses, ec-*, compliance)
 │   │   ├── src/common/       # Guards, interceptors, decorators
-│   │   └── prisma/           # Database schema
-│   └── web/                  # Next.js 14 PWA
+│   │   └── test/             # Test utilities
+│   └── web/                  # Next.js PWA (port 3060)
 │       ├── app/              # App Router pages
+│       │   ├── (dashboard)/  # Authenticated dashboard routes
+│       │   ├── (marketing)/  # Public marketing pages
+│       │   ├── (public)/     # Public verification pages
+│       │   └── demo/         # Interactive role-based demo
 │       ├── components/       # React components
 │       └── lib/              # Utilities & API client
 ├── packages/
@@ -107,8 +138,11 @@ avala/
 ├── docs/                     # Documentation
 │   ├── architecture/         # SOFTWARE_SPEC.md, ALIGNMENT.md
 │   ├── setup/                # SETUP.md, DEPLOY.md
-│   └── INDEX.md              # Documentation index
-└── infra/                    # Docker, Terraform, K8s configs
+│   ├── design/               # UI/UX design docs
+│   └── INDEX.md              # Documentation hub
+├── infra/
+│   └── enclii/               # Enclii PaaS deployment configs
+└── .enclii.yml               # Enclii project configuration
 ```
 
 ---
@@ -127,6 +161,7 @@ pnpm dev --filter @avala/web  # Web only
 pnpm build                    # Build all packages
 pnpm test                     # Run all tests
 pnpm lint                     # Lint all packages
+pnpm typecheck                # Type check all packages
 
 # Database
 pnpm db:generate              # Generate Prisma client
@@ -144,23 +179,9 @@ pnpm db:studio                # Open Prisma Studio
 
 ```bash
 # Run with coverage
-cd apps/api && pnpm test:cov
-cd apps/web && pnpm test:coverage
+pnpm --filter @avala/api test:cov
+pnpm --filter @avala/web test:coverage
 ```
-
----
-
-## Tech Stack
-
-| Layer | Technology |
-|-------|------------|
-| **Frontend** | Next.js 14, TypeScript, Tailwind CSS, shadcn/ui |
-| **API** | NestJS, TypeScript, Prisma ORM |
-| **Database** | PostgreSQL 16 with Row-Level Security |
-| **Cache** | Redis |
-| **Storage** | S3-compatible (MinIO/AWS) |
-| **Auth** | JWT + Janua SSO integration |
-| **Testing** | Jest (API), Vitest (Web) |
 
 ---
 
@@ -199,14 +220,32 @@ See full API documentation at `/docs` when running the API.
 
 ---
 
+## Interactive Demo
+
+AVALA includes a comprehensive interactive demo showcasing the platform from four different user perspectives:
+
+| Role | Path | Features Showcased |
+|------|------|--------------------|
+| **HR Manager** | `/demo/hr` | Compliance dashboard, DC-3 management, team progress |
+| **Instructor** | `/demo/instructor` | Course management, assessments, student tracking |
+| **Trainee** | `/demo/trainee` | Learning progress, credentials, gamification |
+| **Executive** | `/demo/executive` | ROI analytics, compliance reports, strategic metrics |
+
+Access the demo at `/demo` to explore all personas with role switching.
+
+---
+
 ## Documentation
 
 | Document | Description |
 |----------|-------------|
-| [docs/INDEX.md](./docs/INDEX.md) | Documentation hub |
+| [docs/INDEX.md](./docs/INDEX.md) | 📚 Documentation hub |
 | [docs/architecture/SOFTWARE_SPEC.md](./docs/architecture/SOFTWARE_SPEC.md) | Full product specification |
+| [docs/architecture/ALIGNMENT.md](./docs/architecture/ALIGNMENT.md) | Standards alignment brief |
 | [docs/setup/SETUP.md](./docs/setup/SETUP.md) | Detailed setup guide |
-| [docs/setup/DEPLOY.md](./docs/setup/DEPLOY.md) | Deployment guide |
+| [docs/setup/DEPLOY.md](./docs/setup/DEPLOY.md) | Production deployment |
+| [infra/enclii/README.md](./infra/enclii/README.md) | Enclii PaaS deployment guide |
+| [CLAUDE.md](./CLAUDE.md) | AI assistant quick reference |
 | [CONTRIBUTING.md](./CONTRIBUTING.md) | Development guidelines |
 | [SECURITY.md](./SECURITY.md) | Security policies |
 | [CHANGELOG.md](./CHANGELOG.md) | Version history |
@@ -219,6 +258,7 @@ See full API documentation at `/docs` when running the API.
 - **DC-3** — Training completion certificates (STPS requirement)
 - **SIRCE** — Government registry integration
 - **LFT** — Federal Labor Law compliance
+- **NOM-035** — Psychosocial risk factors in the workplace
 
 ---
 

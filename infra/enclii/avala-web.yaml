@@ -1,0 +1,139 @@
+# Avala Web Service Specification for Enclii
+# Next.js Frontend Application
+
+apiVersion: enclii.dev/v1
+kind: Service
+metadata:
+  name: avala-web
+  project: avala
+  labels:
+    app: avala
+    component: web
+    tier: frontend
+
+spec:
+  build:
+    type: dockerfile
+    dockerfile: Dockerfile.web
+    source:
+      repo: github.com/madfam-io/avala
+      branch: main
+      autoDeploy: true
+    cache: true
+    args:
+      - name: NEXT_PUBLIC_API_URL
+        value: https://api.avala.studio
+      - name: NEXT_PUBLIC_APP_URL
+        value: https://avala.studio
+
+  runtime:
+    port: 3000
+    replicas:
+      min: 2
+      max: 6
+    healthCheck:
+      path: /api/health
+      initialDelaySeconds: 15
+      periodSeconds: 10
+      timeoutSeconds: 5
+      failureThreshold: 3
+    resources:
+      requests:
+        cpu: "100m"
+        memory: "256Mi"
+      limits:
+        cpu: "1000m"
+        memory: "1Gi"
+
+  env:
+    # Node environment
+    - name: NODE_ENV
+      value: production
+    - name: PORT
+      value: "3000"
+    - name: HOSTNAME
+      value: "0.0.0.0"
+
+    # Public environment variables (baked at build time)
+    - name: NEXT_PUBLIC_API_URL
+      value: https://api.avala.studio
+    - name: NEXT_PUBLIC_APP_URL
+      value: https://avala.studio
+
+  domains:
+    - domain: avala.studio
+      tls: true
+      forceHttps: true
+      primary: true
+    - domain: www.avala.studio
+      tls: true
+      forceHttps: true
+      redirectTo: avala.studio
+
+  autoscaling:
+    enabled: true
+    metrics:
+      - type: cpu
+        target: 70
+      - type: memory
+        target: 75
+    scaleDown:
+      stabilizationWindowSeconds: 300
+      policies:
+        - type: Percent
+          value: 20
+          periodSeconds: 60
+
+  deployment:
+    strategy: canary
+    canary:
+      steps:
+        - weight: 10
+          pause: 3m
+        - weight: 50
+          pause: 5m
+        - weight: 100
+      analysis:
+        metrics:
+          - name: error-rate
+            threshold: 1
+            interval: 1m
+          - name: latency-p99
+            threshold: 300
+            interval: 1m
+      rollback:
+        automatic: true
+        threshold: 3
+
+  # Static asset caching
+  cdn:
+    enabled: true
+    cacheControl:
+      static: "public, max-age=31536000, immutable"
+      html: "public, max-age=0, must-revalidate"
+
+  # Observability
+  observability:
+    metrics:
+      enabled: true
+      port: 3000
+      path: /metrics
+    logging:
+      format: json
+      level: info
+    tracing:
+      enabled: true
+      sampleRate: 0.1
+
+  # Security headers
+  headers:
+    - key: X-Frame-Options
+      value: DENY
+    - key: X-Content-Type-Options
+      value: nosniff
+    - key: X-XSS-Protection
+      value: "1; mode=block"
+    - key: Referrer-Policy
+      value: strict-origin-when-cross-origin
+    - key: Permissions-Policy
+      value: "camera=(), microphone=(), geolocation=()"

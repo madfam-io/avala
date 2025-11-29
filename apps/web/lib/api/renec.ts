@@ -271,22 +271,59 @@ export async function autocomplete(
 export async function searchEC(
   params: ECSearchParams = {},
 ): Promise<ECListResponse> {
-  return fetchAPI<ECListResponse>(
-    "/ec",
-    params as Record<string, string | number | undefined>,
-  );
+  // Backend returns { data, total, skip, limit }
+  // Frontend expects { items, pagination, filters }
+  const response = await fetchAPI<{
+    data: ECStandard[];
+    total: number;
+    skip: number;
+    limit: number;
+  }>("/ec-standards", {
+    search: params.q,
+    sector: params.sector,
+    vigente:
+      params.vigente === "true"
+        ? "true"
+        : params.vigente === "false"
+          ? "false"
+          : undefined,
+    skip: params.page ? (params.page - 1) * (params.limit || 20) : 0,
+    limit: params.limit || 20,
+  } as Record<string, string | number | undefined>);
+
+  const page = params.page || 1;
+  const limit = params.limit || 20;
+  const totalPages = Math.ceil(response.total / limit);
+
+  return {
+    items: response.data,
+    pagination: {
+      page,
+      limit,
+      total: response.total,
+      totalPages,
+      hasNext: page < totalPages,
+      hasPrev: page > 1,
+    },
+    filters: {
+      q: params.q,
+      vigente: params.vigente || "all",
+      sector: params.sector,
+      nivelCompetencia: params.nivelCompetencia,
+    },
+  };
 }
 
 export async function getEC(id: string): Promise<ECDetail> {
-  return fetchAPI<ECDetail>(`/ec/${id}`);
+  return fetchAPI<ECDetail>(`/ec-standards/${id}`);
 }
 
 export async function getECByCode(code: string): Promise<ECDetail> {
-  return fetchAPI<ECDetail>(`/ec/code/${code}`);
+  return fetchAPI<ECDetail>(`/ec-standards/${code}`);
 }
 
 export async function getSectors(): Promise<Sector[]> {
-  return fetchAPI<Sector[]>("/ec/sectors");
+  return fetchAPI<Sector[]>("/ec-standards/sectors");
 }
 
 // Certifiers

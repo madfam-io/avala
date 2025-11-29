@@ -1,0 +1,177 @@
+# Avala API Service Specification for Enclii
+# NestJS Backend with PostgreSQL and Redis
+
+apiVersion: enclii.dev/v1
+kind: Service
+metadata:
+  name: avala-api
+  project: avala
+  labels:
+    app: avala
+    component: api
+    tier: backend
+
+spec:
+  build:
+    type: dockerfile
+    dockerfile: Dockerfile
+    source:
+      repo: github.com/madfam-io/avala
+      branch: main
+      autoDeploy: true
+    cache: true
+
+  runtime:
+    port: 3000
+    replicas:
+      min: 2
+      max: 10
+    healthCheck:
+      path: /api/health
+      initialDelaySeconds: 30
+      periodSeconds: 10
+      timeoutSeconds: 5
+      failureThreshold: 3
+    resources:
+      requests:
+        cpu: "500m"
+        memory: "512Mi"
+      limits:
+        cpu: "2000m"
+        memory: "2Gi"
+
+  env:
+    # Node environment
+    - name: NODE_ENV
+      value: production
+    - name: PORT
+      value: "3000"
+
+    # Database (from secrets)
+    - name: DATABASE_URL
+      valueFrom:
+        secretKeyRef:
+          name: avala-secrets
+          key: database-url
+
+    # JWT Authentication (from secrets)
+    - name: JWT_SECRET
+      valueFrom:
+        secretKeyRef:
+          name: avala-secrets
+          key: jwt-secret
+    - name: JWT_EXPIRES_IN
+      value: "7d"
+
+    # SMTP Email Configuration (from secrets)
+    - name: SMTP_HOST
+      valueFrom:
+        secretKeyRef:
+          name: avala-secrets
+          key: smtp-host
+    - name: SMTP_PORT
+      valueFrom:
+        secretKeyRef:
+          name: avala-secrets
+          key: smtp-port
+    - name: SMTP_USER
+      valueFrom:
+        secretKeyRef:
+          name: avala-secrets
+          key: smtp-user
+    - name: SMTP_PASS
+      valueFrom:
+        secretKeyRef:
+          name: avala-secrets
+          key: smtp-pass
+    - name: SMTP_FROM
+      value: '"AVALA" <noreply@avala.studio>'
+
+    # App URLs
+    - name: NEXT_PUBLIC_APP_URL
+      value: https://avala.studio
+    - name: NEXT_PUBLIC_API_URL
+      value: https://api.avala.studio
+
+    # RENEC Harvest (disabled in production - run as separate job)
+    - name: RENEC_HARVEST_ENABLED
+      value: "false"
+
+    # Rate Limiting
+    - name: THROTTLE_SHORT_LIMIT
+      value: "3"
+    - name: THROTTLE_MEDIUM_LIMIT
+      value: "20"
+    - name: THROTTLE_LONG_LIMIT
+      value: "100"
+
+  domains:
+    - domain: api.avala.studio
+      tls: true
+      forceHttps: true
+
+  autoscaling:
+    enabled: true
+    metrics:
+      - type: cpu
+        target: 70
+      - type: memory
+        target: 80
+    scaleDown:
+      stabilizationWindowSeconds: 300
+      policies:
+        - type: Percent
+          value: 10
+          periodSeconds: 60
+
+  deployment:
+    strategy: canary
+    canary:
+      steps:
+        - weight: 10
+          pause: 5m
+        - weight: 50
+          pause: 10m
+        - weight: 100
+      analysis:
+        metrics:
+          - name: error-rate
+            threshold: 1
+            interval: 1m
+          - name: latency-p99
+            threshold: 500
+            interval: 1m
+      rollback:
+        automatic: true
+        threshold: 3
+
+  # Database migrations run before deployment
+  hooks:
+    preStart:
+      - name: run-migrations
+        command: ["npx", "prisma", "migrate", "deploy"]
+        timeout: 120s
+
+  # Networking
+  networking:
+    cors:
+      enabled: true
+      origins:
+        - https://avala.studio
+        - https://www.avala.studio
+        - https://staging.avala.studio
+      methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
+      credentials: true
+
+  # Observability
+  observability:
+    metrics:
+      enabled: true
+      port: 3000
+      path: /metrics
+    logging:
+      format: json
+      level: info
+    tracing:
+      enabled: true
+      sampleRate: 0.1

@@ -339,10 +339,13 @@ pnpm build
 
 ## 📖 Documentation
 
-- **API Docs (Swagger)**: http://localhost:4900/api
-- **Documentation Index**: [docs/INDEX.md](../INDEX.md)
+- **API Docs (Swagger)**: http://localhost:4900/docs
+- **Documentation Hub**: [docs/INDEX.md](../INDEX.md)
+- **Architecture Overview**: [docs/architecture/OVERVIEW.md](../architecture/OVERVIEW.md)
 - **Software Spec**: [docs/architecture/SOFTWARE_SPEC.md](../architecture/SOFTWARE_SPEC.md)
+- **Interactive Demo**: [docs/DEMO.md](../DEMO.md)
 - **Contributing**: [CONTRIBUTING.md](../../CONTRIBUTING.md)
+- **Quick Reference**: [CLAUDE.md](../../CLAUDE.md)
 
 ---
 

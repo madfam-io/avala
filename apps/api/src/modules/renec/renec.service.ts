@@ -214,6 +214,22 @@ export class RenecService {
     return ecStandard;
   }
 
+  async getSectors(): Promise<{ sector: string; count: number }[]> {
+    const sectors = await this.prisma.renecEC.groupBy({
+      by: ["sector"],
+      _count: { sector: true },
+      where: { sector: { not: null } },
+      orderBy: { _count: { sector: "desc" } },
+    });
+
+    return sectors
+      .filter((s) => s.sector !== null)
+      .map((s) => ({
+        sector: s.sector as string,
+        count: s._count.sector,
+      }));
+  }
+
   // ============================================
   // GLOBAL SEARCH
   // ============================================

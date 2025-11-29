@@ -85,7 +85,7 @@ export function Hero() {
                 </div>
                 <div className="flex-1 mx-4">
                   <div className="bg-muted rounded px-3 py-1 text-xs text-muted-foreground max-w-xs mx-auto text-center">
-                    app.avala.mx/dashboard
+                    app.avala.studio/dashboard
                   </div>
                 </div>
               </div>

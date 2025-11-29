@@ -3,9 +3,9 @@ import {
   Logger,
   NotFoundException,
   BadRequestException,
-} from '@nestjs/common';
-import { PrismaService } from '../../database/prisma.service';
-import { randomUUID } from 'crypto';
+} from "@nestjs/common";
+import { PrismaService } from "../../database/prisma.service";
+import { randomUUID } from "crypto";
 import {
   IssueBadgeDto,
   BulkIssueBadgeDto,
@@ -18,7 +18,7 @@ import {
   CredentialStatusDto,
   AchievementType,
   AlignmentDto,
-} from './dto/open-badge.dto';
+} from "./dto/open-badge.dto";
 
 /**
  * OpenBadgeService - Open Badges 3.0 Credential Issuance
@@ -39,8 +39,8 @@ export class OpenBadgeService {
 
   // OBv3 JSON-LD contexts
   private readonly OB_CONTEXT = [
-    'https://www.w3.org/2018/credentials/v1',
-    'https://purl.imsglobal.org/spec/ob/v3p0/context-3.0.3.json',
+    "https://www.w3.org/2018/credentials/v1",
+    "https://purl.imsglobal.org/spec/ob/v3p0/context-3.0.3.json",
   ];
 
   constructor(private readonly prisma: PrismaService) {}
@@ -49,7 +49,9 @@ export class OpenBadgeService {
    * Issue a new Open Badge credential
    */
   async issue(dto: IssueBadgeDto): Promise<CredentialResponseDto> {
-    this.logger.log(`Issuing badge for trainee ${dto.traineeId} in tenant ${dto.tenantId}`);
+    this.logger.log(
+      `Issuing badge for trainee ${dto.traineeId} in tenant ${dto.tenantId}`,
+    );
 
     // Validate tenant
     const tenant = await this.prisma.tenant.findUnique({
@@ -64,7 +66,9 @@ export class OpenBadgeService {
       where: { id: dto.traineeId, tenantId: dto.tenantId },
     });
     if (!trainee) {
-      throw new NotFoundException(`Trainee ${dto.traineeId} not found in tenant`);
+      throw new NotFoundException(
+        `Trainee ${dto.traineeId} not found in tenant`,
+      );
     }
 
     // Validate course if provided
@@ -74,13 +78,15 @@ export class OpenBadgeService {
         where: { id: dto.courseId, tenantId: dto.tenantId },
       });
       if (!course) {
-        throw new NotFoundException(`Course ${dto.courseId} not found in tenant`);
+        throw new NotFoundException(
+          `Course ${dto.courseId} not found in tenant`,
+        );
       }
     }
 
     // Generate unique credential ID
     const credentialId = randomUUID();
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://avala.mx';
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://avala.studio";
     const credentialUri = `${baseUrl}/credentials/${credentialId}`;
 
     // Build alignments (include EC codes if available)
@@ -103,9 +109,9 @@ export class OpenBadgeService {
         id: credentialId,
         tenantId: dto.tenantId,
         traineeId: dto.traineeId,
-        type: 'OBV3',
+        type: "OBV3",
         payloadJson: obCredential as any,
-        status: 'ACTIVE',
+        status: "ACTIVE",
         issuedAt: new Date(),
         expiresAt: dto.expiresAt ? new Date(dto.expiresAt) : null,
       },
@@ -140,7 +146,7 @@ export class OpenBadgeService {
       } catch (error) {
         errors.push({
           traineeId,
-          error: error instanceof Error ? error.message : 'Unknown error',
+          error: error instanceof Error ? error.message : "Unknown error",
         });
       }
     }
@@ -198,7 +204,7 @@ export class OpenBadgeService {
     // Filter by achievement type requires JSON query
     if (achievementType) {
       where.payloadJson = {
-        path: ['credentialSubject', 'achievement', 'achievementType'],
+        path: ["credentialSubject", "achievement", "achievementType"],
         equals: achievementType,
       };
     }
@@ -209,7 +215,7 @@ export class OpenBadgeService {
         include: {
           tenant: { select: { name: true } },
         },
-        orderBy: { issuedAt: 'desc' },
+        orderBy: { issuedAt: "desc" },
         skip: (page - 1) * limit,
         take: limit,
       }),
@@ -230,13 +236,16 @@ export class OpenBadgeService {
   /**
    * Get credentials for a specific trainee
    */
-  async findByTrainee(tenantId: string, traineeId: string): Promise<CredentialResponseDto[]> {
+  async findByTrainee(
+    tenantId: string,
+    traineeId: string,
+  ): Promise<CredentialResponseDto[]> {
     const credentials = await this.prisma.credential.findMany({
       where: { tenantId, traineeId },
       include: {
         tenant: { select: { name: true } },
       },
-      orderBy: { issuedAt: 'desc' },
+      orderBy: { issuedAt: "desc" },
     });
 
     return credentials.map((c) => this.mapToResponse(c));
@@ -245,7 +254,10 @@ export class OpenBadgeService {
   /**
    * Revoke a credential
    */
-  async revoke(id: string, dto: RevokeBadgeDto): Promise<CredentialResponseDto> {
+  async revoke(
+    id: string,
+    dto: RevokeBadgeDto,
+  ): Promise<CredentialResponseDto> {
     const credential = await this.prisma.credential.findUnique({
       where: { id },
     });
@@ -254,7 +266,7 @@ export class OpenBadgeService {
       throw new NotFoundException(`Credential ${id} not found`);
     }
 
-    if (credential.status === 'REVOKED') {
+    if (credential.status === "REVOKED") {
       throw new BadRequestException(`Credential ${id} is already revoked`);
     }
 
@@ -262,7 +274,7 @@ export class OpenBadgeService {
     const updated = await this.prisma.credential.update({
       where: { id },
       data: {
-        status: 'REVOKED',
+        status: "REVOKED",
         revokedAt: new Date(),
       },
     });
@@ -292,13 +304,14 @@ export class OpenBadgeService {
         valid: false,
         credentialId,
         status: CredentialStatusDto.REVOKED,
-        message: 'Credential not found. The ID may be invalid.',
+        message: "Credential not found. The ID may be invalid.",
       };
     }
 
     const payload = credential.payloadJson as any;
-    const isExpired = credential.expiresAt && new Date(credential.expiresAt) < new Date();
-    const isRevoked = credential.status === 'REVOKED';
+    const isExpired =
+      credential.expiresAt && new Date(credential.expiresAt) < new Date();
+    const isRevoked = credential.status === "REVOKED";
     const isValid = !isExpired && !isRevoked;
 
     return {
@@ -310,13 +323,13 @@ export class OpenBadgeService {
           ? CredentialStatusDto.EXPIRED
           : CredentialStatusDto.ACTIVE,
       message: isValid
-        ? 'Credential is valid and verified.'
+        ? "Credential is valid and verified."
         : isRevoked
-          ? 'Credential has been revoked.'
-          : 'Credential has expired.',
+          ? "Credential has been revoked."
+          : "Credential has expired.",
       achievementName: payload?.credentialSubject?.achievement?.name,
       recipientName: credential.trainee
-        ? `${credential.trainee.firstName || ''} ${credential.trainee.lastName || ''}`.trim()
+        ? `${credential.trainee.firstName || ""} ${credential.trainee.lastName || ""}`.trim()
         : undefined,
       issuerName: credential.tenant?.name,
       issuedAt: credential.issuedAt,
@@ -342,7 +355,10 @@ export class OpenBadgeService {
   /**
    * Get statistics for credentials
    */
-  async getStatistics(tenantId: string, year?: number): Promise<CredentialStatisticsDto> {
+  async getStatistics(
+    tenantId: string,
+    year?: number,
+  ): Promise<CredentialStatisticsDto> {
     const targetYear = year || new Date().getFullYear();
     const startDate = new Date(`${targetYear}-01-01`);
     const endDate = new Date(`${targetYear + 1}-01-01`);
@@ -354,21 +370,21 @@ export class OpenBadgeService {
       this.prisma.credential.count({
         where: {
           tenantId,
-          status: 'ACTIVE',
+          status: "ACTIVE",
           issuedAt: { gte: startDate, lt: endDate },
         },
       }),
       this.prisma.credential.count({
         where: {
           tenantId,
-          status: 'REVOKED',
+          status: "REVOKED",
           issuedAt: { gte: startDate, lt: endDate },
         },
       }),
       this.prisma.credential.count({
         where: {
           tenantId,
-          status: 'EXPIRED',
+          status: "EXPIRED",
           issuedAt: { gte: startDate, lt: endDate },
         },
       }),
@@ -377,7 +393,9 @@ export class OpenBadgeService {
     // Monthly breakdown
     const byMonth: { month: number; count: number }[] = [];
     for (let month = 1; month <= 12; month++) {
-      const monthStart = new Date(`${targetYear}-${month.toString().padStart(2, '0')}-01`);
+      const monthStart = new Date(
+        `${targetYear}-${month.toString().padStart(2, "0")}-01`,
+      );
       const monthEnd = new Date(targetYear, month, 1);
 
       const count = await this.prisma.credential.count({
@@ -414,29 +432,39 @@ export class OpenBadgeService {
     expiresAt?: string;
     evidence?: string[];
   }): OpenBadgeCredentialDto {
-    const { credentialUri, tenant, trainee, achievement, alignments, expiresAt, evidence } = params;
+    const {
+      credentialUri,
+      tenant,
+      trainee,
+      achievement,
+      alignments,
+      expiresAt,
+      evidence,
+    } = params;
 
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://avala.mx';
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://avala.studio";
     const issuanceDate = new Date().toISOString();
 
     // Build credential subject
     const credentialSubject: any = {
       id: `urn:uuid:${trainee.id}`,
-      type: ['AchievementSubject'],
-      name: `${trainee.firstName || ''} ${trainee.lastName || ''}`.trim(),
+      type: ["AchievementSubject"],
+      name: `${trainee.firstName || ""} ${trainee.lastName || ""}`.trim(),
       achievement: {
         id: `${baseUrl}/achievements/${randomUUID()}`,
-        type: ['Achievement'],
-        achievementType: achievement.achievementType || AchievementType.Achievement,
+        type: ["Achievement"],
+        achievementType:
+          achievement.achievementType || AchievementType.Achievement,
         name: achievement.name,
         description: achievement.description,
         criteria: {
-          narrative: achievement.criteria || `Completion of ${achievement.name}`,
+          narrative:
+            achievement.criteria || `Completion of ${achievement.name}`,
         },
         image: achievement.image
           ? {
               id: achievement.image,
-              type: 'Image',
+              type: "Image",
             }
           : undefined,
       },
@@ -445,7 +473,7 @@ export class OpenBadgeService {
     // Add alignments
     if (alignments && alignments.length > 0) {
       credentialSubject.achievement.alignment = alignments.map((a) => ({
-        type: ['Alignment'],
+        type: ["Alignment"],
         targetName: a.targetName,
         targetUrl: a.targetUrl,
         targetCode: a.targetCode,
@@ -456,12 +484,12 @@ export class OpenBadgeService {
 
     // Build full credential
     const credential: OpenBadgeCredentialDto = {
-      '@context': this.OB_CONTEXT,
+      "@context": this.OB_CONTEXT,
       id: credentialUri,
-      type: ['VerifiableCredential', 'OpenBadgeCredential'],
+      type: ["VerifiableCredential", "OpenBadgeCredential"],
       issuer: {
         id: `${baseUrl}/issuers/${tenant.id}`,
-        type: ['Profile'],
+        type: ["Profile"],
         name: tenant.legalName || tenant.name,
         url: tenant.website || baseUrl,
         email: tenant.contactEmail,
@@ -481,16 +509,16 @@ export class OpenBadgeService {
     if (evidence && evidence.length > 0) {
       credential.evidence = evidence.map((url) => ({
         id: url,
-        type: ['Evidence'],
+        type: ["Evidence"],
       }));
     }
 
     // Add credential status (for revocation checking)
     credential.credentialStatus = {
-      id: `${baseUrl}/credentials/${credentialUri.split('/').pop()}/status`,
-      type: 'BitstringStatusListEntry',
-      statusPurpose: 'revocation',
-      statusListIndex: '0',
+      id: `${baseUrl}/credentials/${credentialUri.split("/").pop()}/status`,
+      type: "BitstringStatusListEntry",
+      statusPurpose: "revocation",
+      statusListIndex: "0",
       statusListCredential: `${baseUrl}/status-list/${tenant.id}`,
     };
 
@@ -513,7 +541,7 @@ export class OpenBadgeService {
           targetName: `CONOCER EC ${ecCode}`,
           targetCode: ecCode,
           targetDescription: `Estándar de Competencia ${ecCode}`,
-          targetFramework: 'CONOCER' as any,
+          targetFramework: "CONOCER" as any,
           targetUrl: `https://conocer.gob.mx/registro-nacional-estandares-competencia/?q=${ecCode}`,
         });
       }

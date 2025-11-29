@@ -82,6 +82,16 @@ export class RenecController {
     return this.renecService.getRenecECStandards(query);
   }
 
+  @Get("ec-standards/sectors")
+  @ApiOperation({ summary: "Get all EC sectors with counts" })
+  @ApiResponse({
+    status: 200,
+    description: "List of sectors with EC counts",
+  })
+  async getSectors() {
+    return this.renecService.getSectors();
+  }
+
   @Get("ec-standards/:ecClave")
   @ApiOperation({ summary: "Get EC standard by code" })
   @ApiResponse({

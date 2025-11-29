@@ -643,5 +643,14 @@ docker compose -f docker-compose.deploy.yml run --rm certbot renew
 
 ---
 
-**Last Updated**: January 2025
+## Related Documentation
+
+- [Setup Guide](./SETUP.md) - Local development setup
+- [Documentation Hub](../INDEX.md) - All documentation
+- [Architecture Overview](../architecture/OVERVIEW.md) - System architecture
+- [Security Policies](../../SECURITY.md) - Security guidelines
+
+---
+
+**Last Updated**: November 2024
 **Version**: 1.0.0 (Phase 6)

@@ -57,3 +57,119 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Holiday Theme Variables */
+:root {
+  --holiday-primary: none;
+  --holiday-secondary: none;
+  --holiday-accent: none;
+}
+
+/* Holiday Theme Overrides - Applied when .holiday-theme class is present */
+.holiday-theme {
+  /* Primary color override */
+  --primary: var(--holiday-primary);
+
+  /* Accent becomes holiday secondary */
+  --accent: hsl(var(--holiday-secondary) / 0.1);
+  --accent-foreground: hsl(var(--holiday-primary));
+
+  /* Ring uses holiday primary */
+  --ring: var(--holiday-primary);
+}
+
+/* Holiday-specific theme adjustments */
+/* Day of the Dead - Dark background with vibrant colors */
+[data-holiday="dia-de-muertos"] {
+  --background: 270 15% 10%;
+  --foreground: 35 100% 90%;
+  --card: 270 20% 12%;
+  --card-foreground: 35 100% 90%;
+  --popover: 270 20% 12%;
+  --popover-foreground: 35 100% 90%;
+  --muted: 270 20% 20%;
+  --muted-foreground: 35 60% 70%;
+  --border: 270 20% 25%;
+  --input: 270 20% 25%;
+}
+
+/* New Year's Eve - Dark midnight theme */
+[data-holiday="new-years-eve"],
+[data-holiday="new-year"] {
+  --background: 220 20% 10%;
+  --foreground: 45 90% 90%;
+  --card: 220 20% 12%;
+  --card-foreground: 45 90% 90%;
+  --popover: 220 20% 12%;
+  --popover-foreground: 45 90% 90%;
+  --muted: 220 15% 20%;
+  --muted-foreground: 45 50% 70%;
+  --border: 220 15% 25%;
+  --input: 220 15% 25%;
+}
+
+/* Independence Day - Vibrant patriotic */
+[data-holiday="independence-day"],
+[data-holiday="cinco-de-mayo"],
+[data-holiday="constitution-day"] {
+  --primary: 142 76% 36%;
+  --primary-foreground: 0 0% 100%;
+  --accent: 0 84% 44%;
+  --accent-foreground: 0 0% 100%;
+}
+
+/* Revolution Day - Sepia tones */
+[data-holiday="revolution-day"] {
+  --primary: 25 80% 35%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 45 70% 50%;
+  --secondary-foreground: 25 60% 20%;
+}
+
+/* Virgin of Guadalupe - Teal and rose */
+[data-holiday="virgen-guadalupe"] {
+  --primary: 180 70% 35%;
+  --primary-foreground: 0 0% 100%;
+  --accent: 340 70% 50%;
+  --accent-foreground: 0 0% 100%;
+}
+
+/* Christmas - Red and green */
+[data-holiday="christmas"] {
+  --primary: 0 72% 45%;
+  --primary-foreground: 0 0% 100%;
+  --accent: 142 60% 35%;
+  --accent-foreground: 0 0% 100%;
+}
+
+/* Labor Day - Bold red */
+[data-holiday="labor-day"] {
+  --primary: 0 72% 51%;
+  --primary-foreground: 0 0% 100%;
+  --accent: 45 100% 51%;
+  --accent-foreground: 0 0% 20%;
+}
+
+/* Day of the Race - Earth tones */
+[data-holiday="dia-de-la-raza"] {
+  --primary: 25 95% 45%;
+  --primary-foreground: 0 0% 100%;
+  --accent: 180 50% 35%;
+  --accent-foreground: 0 0% 100%;
+}
+
+/* Benito Juárez - Dignified blue */
+[data-holiday="benito-juarez"] {
+  --primary: 220 70% 45%;
+  --primary-foreground: 0 0% 100%;
+  --accent: 45 90% 55%;
+  --accent-foreground: 220 70% 25%;
+}
+
+/* Holiday theme transitions */
+.holiday-theme * {
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
+}

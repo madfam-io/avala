@@ -227,7 +227,9 @@ avala/
 
 ## Getting Help
 
-- **Documentation**: See [docs/INDEX.md](docs/INDEX.md)
+- **Documentation Hub**: [docs/INDEX.md](docs/INDEX.md)
+- **Architecture Overview**: [docs/architecture/OVERVIEW.md](docs/architecture/OVERVIEW.md)
+- **Quick Reference**: [CLAUDE.md](CLAUDE.md)
 - **Issues**: Open a GitHub issue
 - **Discussions**: Use GitHub Discussions
 

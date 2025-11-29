@@ -26,6 +26,7 @@ import { CertificationModule } from "./modules/certification/certification.modul
 import { SearchModule } from "./modules/search/search.module";
 import { ComplianceModule } from "./modules/compliance/compliance.module";
 import { CredentialsModule } from "./modules/credentials/credentials.module";
+import { HealthModule } from "./modules/health/health.module";
 
 // Multi-EC Training System (Phase 7)
 import { ECConfigModule } from "./modules/ec-config/ec-config.module";
@@ -81,6 +82,9 @@ import { ECAssessmentModule } from "./modules/ec-assessment/ec-assessment.module
 
     // Database
     DatabaseModule,
+
+    // Health Checks (Enclii/K8s probes)
+    HealthModule,
 
     // Caching (Redis/In-memory)
     CacheModule,
