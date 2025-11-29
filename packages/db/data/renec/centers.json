@@ -1,0 +1,3412 @@
+[
+  {
+    "id": "CCAP-00001",
+    "centerId": "CCAP-00001",
+    "name": "ELABORACIÓN DE PERITAJE EN HECHOS DE TRÁNSITO TERRESTRE",
+    "nombre": "ELABORACIÓN DE PERITAJE EN HECHOS DE TRÁNSITO TERRESTRE",
+    "activo": true,
+    "ec_codes": [
+      "EC0765",
+      "EC0801"
+    ]
+  },
+  {
+    "id": "CCAP-00002",
+    "centerId": "CCAP-00002",
+    "name": "FORMACIÓN BÁSICA DE OFICIALES DE SEGURIDAD (FOBOS)",
+    "nombre": "FORMACIÓN BÁSICA DE OFICIALES DE SEGURIDAD (FOBOS)",
+    "activo": true,
+    "ec_codes": [
+      "EC0060",
+      "EC0573"
+    ]
+  },
+  {
+    "id": "CCAP-00003",
+    "centerId": "CCAP-00003",
+    "name": "MANEJO DE PROCESADOR DE TEXTOS DIGITALES, HOJAS DE CÁLCULO DIGITALES, PRESENTACIONES DIGITALES",
+    "nombre": "MANEJO DE PROCESADOR DE TEXTOS DIGITALES, HOJAS DE CÁLCULO DIGITALES, PRESENTACIONES DIGITALES",
+    "activo": true,
+    "ec_codes": [
+      "EC0107",
+      "EC0109"
+    ]
+  },
+  {
+    "id": "CCAP-00004",
+    "centerId": "CCAP-00004",
+    "name": "MESERO PROFESIONAL",
+    "nombre": "MESERO PROFESIONAL",
+    "activo": true,
+    "ec_codes": [
+      "EC0038",
+      "EC0042"
+    ]
+  },
+  {
+    "id": "CCAP-00005",
+    "centerId": "CCAP-00005",
+    "name": "MICROSOFT EXCEL 2007 (BÁSICO)",
+    "nombre": "MICROSOFT EXCEL 2007 (BÁSICO)",
+    "activo": true,
+    "ec_codes": [
+      "EC0013",
+      "EC0108"
+    ]
+  },
+  {
+    "id": "CCAP-00006",
+    "centerId": "CCAP-00006",
+    "name": "MICROSOFT EXCEL 2010 (BÁSICO)",
+    "nombre": "MICROSOFT EXCEL 2010 (BÁSICO)",
+    "activo": true,
+    "ec_codes": [
+      "EC0013",
+      "EC0108"
+    ]
+  },
+  {
+    "id": "CCAP-00007",
+    "centerId": "CCAP-00007",
+    "name": "MICROSOFT POWER POINT 2007 (BÁSICO)",
+    "nombre": "MICROSOFT POWER POINT 2007 (BÁSICO)",
+    "activo": true,
+    "ec_codes": [
+      "EC0012",
+      "EC0109"
+    ]
+  },
+  {
+    "id": "CCAP-00008",
+    "centerId": "CCAP-00008",
+    "name": "MICROSOFT POWER POINT 2010 (BÁSICO)",
+    "nombre": "MICROSOFT POWER POINT 2010 (BÁSICO)",
+    "activo": true,
+    "ec_codes": [
+      "EC0012",
+      "EC0109"
+    ]
+  },
+  {
+    "id": "CCAP-00009",
+    "centerId": "CCAP-00009",
+    "name": "MICROSOFT WORD 2007 (BÁSICO)",
+    "nombre": "MICROSOFT WORD 2007 (BÁSICO)",
+    "activo": true,
+    "ec_codes": [
+      "EC0011",
+      "EC0107"
+    ]
+  },
+  {
+    "id": "CCAP-00010",
+    "centerId": "CCAP-00010",
+    "name": "MICROSOFT WORD 2010 (BÁSICO)",
+    "nombre": "MICROSOFT WORD 2010 (BÁSICO)",
+    "activo": true,
+    "ec_codes": [
+      "EC0011",
+      "EC0107"
+    ]
+  },
+  {
+    "id": "CCAP-00011",
+    "centerId": "CCAP-00011",
+    "name": "23 HERRAMIENTAS PARA LA ADMINISTRACIÓN DE PROYECTOS DE CONSTRUCCIÓN BY AXIOMA",
+    "nombre": "23 HERRAMIENTAS PARA LA ADMINISTRACIÓN DE PROYECTOS DE CONSTRUCCIÓN BY AXIOMA",
+    "activo": true,
+    "ec_codes": [
+      "EC0935"
+    ]
+  },
+  {
+    "id": "CCAP-00012",
+    "centerId": "CCAP-00012",
+    "name": "ACEPTACIÓN DE RIESGOS EN CULTIVOS DE GRANOS BÁSICOS",
+    "nombre": "ACEPTACIÓN DE RIESGOS EN CULTIVOS DE GRANOS BÁSICOS",
+    "activo": true,
+    "ec_codes": [
+      "EC0922"
+    ]
+  },
+  {
+    "id": "CCAP-00013",
+    "centerId": "CCAP-00013",
+    "name": "ACTIVIDADES EN EL SERVICIO DEL ASEO Y ALIMENTACIÓN EN EL HOGAR",
+    "nombre": "ACTIVIDADES EN EL SERVICIO DEL ASEO Y ALIMENTACIÓN EN EL HOGAR",
+    "activo": true,
+    "ec_codes": [
+      "EC0561"
+    ]
+  },
+  {
+    "id": "CCAP-00014",
+    "centerId": "CCAP-00014",
+    "name": "ADMINISTRACIÓN DE CONDOMINIOS",
+    "nombre": "ADMINISTRACIÓN DE CONDOMINIOS",
+    "activo": true,
+    "ec_codes": [
+      "EC0112"
+    ]
+  },
+  {
+    "id": "CCAP-00015",
+    "centerId": "CCAP-00015",
+    "name": "ADMINISTRACIÓN DE CONTRATOS, NÓMINAS Y SEGURIDAD SOCIAL",
+    "nombre": "ADMINISTRACIÓN DE CONTRATOS, NÓMINAS Y SEGURIDAD SOCIAL",
+    "activo": true,
+    "ec_codes": [
+      "EC0422"
+    ]
+  },
+  {
+    "id": "CCAP-00016",
+    "centerId": "CCAP-00016",
+    "name": "ADMINISTRACIÓN DE HOTELES",
+    "nombre": "ADMINISTRACIÓN DE HOTELES",
+    "activo": true,
+    "ec_codes": [
+      "EC0047"
+    ]
+  },
+  {
+    "id": "CCAP-00017",
+    "centerId": "CCAP-00017",
+    "name": "ADMINISTRACIÓN DE LA OBRA PÚBLICA MUNICIPAL",
+    "nombre": "ADMINISTRACIÓN DE LA OBRA PÚBLICA MUNICIPAL",
+    "activo": true,
+    "ec_codes": [
+      "EC0625"
+    ]
+  },
+  {
+    "id": "CCAP-00018",
+    "centerId": "CCAP-00018",
+    "name": "ADMINISTRACIÓN DE LOS SERVICIOS PÚBLICOS MUNICIPALES",
+    "nombre": "ADMINISTRACIÓN DE LOS SERVICIOS PÚBLICOS MUNICIPALES",
+    "activo": true,
+    "ec_codes": [
+      "EC0775"
+    ]
+  },
+  {
+    "id": "CCAP-00019",
+    "centerId": "CCAP-00019",
+    "name": "ALINEACIÓN AL ESTÁNDAR DE COMPETENCIA EC0046 SERVICIOS COSMETOLÓGICOS FACIALES",
+    "nombre": "ALINEACIÓN AL ESTÁNDAR DE COMPETENCIA EC0046 SERVICIOS COSMETOLÓGICOS FACIALES",
+    "activo": true,
+    "ec_codes": [
+      "EC0046"
+    ]
+  },
+  {
+    "id": "CCAP-00020",
+    "centerId": "CCAP-00020",
+    "name": "ALINEACIÓN AL ESTÁNDAR DE COMPETENCIA EC0217.01 IMPARTICIÓN DE CURSOS DE FORMACIÓN DEL CAPITAL HUMANO DE MANERA PRESENCIAL GRUPAL",
+    "nombre": "ALINEACIÓN AL ESTÁNDAR DE COMPETENCIA EC0217.01 IMPARTICIÓN DE CURSOS DE FORMACIÓN DEL CAPITAL HUMANO DE MANERA PRESENCIAL GRUPAL",
+    "activo": true,
+    "ec_codes": [
+      "EC0217.01"
+    ]
+  },
+  {
+    "id": "CCAP-00021",
+    "centerId": "CCAP-00021",
+    "name": "ALINEACIÓN AL ESTÁNDAR ECO902 APLICACIÓN DE MASAJE DRENAJE LINFÁTICO MANUAL",
+    "nombre": "ALINEACIÓN AL ESTÁNDAR ECO902 APLICACIÓN DE MASAJE DRENAJE LINFÁTICO MANUAL",
+    "activo": true,
+    "ec_codes": [
+      "EC0902"
+    ]
+  },
+  {
+    "id": "CCAP-00022",
+    "centerId": "CCAP-00022",
+    "name": "ALINEACIÓN AL ESTÁNDAR EN APLICACIÓN DE MASAJE SUECO",
+    "nombre": "ALINEACIÓN AL ESTÁNDAR EN APLICACIÓN DE MASAJE SUECO",
+    "activo": true,
+    "ec_codes": [
+      "EC0901"
+    ]
+  },
+  {
+    "id": "CCAP-00023",
+    "centerId": "CCAP-00023",
+    "name": "ALINEACIÓN AL ESTÁNDAR EN APLICACIÓN DE MASAJE TEJIDO PROFUNDO",
+    "nombre": "ALINEACIÓN AL ESTÁNDAR EN APLICACIÓN DE MASAJE TEJIDO PROFUNDO",
+    "activo": true,
+    "ec_codes": [
+      "EC0899"
+    ]
+  },
+  {
+    "id": "CCAP-00024",
+    "centerId": "CCAP-00024",
+    "name": "ALINEACIÓN AL ESTÁNDAR EN LA APLICACIÓN DE MASAJE CON PIEDRAS CALIENTES",
+    "nombre": "ALINEACIÓN AL ESTÁNDAR EN LA APLICACIÓN DE MASAJE CON PIEDRAS CALIENTES",
+    "activo": true,
+    "ec_codes": [
+      "EC1048"
+    ]
+  },
+  {
+    "id": "CCAP-00025",
+    "centerId": "CCAP-00025",
+    "name": "ALINEACIÓN AL ESTÁNDAR EN LA APLICACIÓN DE MASAJE DE REFLEXOTERAPIA PODAL",
+    "nombre": "ALINEACIÓN AL ESTÁNDAR EN LA APLICACIÓN DE MASAJE DE REFLEXOTERAPIA PODAL",
+    "activo": true,
+    "ec_codes": [
+      "EC1049"
+    ]
+  },
+  {
+    "id": "CCAP-00026",
+    "centerId": "CCAP-00026",
+    "name": "ALINEACIÓN AL ESTÁNDAR SERVICIOS ESTÉTICOS CORPORALES",
+    "nombre": "ALINEACIÓN AL ESTÁNDAR SERVICIOS ESTÉTICOS CORPORALES",
+    "activo": true,
+    "ec_codes": [
+      "EC0010"
+    ]
+  },
+  {
+    "id": "CCAP-00027",
+    "centerId": "CCAP-00027",
+    "name": "ANÁLISIS DE INFORMACIÓN PARA EL DESARROLLO DE PRODUCTOS DE INTELIGENCIA",
+    "nombre": "ANÁLISIS DE INFORMACIÓN PARA EL DESARROLLO DE PRODUCTOS DE INTELIGENCIA",
+    "activo": true,
+    "ec_codes": [
+      "EC0329"
+    ]
+  },
+  {
+    "id": "CCAP-00028",
+    "centerId": "CCAP-00028",
+    "name": "APLICACIÓN DE LA METODOLOGÍA ACR EN EL ANÁLISIS DE INCIDENTES",
+    "nombre": "APLICACIÓN DE LA METODOLOGÍA ACR EN EL ANÁLISIS DE INCIDENTES",
+    "activo": true,
+    "ec_codes": [
+      "EC0479"
+    ]
+  },
+  {
+    "id": "CCAP-00029",
+    "centerId": "CCAP-00029",
+    "name": "APLICACIÓN DE MASAJE HOLÍSTICO",
+    "nombre": "APLICACIÓN DE MASAJE HOLÍSTICO",
+    "activo": true,
+    "ec_codes": [
+      "EC0900"
+    ]
+  },
+  {
+    "id": "CCAP-00030",
+    "centerId": "CCAP-00030",
+    "name": "ARCHIVO DE CONCENTRACIÓN",
+    "nombre": "ARCHIVO DE CONCENTRACIÓN",
+    "activo": true,
+    "ec_codes": [
+      "EC0624"
+    ]
+  },
+  {
+    "id": "CCAP-00031",
+    "centerId": "CCAP-00031",
+    "name": "ARCHIVO EN TRÁMITE",
+    "nombre": "ARCHIVO EN TRÁMITE",
+    "activo": true,
+    "ec_codes": [
+      "EC0549"
+    ]
+  },
+  {
+    "id": "CCAP-00032",
+    "centerId": "CCAP-00032",
+    "name": "ASESORÍA DE SERVICIOS TURÍSTICOS EN AGENCIAS DE VIAJES",
+    "nombre": "ASESORÍA DE SERVICIOS TURÍSTICOS EN AGENCIAS DE VIAJES",
+    "activo": true,
+    "ec_codes": [
+      "EC0868"
+    ]
+  },
+  {
+    "id": "CCAP-00033",
+    "centerId": "CCAP-00033",
+    "name": "ASESORÍA PARA LA ORGANIZACIÓN VECINAL EN ZONAS HABITACIONALES",
+    "nombre": "ASESORÍA PARA LA ORGANIZACIÓN VECINAL EN ZONAS HABITACIONALES",
+    "activo": true,
+    "ec_codes": [
+      "EC0036"
+    ]
+  },
+  {
+    "id": "CCAP-00034",
+    "centerId": "CCAP-00034",
+    "name": "ASISTENCIA PRIMARIA ANTE UN EVENTO ADVERSO",
+    "nombre": "ASISTENCIA PRIMARIA ANTE UN EVENTO ADVERSO",
+    "activo": true,
+    "ec_codes": [
+      "EC0002"
+    ]
+  },
+  {
+    "id": "CCAP-00035",
+    "centerId": "CCAP-00035",
+    "name": "ASISTENCIA PRIMARIA DE UN EVENTO ADVERSO",
+    "nombre": "ASISTENCIA PRIMARIA DE UN EVENTO ADVERSO",
+    "activo": true,
+    "ec_codes": [
+      "EC0002"
+    ]
+  },
+  {
+    "id": "CCAP-00036",
+    "centerId": "CCAP-00036",
+    "name": "ASISTENCIA Y APOYO EN EL CUIDADO BÁSICO DE LA PERSONA ADULTA MAYOR EN DOMICILIO",
+    "nombre": "ASISTENCIA Y APOYO EN EL CUIDADO BÁSICO DE LA PERSONA ADULTA MAYOR EN DOMICILIO",
+    "activo": true,
+    "ec_codes": [
+      "EC0669"
+    ]
+  },
+  {
+    "id": "CCAP-00037",
+    "centerId": "CCAP-00037",
+    "name": "ATENCION COMENSALES",
+    "nombre": "ATENCION COMENSALES",
+    "activo": true,
+    "ec_codes": [
+      "EC0038"
+    ]
+  },
+  {
+    "id": "CCAP-00038",
+    "centerId": "CCAP-00038",
+    "name": "ATENCIÓN A CLIENTES",
+    "nombre": "ATENCIÓN A CLIENTES",
+    "activo": true,
+    "ec_codes": [
+      "EC0305"
+    ]
+  },
+  {
+    "id": "CCAP-00039",
+    "centerId": "CCAP-00039",
+    "name": "ATENCIÓN A COMENSALES",
+    "nombre": "ATENCIÓN A COMENSALES",
+    "activo": true,
+    "ec_codes": [
+      "EC0038"
+    ]
+  },
+  {
+    "id": "CCAP-00040",
+    "centerId": "CCAP-00040",
+    "name": "ATENCIÓN A COMENSALES EN SERVICIO DE ESPECIALIDADES",
+    "nombre": "ATENCIÓN A COMENSALES EN SERVICIO DE ESPECIALIDADES",
+    "activo": true,
+    "ec_codes": [
+      "EC0016"
+    ]
+  },
+  {
+    "id": "CCAP-00041",
+    "centerId": "CCAP-00041",
+    "name": "ATENCIÓN A COMENSALES EN SERVICIOS ESPECIALES",
+    "nombre": "ATENCIÓN A COMENSALES EN SERVICIOS ESPECIALES",
+    "activo": true,
+    "ec_codes": [
+      "EC0016"
+    ]
+  },
+  {
+    "id": "CCAP-00042",
+    "centerId": "CCAP-00042",
+    "name": "ATENCIÓN AL CIUDADANO EN EL SECTOR PÚBLICO",
+    "nombre": "ATENCIÓN AL CIUDADANO EN EL SECTOR PÚBLICO",
+    "activo": true,
+    "ec_codes": [
+      "EC0105"
+    ]
+  },
+  {
+    "id": "CCAP-00043",
+    "centerId": "CCAP-00043",
+    "name": "ATENCIÓN AL HUÉSPED DURANTE SU ALOJAMIENTO EC0828",
+    "nombre": "ATENCIÓN AL HUÉSPED DURANTE SU ALOJAMIENTO EC0828",
+    "activo": true,
+    "ec_codes": [
+      "EC0828"
+    ]
+  },
+  {
+    "id": "CCAP-00044",
+    "centerId": "CCAP-00044",
+    "name": "ATENCIÓN AL HUÉSPED PARA SU REGISTRO Y ESTANCIA EN EL HOTEL",
+    "nombre": "ATENCIÓN AL HUÉSPED PARA SU REGISTRO Y ESTANCIA EN EL HOTEL",
+    "activo": true,
+    "ec_codes": [
+      "EC0045"
+    ]
+  },
+  {
+    "id": "CCAP-00045",
+    "centerId": "CCAP-00045",
+    "name": "ATENCIÓN DE PRIMER CONTACTO PARA LA BÚSQUEDA DE PERSONAS DESAPARECIDAS Y NO LOCALIZADAS",
+    "nombre": "ATENCIÓN DE PRIMER CONTACTO PARA LA BÚSQUEDA DE PERSONAS DESAPARECIDAS Y NO LOCALIZADAS",
+    "activo": true,
+    "ec_codes": [
+      "EC1235"
+    ]
+  },
+  {
+    "id": "CCAP-00046",
+    "centerId": "CCAP-00046",
+    "name": "ATENCIÓN DE PRIMEROS AUXILIOS A LA PERSONA AFECTADA / LESIONADA",
+    "nombre": "ATENCIÓN DE PRIMEROS AUXILIOS A LA PERSONA AFECTADA / LESIONADA",
+    "activo": true,
+    "ec_codes": [
+      "EC0585"
+    ]
+  },
+  {
+    "id": "CCAP-00047",
+    "centerId": "CCAP-00047",
+    "name": "ATENCIÓN IN SITU AL VISITANTE DURANTE DURANTE RECORRIDOS TURÍSTICOS",
+    "nombre": "ATENCIÓN IN SITU AL VISITANTE DURANTE DURANTE RECORRIDOS TURÍSTICOS",
+    "activo": true,
+    "ec_codes": [
+      "EC0072"
+    ]
+  },
+  {
+    "id": "CCAP-00048",
+    "centerId": "CCAP-00048",
+    "name": "ATENCIÓN IN SITU AL VISITANTE DURANTE RECORRIDOS TURÍSTICOS EC0072",
+    "nombre": "ATENCIÓN IN SITU AL VISITANTE DURANTE RECORRIDOS TURÍSTICOS EC0072",
+    "activo": true,
+    "ec_codes": [
+      "EC0072"
+    ]
+  },
+  {
+    "id": "CCAP-00049",
+    "centerId": "CCAP-00049",
+    "name": "ATENCIÓN IN SITU DURANTE RECORRIDOS TURÍSTICOS",
+    "nombre": "ATENCIÓN IN SITU DURANTE RECORRIDOS TURÍSTICOS",
+    "activo": true,
+    "ec_codes": [
+      "EC0072"
+    ]
+  },
+  {
+    "id": "CCAP-00050",
+    "centerId": "CCAP-00050",
+    "name": "ATENCIÓN PRIMARIA EN UN EVENTO ADVERSO",
+    "nombre": "ATENCIÓN PRIMARIA EN UN EVENTO ADVERSO",
+    "activo": true,
+    "ec_codes": [
+      "EC0002"
+    ]
+  },
+  {
+    "id": "CCAP-00051",
+    "centerId": "CCAP-00051",
+    "name": "AUXILIAR DE ENFERMERÍA",
+    "nombre": "AUXILIAR DE ENFERMERÍA",
+    "activo": true,
+    "ec_codes": [
+      "EC0616"
+    ]
+  },
+  {
+    "id": "CCAP-00052",
+    "centerId": "CCAP-00052",
+    "name": "AUXILIAR DE RECURSOS HUMANOS",
+    "nombre": "AUXILIAR DE RECURSOS HUMANOS",
+    "activo": true,
+    "ec_codes": [
+      "EC0422"
+    ]
+  },
+  {
+    "id": "CCAP-00053",
+    "centerId": "CCAP-00053",
+    "name": "AUXILIAR EN SERVICIOS Y ESTABLECIMIENTOS VETERINARIOS",
+    "nombre": "AUXILIAR EN SERVICIOS Y ESTABLECIMIENTOS VETERINARIOS",
+    "activo": true,
+    "ec_codes": [
+      "EC0678"
+    ]
+  },
+  {
+    "id": "CCAP-00054",
+    "centerId": "CCAP-00054",
+    "name": "AUXILIAR Y MEDICINA PREVENTIVA",
+    "nombre": "AUXILIAR Y MEDICINA PREVENTIVA",
+    "activo": true,
+    "ec_codes": [
+      "EC0616"
+    ]
+  },
+  {
+    "id": "CCAP-00055",
+    "centerId": "CCAP-00055",
+    "name": "BRIGADAS DE PRIMEROS AUXILIOS",
+    "nombre": "BRIGADAS DE PRIMEROS AUXILIOS",
+    "activo": true,
+    "ec_codes": [
+      "EC0585"
+    ]
+  },
+  {
+    "id": "CCAP-00056",
+    "centerId": "CCAP-00056",
+    "name": "BUENAS PRÁCTICAS DE HIGIENE EN EL PROCESO DE ALIMENTOS,  BEBIDAS O SUPLEMENTOS ALIMENTICIOS.",
+    "nombre": "BUENAS PRÁCTICAS DE HIGIENE EN EL PROCESO DE ALIMENTOS,  BEBIDAS O SUPLEMENTOS ALIMENTICIOS.",
+    "activo": true,
+    "ec_codes": [
+      "EC0081"
+    ]
+  },
+  {
+    "id": "CCAP-00057",
+    "centerId": "CCAP-00057",
+    "name": "BUSINESS ENGLISH COURSE",
+    "nombre": "BUSINESS ENGLISH COURSE",
+    "activo": true,
+    "ec_codes": [
+      "EC0679"
+    ]
+  },
+  {
+    "id": "CCAP-00058",
+    "centerId": "CCAP-00058",
+    "name": "CAPACITACIÓN TÉCNICO BÁSICO G.W.O.",
+    "nombre": "CAPACITACIÓN TÉCNICO BÁSICO G.W.O.",
+    "activo": true,
+    "ec_codes": [
+      "EC0530"
+    ]
+  },
+  {
+    "id": "CCAP-00059",
+    "centerId": "CCAP-00059",
+    "name": "CERTIFICACIÓN EN APLICACIÓN DE EXTENSIONES DE PESTAÑAS",
+    "nombre": "CERTIFICACIÓN EN APLICACIÓN DE EXTENSIONES DE PESTAÑAS",
+    "activo": true,
+    "ec_codes": [
+      "EC0611"
+    ]
+  },
+  {
+    "id": "CCAP-00060",
+    "centerId": "CCAP-00060",
+    "name": "CERTIFICACIÓN GREEN BELT",
+    "nombre": "CERTIFICACIÓN GREEN BELT",
+    "activo": true,
+    "ec_codes": [
+      "EC0264"
+    ]
+  },
+  {
+    "id": "CCAP-00061",
+    "centerId": "CCAP-00061",
+    "name": "CERTIFICACIÓN MEXICANA DE COACHING",
+    "nombre": "CERTIFICACIÓN MEXICANA DE COACHING",
+    "activo": true,
+    "ec_codes": [
+      "EC0204"
+    ]
+  },
+  {
+    "id": "CCAP-00062",
+    "centerId": "CCAP-00062",
+    "name": "COLABORACIÓN EN LA APLICACIÓN DEL PROCEDIMIENTO ABREVIADO COMO FORMA DE TERMINACIÓN ANTICIPADA DEL PROCESO PENAL",
+    "nombre": "COLABORACIÓN EN LA APLICACIÓN DEL PROCEDIMIENTO ABREVIADO COMO FORMA DE TERMINACIÓN ANTICIPADA DEL PROCESO PENAL",
+    "activo": true,
+    "ec_codes": [
+      "EC1093"
+    ]
+  },
+  {
+    "id": "CCAP-00063",
+    "centerId": "CCAP-00063",
+    "name": "COMO FORMALIZAR NUESTRO NEGOCIO.",
+    "nombre": "COMO FORMALIZAR NUESTRO NEGOCIO.",
+    "activo": true,
+    "ec_codes": [
+      "EC0839"
+    ]
+  },
+  {
+    "id": "CCAP-00064",
+    "centerId": "CCAP-00064",
+    "name": "COMPETENCIAS DEL TUTOR PARA CURSOS EN LÍNEA",
+    "nombre": "COMPETENCIAS DEL TUTOR PARA CURSOS EN LÍNEA",
+    "activo": true,
+    "ec_codes": [
+      "EC0019"
+    ]
+  },
+  {
+    "id": "CCAP-00065",
+    "centerId": "CCAP-00065",
+    "name": "COMUNICACIÓN Y ATENCIÓN AL CLIENTE EN HOSTELERÍA Y TURISMO",
+    "nombre": "COMUNICACIÓN Y ATENCIÓN AL CLIENTE EN HOSTELERÍA Y TURISMO",
+    "activo": true,
+    "ec_codes": [
+      "EC0047"
+    ]
+  },
+  {
+    "id": "CCAP-00066",
+    "centerId": "CCAP-00066",
+    "name": "CONCILIACIÓN PARA LA SOLUCIÓN DE CONFLICTOS EN MATERIA LABORAL INDIVIDUAL",
+    "nombre": "CONCILIACIÓN PARA LA SOLUCIÓN DE CONFLICTOS EN MATERIA LABORAL INDIVIDUAL",
+    "activo": true,
+    "ec_codes": [
+      "EC1374"
+    ]
+  },
+  {
+    "id": "CCAP-00067",
+    "centerId": "CCAP-00067",
+    "name": "CONFORMADO DE LÁMINA DE ACERO EN CARROCERÍA DE AUTOMÓVILES",
+    "nombre": "CONFORMADO DE LÁMINA DE ACERO EN CARROCERÍA DE AUTOMÓVILES",
+    "activo": true,
+    "ec_codes": [
+      "EC0803"
+    ]
+  },
+  {
+    "id": "CCAP-00068",
+    "centerId": "CCAP-00068",
+    "name": "CONOCIENDO A LAS SOCIEDADES MERCANTILES.",
+    "nombre": "CONOCIENDO A LAS SOCIEDADES MERCANTILES.",
+    "activo": true,
+    "ec_codes": [
+      "EC0754"
+    ]
+  },
+  {
+    "id": "CCAP-00069",
+    "centerId": "CCAP-00069",
+    "name": "CONOCIENDO LOS TÍTULOS Y OPERACIONES DE CRÉDITO",
+    "nombre": "CONOCIENDO LOS TÍTULOS Y OPERACIONES DE CRÉDITO",
+    "activo": true,
+    "ec_codes": [
+      "EC0754"
+    ]
+  },
+  {
+    "id": "CCAP-00070",
+    "centerId": "CCAP-00070",
+    "name": "CONSULTOR ESPECIALIZADO EN HERRAMIENTAS DE FAMILY & EDUCATIONAL COACHING",
+    "nombre": "CONSULTOR ESPECIALIZADO EN HERRAMIENTAS DE FAMILY & EDUCATIONAL COACHING",
+    "activo": true,
+    "ec_codes": [
+      "EC0249"
+    ]
+  },
+  {
+    "id": "CCAP-00071",
+    "centerId": "CCAP-00071",
+    "name": "CONSULTORÍA A PYMES, CURSO ALINEADO AL ESTÁNDAR EC0359",
+    "nombre": "CONSULTORÍA A PYMES, CURSO ALINEADO AL ESTÁNDAR EC0359",
+    "activo": true,
+    "ec_codes": [
+      "EC0359"
+    ]
+  },
+  {
+    "id": "CCAP-00072",
+    "centerId": "CCAP-00072",
+    "name": "CONTABILIDAD ELECTRÓNICA Y ASPEL-COI",
+    "nombre": "CONTABILIDAD ELECTRÓNICA Y ASPEL-COI",
+    "activo": true,
+    "ec_codes": [
+      "EC0744"
+    ]
+  },
+  {
+    "id": "CCAP-00073",
+    "centerId": "CCAP-00073",
+    "name": "CONTABILIDAD PARA NO CONTADORES",
+    "nombre": "CONTABILIDAD PARA NO CONTADORES",
+    "activo": true,
+    "ec_codes": [
+      "EC0374"
+    ]
+  },
+  {
+    "id": "CCAP-00074",
+    "centerId": "CCAP-00074",
+    "name": "COORDINACIÓN DE GRUPOS TÉCNICOS Y DESARROLLO DE ESTÁNDARES DE COMPETENCIA",
+    "nombre": "COORDINACIÓN DE GRUPOS TÉCNICOS Y DESARROLLO DE ESTÁNDARES DE COMPETENCIA",
+    "activo": true,
+    "ec_codes": [
+      "EC0074"
+    ]
+  },
+  {
+    "id": "CCAP-00075",
+    "centerId": "CCAP-00075",
+    "name": "COORDINACIÓN DE LOS SERVICIOS DE ALIMENTOS Y BEBIDAS",
+    "nombre": "COORDINACIÓN DE LOS SERVICIOS DE ALIMENTOS Y BEBIDAS",
+    "activo": true,
+    "ec_codes": [
+      "EC0042"
+    ]
+  },
+  {
+    "id": "CCAP-00076",
+    "centerId": "CCAP-00076",
+    "name": "COORDINACIÓN DE LOS SERVICIOS DE ALIMENTOS Y BEBIDAS EC0042",
+    "nombre": "COORDINACIÓN DE LOS SERVICIOS DE ALIMENTOS Y BEBIDAS EC0042",
+    "activo": true,
+    "ec_codes": [
+      "EC0042"
+    ]
+  },
+  {
+    "id": "CCAP-00077",
+    "centerId": "CCAP-00077",
+    "name": "COORDINACIÓN DE LOS SERVICIOS DE LIMPIEZA DE HABITACIONES Y ÁREAS DE ESTANCIA PARA ALOJAMIENTO TEMPORAL",
+    "nombre": "COORDINACIÓN DE LOS SERVICIOS DE LIMPIEZA DE HABITACIONES Y ÁREAS DE ESTANCIA PARA ALOJAMIENTO TEMPORAL",
+    "activo": true,
+    "ec_codes": [
+      "EC0044"
+    ]
+  },
+  {
+    "id": "CCAP-00078",
+    "centerId": "CCAP-00078",
+    "name": "COORDINACIÓN DE LOS SERVICIOS DE LIMPIEZA DE HABITACIONES Y ÁREAS DE ESTANCIA PARA AMAS DE LLAVES",
+    "nombre": "COORDINACIÓN DE LOS SERVICIOS DE LIMPIEZA DE HABITACIONES Y ÁREAS DE ESTANCIA PARA AMAS DE LLAVES",
+    "activo": true,
+    "ec_codes": [
+      "EC0044"
+    ]
+  },
+  {
+    "id": "CCAP-00079",
+    "centerId": "CCAP-00079",
+    "name": "COORDINACIÓN DE SERVICIOS DE HOSPEDAJE EC0832",
+    "nombre": "COORDINACIÓN DE SERVICIOS DE HOSPEDAJE EC0832",
+    "activo": true,
+    "ec_codes": [
+      "EC0832"
+    ]
+  },
+  {
+    "id": "CCAP-00080",
+    "centerId": "CCAP-00080",
+    "name": "CUIDADOS AUXILIARES EN ENFERMERÍA",
+    "nombre": "CUIDADOS AUXILIARES EN ENFERMERÍA",
+    "activo": true,
+    "ec_codes": [
+      "EC0616"
+    ]
+  },
+  {
+    "id": "CCAP-00081",
+    "centerId": "CCAP-00081",
+    "name": "CURSO BÁSICO DE MICROPIGMENTACIÓN (TÉCNICAS MICROBLADING Y MAGIC SHADING)",
+    "nombre": "CURSO BÁSICO DE MICROPIGMENTACIÓN (TÉCNICAS MICROBLADING Y MAGIC SHADING)",
+    "activo": true,
+    "ec_codes": [
+      "EC1045"
+    ]
+  },
+  {
+    "id": "CCAP-00082",
+    "centerId": "CCAP-00082",
+    "name": "CURSO BÁSICO DEL VINO PARA LAS PERSONAS QUE MANEJAN DE FORMA PRÁCTICA EL VINO EN ESTABLECIMIENTOS DE VENTA Y CONSUMO",
+    "nombre": "CURSO BÁSICO DEL VINO PARA LAS PERSONAS QUE MANEJAN DE FORMA PRÁCTICA EL VINO EN ESTABLECIMIENTOS DE VENTA Y CONSUMO",
+    "activo": true,
+    "ec_codes": [
+      "EC0314"
+    ]
+  },
+  {
+    "id": "CCAP-00083",
+    "centerId": "CCAP-00083",
+    "name": "CURSO BÁSICO LEAN MANUFACTURING",
+    "nombre": "CURSO BÁSICO LEAN MANUFACTURING",
+    "activo": true,
+    "ec_codes": [
+      "EC1189"
+    ]
+  },
+  {
+    "id": "CCAP-00084",
+    "centerId": "CCAP-00084",
+    "name": "CURSO BÁSICO PARA USO DE EQUIPO MÉDICO E INSTRUMENTAL EN CENTROS DE ATENCIÓN MÉDICA",
+    "nombre": "CURSO BÁSICO PARA USO DE EQUIPO MÉDICO E INSTRUMENTAL EN CENTROS DE ATENCIÓN MÉDICA",
+    "activo": true,
+    "ec_codes": [
+      "EC0793"
+    ]
+  },
+  {
+    "id": "CCAP-00085",
+    "centerId": "CCAP-00085",
+    "name": "CURSO DE ALINEACIÓN AL EC1084 PREPARACIÓN DE GASTRONOMÍA MEXICANA POPULAR Y TRADICIONAL",
+    "nombre": "CURSO DE ALINEACIÓN AL EC1084 PREPARACIÓN DE GASTRONOMÍA MEXICANA POPULAR Y TRADICIONAL",
+    "activo": true,
+    "ec_codes": [
+      "EC1084"
+    ]
+  },
+  {
+    "id": "CCAP-00086",
+    "centerId": "CCAP-00086",
+    "name": "CURSO DE ALINEACIÓN PARA CATADOR Y/O MAESTRO CATADOR",
+    "nombre": "CURSO DE ALINEACIÓN PARA CATADOR Y/O MAESTRO CATADOR",
+    "activo": true,
+    "ec_codes": [
+      "EC1456"
+    ]
+  },
+  {
+    "id": "CCAP-00087",
+    "centerId": "CCAP-00087",
+    "name": "CURSO DE ALINEACIÓN PARA EL ESTÁNDAR DE ADMINISTRACIÓN DE CONDOMINIOS",
+    "nombre": "CURSO DE ALINEACIÓN PARA EL ESTÁNDAR DE ADMINISTRACIÓN DE CONDOMINIOS",
+    "activo": true,
+    "ec_codes": [
+      "EC0112"
+    ]
+  },
+  {
+    "id": "CCAP-00088",
+    "centerId": "CCAP-00088",
+    "name": "CURSO DE ALINEACIÓN PARA INSTALADORES DE CALENTADORES SOLARES DE AGUA TERMOSIFÓNICOS EN VIVIENDA SUSTENTABLE CON BASE EN EL EC-0325",
+    "nombre": "CURSO DE ALINEACIÓN PARA INSTALADORES DE CALENTADORES SOLARES DE AGUA TERMOSIFÓNICOS EN VIVIENDA SUSTENTABLE CON BASE EN EL EC-0325",
+    "activo": true,
+    "ec_codes": [
+      "EC0325"
+    ]
+  },
+  {
+    "id": "CCAP-00089",
+    "centerId": "CCAP-00089",
+    "name": "CURSO DE ATENCIÓN DE INCENDIOS QUE INVOLUCRAN MATERIALES, PRODUCTOS Y SUSTANCIAS QUÍMICAS.",
+    "nombre": "CURSO DE ATENCIÓN DE INCENDIOS QUE INVOLUCRAN MATERIALES, PRODUCTOS Y SUSTANCIAS QUÍMICAS.",
+    "activo": true,
+    "ec_codes": [
+      "EC0290"
+    ]
+  },
+  {
+    "id": "CCAP-00090",
+    "centerId": "CCAP-00090",
+    "name": "CURSO DE CAPACITACIÓN BASADO EN EL ESTÁNDAR DE COMPETENCIA EC0772",
+    "nombre": "CURSO DE CAPACITACIÓN BASADO EN EL ESTÁNDAR DE COMPETENCIA EC0772",
+    "activo": true,
+    "ec_codes": [
+      "EC0772"
+    ]
+  },
+  {
+    "id": "CCAP-00091",
+    "centerId": "CCAP-00091",
+    "name": "CURSO DE CAPACITACIÓN CON BASE EN EL ESTÁNDAR DE COMPETENCIA EC1319 \"INTERPRETACIÓN DE CONFERENCIA DE LENGUA DE SEÑAS MEXICANA <> ESPAÑOL\"",
+    "nombre": "CURSO DE CAPACITACIÓN CON BASE EN EL ESTÁNDAR DE COMPETENCIA EC1319 \"INTERPRETACIÓN DE CONFERENCIA DE LENGUA DE SEÑAS MEXICANA <> ESPAÑOL\"",
+    "activo": true,
+    "ec_codes": [
+      "EC1319"
+    ]
+  },
+  {
+    "id": "CCAP-00092",
+    "centerId": "CCAP-00092",
+    "name": "CURSO DE CAPACITACIÓN PARA EVALUADORES DE INDEPENDIENTES DE LA ECE DEL CCGM",
+    "nombre": "CURSO DE CAPACITACIÓN PARA EVALUADORES DE INDEPENDIENTES DE LA ECE DEL CCGM",
+    "activo": true,
+    "ec_codes": [
+      "EC0076"
+    ]
+  },
+  {
+    "id": "CCAP-00093",
+    "centerId": "CCAP-00093",
+    "name": "CURSO DE IMPLEMENTACIÓN DE ACCIONES DE RESPUESTA A EMERGENCIAS EN PLANTAS INDUSTRIALES.",
+    "nombre": "CURSO DE IMPLEMENTACIÓN DE ACCIONES DE RESPUESTA A EMERGENCIAS EN PLANTAS INDUSTRIALES.",
+    "activo": true,
+    "ec_codes": [
+      "EC0291"
+    ]
+  },
+  {
+    "id": "CCAP-00094",
+    "centerId": "CCAP-00094",
+    "name": "CURSO DE INGLES",
+    "nombre": "CURSO DE INGLES",
+    "activo": true,
+    "ec_codes": [
+      "EC0679"
+    ]
+  },
+  {
+    "id": "CCAP-00095",
+    "centerId": "CCAP-00095",
+    "name": "CURSO DE INGLES PROFESIONAL Y DE CERTIFICACIÓN INTERNACIONAL",
+    "nombre": "CURSO DE INGLES PROFESIONAL Y DE CERTIFICACIÓN INTERNACIONAL",
+    "activo": true,
+    "ec_codes": [
+      "EC0679"
+    ]
+  },
+  {
+    "id": "CCAP-00096",
+    "centerId": "CCAP-00096",
+    "name": "CURSO DE INGLÉS PROFESIONAL Y DE CERTIFICACIÓN INTERNACIONAL",
+    "nombre": "CURSO DE INGLÉS PROFESIONAL Y DE CERTIFICACIÓN INTERNACIONAL",
+    "activo": true,
+    "ec_codes": [
+      "EC0974"
+    ]
+  },
+  {
+    "id": "CCAP-00097",
+    "centerId": "CCAP-00097",
+    "name": "CURSO DE MAQUILLAJE CORRECTIVO EN LOS MEDIOS MASIVOS DE COMUNICACIÓN",
+    "nombre": "CURSO DE MAQUILLAJE CORRECTIVO EN LOS MEDIOS MASIVOS DE COMUNICACIÓN",
+    "activo": true,
+    "ec_codes": [
+      "EC0569"
+    ]
+  },
+  {
+    "id": "CCAP-00098",
+    "centerId": "CCAP-00098",
+    "name": "CURSO DE MICROBLADING",
+    "nombre": "CURSO DE MICROBLADING",
+    "activo": true,
+    "ec_codes": [
+      "EC1045"
+    ]
+  },
+  {
+    "id": "CCAP-00099",
+    "centerId": "CCAP-00099",
+    "name": "CURSO DE MICROPIGMENTACIÓN ESTÉTICA FACIAL",
+    "nombre": "CURSO DE MICROPIGMENTACIÓN ESTÉTICA FACIAL",
+    "activo": true,
+    "ec_codes": [
+      "EC0715.01"
+    ]
+  },
+  {
+    "id": "CCAP-00100",
+    "centerId": "CCAP-00100",
+    "name": "CURSO DE RESPUESTA A EMERGENCIAS QUE INVOLUCRAN MATERIALES PELIGROSOS",
+    "nombre": "CURSO DE RESPUESTA A EMERGENCIAS QUE INVOLUCRAN MATERIALES PELIGROSOS",
+    "activo": true,
+    "ec_codes": [
+      "EC0252"
+    ]
+  },
+  {
+    "id": "CCAP-00101",
+    "centerId": "CCAP-00101",
+    "name": "CURSO TEÓRICO PRÁCTICO DE CAPTACIÓN PLUVIAL Y PROMOCIÓN DE LA CULTURA DEL AGUA",
+    "nombre": "CURSO TEÓRICO PRÁCTICO DE CAPTACIÓN PLUVIAL Y PROMOCIÓN DE LA CULTURA DEL AGUA",
+    "activo": true,
+    "ec_codes": [
+      "EC0180"
+    ]
+  },
+  {
+    "id": "CCAP-00102",
+    "centerId": "CCAP-00102",
+    "name": "DE PRINCIPIANTE A EXPERTO EN LA COMERCIALIZACIÓN DE BIENES INMUEBLES",
+    "nombre": "DE PRINCIPIANTE A EXPERTO EN LA COMERCIALIZACIÓN DE BIENES INMUEBLES",
+    "activo": true,
+    "ec_codes": [
+      "EC0110.02"
+    ]
+  },
+  {
+    "id": "CCAP-00103",
+    "centerId": "CCAP-00103",
+    "name": "DECLARACIÓN ANUAL ISR PERSONAS MORALES.",
+    "nombre": "DECLARACIÓN ANUAL ISR PERSONAS MORALES.",
+    "activo": true,
+    "ec_codes": [
+      "EC0839"
+    ]
+  },
+  {
+    "id": "CCAP-00104",
+    "centerId": "CCAP-00104",
+    "name": "DEEP TISSUE",
+    "nombre": "DEEP TISSUE",
+    "activo": true,
+    "ec_codes": [
+      "EC0899"
+    ]
+  },
+  {
+    "id": "CCAP-00105",
+    "centerId": "CCAP-00105",
+    "name": "DERECHO LABORAL Y CÁLCULO DE NÓMINAS",
+    "nombre": "DERECHO LABORAL Y CÁLCULO DE NÓMINAS",
+    "activo": true,
+    "ec_codes": [
+      "EC0383"
+    ]
+  },
+  {
+    "id": "CCAP-00106",
+    "centerId": "CCAP-00106",
+    "name": "DESARROLLO DE HABILIDADES GERENCIALES",
+    "nombre": "DESARROLLO DE HABILIDADES GERENCIALES",
+    "activo": true,
+    "ec_codes": [
+      "EC0009"
+    ]
+  },
+  {
+    "id": "CCAP-00107",
+    "centerId": "CCAP-00107",
+    "name": "DESARROLLO DE HABILIDADES PARA LA MEJORA CONTINUA",
+    "nombre": "DESARROLLO DE HABILIDADES PARA LA MEJORA CONTINUA",
+    "activo": true,
+    "ec_codes": [
+      "EC0301"
+    ]
+  },
+  {
+    "id": "CCAP-00108",
+    "centerId": "CCAP-00108",
+    "name": "DESARROLLO ORGANIZACIONAL, GENERACIONAL Y EVALUACIÓN PERSONAL",
+    "nombre": "DESARROLLO ORGANIZACIONAL, GENERACIONAL Y EVALUACIÓN PERSONAL",
+    "activo": true,
+    "ec_codes": [
+      "EC0381"
+    ]
+  },
+  {
+    "id": "CCAP-00109",
+    "centerId": "CCAP-00109",
+    "name": "DESARROLLO RURAL: ALTERNATIVA DE NEGOCIO PARA LA TRANSFORMACIÓN SOCIAL",
+    "nombre": "DESARROLLO RURAL: ALTERNATIVA DE NEGOCIO PARA LA TRANSFORMACIÓN SOCIAL",
+    "activo": true,
+    "ec_codes": [
+      "EC0020"
+    ]
+  },
+  {
+    "id": "CCAP-00110",
+    "centerId": "CCAP-00110",
+    "name": "DETERMINACIÓN DE IMPUESTOS SOBRE LA RENTA PARA PERSONAS FÍSICAS, BAJO EL REGIMEN DE INGRESOS POR SALARIOS",
+    "nombre": "DETERMINACIÓN DE IMPUESTOS SOBRE LA RENTA PARA PERSONAS FÍSICAS, BAJO EL REGIMEN DE INGRESOS POR SALARIOS",
+    "activo": true,
+    "ec_codes": [
+      "EC0839"
+    ]
+  },
+  {
+    "id": "CCAP-00111",
+    "centerId": "CCAP-00111",
+    "name": "DIPLOMADO COMO COACH Y FACILITADOR DE APRENDIZAJE",
+    "nombre": "DIPLOMADO COMO COACH Y FACILITADOR DE APRENDIZAJE",
+    "activo": true,
+    "ec_codes": [
+      "EC0204"
+    ]
+  },
+  {
+    "id": "CCAP-00112",
+    "centerId": "CCAP-00112",
+    "name": "DIPLOMADO DE COSMETOLOGÍA FACIAL CLÍNICA",
+    "nombre": "DIPLOMADO DE COSMETOLOGÍA FACIAL CLÍNICA",
+    "activo": true,
+    "ec_codes": [
+      "EC0046"
+    ]
+  },
+  {
+    "id": "CCAP-00113",
+    "centerId": "CCAP-00113",
+    "name": "DIPLOMADO DE CUIDADORES GERONTOLÓGICOS",
+    "nombre": "DIPLOMADO DE CUIDADORES GERONTOLÓGICOS",
+    "activo": true,
+    "ec_codes": [
+      "EC0669"
+    ]
+  },
+  {
+    "id": "CCAP-00114",
+    "centerId": "CCAP-00114",
+    "name": "DIPLOMADO DE MAQUILLAJE PROFESIONAL",
+    "nombre": "DIPLOMADO DE MAQUILLAJE PROFESIONAL",
+    "activo": true,
+    "ec_codes": [
+      "EC0859"
+    ]
+  },
+  {
+    "id": "CCAP-00115",
+    "centerId": "CCAP-00115",
+    "name": "DIPLOMADO DE NOMINAS Y SEGURIDAD SOCIAL",
+    "nombre": "DIPLOMADO DE NOMINAS Y SEGURIDAD SOCIAL",
+    "activo": true,
+    "ec_codes": [
+      "EC0383"
+    ]
+  },
+  {
+    "id": "CCAP-00116",
+    "centerId": "CCAP-00116",
+    "name": "DIPLOMADO DESARROLLO RURAL: ALTERNATIVA DE NEGOCIO PARA LA TRANSFORMACIÓN SOCIAL",
+    "nombre": "DIPLOMADO DESARROLLO RURAL: ALTERNATIVA DE NEGOCIO PARA LA TRANSFORMACIÓN SOCIAL",
+    "activo": true,
+    "ec_codes": [
+      "EC0070"
+    ]
+  },
+  {
+    "id": "CCAP-00117",
+    "centerId": "CCAP-00117",
+    "name": "DIPLOMADO EN AGRICULTURA URBANA",
+    "nombre": "DIPLOMADO EN AGRICULTURA URBANA",
+    "activo": true,
+    "ec_codes": [
+      "EC0557"
+    ]
+  },
+  {
+    "id": "CCAP-00118",
+    "centerId": "CCAP-00118",
+    "name": "DIPLOMADO EN CONSEJERÍA TERAPÉUTICA EN DROGODEPENDENCIA BAJO MODELO DE COMUNIDAD TERAPÉUTICA",
+    "nombre": "DIPLOMADO EN CONSEJERÍA TERAPÉUTICA EN DROGODEPENDENCIA BAJO MODELO DE COMUNIDAD TERAPÉUTICA",
+    "activo": true,
+    "ec_codes": [
+      "EC0548"
+    ]
+  },
+  {
+    "id": "CCAP-00119",
+    "centerId": "CCAP-00119",
+    "name": "DIPLOMADO EN FOTOGRAFÍA PARA PRINCIPIANTES",
+    "nombre": "DIPLOMADO EN FOTOGRAFÍA PARA PRINCIPIANTES",
+    "activo": true,
+    "ec_codes": [
+      "EC0873"
+    ]
+  },
+  {
+    "id": "CCAP-00120",
+    "centerId": "CCAP-00120",
+    "name": "DIPLOMADO EN MICROSOFT EXCEL",
+    "nombre": "DIPLOMADO EN MICROSOFT EXCEL",
+    "activo": true,
+    "ec_codes": [
+      "EC0108"
+    ]
+  },
+  {
+    "id": "CCAP-00121",
+    "centerId": "CCAP-00121",
+    "name": "DIPLOMADO EN MICROSOFT POWER POINT",
+    "nombre": "DIPLOMADO EN MICROSOFT POWER POINT",
+    "activo": true,
+    "ec_codes": [
+      "EC0109"
+    ]
+  },
+  {
+    "id": "CCAP-00122",
+    "centerId": "CCAP-00122",
+    "name": "DIPLOMADO EN MICROSOFT WORD",
+    "nombre": "DIPLOMADO EN MICROSOFT WORD",
+    "activo": true,
+    "ec_codes": [
+      "EC0107"
+    ]
+  },
+  {
+    "id": "CCAP-00123",
+    "centerId": "CCAP-00123",
+    "name": "DISEÑADOR DE CURSOS PRESENCIALES",
+    "nombre": "DISEÑADOR DE CURSOS PRESENCIALES",
+    "activo": true,
+    "ec_codes": [
+      "EC0301"
+    ]
+  },
+  {
+    "id": "CCAP-00124",
+    "centerId": "CCAP-00124",
+    "name": "DISEÑO DE CURSOS DE CAPACITACIÓN EN LÍNEA",
+    "nombre": "DISEÑO DE CURSOS DE CAPACITACIÓN EN LÍNEA",
+    "activo": true,
+    "ec_codes": [
+      "EC0050"
+    ]
+  },
+  {
+    "id": "CCAP-00125",
+    "centerId": "CCAP-00125",
+    "name": "DISEÑO DE CURSOS DE FORMACIÓN DEL CAPITAL HUMANO DE MANERA PRESENCIAL GRUPAL, SUS INSTRUMENTOS DE EVALUACIÓN Y MANUALES DEL CURSO.",
+    "nombre": "DISEÑO DE CURSOS DE FORMACIÓN DEL CAPITAL HUMANO DE MANERA PRESENCIAL GRUPAL, SUS INSTRUMENTOS DE EVALUACIÓN Y MANUALES DEL CURSO.",
+    "activo": true,
+    "ec_codes": [
+      "EC0301"
+    ]
+  },
+  {
+    "id": "CCAP-00126",
+    "centerId": "CCAP-00126",
+    "name": "DISEÑO DE CURSOS DE FORMACIÓN DEL CAPITAL HUMANO DE MANERA PRESENCIAL GRUPAL, SUS INTRUMENTOS DE EVALUACIÓN Y MANUALES DEL CURSO",
+    "nombre": "DISEÑO DE CURSOS DE FORMACIÓN DEL CAPITAL HUMANO DE MANERA PRESENCIAL GRUPAL, SUS INTRUMENTOS DE EVALUACIÓN Y MANUALES DEL CURSO",
+    "activo": true,
+    "ec_codes": [
+      "EC0301"
+    ]
+  },
+  {
+    "id": "CCAP-00127",
+    "centerId": "CCAP-00127",
+    "name": "DISEÑO DE CURSOS DE FORMACIÓN, SUS INSTRUMENTOS DE EVALUACIÓN Y MANUALES DEL CURSO",
+    "nombre": "DISEÑO DE CURSOS DE FORMACIÓN, SUS INSTRUMENTOS DE EVALUACIÓN Y MANUALES DEL CURSO",
+    "activo": true,
+    "ec_codes": [
+      "EC0301"
+    ]
+  },
+  {
+    "id": "CCAP-00128",
+    "centerId": "CCAP-00128",
+    "name": "DISEÑO DE CURSOS PRESENCIALES",
+    "nombre": "DISEÑO DE CURSOS PRESENCIALES",
+    "activo": true,
+    "ec_codes": [
+      "EC0301"
+    ]
+  },
+  {
+    "id": "CCAP-00129",
+    "centerId": "CCAP-00129",
+    "name": "DISEÑO DE CURSOS Y MATERIALES DIDÁCTICOS PARA ENTORNOS VIRTUALES",
+    "nombre": "DISEÑO DE CURSOS Y MATERIALES DIDÁCTICOS PARA ENTORNOS VIRTUALES",
+    "activo": true,
+    "ec_codes": [
+      "EC0050"
+    ]
+  },
+  {
+    "id": "CCAP-00130",
+    "centerId": "CCAP-00130",
+    "name": "DISEÑO DE CURSOS, SUS INSTRUMENTOS DE EVALUACIÓN Y MANUALES DEL CURSO, CON MÉTODO EC0301 CONOCER-SEP.",
+    "nombre": "DISEÑO DE CURSOS, SUS INSTRUMENTOS DE EVALUACIÓN Y MANUALES DEL CURSO, CON MÉTODO EC0301 CONOCER-SEP.",
+    "activo": true,
+    "ec_codes": [
+      "EC0301"
+    ]
+  },
+  {
+    "id": "CCAP-00131",
+    "centerId": "CCAP-00131",
+    "name": "DISEÑO DE PROYECTOS SOCIO-PRODUCTIVOS CON BASE EN EL MODELO DE EMPRENDEDORES PARA LA EDUCACIÓN MEDIA SUPERIOR",
+    "nombre": "DISEÑO DE PROYECTOS SOCIO-PRODUCTIVOS CON BASE EN EL MODELO DE EMPRENDEDORES PARA LA EDUCACIÓN MEDIA SUPERIOR",
+    "activo": true,
+    "ec_codes": [
+      "EC0996"
+    ]
+  },
+  {
+    "id": "CCAP-00132",
+    "centerId": "CCAP-00132",
+    "name": "DISPOSICIONES ACTUALES SOBRE PREVENCIÓN DE LAVADO DE DINERO.",
+    "nombre": "DISPOSICIONES ACTUALES SOBRE PREVENCIÓN DE LAVADO DE DINERO.",
+    "activo": true,
+    "ec_codes": [
+      "EC0839"
+    ]
+  },
+  {
+    "id": "CCAP-00133",
+    "centerId": "CCAP-00133",
+    "name": "DONATARIAS, A.C. Y PERSONAS MORALES SIN FINES DE LUCRO.",
+    "nombre": "DONATARIAS, A.C. Y PERSONAS MORALES SIN FINES DE LUCRO.",
+    "activo": true,
+    "ec_codes": [
+      "EC0839"
+    ]
+  },
+  {
+    "id": "CCAP-00134",
+    "centerId": "CCAP-00134",
+    "name": "EC1425 \"DETECCIÓN DE POSIBLES VÍCTIMAS DE TRATA DE PERSONAS DURANTE LAS DILIGENCIAS MIGRATORIAS EN EL MARCO DE PROTECCIÓN A LOS DERECHOS HUMANOS\"",
+    "nombre": "EC1425 \"DETECCIÓN DE POSIBLES VÍCTIMAS DE TRATA DE PERSONAS DURANTE LAS DILIGENCIAS MIGRATORIAS EN EL MARCO DE PROTECCIÓN A LOS DERECHOS HUMANOS\"",
+    "activo": true,
+    "ec_codes": [
+      "EC1425"
+    ]
+  },
+  {
+    "id": "CCAP-00135",
+    "centerId": "CCAP-00135",
+    "name": "EJECUCIÓN DE LAS ATRIBUCIONES DE LA CONTRALORÍA MUNICIPAL",
+    "nombre": "EJECUCIÓN DE LAS ATRIBUCIONES DE LA CONTRALORÍA MUNICIPAL",
+    "activo": true,
+    "ec_codes": [
+      "EC0777"
+    ]
+  },
+  {
+    "id": "CCAP-00136",
+    "centerId": "CCAP-00136",
+    "name": "EJECUCIÓN DE LAS ATRIBUCIONES DE LA HACIENDA PÚBLICA MUNICIPAL",
+    "nombre": "EJECUCIÓN DE LAS ATRIBUCIONES DE LA HACIENDA PÚBLICA MUNICIPAL",
+    "activo": true,
+    "ec_codes": [
+      "EC0689"
+    ]
+  },
+  {
+    "id": "CCAP-00137",
+    "centerId": "CCAP-00137",
+    "name": "EJECUCIÓN DE SESIONES DE COACHING.",
+    "nombre": "EJECUCIÓN DE SESIONES DE COACHING.",
+    "activo": true,
+    "ec_codes": [
+      "EC0204"
+    ]
+  },
+  {
+    "id": "CCAP-00138",
+    "centerId": "CCAP-00138",
+    "name": "EJECUCIÓN DE SESIONES EN CLÍNICA TRANSDISCIPLINARIA",
+    "nombre": "EJECUCIÓN DE SESIONES EN CLÍNICA TRANSDISCIPLINARIA",
+    "activo": true,
+    "ec_codes": [
+      "EC0204"
+    ]
+  },
+  {
+    "id": "CCAP-00139",
+    "centerId": "CCAP-00139",
+    "name": "EJECUTIVO A",
+    "nombre": "EJECUTIVO A",
+    "activo": true,
+    "ec_codes": [
+      "EC0108"
+    ]
+  },
+  {
+    "id": "CCAP-00140",
+    "centerId": "CCAP-00140",
+    "name": "EJECUTIVO B",
+    "nombre": "EJECUTIVO B",
+    "activo": true,
+    "ec_codes": [
+      "EC0108"
+    ]
+  },
+  {
+    "id": "CCAP-00141",
+    "centerId": "CCAP-00141",
+    "name": "EJECUTIVO C",
+    "nombre": "EJECUTIVO C",
+    "activo": true,
+    "ec_codes": [
+      "EC0108"
+    ]
+  },
+  {
+    "id": "CCAP-00142",
+    "centerId": "CCAP-00142",
+    "name": "ELABORACIÓN DE DOCUMENTOS MEDIANTE UN PROCESADOR DE TEXTOS",
+    "nombre": "ELABORACIÓN DE DOCUMENTOS MEDIANTE UN PROCESADOR DE TEXTOS",
+    "activo": true,
+    "ec_codes": [
+      "EC0011"
+    ]
+  },
+  {
+    "id": "CCAP-00143",
+    "centerId": "CCAP-00143",
+    "name": "ELABORACIÓN DE INVESTIGACIÓN DE MERCADOS CUANTITATIVA",
+    "nombre": "ELABORACIÓN DE INVESTIGACIÓN DE MERCADOS CUANTITATIVA",
+    "activo": true,
+    "ec_codes": [
+      "EC0373"
+    ]
+  },
+  {
+    "id": "CCAP-00144",
+    "centerId": "CCAP-00144",
+    "name": "ELABORACIÓN DE LIBROS MEDIANTE EL USO DE PROCESADORES DE CÁLCULO",
+    "nombre": "ELABORACIÓN DE LIBROS MEDIANTE EL USO DE PROCESADORES DE CÁLCULO",
+    "activo": true,
+    "ec_codes": [
+      "EC0013"
+    ]
+  },
+  {
+    "id": "CCAP-00145",
+    "centerId": "CCAP-00145",
+    "name": "ELABORACIÓN DE LIBROS MEDIANTE EL USO DE PROCESADORES DE HOJA DE CÁLCULO",
+    "nombre": "ELABORACIÓN DE LIBROS MEDIANTE EL USO DE PROCESADORES DE HOJA DE CÁLCULO",
+    "activo": true,
+    "ec_codes": [
+      "EC0013"
+    ]
+  },
+  {
+    "id": "CCAP-00146",
+    "centerId": "CCAP-00146",
+    "name": "ELABORACIÓN DE PRESENTACIONES GRÁFICAS MEDIANTE HERRAMIENTAS DE CÓMPUTO.",
+    "nombre": "ELABORACIÓN DE PRESENTACIONES GRÁFICAS MEDIANTE HERRAMIENTAS DE CÓMPUTO.",
+    "activo": true,
+    "ec_codes": [
+      "EC0012"
+    ]
+  },
+  {
+    "id": "CCAP-00147",
+    "centerId": "CCAP-00147",
+    "name": "ELABORACIÓN DE PROGRAMAS DE ASEGURAMIENTO EN CULTIVOS DE GRANOS BÁSICOS",
+    "nombre": "ELABORACIÓN DE PROGRAMAS DE ASEGURAMIENTO EN CULTIVOS DE GRANOS BÁSICOS",
+    "activo": true,
+    "ec_codes": [
+      "EC0923"
+    ]
+  },
+  {
+    "id": "CCAP-00148",
+    "centerId": "CCAP-00148",
+    "name": "ENGLISH DISCOVERIES",
+    "nombre": "ENGLISH DISCOVERIES",
+    "activo": true,
+    "ec_codes": [
+      "EC0679"
+    ]
+  },
+  {
+    "id": "CCAP-00149",
+    "centerId": "CCAP-00149",
+    "name": "ENSAMBLAJE E INSTALACIÓN DE PANELES FOTOVOLTAICOS RESIDENCIALES",
+    "nombre": "ENSAMBLAJE E INSTALACIÓN DE PANELES FOTOVOLTAICOS RESIDENCIALES",
+    "activo": true,
+    "ec_codes": [
+      "EC0586.01"
+    ]
+  },
+  {
+    "id": "CCAP-00150",
+    "centerId": "CCAP-00150",
+    "name": "ENTENDIDO AL IVA Y SU APLICACIÓN.",
+    "nombre": "ENTENDIDO AL IVA Y SU APLICACIÓN.",
+    "activo": true,
+    "ec_codes": [
+      "EC0839"
+    ]
+  },
+  {
+    "id": "CCAP-00151",
+    "centerId": "CCAP-00151",
+    "name": "ENTRENAMIENTO POTENTOR",
+    "nombre": "ENTRENAMIENTO POTENTOR",
+    "activo": true,
+    "ec_codes": [
+      "EC0315"
+    ]
+  },
+  {
+    "id": "CCAP-00152",
+    "centerId": "CCAP-00152",
+    "name": "ENVASADO DE CONSERVAS ALIMENTICIAS",
+    "nombre": "ENVASADO DE CONSERVAS ALIMENTICIAS",
+    "activo": true,
+    "ec_codes": [
+      "EC0138"
+    ]
+  },
+  {
+    "id": "CCAP-00153",
+    "centerId": "CCAP-00153",
+    "name": "ENVEJECIMIENTO SALUDABLE LIDERAZGO Y EMPRENDIMIENTO 50CRAL",
+    "nombre": "ENVEJECIMIENTO SALUDABLE LIDERAZGO Y EMPRENDIMIENTO 50CRAL",
+    "activo": true,
+    "ec_codes": [
+      "EC0669"
+    ]
+  },
+  {
+    "id": "CCAP-00154",
+    "centerId": "CCAP-00154",
+    "name": "ESTIMULACIÓN TEMPRANA INTEGRAL CON EL NUEVO MODELO EDUCATIVO 2017",
+    "nombre": "ESTIMULACIÓN TEMPRANA INTEGRAL CON EL NUEVO MODELO EDUCATIVO 2017",
+    "activo": true,
+    "ec_codes": [
+      "EC0435"
+    ]
+  },
+  {
+    "id": "CCAP-00155",
+    "centerId": "CCAP-00155",
+    "name": "EVALUACIÓN DE COMPETENCIAS Y VERIFICACIÓN INTERNA",
+    "nombre": "EVALUACIÓN DE COMPETENCIAS Y VERIFICACIÓN INTERNA",
+    "activo": true,
+    "ec_codes": [
+      "EC0076"
+    ]
+  },
+  {
+    "id": "CCAP-00156",
+    "centerId": "CCAP-00156",
+    "name": "EVALUACIÓN DE LA COMPETENCIA DE CANDIDATOS CON BASE EN ESTÁNDARES DE COMPETENCIA",
+    "nombre": "EVALUACIÓN DE LA COMPETENCIA DE CANDIDATOS CON BASE EN ESTÁNDARES DE COMPETENCIA",
+    "activo": true,
+    "ec_codes": [
+      "EC0038"
+    ]
+  },
+  {
+    "id": "CCAP-00157",
+    "centerId": "CCAP-00157",
+    "name": "EVALUACIÓN FORMATIVA, \"UNA ESTRATEGIA PARA LA MEJORA CONTINUA\"",
+    "nombre": "EVALUACIÓN FORMATIVA, \"UNA ESTRATEGIA PARA LA MEJORA CONTINUA\"",
+    "activo": true,
+    "ec_codes": [
+      "EC0564"
+    ]
+  },
+  {
+    "id": "CCAP-00158",
+    "centerId": "CCAP-00158",
+    "name": "EXCEL INTERMEDIO",
+    "nombre": "EXCEL INTERMEDIO",
+    "activo": true,
+    "ec_codes": [
+      "EC0108"
+    ]
+  },
+  {
+    "id": "CCAP-00159",
+    "centerId": "CCAP-00159",
+    "name": "EXCELENCIA EN EL SERVICIO",
+    "nombre": "EXCELENCIA EN EL SERVICIO",
+    "activo": true,
+    "ec_codes": [
+      "EC0038"
+    ]
+  },
+  {
+    "id": "CCAP-00160",
+    "centerId": "CCAP-00160",
+    "name": "FINANZAS PERSONALES.",
+    "nombre": "FINANZAS PERSONALES.",
+    "activo": true,
+    "ec_codes": [
+      "EC0754"
+    ]
+  },
+  {
+    "id": "CCAP-00161",
+    "centerId": "CCAP-00161",
+    "name": "FORMACION DE PERSONAL DE VIGILANCIA",
+    "nombre": "FORMACION DE PERSONAL DE VIGILANCIA",
+    "activo": true,
+    "ec_codes": [
+      "EC0060"
+    ]
+  },
+  {
+    "id": "CCAP-00162",
+    "centerId": "CCAP-00162",
+    "name": "FORMACIÓN DE ANALISTAS DE INTELIGENCIA",
+    "nombre": "FORMACIÓN DE ANALISTAS DE INTELIGENCIA",
+    "activo": true,
+    "ec_codes": [
+      "EC0329"
+    ]
+  },
+  {
+    "id": "CCAP-00163",
+    "centerId": "CCAP-00163",
+    "name": "FORMACIÓN DE AUDITORES DE LOS SISTEMAS DE GESTIÓN DEL RIESGO",
+    "nombre": "FORMACIÓN DE AUDITORES DE LOS SISTEMAS DE GESTIÓN DEL RIESGO",
+    "activo": true,
+    "ec_codes": [
+      "EC0536"
+    ]
+  },
+  {
+    "id": "CCAP-00164",
+    "centerId": "CCAP-00164",
+    "name": "FORMACIÓN DE COORDINADORES DE SERVICIOS DE VIGILANCIA",
+    "nombre": "FORMACIÓN DE COORDINADORES DE SERVICIOS DE VIGILANCIA",
+    "activo": true,
+    "ec_codes": [
+      "EC0061"
+    ]
+  },
+  {
+    "id": "CCAP-00165",
+    "centerId": "CCAP-00165",
+    "name": "FORMACIÓN DE EVALUADORES EN COMPETENCIAS",
+    "nombre": "FORMACIÓN DE EVALUADORES EN COMPETENCIAS",
+    "activo": true,
+    "ec_codes": [
+      "EC0076"
+    ]
+  },
+  {
+    "id": "CCAP-00166",
+    "centerId": "CCAP-00166",
+    "name": "FORMACIÓN DE INSTRUCTORES",
+    "nombre": "FORMACIÓN DE INSTRUCTORES",
+    "activo": true,
+    "ec_codes": [
+      "EC0217.01"
+    ]
+  },
+  {
+    "id": "CCAP-00167",
+    "centerId": "CCAP-00167",
+    "name": "FORMACIÓN DE INSTRUCTORES/CAPACITADORES PARA IMPARTIR CURSOS DE MANERA PRESENCIAL GRUPAL, CON BASE EN PRINCIPIOS DIDÁCTICOS Y METODOLÓGICOS DEL EC0217.01",
+    "nombre": "FORMACIÓN DE INSTRUCTORES/CAPACITADORES PARA IMPARTIR CURSOS DE MANERA PRESENCIAL GRUPAL, CON BASE EN PRINCIPIOS DIDÁCTICOS Y METODOLÓGICOS DEL EC0217.01",
+    "activo": true,
+    "ec_codes": [
+      "EC0217.01"
+    ]
+  },
+  {
+    "id": "CCAP-00168",
+    "centerId": "CCAP-00168",
+    "name": "FORMACIÓN DE MONITORISTAS PARA SEGURIDAD",
+    "nombre": "FORMACIÓN DE MONITORISTAS PARA SEGURIDAD",
+    "activo": true,
+    "ec_codes": [
+      "EC0023"
+    ]
+  },
+  {
+    "id": "CCAP-00169",
+    "centerId": "CCAP-00169",
+    "name": "FORMACIÓN DE OPERADOR DE RETROEXCAVADORA CON BASE EN EL EC DEL CONOCER 452",
+    "nombre": "FORMACIÓN DE OPERADOR DE RETROEXCAVADORA CON BASE EN EL EC DEL CONOCER 452",
+    "activo": true,
+    "ec_codes": [
+      "EC0452"
+    ]
+  },
+  {
+    "id": "CCAP-00170",
+    "centerId": "CCAP-00170",
+    "name": "FORMACIÓN EN DISEÑO  DE CURSOS CON BASE EN ESTÁNDAR DE COMPETENCIA",
+    "nombre": "FORMACIÓN EN DISEÑO  DE CURSOS CON BASE EN ESTÁNDAR DE COMPETENCIA",
+    "activo": true,
+    "ec_codes": [
+      "EC0301"
+    ]
+  },
+  {
+    "id": "CCAP-00171",
+    "centerId": "CCAP-00171",
+    "name": "FORMACIÓN EN DISEÑO DE CURSOS D23 CON BASE EN ESTÁNDARES DE COMPETENCIA",
+    "nombre": "FORMACIÓN EN DISEÑO DE CURSOS D23 CON BASE EN ESTÁNDARES DE COMPETENCIA",
+    "activo": true,
+    "ec_codes": [
+      "EC0050"
+    ]
+  },
+  {
+    "id": "CCAP-00172",
+    "centerId": "CCAP-00172",
+    "name": "FORMACIÓN PARA FACILITADORES DEL AUTOCONOCIMIENTO PROFUNDO",
+    "nombre": "FORMACIÓN PARA FACILITADORES DEL AUTOCONOCIMIENTO PROFUNDO",
+    "activo": true,
+    "ec_codes": [
+      "EC0446"
+    ]
+  },
+  {
+    "id": "CCAP-00173",
+    "centerId": "CCAP-00173",
+    "name": "FORMACIÓN/ACTUALIZACIÓN DOCENTE Y DE INSTRUCTORES PARA EL DISEÑO DE CURSOS, DIPLOMADOS Y PROGRAMAS CURRICULARES CON BASE EN EL EC0301",
+    "nombre": "FORMACIÓN/ACTUALIZACIÓN DOCENTE Y DE INSTRUCTORES PARA EL DISEÑO DE CURSOS, DIPLOMADOS Y PROGRAMAS CURRICULARES CON BASE EN EL EC0301",
+    "activo": true,
+    "ec_codes": [
+      "EC0301"
+    ]
+  },
+  {
+    "id": "CCAP-00174",
+    "centerId": "CCAP-00174",
+    "name": "FORMACIÓN/ACTUALIZACIÓN DOCENTE Y DE INSTRUCTORES PARA LA IMPARTICIÓN DE CURSOS/CLASES DE FORMACIÓN DEL CAPITAL HUMANO, CON BASE EN EC0217.01",
+    "nombre": "FORMACIÓN/ACTUALIZACIÓN DOCENTE Y DE INSTRUCTORES PARA LA IMPARTICIÓN DE CURSOS/CLASES DE FORMACIÓN DEL CAPITAL HUMANO, CON BASE EN EC0217.01",
+    "activo": true,
+    "ec_codes": [
+      "EC0217.01"
+    ]
+  },
+  {
+    "id": "CCAP-00175",
+    "centerId": "CCAP-00175",
+    "name": "FORMULACIÓN DE PROYECTOS DE INVERSIÓN",
+    "nombre": "FORMULACIÓN DE PROYECTOS DE INVERSIÓN",
+    "activo": true,
+    "ec_codes": [
+      "EC0020"
+    ]
+  },
+  {
+    "id": "CCAP-00176",
+    "centerId": "CCAP-00176",
+    "name": "FORMULACIÓN DE PROYECTOS PRODUCTIVOS EN EL SECTOR RURAL",
+    "nombre": "FORMULACIÓN DE PROYECTOS PRODUCTIVOS EN EL SECTOR RURAL",
+    "activo": true,
+    "ec_codes": [
+      "EC0020"
+    ]
+  },
+  {
+    "id": "CCAP-00177",
+    "centerId": "CCAP-00177",
+    "name": "FORTALECIMIENTO DE LAS CAPACIDADES DE INSPECCIÓN Y VIGILANCIA PARA INSPECTORES AMBIENTALES",
+    "nombre": "FORTALECIMIENTO DE LAS CAPACIDADES DE INSPECCIÓN Y VIGILANCIA PARA INSPECTORES AMBIENTALES",
+    "activo": true,
+    "ec_codes": [
+      "EC1094"
+    ]
+  },
+  {
+    "id": "CCAP-00178",
+    "centerId": "CCAP-00178",
+    "name": "FRANCESERO",
+    "nombre": "FRANCESERO",
+    "activo": true,
+    "ec_codes": [
+      "EC0950"
+    ]
+  },
+  {
+    "id": "CCAP-00179",
+    "centerId": "CCAP-00179",
+    "name": "FUNCIONAMIENTO E INTEGRACIÓN DE LA COMISIÓN MIXTA DE CAPACITACIÓN, ADIESTRAMIENTO Y PRODUCTIVIDAD.",
+    "nombre": "FUNCIONAMIENTO E INTEGRACIÓN DE LA COMISIÓN MIXTA DE CAPACITACIÓN, ADIESTRAMIENTO Y PRODUCTIVIDAD.",
+    "activo": true,
+    "ec_codes": [
+      "EC0581"
+    ]
+  },
+  {
+    "id": "CCAP-00180",
+    "centerId": "CCAP-00180",
+    "name": "FUNDAMENTOS Y ESTRATEGIAS DE LIDERAZGO PARA LA SEGURIDAD PÚBLICA",
+    "nombre": "FUNDAMENTOS Y ESTRATEGIAS DE LIDERAZGO PARA LA SEGURIDAD PÚBLICA",
+    "activo": true,
+    "ec_codes": [
+      "EC0401"
+    ]
+  },
+  {
+    "id": "CCAP-00181",
+    "centerId": "CCAP-00181",
+    "name": "GASTRONOMÍA",
+    "nombre": "GASTRONOMÍA",
+    "activo": true,
+    "ec_codes": [
+      "EC0127"
+    ]
+  },
+  {
+    "id": "CCAP-00182",
+    "centerId": "CCAP-00182",
+    "name": "GERENCIA SPA",
+    "nombre": "GERENCIA SPA",
+    "activo": true,
+    "ec_codes": [
+      "EC0186"
+    ]
+  },
+  {
+    "id": "CCAP-00183",
+    "centerId": "CCAP-00183",
+    "name": "GESTIÓN DE LA PARTICIPACIÓN VOLUNTARIA DE LOS INTERVINIENTES EN LOS MECANISMOS ALTERNATIVOS DE SOLUCIÓN DE CONTROVERSIAS EN MATERIA PENAL.",
+    "nombre": "GESTIÓN DE LA PARTICIPACIÓN VOLUNTARIA DE LOS INTERVINIENTES EN LOS MECANISMOS ALTERNATIVOS DE SOLUCIÓN DE CONTROVERSIAS EN MATERIA PENAL.",
+    "activo": true,
+    "ec_codes": [
+      "EC1096"
+    ]
+  },
+  {
+    "id": "CCAP-00184",
+    "centerId": "CCAP-00184",
+    "name": "GESTIÓN ESTRATÉGICA PARA LA MEJORA CONTINUA INSTITUCIONAL",
+    "nombre": "GESTIÓN ESTRATÉGICA PARA LA MEJORA CONTINUA INSTITUCIONAL",
+    "activo": true,
+    "ec_codes": [
+      "EC0150"
+    ]
+  },
+  {
+    "id": "CCAP-00185",
+    "centerId": "CCAP-00185",
+    "name": "HABILIDADES PARA EJERCER UNA DOCENCIA IDÓNEA",
+    "nombre": "HABILIDADES PARA EJERCER UNA DOCENCIA IDÓNEA",
+    "activo": true,
+    "ec_codes": [
+      "EC0454"
+    ]
+  },
+  {
+    "id": "CCAP-00186",
+    "centerId": "CCAP-00186",
+    "name": "HERRAMIENTAS PARA EL DESARROLLO DE MATERIALES DIDÁCTICOS DIGITALES",
+    "nombre": "HERRAMIENTAS PARA EL DESARROLLO DE MATERIALES DIDÁCTICOS DIGITALES",
+    "activo": true,
+    "ec_codes": [
+      "EC0564"
+    ]
+  },
+  {
+    "id": "CCAP-00187",
+    "centerId": "CCAP-00187",
+    "name": "HIGIENE ALIMENTARIA",
+    "nombre": "HIGIENE ALIMENTARIA",
+    "activo": true,
+    "ec_codes": [
+      "EC0081"
+    ]
+  },
+  {
+    "id": "CCAP-00188",
+    "centerId": "CCAP-00188",
+    "name": "IMPARTICIÓN DE CURSOS DE FORMACIÓN DEL CAPITAL HUMANO DE MANERA PRESENCIAL GRUPAL",
+    "nombre": "IMPARTICIÓN DE CURSOS DE FORMACIÓN DEL CAPITAL HUMANO DE MANERA PRESENCIAL GRUPAL",
+    "activo": true,
+    "ec_codes": [
+      "EC0217.01"
+    ]
+  },
+  {
+    "id": "CCAP-00189",
+    "centerId": "CCAP-00189",
+    "name": "IMPARTICIÓN DE CURSOS DE FORMACIÓN PRESENCIALES",
+    "nombre": "IMPARTICIÓN DE CURSOS DE FORMACIÓN PRESENCIALES",
+    "activo": true,
+    "ec_codes": [
+      "EC0217.01"
+    ]
+  },
+  {
+    "id": "CCAP-00190",
+    "centerId": "CCAP-00190",
+    "name": "IMPARTICIÓN DE PROGRAMAS COMUNITARIOS",
+    "nombre": "IMPARTICIÓN DE PROGRAMAS COMUNITARIOS",
+    "activo": true,
+    "ec_codes": [
+      "EC0806"
+    ]
+  },
+  {
+    "id": "CCAP-00191",
+    "centerId": "CCAP-00191",
+    "name": "IMPARTIDOR DE CURSOS PRESENCIALES",
+    "nombre": "IMPARTIDOR DE CURSOS PRESENCIALES",
+    "activo": true,
+    "ec_codes": [
+      "EC0217.01"
+    ]
+  },
+  {
+    "id": "CCAP-00192",
+    "centerId": "CCAP-00192",
+    "name": "IMPLEMENTACIÓN DE BUENAS PRÁCTICAS EN PRIMER RESPONDIENTE PARA LA PROTECCIÓN DE LA EMPRESA",
+    "nombre": "IMPLEMENTACIÓN DE BUENAS PRÁCTICAS EN PRIMER RESPONDIENTE PARA LA PROTECCIÓN DE LA EMPRESA",
+    "activo": true,
+    "ec_codes": [
+      "EC0626"
+    ]
+  },
+  {
+    "id": "CCAP-00193",
+    "centerId": "CCAP-00193",
+    "name": "IMPUESTOS EN PERSONAS FÍSICAS.",
+    "nombre": "IMPUESTOS EN PERSONAS FÍSICAS.",
+    "activo": true,
+    "ec_codes": [
+      "EC0839"
+    ]
+  },
+  {
+    "id": "CCAP-00194",
+    "centerId": "CCAP-00194",
+    "name": "INDUCCIÓN AL EC0247 \"PRESTACIÓN DE SERVICIOS DE CONSULTORÍA EN GESTIÓN ORGANIZACIONAL\"",
+    "nombre": "INDUCCIÓN AL EC0247 \"PRESTACIÓN DE SERVICIOS DE CONSULTORÍA EN GESTIÓN ORGANIZACIONAL\"",
+    "activo": true,
+    "ec_codes": [
+      "EC0247"
+    ]
+  },
+  {
+    "id": "CCAP-00195",
+    "centerId": "CCAP-00195",
+    "name": "INFRACCIONES Y DELITOS FISCALES.",
+    "nombre": "INFRACCIONES Y DELITOS FISCALES.",
+    "activo": true,
+    "ec_codes": [
+      "EC0839"
+    ]
+  },
+  {
+    "id": "CCAP-00196",
+    "centerId": "CCAP-00196",
+    "name": "INSCRIPCIÓN DE ACTOS Y HECHOS JURÍDICOS RELATIVOS AL ESTADO CIVIL DE LAS PERSONAS",
+    "nombre": "INSCRIPCIÓN DE ACTOS Y HECHOS JURÍDICOS RELATIVOS AL ESTADO CIVIL DE LAS PERSONAS",
+    "activo": true,
+    "ec_codes": [
+      "EC0778"
+    ]
+  },
+  {
+    "id": "CCAP-00197",
+    "centerId": "CCAP-00197",
+    "name": "INSPECCIÓN DE CAMPO EN LA PRODUCCIÓN DE SEMILLAS CALIFICADAS CON ALCANCE AL CULTIVO DE MAÍZ",
+    "nombre": "INSPECCIÓN DE CAMPO EN LA PRODUCCIÓN DE SEMILLAS CALIFICADAS CON ALCANCE AL CULTIVO DE MAÍZ",
+    "activo": true,
+    "ec_codes": [
+      "EC0275"
+    ]
+  },
+  {
+    "id": "CCAP-00198",
+    "centerId": "CCAP-00198",
+    "name": "INSPECCIÓN DE SEGURIDAD EN LA OPERACIÓN DE POLIPASTOS",
+    "nombre": "INSPECCIÓN DE SEGURIDAD EN LA OPERACIÓN DE POLIPASTOS",
+    "activo": true,
+    "ec_codes": [
+      "EC0201"
+    ]
+  },
+  {
+    "id": "CCAP-00199",
+    "centerId": "CCAP-00199",
+    "name": "INSPECCIÓN Y MANTENIMIENTO DE POLIPASTOS MANUALES",
+    "nombre": "INSPECCIÓN Y MANTENIMIENTO DE POLIPASTOS MANUALES",
+    "activo": true,
+    "ec_codes": [
+      "EC1004"
+    ]
+  },
+  {
+    "id": "CCAP-00200",
+    "centerId": "CCAP-00200",
+    "name": "INSPECCIÓN Y MANTENIMIENTO DE POLIPASTOS MOTORIZADOS",
+    "nombre": "INSPECCIÓN Y MANTENIMIENTO DE POLIPASTOS MOTORIZADOS",
+    "activo": true,
+    "ec_codes": [
+      "EC1004"
+    ]
+  },
+  {
+    "id": "CCAP-00201",
+    "centerId": "CCAP-00201",
+    "name": "INSPECCIÓN, USO SEGURO, ÁNGULOS DE REDUCCIÓN Y CÁLCULO DE TENSIONES EN EL IZAJE DE CARGAS",
+    "nombre": "INSPECCIÓN, USO SEGURO, ÁNGULOS DE REDUCCIÓN Y CÁLCULO DE TENSIONES EN EL IZAJE DE CARGAS",
+    "activo": true,
+    "ec_codes": [
+      "EC0857"
+    ]
+  },
+  {
+    "id": "CCAP-00202",
+    "centerId": "CCAP-00202",
+    "name": "INSTALACIÓN DE SISTEMA DE CALENTAMIENTO SOLAR DE AGUA TEMOSIFÓNICO EN VIVIENDA SUSTENTABLE",
+    "nombre": "INSTALACIÓN DE SISTEMA DE CALENTAMIENTO SOLAR DE AGUA TEMOSIFÓNICO EN VIVIENDA SUSTENTABLE",
+    "activo": true,
+    "ec_codes": [
+      "EC0325"
+    ]
+  },
+  {
+    "id": "CCAP-00203",
+    "centerId": "CCAP-00203",
+    "name": "INSTALACIÓN DE SISTEMAS FOTOVOLTAICOS INTERCONECTADOS, ALINEADO AL ESTÁNDAR DE COMPETENCIA EC0586.01 DEL CONOCER",
+    "nombre": "INSTALACIÓN DE SISTEMAS FOTOVOLTAICOS INTERCONECTADOS, ALINEADO AL ESTÁNDAR DE COMPETENCIA EC0586.01 DEL CONOCER",
+    "activo": true,
+    "ec_codes": [
+      "EC0586.01"
+    ]
+  },
+  {
+    "id": "CCAP-00204",
+    "centerId": "CCAP-00204",
+    "name": "INSTALACIÓN DEL SISTEMA DE CALENTAMIENTO SOLAR DE AGUA DE CIRCULACIÓN FORZADA CON TERMOTANQUE",
+    "nombre": "INSTALACIÓN DEL SISTEMA DE CALENTAMIENTO SOLAR DE AGUA DE CIRCULACIÓN FORZADA CON TERMOTANQUE",
+    "activo": true,
+    "ec_codes": [
+      "EC0473"
+    ]
+  },
+  {
+    "id": "CCAP-00205",
+    "centerId": "CCAP-00205",
+    "name": "INTEGRACIÓN DE LA ACUPUNTURA EN LA MEJORA DE HABITOS A BASE DE UNA NUTRICIÓN ADECUADA",
+    "nombre": "INTEGRACIÓN DE LA ACUPUNTURA EN LA MEJORA DE HABITOS A BASE DE UNA NUTRICIÓN ADECUADA",
+    "activo": true,
+    "ec_codes": [
+      "EC0933"
+    ]
+  },
+  {
+    "id": "CCAP-00206",
+    "centerId": "CCAP-00206",
+    "name": "INTEGRANDO TECNOLOGÍAS A LOS PROCESOS EDUCATIVOS",
+    "nombre": "INTEGRANDO TECNOLOGÍAS A LOS PROCESOS EDUCATIVOS",
+    "activo": true,
+    "ec_codes": [
+      "EC0235"
+    ]
+  },
+  {
+    "id": "CCAP-00207",
+    "centerId": "CCAP-00207",
+    "name": "INTERVENCIÓN PEDAGÓGICA PARA EL DESARROLLO RURAL",
+    "nombre": "INTERVENCIÓN PEDAGÓGICA PARA EL DESARROLLO RURAL",
+    "activo": true,
+    "ec_codes": [
+      "EC0049"
+    ]
+  },
+  {
+    "id": "CCAP-00208",
+    "centerId": "CCAP-00208",
+    "name": "INTRODUCCIÓN A LA CAPTACIÓN Y AL APROVECHAMIENTO DE AGUA DE LLUVIA (AMSCALL-INTRO-001)",
+    "nombre": "INTRODUCCIÓN A LA CAPTACIÓN Y AL APROVECHAMIENTO DE AGUA DE LLUVIA (AMSCALL-INTRO-001)",
+    "activo": true,
+    "ec_codes": [
+      "EC0180"
+    ]
+  },
+  {
+    "id": "CCAP-00209",
+    "centerId": "CCAP-00209",
+    "name": "INTRODUCCIÓN A LA COMPUTACIÓN 2012 (INFORMÁTICA E INTERNET)",
+    "nombre": "INTRODUCCIÓN A LA COMPUTACIÓN 2012 (INFORMÁTICA E INTERNET)",
+    "activo": true,
+    "ec_codes": [
+      "EC0190"
+    ]
+  },
+  {
+    "id": "CCAP-00210",
+    "centerId": "CCAP-00210",
+    "name": "INTRODUCCIÓN A LA INFORMÁTICA",
+    "nombre": "INTRODUCCIÓN A LA INFORMÁTICA",
+    "activo": true,
+    "ec_codes": [
+      "EC0156"
+    ]
+  },
+  {
+    "id": "CCAP-00211",
+    "centerId": "CCAP-00211",
+    "name": "INTRODUCCIÓN A LAS VENTAS",
+    "nombre": "INTRODUCCIÓN A LAS VENTAS",
+    "activo": true,
+    "ec_codes": [
+      "EC0094"
+    ]
+  },
+  {
+    "id": "CCAP-00212",
+    "centerId": "CCAP-00212",
+    "name": "INVESTIGACIÓN DE DELITOS COMETIDOS CONTRA LA LIBERTAD DE EXPRESIÓN BAJO EL ENFOQUE DIFERENCIAL Y ESPECIALIZADO",
+    "nombre": "INVESTIGACIÓN DE DELITOS COMETIDOS CONTRA LA LIBERTAD DE EXPRESIÓN BAJO EL ENFOQUE DIFERENCIAL Y ESPECIALIZADO",
+    "activo": true,
+    "ec_codes": [
+      "EC1103"
+    ]
+  },
+  {
+    "id": "CCAP-00213",
+    "centerId": "CCAP-00213",
+    "name": "JEFE DE COMEDOR",
+    "nombre": "JEFE DE COMEDOR",
+    "activo": true,
+    "ec_codes": [
+      "EC0038"
+    ]
+  },
+  {
+    "id": "CCAP-00214",
+    "centerId": "CCAP-00214",
+    "name": "LANZADOR DE CONCRETO",
+    "nombre": "LANZADOR DE CONCRETO",
+    "activo": true,
+    "ec_codes": [
+      "EC0502"
+    ]
+  },
+  {
+    "id": "CCAP-00215",
+    "centerId": "CCAP-00215",
+    "name": "LEAN MANUFACTURING",
+    "nombre": "LEAN MANUFACTURING",
+    "activo": true,
+    "ec_codes": [
+      "EC0354"
+    ]
+  },
+  {
+    "id": "CCAP-00216",
+    "centerId": "CCAP-00216",
+    "name": "LEGALIDAD Y PREVENCIÓN DE LA CORRUPCIÓN EN LA ADMINISTRACIÓN PÚBLICA",
+    "nombre": "LEGALIDAD Y PREVENCIÓN DE LA CORRUPCIÓN EN LA ADMINISTRACIÓN PÚBLICA",
+    "activo": true,
+    "ec_codes": [
+      "EC0500"
+    ]
+  },
+  {
+    "id": "CCAP-00217",
+    "centerId": "CCAP-00217",
+    "name": "LIDERAZGO EDUCATIVO PARA GESTIONAR UNA INSTITUCIÓN ESCOLAR DE CALIDAD",
+    "nombre": "LIDERAZGO EDUCATIVO PARA GESTIONAR UNA INSTITUCIÓN ESCOLAR DE CALIDAD",
+    "activo": true,
+    "ec_codes": [
+      "EC0507"
+    ]
+  },
+  {
+    "id": "CCAP-00218",
+    "centerId": "CCAP-00218",
+    "name": "LIDERAZGO EN EL SERVICIO PÚBLICO",
+    "nombre": "LIDERAZGO EN EL SERVICIO PÚBLICO",
+    "activo": true,
+    "ec_codes": [
+      "EC0401"
+    ]
+  },
+  {
+    "id": "CCAP-00219",
+    "centerId": "CCAP-00219",
+    "name": "LIDERAZGO PARA LA AUTONOMÍA DE GESTIÓN ESCOLAR",
+    "nombre": "LIDERAZGO PARA LA AUTONOMÍA DE GESTIÓN ESCOLAR",
+    "activo": true,
+    "ec_codes": [
+      "EC0507"
+    ]
+  },
+  {
+    "id": "CCAP-00220",
+    "centerId": "CCAP-00220",
+    "name": "LIDERAZGO Y AUDITORÍA AMBIENTAL PARA LA COMPETITIVIDAD",
+    "nombre": "LIDERAZGO Y AUDITORÍA AMBIENTAL PARA LA COMPETITIVIDAD",
+    "activo": true,
+    "ec_codes": [
+      "EC0910"
+    ]
+  },
+  {
+    "id": "CCAP-00221",
+    "centerId": "CCAP-00221",
+    "name": "LIMPIEZA DE COCINAS INDUSTRIALES",
+    "nombre": "LIMPIEZA DE COCINAS INDUSTRIALES",
+    "activo": true,
+    "ec_codes": [
+      "EC0126"
+    ]
+  },
+  {
+    "id": "CCAP-00222",
+    "centerId": "CCAP-00222",
+    "name": "LIMPIEZA Y DESINFECCIÓN EN ESTABLECIMIENTOS DE SALUD",
+    "nombre": "LIMPIEZA Y DESINFECCIÓN EN ESTABLECIMIENTOS DE SALUD",
+    "activo": true,
+    "ec_codes": [
+      "EC0248"
+    ]
+  },
+  {
+    "id": "CCAP-00223",
+    "centerId": "CCAP-00223",
+    "name": "MAESTRO DE MEZCAL ARTESANAL",
+    "nombre": "MAESTRO DE MEZCAL ARTESANAL",
+    "activo": true,
+    "ec_codes": [
+      "EC0313"
+    ]
+  },
+  {
+    "id": "CCAP-00224",
+    "centerId": "CCAP-00224",
+    "name": "MANEJO DE PROCESADOR DE TEXTOS DIGITALES",
+    "nombre": "MANEJO DE PROCESADOR DE TEXTOS DIGITALES",
+    "activo": true,
+    "ec_codes": [
+      "EC0107"
+    ]
+  },
+  {
+    "id": "CCAP-00225",
+    "centerId": "CCAP-00225",
+    "name": "MANEJO DE PROCESADOR DE TEXTOS DIGITALES, HOJAS ELECTRÓNICAS DIGITALES Y PRESENTACIONES DIGITALES",
+    "nombre": "MANEJO DE PROCESADOR DE TEXTOS DIGITALES, HOJAS ELECTRÓNICAS DIGITALES Y PRESENTACIONES DIGITALES",
+    "activo": true,
+    "ec_codes": [
+      "EC0108"
+    ]
+  },
+  {
+    "id": "CCAP-00226",
+    "centerId": "CCAP-00226",
+    "name": "MANEJO DE PROCESADORES DE PRESENTACIONES DIGITALES",
+    "nombre": "MANEJO DE PROCESADORES DE PRESENTACIONES DIGITALES",
+    "activo": true,
+    "ec_codes": [
+      "EC0109"
+    ]
+  },
+  {
+    "id": "CCAP-00227",
+    "centerId": "CCAP-00227",
+    "name": "MANEJO DEL PROCESADOR DE HOJAS DE CALCULO DIGITALES",
+    "nombre": "MANEJO DEL PROCESADOR DE HOJAS DE CALCULO DIGITALES",
+    "activo": true,
+    "ec_codes": [
+      "EC0108"
+    ]
+  },
+  {
+    "id": "CCAP-00228",
+    "centerId": "CCAP-00228",
+    "name": "MANEJO DEL PROCESADOR DE HOJAS DE CÁLCULO DIGITALES",
+    "nombre": "MANEJO DEL PROCESADOR DE HOJAS DE CÁLCULO DIGITALES",
+    "activo": true,
+    "ec_codes": [
+      "EC0108"
+    ]
+  },
+  {
+    "id": "CCAP-00229",
+    "centerId": "CCAP-00229",
+    "name": "MANEJO HIGIENICO DE ALIMENTOS",
+    "nombre": "MANEJO HIGIENICO DE ALIMENTOS",
+    "activo": true,
+    "ec_codes": [
+      "EC0081"
+    ]
+  },
+  {
+    "id": "CCAP-00230",
+    "centerId": "CCAP-00230",
+    "name": "MANEJO HIGIÉNICO DE ALIMENTO",
+    "nombre": "MANEJO HIGIÉNICO DE ALIMENTO",
+    "activo": true,
+    "ec_codes": [
+      "EC0081"
+    ]
+  },
+  {
+    "id": "CCAP-00231",
+    "centerId": "CCAP-00231",
+    "name": "MANEJO HIGIÉNICO DE ALIMENTOS",
+    "nombre": "MANEJO HIGIÉNICO DE ALIMENTOS",
+    "activo": true,
+    "ec_codes": [
+      "EC0081"
+    ]
+  },
+  {
+    "id": "CCAP-00232",
+    "centerId": "CCAP-00232",
+    "name": "MANEJO HIGIÉNICO DE LOS ALIMENTOS",
+    "nombre": "MANEJO HIGIÉNICO DE LOS ALIMENTOS",
+    "activo": true,
+    "ec_codes": [
+      "EC0081"
+    ]
+  },
+  {
+    "id": "CCAP-00233",
+    "centerId": "CCAP-00233",
+    "name": "MANEJO HIGIÉNICO E INOCUIDAD DE LOS ALIMENTOS",
+    "nombre": "MANEJO HIGIÉNICO E INOCUIDAD DE LOS ALIMENTOS",
+    "activo": true,
+    "ec_codes": [
+      "EC0081"
+    ]
+  },
+  {
+    "id": "CCAP-00234",
+    "centerId": "CCAP-00234",
+    "name": "MANEJO INTEGRAL DE PLAGAS PARA LA SEGURIDAD E INOCUIDAD DEL PRODUCTO",
+    "nombre": "MANEJO INTEGRAL DE PLAGAS PARA LA SEGURIDAD E INOCUIDAD DEL PRODUCTO",
+    "activo": true,
+    "ec_codes": [
+      "EC0303"
+    ]
+  },
+  {
+    "id": "CCAP-00235",
+    "centerId": "CCAP-00235",
+    "name": "MAQUILLAJE CORRECTIVO PARA LOS MEDIOS DE COMUNICACIÓN (AUDIOVISUALES)",
+    "nombre": "MAQUILLAJE CORRECTIVO PARA LOS MEDIOS DE COMUNICACIÓN (AUDIOVISUALES)",
+    "activo": true,
+    "ec_codes": [
+      "EC0569"
+    ]
+  },
+  {
+    "id": "CCAP-00236",
+    "centerId": "CCAP-00236",
+    "name": "MAQUILLAJE DE CARACTERIZACIÓN Y EFECTOS ESPECIALES",
+    "nombre": "MAQUILLAJE DE CARACTERIZACIÓN Y EFECTOS ESPECIALES",
+    "activo": true,
+    "ec_codes": [
+      "EC0569"
+    ]
+  },
+  {
+    "id": "CCAP-00237",
+    "centerId": "CCAP-00237",
+    "name": "MAQUILLAJE PROFESIONAL",
+    "nombre": "MAQUILLAJE PROFESIONAL",
+    "activo": true,
+    "ec_codes": [
+      "EC0046"
+    ]
+  },
+  {
+    "id": "CCAP-00238",
+    "centerId": "CCAP-00238",
+    "name": "MAQUINADOS CNC (CONTROL NUMÉRICO) PARA EL SECTOR AERONÁUTICO",
+    "nombre": "MAQUINADOS CNC (CONTROL NUMÉRICO) PARA EL SECTOR AERONÁUTICO",
+    "activo": true,
+    "ec_codes": [
+      "EC0607"
+    ]
+  },
+  {
+    "id": "CCAP-00239",
+    "centerId": "CCAP-00239",
+    "name": "MASAJE AYURVEDA ABHYANGA",
+    "nombre": "MASAJE AYURVEDA ABHYANGA",
+    "activo": true,
+    "ec_codes": [
+      "EC0883"
+    ]
+  },
+  {
+    "id": "CCAP-00240",
+    "centerId": "CCAP-00240",
+    "name": "MASAJE DRENAJE LINFÁTICO MANUAL",
+    "nombre": "MASAJE DRENAJE LINFÁTICO MANUAL",
+    "activo": true,
+    "ec_codes": [
+      "EC0902"
+    ]
+  },
+  {
+    "id": "CCAP-00241",
+    "centerId": "CCAP-00241",
+    "name": "MASAJE DRENAJE LINFÁTICO MANUAL ESTANDARIZADO",
+    "nombre": "MASAJE DRENAJE LINFÁTICO MANUAL ESTANDARIZADO",
+    "activo": true,
+    "ec_codes": [
+      "EC0902"
+    ]
+  },
+  {
+    "id": "CCAP-00242",
+    "centerId": "CCAP-00242",
+    "name": "MASAJE HOLÍSTICO",
+    "nombre": "MASAJE HOLÍSTICO",
+    "activo": true,
+    "ec_codes": [
+      "EC0900"
+    ]
+  },
+  {
+    "id": "CCAP-00243",
+    "centerId": "CCAP-00243",
+    "name": "MASAJE HOLÍSTICO ESTANDARIZADO",
+    "nombre": "MASAJE HOLÍSTICO ESTANDARIZADO",
+    "activo": true,
+    "ec_codes": [
+      "EC0900"
+    ]
+  },
+  {
+    "id": "CCAP-00244",
+    "centerId": "CCAP-00244",
+    "name": "MASAJE SHIATSU",
+    "nombre": "MASAJE SHIATSU",
+    "activo": true,
+    "ec_codes": [
+      "EC0143"
+    ]
+  },
+  {
+    "id": "CCAP-00245",
+    "centerId": "CCAP-00245",
+    "name": "MASAJE SUECO",
+    "nombre": "MASAJE SUECO",
+    "activo": true,
+    "ec_codes": [
+      "EC0901"
+    ]
+  },
+  {
+    "id": "CCAP-00246",
+    "centerId": "CCAP-00246",
+    "name": "MASAJE SUECO ESTANDARIZADO",
+    "nombre": "MASAJE SUECO ESTANDARIZADO",
+    "activo": true,
+    "ec_codes": [
+      "EC0901"
+    ]
+  },
+  {
+    "id": "CCAP-00247",
+    "centerId": "CCAP-00247",
+    "name": "MASAJE TEJIDO PROFUNDO ESTANDARIZADO",
+    "nombre": "MASAJE TEJIDO PROFUNDO ESTANDARIZADO",
+    "activo": true,
+    "ec_codes": [
+      "EC0899"
+    ]
+  },
+  {
+    "id": "CCAP-00248",
+    "centerId": "CCAP-00248",
+    "name": "MASTER IN LEADERSHIP AND ORGANIZATIONAL DEVELOPMENT WITH COACHING",
+    "nombre": "MASTER IN LEADERSHIP AND ORGANIZATIONAL DEVELOPMENT WITH COACHING",
+    "activo": true,
+    "ec_codes": [
+      "EC0204"
+    ]
+  },
+  {
+    "id": "CCAP-00249",
+    "centerId": "CCAP-00249",
+    "name": "MASTER MEZCALIER NIVEL 4",
+    "nombre": "MASTER MEZCALIER NIVEL 4",
+    "activo": true,
+    "ec_codes": [
+      "EC0313"
+    ]
+  },
+  {
+    "id": "CCAP-00250",
+    "centerId": "CCAP-00250",
+    "name": "MICROSOFT EXCEL",
+    "nombre": "MICROSOFT EXCEL",
+    "activo": true,
+    "ec_codes": [
+      "EC0108"
+    ]
+  },
+  {
+    "id": "CCAP-00251",
+    "centerId": "CCAP-00251",
+    "name": "MICROSOFT OUTLOOK 2007",
+    "nombre": "MICROSOFT OUTLOOK 2007",
+    "activo": true,
+    "ec_codes": [
+      "EC0157"
+    ]
+  },
+  {
+    "id": "CCAP-00252",
+    "centerId": "CCAP-00252",
+    "name": "MICROSOFT OUTLOOK 2010",
+    "nombre": "MICROSOFT OUTLOOK 2010",
+    "activo": true,
+    "ec_codes": [
+      "EC0157"
+    ]
+  },
+  {
+    "id": "CCAP-00253",
+    "centerId": "CCAP-00253",
+    "name": "MIXOLOGÍA INTERNACIONAL",
+    "nombre": "MIXOLOGÍA INTERNACIONAL",
+    "activo": true,
+    "ec_codes": [
+      "EC0128"
+    ]
+  },
+  {
+    "id": "CCAP-00254",
+    "centerId": "CCAP-00254",
+    "name": "NORMATIVIDAD ANTICORRUPCIÓN Y RESPONSABILIDAD DE LOS SERVIDORES PÚBLICOS",
+    "nombre": "NORMATIVIDAD ANTICORRUPCIÓN Y RESPONSABILIDAD DE LOS SERVIDORES PÚBLICOS",
+    "activo": true,
+    "ec_codes": [
+      "EC0500"
+    ]
+  },
+  {
+    "id": "CCAP-00255",
+    "centerId": "CCAP-00255",
+    "name": "OPERACIÓN DE CARGADOR FRONTA CON BASE EN EL EC DEL CONOCER 526",
+    "nombre": "OPERACIÓN DE CARGADOR FRONTA CON BASE EN EL EC DEL CONOCER 526",
+    "activo": true,
+    "ec_codes": [
+      "EC0526"
+    ]
+  },
+  {
+    "id": "CCAP-00256",
+    "centerId": "CCAP-00256",
+    "name": "OPERACIÓN DE FONDOS DE ASEGURAMIENTO AGRÍCOLA",
+    "nombre": "OPERACIÓN DE FONDOS DE ASEGURAMIENTO AGRÍCOLA",
+    "activo": true,
+    "ec_codes": [
+      "EC0130"
+    ]
+  },
+  {
+    "id": "CCAP-00257",
+    "centerId": "CCAP-00257",
+    "name": "OPERACIÓN DE GRÚA MÓVIL  CON BASE EN EL EC DEL CONOCER",
+    "nombre": "OPERACIÓN DE GRÚA MÓVIL  CON BASE EN EL EC DEL CONOCER",
+    "activo": true,
+    "ec_codes": [
+      "EC0531"
+    ]
+  },
+  {
+    "id": "CCAP-00258",
+    "centerId": "CCAP-00258",
+    "name": "OPERACIÓN DE GRÚA VIAJERA CON BASE EN EL EC DEL CONOCER",
+    "nombre": "OPERACIÓN DE GRÚA VIAJERA CON BASE EN EL EC DEL CONOCER",
+    "activo": true,
+    "ec_codes": [
+      "EC0201"
+    ]
+  },
+  {
+    "id": "CCAP-00259",
+    "centerId": "CCAP-00259",
+    "name": "OPERACIÓN DE MONTACARGAS HORIZONTAL CON BASE EN EL EC DEL CONOCER 200",
+    "nombre": "OPERACIÓN DE MONTACARGAS HORIZONTAL CON BASE EN EL EC DEL CONOCER 200",
+    "activo": true,
+    "ec_codes": [
+      "EC0200"
+    ]
+  },
+  {
+    "id": "CCAP-00260",
+    "centerId": "CCAP-00260",
+    "name": "OPERACIÓN DE PLATAFORMA DE TRABAJO MÓVIL PARA ELEVACIÓN DE PERSONAL CON BASE EN EL EC DEL CONOCER",
+    "nombre": "OPERACIÓN DE PLATAFORMA DE TRABAJO MÓVIL PARA ELEVACIÓN DE PERSONAL CON BASE EN EL EC DEL CONOCER",
+    "activo": true,
+    "ec_codes": [
+      "EC0590"
+    ]
+  },
+  {
+    "id": "CCAP-00261",
+    "centerId": "CCAP-00261",
+    "name": "OPERACIÓN DE VEHÍCULO DE EMERGENCIA",
+    "nombre": "OPERACIÓN DE VEHÍCULO DE EMERGENCIA",
+    "activo": true,
+    "ec_codes": [
+      "EC0532"
+    ]
+  },
+  {
+    "id": "CCAP-00262",
+    "centerId": "CCAP-00262",
+    "name": "OPERACIÓN SEGURA DE MONTACARGAS HORIZONTAL",
+    "nombre": "OPERACIÓN SEGURA DE MONTACARGAS HORIZONTAL",
+    "activo": true,
+    "ec_codes": [
+      "EC0200"
+    ]
+  },
+  {
+    "id": "CCAP-00263",
+    "centerId": "CCAP-00263",
+    "name": "OPERACIÓN SEGURA DE MONTACARGAS HORIZONTAL\tPRESENCIAL",
+    "nombre": "OPERACIÓN SEGURA DE MONTACARGAS HORIZONTAL\tPRESENCIAL",
+    "activo": true,
+    "ec_codes": [
+      "EC0200"
+    ]
+  },
+  {
+    "id": "CCAP-00264",
+    "centerId": "CCAP-00264",
+    "name": "OPERACIÓN SEGURA DE MONTACARGAS NIVEL INTERMEDIO",
+    "nombre": "OPERACIÓN SEGURA DE MONTACARGAS NIVEL INTERMEDIO",
+    "activo": true,
+    "ec_codes": [
+      "EC0288"
+    ]
+  },
+  {
+    "id": "CCAP-00265",
+    "centerId": "CCAP-00265",
+    "name": "OPERADOR DE VEHÍCULO DE EMERGENCIA",
+    "nombre": "OPERADOR DE VEHÍCULO DE EMERGENCIA",
+    "activo": true,
+    "ec_codes": [
+      "EC0532"
+    ]
+  },
+  {
+    "id": "CCAP-00266",
+    "centerId": "CCAP-00266",
+    "name": "PENSIONES POR RETIRO IMSS",
+    "nombre": "PENSIONES POR RETIRO IMSS",
+    "activo": true,
+    "ec_codes": [
+      "EC0485"
+    ]
+  },
+  {
+    "id": "CCAP-00267",
+    "centerId": "CCAP-00267",
+    "name": "PENSIONES, SU PROYECCIÓN, CÁLCULO Y MODALIDADES BAJO EL RÉGIMEN DEL IMSS",
+    "nombre": "PENSIONES, SU PROYECCIÓN, CÁLCULO Y MODALIDADES BAJO EL RÉGIMEN DEL IMSS",
+    "activo": true,
+    "ec_codes": [
+      "EC0485"
+    ]
+  },
+  {
+    "id": "CCAP-00268",
+    "centerId": "CCAP-00268",
+    "name": "PINTADO DE PLÁSTICOS EN CARROCERÍA DE AUTOMÓVILES",
+    "nombre": "PINTADO DE PLÁSTICOS EN CARROCERÍA DE AUTOMÓVILES",
+    "activo": true,
+    "ec_codes": [
+      "EC0807"
+    ]
+  },
+  {
+    "id": "CCAP-00269",
+    "centerId": "CCAP-00269",
+    "name": "PLANEACIÓN DE CONDOMINIOS",
+    "nombre": "PLANEACIÓN DE CONDOMINIOS",
+    "activo": true,
+    "ec_codes": [
+      "EC0112"
+    ]
+  },
+  {
+    "id": "CCAP-00270",
+    "centerId": "CCAP-00270",
+    "name": "PLANEACIÓN DIDÁCTICA 1 \"ESTRUCTURA DE LA PLANEACIÓN Y ARMADO DE EVIDENCIAS DE ENSEÑANZA\"",
+    "nombre": "PLANEACIÓN DIDÁCTICA 1 \"ESTRUCTURA DE LA PLANEACIÓN Y ARMADO DE EVIDENCIAS DE ENSEÑANZA\"",
+    "activo": true,
+    "ec_codes": [
+      "EC0447"
+    ]
+  },
+  {
+    "id": "CCAP-00271",
+    "centerId": "CCAP-00271",
+    "name": "PLANEACIÓN DIDÁCTICA 2 \"ARGUMENTACIÓN DE LA PLANEACIÓN Y ESTABLECIMIENTO DE LA EVALUACIÓN EDUCATIVA\"",
+    "nombre": "PLANEACIÓN DIDÁCTICA 2 \"ARGUMENTACIÓN DE LA PLANEACIÓN Y ESTABLECIMIENTO DE LA EVALUACIÓN EDUCATIVA\"",
+    "activo": true,
+    "ec_codes": [
+      "EC0447"
+    ]
+  },
+  {
+    "id": "CCAP-00272",
+    "centerId": "CCAP-00272",
+    "name": "PLANEACIÓN ESTRATÉGICA , RECLUTAMIENTO Y SELECCIÓN DE TALENTO",
+    "nombre": "PLANEACIÓN ESTRATÉGICA , RECLUTAMIENTO Y SELECCIÓN DE TALENTO",
+    "activo": true,
+    "ec_codes": [
+      "EC0306"
+    ]
+  },
+  {
+    "id": "CCAP-00273",
+    "centerId": "CCAP-00273",
+    "name": "POWERPOINT INTERMEDIO",
+    "nombre": "POWERPOINT INTERMEDIO",
+    "activo": true,
+    "ec_codes": [
+      "EC0109"
+    ]
+  },
+  {
+    "id": "CCAP-00274",
+    "centerId": "CCAP-00274",
+    "name": "PREPARACION Y SERVICIO DE BEBIDAS",
+    "nombre": "PREPARACION Y SERVICIO DE BEBIDAS",
+    "activo": true,
+    "ec_codes": [
+      "EC0128"
+    ]
+  },
+  {
+    "id": "CCAP-00275",
+    "centerId": "CCAP-00275",
+    "name": "PREPARACIÓN DE ALIMENTOS",
+    "nombre": "PREPARACIÓN DE ALIMENTOS",
+    "activo": true,
+    "ec_codes": [
+      "EC0127"
+    ]
+  },
+  {
+    "id": "CCAP-00276",
+    "centerId": "CCAP-00276",
+    "name": "PREPARACIÓN DE BEBIDAS CON BASE DE CAFÉ",
+    "nombre": "PREPARACIÓN DE BEBIDAS CON BASE DE CAFÉ",
+    "activo": true,
+    "ec_codes": [
+      "EC0622"
+    ]
+  },
+  {
+    "id": "CCAP-00277",
+    "centerId": "CCAP-00277",
+    "name": "PREPARACIÓN DE HABITACIONES PARA ALOJAMIENTO TEMPORAL",
+    "nombre": "PREPARACIÓN DE HABITACIONES PARA ALOJAMIENTO TEMPORAL",
+    "activo": true,
+    "ec_codes": [
+      "EC0043"
+    ]
+  },
+  {
+    "id": "CCAP-00278",
+    "centerId": "CCAP-00278",
+    "name": "PREPARACIÓN DE HABITACIONES PARA ALOJAMIENTO TEMPORAL (CAMARISTAS)",
+    "nombre": "PREPARACIÓN DE HABITACIONES PARA ALOJAMIENTO TEMPORAL (CAMARISTAS)",
+    "activo": true,
+    "ec_codes": [
+      "EC0043"
+    ]
+  },
+  {
+    "id": "CCAP-00279",
+    "centerId": "CCAP-00279",
+    "name": "PREPARACIÓN Y SERVICIO DE BEBIDAS",
+    "nombre": "PREPARACIÓN Y SERVICIO DE BEBIDAS",
+    "activo": true,
+    "ec_codes": [
+      "EC0128"
+    ]
+  },
+  {
+    "id": "CCAP-00280",
+    "centerId": "CCAP-00280",
+    "name": "PREPARACIÓN Y SERVICIO DE BEBIDAS BASADO EN EL EC0128",
+    "nombre": "PREPARACIÓN Y SERVICIO DE BEBIDAS BASADO EN EL EC0128",
+    "activo": true,
+    "ec_codes": [
+      "EC0128"
+    ]
+  },
+  {
+    "id": "CCAP-00281",
+    "centerId": "CCAP-00281",
+    "name": "PRESERVACIÓN DEL LUGAR DEL HECHO LA ESCENA DEL CRIMEN O DEL HALLAZGO Y CADENA DE CUSTODIA",
+    "nombre": "PRESERVACIÓN DEL LUGAR DEL HECHO LA ESCENA DEL CRIMEN O DEL HALLAZGO Y CADENA DE CUSTODIA",
+    "activo": true,
+    "ec_codes": [
+      "EC0626"
+    ]
+  },
+  {
+    "id": "CCAP-00282",
+    "centerId": "CCAP-00282",
+    "name": "PRESTACIÓN DE LOS SERVICIOS DE HOTELERÍA EC0667",
+    "nombre": "PRESTACIÓN DE LOS SERVICIOS DE HOTELERÍA EC0667",
+    "activo": true,
+    "ec_codes": [
+      "EC0667"
+    ]
+  },
+  {
+    "id": "CCAP-00283",
+    "centerId": "CCAP-00283",
+    "name": "PRESTACIÓN DE SERVICIOS COSMETOLÓGICOS CORPORALES",
+    "nombre": "PRESTACIÓN DE SERVICIOS COSMETOLÓGICOS CORPORALES",
+    "activo": true,
+    "ec_codes": [
+      "EC0010"
+    ]
+  },
+  {
+    "id": "CCAP-00284",
+    "centerId": "CCAP-00284",
+    "name": "PRESTACIÓN DE SERVICIOS COSMETOLÓGICOS FACIALES",
+    "nombre": "PRESTACIÓN DE SERVICIOS COSMETOLÓGICOS FACIALES",
+    "activo": true,
+    "ec_codes": [
+      "EC0046"
+    ]
+  },
+  {
+    "id": "CCAP-00285",
+    "centerId": "CCAP-00285",
+    "name": "PRESTACIÓN DE SERVICIOS DE ATENCIÓN A CLIENTES",
+    "nombre": "PRESTACIÓN DE SERVICIOS DE ATENCIÓN A CLIENTES",
+    "activo": true,
+    "ec_codes": [
+      "EC0305"
+    ]
+  },
+  {
+    "id": "CCAP-00286",
+    "centerId": "CCAP-00286",
+    "name": "PRESTACIÓN DE SERVICIOS DE CONSULTORÍA EN GESTIÓN ORGANIZACIONAL",
+    "nombre": "PRESTACIÓN DE SERVICIOS DE CONSULTORÍA EN GESTIÓN ORGANIZACIONAL",
+    "activo": true,
+    "ec_codes": [
+      "EC0247"
+    ]
+  },
+  {
+    "id": "CCAP-00287",
+    "centerId": "CCAP-00287",
+    "name": "PRESTACIÓN DEL SERVICIO DE RECEPCIÓN Y ATENCIÓN AL HUÉSPED PARA ALOJAMIENTO TEMPORAL.",
+    "nombre": "PRESTACIÓN DEL SERVICIO DE RECEPCIÓN Y ATENCIÓN AL HUÉSPED PARA ALOJAMIENTO TEMPORAL.",
+    "activo": true,
+    "ec_codes": [
+      "EC0045"
+    ]
+  },
+  {
+    "id": "CCAP-00288",
+    "centerId": "CCAP-00288",
+    "name": "PRESTACIÓN DEL SERVICIO DE RECEPCIÓN Y ATENCIÓN AL HUÉSPED PARA SU ALOJAMIENTO TEMPORAL",
+    "nombre": "PRESTACIÓN DEL SERVICIO DE RECEPCIÓN Y ATENCIÓN AL HUÉSPED PARA SU ALOJAMIENTO TEMPORAL",
+    "activo": true,
+    "ec_codes": [
+      "EC0045"
+    ]
+  },
+  {
+    "id": "CCAP-00289",
+    "centerId": "CCAP-00289",
+    "name": "PRIMER RESPONDIENTE EN PRIMEROS AUXILIOS",
+    "nombre": "PRIMER RESPONDIENTE EN PRIMEROS AUXILIOS",
+    "activo": true,
+    "ec_codes": [
+      "EC0585"
+    ]
+  },
+  {
+    "id": "CCAP-00290",
+    "centerId": "CCAP-00290",
+    "name": "PRIMEROS AUXILIOS",
+    "nombre": "PRIMEROS AUXILIOS",
+    "activo": true,
+    "ec_codes": [
+      "EC0585"
+    ]
+  },
+  {
+    "id": "CCAP-00291",
+    "centerId": "CCAP-00291",
+    "name": "PRIMEROS AUXILIOS (SOPORTE DE VIDA)",
+    "nombre": "PRIMEROS AUXILIOS (SOPORTE DE VIDA)",
+    "activo": true,
+    "ec_codes": [
+      "EC0585"
+    ]
+  },
+  {
+    "id": "CCAP-00292",
+    "centerId": "CCAP-00292",
+    "name": "PRIMEROS AUXILIOS EN LA ATENCIÓN BÁSICA PREHOSPITALARIA",
+    "nombre": "PRIMEROS AUXILIOS EN LA ATENCIÓN BÁSICA PREHOSPITALARIA",
+    "activo": true,
+    "ec_codes": [
+      "EC0585"
+    ]
+  },
+  {
+    "id": "CCAP-00293",
+    "centerId": "CCAP-00293",
+    "name": "PRINCIPALES APPS EDUCATIVAS DE DISPOSITIVOS MÓVILES",
+    "nombre": "PRINCIPALES APPS EDUCATIVAS DE DISPOSITIVOS MÓVILES",
+    "activo": true,
+    "ec_codes": [
+      "EC0337"
+    ]
+  },
+  {
+    "id": "CCAP-00294",
+    "centerId": "CCAP-00294",
+    "name": "PROGRAMA NACIONAL DE CAPACITACIÓN EN CONSEJERÍA Y TERAPIAS ALTERNATIVAS PARA TRATAMIENTOS EN ADICCIONES",
+    "nombre": "PROGRAMA NACIONAL DE CAPACITACIÓN EN CONSEJERÍA Y TERAPIAS ALTERNATIVAS PARA TRATAMIENTOS EN ADICCIONES",
+    "activo": true,
+    "ec_codes": [
+      "EC0548"
+    ]
+  },
+  {
+    "id": "CCAP-00295",
+    "centerId": "CCAP-00295",
+    "name": "PROMOCIÓN DE LA APLICACIÓN DE LAS REGLAS MÍNIMAS DE LAS NACIONES  UNIDAS PARA EL TRATAMIENTO DE LOS RECLUSOS “REGLAS NELSON MANDELA”  EN EL SISTEMA PENITENCIARIO\tPRESENCIAL",
+    "nombre": "PROMOCIÓN DE LA APLICACIÓN DE LAS REGLAS MÍNIMAS DE LAS NACIONES  UNIDAS PARA EL TRATAMIENTO DE LOS RECLUSOS “REGLAS NELSON MANDELA”  EN EL SISTEMA PENITENCIARIO\tPRESENCIAL",
+    "activo": true,
+    "ec_codes": [
+      "EC1104"
+    ]
+  },
+  {
+    "id": "CCAP-00296",
+    "centerId": "CCAP-00296",
+    "name": "PROMOCIÓN DE LA ATENCIÓN DE LAS VÍCTIMAS DE TORTURA DE ACUERDO CON EL PROTOCOLO DE ESTAMBUL",
+    "nombre": "PROMOCIÓN DE LA ATENCIÓN DE LAS VÍCTIMAS DE TORTURA DE ACUERDO CON EL PROTOCOLO DE ESTAMBUL",
+    "activo": true,
+    "ec_codes": [
+      "EC1105"
+    ]
+  },
+  {
+    "id": "CCAP-00297",
+    "centerId": "CCAP-00297",
+    "name": "PROMOCIÓN DE LOS PRINCIPIOS Y DERECHOS DEL SISTEMA INTEGRAL DE JUSTICIA PENAL PARA ADOLESCENTES",
+    "nombre": "PROMOCIÓN DE LOS PRINCIPIOS Y DERECHOS DEL SISTEMA INTEGRAL DE JUSTICIA PENAL PARA ADOLESCENTES",
+    "activo": true,
+    "ec_codes": [
+      "EC1106"
+    ]
+  },
+  {
+    "id": "CCAP-00298",
+    "centerId": "CCAP-00298",
+    "name": "PROMOCIÓN DEL AHORRO EN EL DESEMPEÑO INTEGRAL DE LOS SISTEMAS ENERGÉTICOS DE LA VIVIENDA",
+    "nombre": "PROMOCIÓN DEL AHORRO EN EL DESEMPEÑO INTEGRAL DE LOS SISTEMAS ENERGÉTICOS DE LA VIVIENDA",
+    "activo": true,
+    "ec_codes": [
+      "EC0431"
+    ]
+  },
+  {
+    "id": "CCAP-00299",
+    "centerId": "CCAP-00299",
+    "name": "PROPORCIONAR SERVICIO DE CONSULTORÍA GENERAL.",
+    "nombre": "PROPORCIONAR SERVICIO DE CONSULTORÍA GENERAL.",
+    "activo": true,
+    "ec_codes": [
+      "EC0249"
+    ]
+  },
+  {
+    "id": "CCAP-00300",
+    "centerId": "CCAP-00300",
+    "name": "PROPORCIONAR SERVICIOS DE CONSULTORÍA A PYME'S",
+    "nombre": "PROPORCIONAR SERVICIOS DE CONSULTORÍA A PYME'S",
+    "activo": true,
+    "ec_codes": [
+      "EC0359"
+    ]
+  },
+  {
+    "id": "CCAP-00301",
+    "centerId": "CCAP-00301",
+    "name": "PROPORCIONAR SERVICIOS DE CONSULTORÍA A PYME´S",
+    "nombre": "PROPORCIONAR SERVICIOS DE CONSULTORÍA A PYME´S",
+    "activo": true,
+    "ec_codes": [
+      "EC0359"
+    ]
+  },
+  {
+    "id": "CCAP-00302",
+    "centerId": "CCAP-00302",
+    "name": "PROPORCIONAR SERVICIOS DE CONSULTORÍA GENERAL",
+    "nombre": "PROPORCIONAR SERVICIOS DE CONSULTORÍA GENERAL",
+    "activo": true,
+    "ec_codes": [
+      "EC0249"
+    ]
+  },
+  {
+    "id": "CCAP-00303",
+    "centerId": "CCAP-00303",
+    "name": "PROYECTOS CON BIOGÁS. DESARROLLO SOSTENIBLE PARA EL SECTOR AGROPECUARIO",
+    "nombre": "PROYECTOS CON BIOGÁS. DESARROLLO SOSTENIBLE PARA EL SECTOR AGROPECUARIO",
+    "activo": true,
+    "ec_codes": [
+      "EC1128"
+    ]
+  },
+  {
+    "id": "CCAP-00304",
+    "centerId": "CCAP-00304",
+    "name": "RECEPCIONISTA DE HOTELES",
+    "nombre": "RECEPCIONISTA DE HOTELES",
+    "activo": true,
+    "ec_codes": [
+      "EC0045"
+    ]
+  },
+  {
+    "id": "CCAP-00305",
+    "centerId": "CCAP-00305",
+    "name": "RECEPCIONISTA PROFESIONAL",
+    "nombre": "RECEPCIONISTA PROFESIONAL",
+    "activo": true,
+    "ec_codes": [
+      "EC0047"
+    ]
+  },
+  {
+    "id": "CCAP-00306",
+    "centerId": "CCAP-00306",
+    "name": "RECLUTAMIENTO, SELECCIÓN Y DISEÑO DE COMPETENCIAS DEL TALENTO ORGANIZACIONAL",
+    "nombre": "RECLUTAMIENTO, SELECCIÓN Y DISEÑO DE COMPETENCIAS DEL TALENTO ORGANIZACIONAL",
+    "activo": true,
+    "ec_codes": [
+      "EC0306"
+    ]
+  },
+  {
+    "id": "CCAP-00307",
+    "centerId": "CCAP-00307",
+    "name": "REFLEXOLOGÍA PODAL",
+    "nombre": "REFLEXOLOGÍA PODAL",
+    "activo": true,
+    "ec_codes": [
+      "EC1049"
+    ]
+  },
+  {
+    "id": "CCAP-00308",
+    "centerId": "CCAP-00308",
+    "name": "RÉGIMEN DE INCORPORACIÓN FISCAL (RIF).",
+    "nombre": "RÉGIMEN DE INCORPORACIÓN FISCAL (RIF).",
+    "activo": true,
+    "ec_codes": [
+      "EC0839"
+    ]
+  },
+  {
+    "id": "CCAP-00309",
+    "centerId": "CCAP-00309",
+    "name": "SEMINARIO DE DERECHO FISCAL.",
+    "nombre": "SEMINARIO DE DERECHO FISCAL.",
+    "activo": true,
+    "ec_codes": [
+      "EC0839"
+    ]
+  },
+  {
+    "id": "CCAP-00310",
+    "centerId": "CCAP-00310",
+    "name": "SEMINARIO DE INVERSORES FOTOVOLTAICOS DE CONEXIÓN A RED, FRONIUS SNAPINVERTER",
+    "nombre": "SEMINARIO DE INVERSORES FOTOVOLTAICOS DE CONEXIÓN A RED, FRONIUS SNAPINVERTER",
+    "activo": true,
+    "ec_codes": [
+      "EC0586.01"
+    ]
+  },
+  {
+    "id": "CCAP-00311",
+    "centerId": "CCAP-00311",
+    "name": "SEMINARIO EN INTELIGENCIA FINANCIERA",
+    "nombre": "SEMINARIO EN INTELIGENCIA FINANCIERA",
+    "activo": true,
+    "ec_codes": [
+      "EC0754"
+    ]
+  },
+  {
+    "id": "CCAP-00312",
+    "centerId": "CCAP-00312",
+    "name": "SERVICIO DE ATENCIÓN AL CLIENTE",
+    "nombre": "SERVICIO DE ATENCIÓN AL CLIENTE",
+    "activo": true,
+    "ec_codes": [
+      "EC0305"
+    ]
+  },
+  {
+    "id": "CCAP-00313",
+    "centerId": "CCAP-00313",
+    "name": "SERVICIOS COSMETOLOGICOS FACIALES ESTANDARIZADO",
+    "nombre": "SERVICIOS COSMETOLOGICOS FACIALES ESTANDARIZADO",
+    "activo": true,
+    "ec_codes": [
+      "EC0046"
+    ]
+  },
+  {
+    "id": "CCAP-00314",
+    "centerId": "CCAP-00314",
+    "name": "SERVICIOS DE CONSULTORÍA EN DESARROLLO ORGANIZACIONAL Y HUMANO",
+    "nombre": "SERVICIOS DE CONSULTORÍA EN DESARROLLO ORGANIZACIONAL Y HUMANO",
+    "activo": true,
+    "ec_codes": [
+      "EC0249"
+    ]
+  },
+  {
+    "id": "CCAP-00315",
+    "centerId": "CCAP-00315",
+    "name": "SISTEMA DASIEN",
+    "nombre": "SISTEMA DASIEN",
+    "activo": true,
+    "ec_codes": [
+      "EC0513"
+    ]
+  },
+  {
+    "id": "CCAP-00316",
+    "centerId": "CCAP-00316",
+    "name": "SISTEMA DE CONTROL INTERNO; MODELO ESTÁNDAR DE CONTROL INTERNO Y ADMINISTRACIÓN DE RIESGOS",
+    "nombre": "SISTEMA DE CONTROL INTERNO; MODELO ESTÁNDAR DE CONTROL INTERNO Y ADMINISTRACIÓN DE RIESGOS",
+    "activo": true,
+    "ec_codes": [
+      "EC0176"
+    ]
+  },
+  {
+    "id": "CCAP-00317",
+    "centerId": "CCAP-00317",
+    "name": "SISTEMA DE PERMISOS PARA TRABAJOS CON RIESGOS",
+    "nombre": "SISTEMA DE PERMISOS PARA TRABAJOS CON RIESGOS",
+    "activo": true,
+    "ec_codes": [
+      "EC0659"
+    ]
+  },
+  {
+    "id": "CCAP-00318",
+    "centerId": "CCAP-00318",
+    "name": "SOSTENIBILIDAD URBANA, LA ADMINISTRACIÓN DEL DESARROLLO URBANO Y ORDENAMIENTO TERRITORIAL MUNICIPAL",
+    "nombre": "SOSTENIBILIDAD URBANA, LA ADMINISTRACIÓN DEL DESARROLLO URBANO Y ORDENAMIENTO TERRITORIAL MUNICIPAL",
+    "activo": true,
+    "ec_codes": [
+      "EC0978"
+    ]
+  },
+  {
+    "id": "CCAP-00319",
+    "centerId": "CCAP-00319",
+    "name": "SUPERVISIÓN DE LA OPERACIÓN DEL FONDO DE ASEGURAMIENTO AGROPECUARIO",
+    "nombre": "SUPERVISIÓN DE LA OPERACIÓN DEL FONDO DE ASEGURAMIENTO AGROPECUARIO",
+    "activo": true,
+    "ec_codes": [
+      "EC0129"
+    ]
+  },
+  {
+    "id": "CCAP-00320",
+    "centerId": "CCAP-00320",
+    "name": "SUPERVISIÓN DE LAS CONDICIONES DE REGISTRO Y ESTANCIA AL HUÉSPED",
+    "nombre": "SUPERVISIÓN DE LAS CONDICIONES DE REGISTRO Y ESTANCIA AL HUÉSPED",
+    "activo": true,
+    "ec_codes": [
+      "EC0047"
+    ]
+  },
+  {
+    "id": "CCAP-00321",
+    "centerId": "CCAP-00321",
+    "name": "SUPERVISIÓN DE LAS CONDICIONES DE REGISTRO Y ESTANCIA DEL HUÉSPED",
+    "nombre": "SUPERVISIÓN DE LAS CONDICIONES DE REGISTRO Y ESTANCIA DEL HUÉSPED",
+    "activo": true,
+    "ec_codes": [
+      "EC0047"
+    ]
+  },
+  {
+    "id": "CCAP-00322",
+    "centerId": "CCAP-00322",
+    "name": "SUPERVISIÓN DE LAS CONDICIONES DE REGISTRO Y ESTANCIA DEL HUÉSPED EC0047",
+    "nombre": "SUPERVISIÓN DE LAS CONDICIONES DE REGISTRO Y ESTANCIA DEL HUÉSPED EC0047",
+    "activo": true,
+    "ec_codes": [
+      "EC0047"
+    ]
+  },
+  {
+    "id": "CCAP-00323",
+    "centerId": "CCAP-00323",
+    "name": "SUPERVISIÓN DE SERVICIOS DE SEGURIDAD (SUPSEG)",
+    "nombre": "SUPERVISIÓN DE SERVICIOS DE SEGURIDAD (SUPSEG)",
+    "activo": true,
+    "ec_codes": [
+      "EC0574"
+    ]
+  },
+  {
+    "id": "CCAP-00324",
+    "centerId": "CCAP-00324",
+    "name": "SUPERVISOR DE CONCRETO LANZADO",
+    "nombre": "SUPERVISOR DE CONCRETO LANZADO",
+    "activo": true,
+    "ec_codes": [
+      "EC0502"
+    ]
+  },
+  {
+    "id": "CCAP-00325",
+    "centerId": "CCAP-00325",
+    "name": "TALLER DE ALINEACIÓN AL ESTÁNDAR DE COMPETENCIA EC0782",
+    "nombre": "TALLER DE ALINEACIÓN AL ESTÁNDAR DE COMPETENCIA EC0782",
+    "activo": true,
+    "ec_codes": [
+      "EC0782"
+    ]
+  },
+  {
+    "id": "CCAP-00326",
+    "centerId": "CCAP-00326",
+    "name": "TRABAJO EN ALTURAS PAR ANDAMIOS TIPO TORRE O ESTRUCTURA",
+    "nombre": "TRABAJO EN ALTURAS PAR ANDAMIOS TIPO TORRE O ESTRUCTURA",
+    "activo": true,
+    "ec_codes": [
+      "EC0591"
+    ]
+  },
+  {
+    "id": "CCAP-00327",
+    "centerId": "CCAP-00327",
+    "name": "TRABAJO EN ALTURAS PARA PLATAFORMAS MECÁNICAS",
+    "nombre": "TRABAJO EN ALTURAS PARA PLATAFORMAS MECÁNICAS",
+    "activo": true,
+    "ec_codes": [
+      "EC0590"
+    ]
+  },
+  {
+    "id": "CCAP-00328",
+    "centerId": "CCAP-00328",
+    "name": "TRATAMIENTOS CORPORALES ESTANDARIZADO",
+    "nombre": "TRATAMIENTOS CORPORALES ESTANDARIZADO",
+    "activo": true,
+    "ec_codes": [
+      "EC0010"
+    ]
+  },
+  {
+    "id": "CCAP-00329",
+    "centerId": "CCAP-00329",
+    "name": "TUTORÍA EN LA EDUCACIÓN MEDIA SUPERIOR Y SUPERIOR",
+    "nombre": "TUTORÍA EN LA EDUCACIÓN MEDIA SUPERIOR Y SUPERIOR",
+    "activo": true,
+    "ec_codes": [
+      "EC0477"
+    ]
+  },
+  {
+    "id": "CCAP-00330",
+    "centerId": "CCAP-00330",
+    "name": "TÉCNICAS DE LEVANTAMIENTO DE INFORMACIÓN EN CAMPO PARA PERITAJES EN MATERIA AMBIENTAL Y ELABORACIÓN DE DICTÁMENES EN MATERIA AMBIENTAL",
+    "nombre": "TÉCNICAS DE LEVANTAMIENTO DE INFORMACIÓN EN CAMPO PARA PERITAJES EN MATERIA AMBIENTAL Y ELABORACIÓN DE DICTÁMENES EN MATERIA AMBIENTAL",
+    "activo": true,
+    "ec_codes": [
+      "EC0878"
+    ]
+  },
+  {
+    "id": "CCAP-00331",
+    "centerId": "CCAP-00331",
+    "name": "TÉCNICAS DE NEURO-NEGOCIACIÓN",
+    "nombre": "TÉCNICAS DE NEURO-NEGOCIACIÓN",
+    "activo": true,
+    "ec_codes": [
+      "EC0619"
+    ]
+  },
+  {
+    "id": "CCAP-00332",
+    "centerId": "CCAP-00332",
+    "name": "TÉCNICO BÁSICO DE TERAPIA FÍSICA",
+    "nombre": "TÉCNICO BÁSICO DE TERAPIA FÍSICA",
+    "activo": true,
+    "ec_codes": [
+      "EC0899"
+    ]
+  },
+  {
+    "id": "CCAP-00333",
+    "centerId": "CCAP-00333",
+    "name": "USO DE INGLES TÉCNICO PARA INDUSTRIAS PETROLERAS (PERFORACIÓN MARINA)",
+    "nombre": "USO DE INGLES TÉCNICO PARA INDUSTRIAS PETROLERAS (PERFORACIÓN MARINA)",
+    "activo": true,
+    "ec_codes": [
+      "EC0679"
+    ]
+  },
+  {
+    "id": "CCAP-00334",
+    "centerId": "CCAP-00334",
+    "name": "USO EDUCATIVO DE DISPOSITIVOS MÓVILES",
+    "nombre": "USO EDUCATIVO DE DISPOSITIVOS MÓVILES",
+    "activo": true,
+    "ec_codes": [
+      "EC0337"
+    ]
+  },
+  {
+    "id": "CCAP-00335",
+    "centerId": "CCAP-00335",
+    "name": "USO, MANEJO Y ADMINISTRACIÓN DEL PORTAL DEL SAT Y FACTURACIÓN ELECTRÓNICA.",
+    "nombre": "USO, MANEJO Y ADMINISTRACIÓN DEL PORTAL DEL SAT Y FACTURACIÓN ELECTRÓNICA.",
+    "activo": true,
+    "ec_codes": [
+      "EC0839"
+    ]
+  },
+  {
+    "id": "CCAP-00336",
+    "centerId": "CCAP-00336",
+    "name": "VALUACIÓN DE DAÑOS EN AUTOMÓVILES",
+    "nombre": "VALUACIÓN DE DAÑOS EN AUTOMÓVILES",
+    "activo": true,
+    "ec_codes": [
+      "EC0672"
+    ]
+  },
+  {
+    "id": "CCAP-00337",
+    "centerId": "CCAP-00337",
+    "name": "VALUACIÓN DEL INVENTARIO Y LA DETERMINACIÓN DEL COSTO DE LO VENDIDO",
+    "nombre": "VALUACIÓN DEL INVENTARIO Y LA DETERMINACIÓN DEL COSTO DE LO VENDIDO",
+    "activo": true,
+    "ec_codes": [
+      "EC0704"
+    ]
+  },
+  {
+    "id": "CCAP-00338",
+    "centerId": "CCAP-00338",
+    "name": "VERIFICACIÓN DE LAS CONDICIONES DE SEGURIDAD E HIGIENE EN LOS CENTROS DE TRABAJO",
+    "nombre": "VERIFICACIÓN DE LAS CONDICIONES DE SEGURIDAD E HIGIENE EN LOS CENTROS DE TRABAJO",
+    "activo": true,
+    "ec_codes": [
+      "EC0391.01"
+    ]
+  },
+  {
+    "id": "CCAP-00339",
+    "centerId": "CCAP-00339",
+    "name": "VERIFICACIÓN EXTERNA DE LA OPERACIÓN DE LOS CENTROS DE EVALUACIÓN Y EVALUADORES INDEPENDIENTES",
+    "nombre": "VERIFICACIÓN EXTERNA DE LA OPERACIÓN DE LOS CENTROS DE EVALUACIÓN Y EVALUADORES INDEPENDIENTES",
+    "activo": true,
+    "ec_codes": [
+      "EC0091"
+    ]
+  },
+  {
+    "id": "CCAP-00340",
+    "centerId": "CCAP-00340",
+    "name": "WORD INTERMEDIO",
+    "nombre": "WORD INTERMEDIO",
+    "activo": true,
+    "ec_codes": [
+      "EC0107"
+    ]
+  }
+]
