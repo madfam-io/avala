@@ -15,7 +15,7 @@ export async function GET() {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 5000);
 
-    const response = await fetch(`${apiUrl}/health`, {
+    const response = await fetch(`${apiUrl}/v1/health`, {
       signal: controller.signal,
     });
     clearTimeout(timeout);
@@ -41,6 +41,6 @@ export async function GET() {
         },
       },
     },
-    { status: status === "healthy" ? 200 : 503 }
+    { status: status === "healthy" ? 200 : 503 },
   );
 }
