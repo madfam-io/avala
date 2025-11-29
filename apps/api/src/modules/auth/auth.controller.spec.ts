@@ -1,8 +1,10 @@
 import { Test, TestingModule } from "@nestjs/testing";
 import { BadRequestException } from "@nestjs/common";
+import { ThrottlerGuard } from "@nestjs/throttler";
 import { AuthController } from "./auth.controller";
 import { AuthService } from "./auth.service";
 import { JanuaAuthService } from "./janua-auth.service";
+import { AuthenticatedRequest } from "../../common/interfaces";
 
 describe("AuthController", () => {
   let controller: AuthController;
@@ -42,7 +44,10 @@ describe("AuthController", () => {
         { provide: AuthService, useValue: mockAuthService },
         { provide: JanuaAuthService, useValue: mockJanuaAuthService },
       ],
-    }).compile();
+    })
+      .overrideGuard(ThrottlerGuard)
+      .useValue({ canActivate: () => true })
+      .compile();
 
     controller = module.get<AuthController>(AuthController);
     authService = module.get(AuthService);
@@ -57,7 +62,9 @@ describe("AuthController", () => {
     it("should login user and set cookies", async () => {
       authService.login.mockResolvedValue(mockLoginResponse as any);
 
-      const mockReq = { user: mockUser };
+      const mockReq = {
+        user: mockUser,
+      } as unknown as AuthenticatedRequest;
       const mockRes = {
         cookie: jest.fn(),
       };

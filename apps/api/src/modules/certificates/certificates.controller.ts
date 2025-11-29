@@ -11,6 +11,7 @@ import {
 import { Response } from "express";
 import { CertificatesService } from "./certificates.service";
 import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
+import { AuthenticatedRequest } from "../../common/interfaces";
 
 /**
  * CertificatesController
@@ -37,11 +38,11 @@ export class CertificatesController {
   @Post("enrollments/:enrollmentId/generate")
   @UseGuards(JwtAuthGuard)
   async generateCertificate(
-    @Req() req: any,
+    @Req() req: AuthenticatedRequest,
     @Param("enrollmentId") enrollmentId: string,
     @Res() res: Response,
   ) {
-    const tenantId = req.user.tenantId;
+    const { tenantId } = req.user;
 
     const pdfBuffer = await this.certificatesService.generateDc3(
       tenantId,
@@ -66,10 +67,10 @@ export class CertificatesController {
   @Get("enrollments/:enrollmentId")
   @UseGuards(JwtAuthGuard)
   async getCertificate(
-    @Req() req: any,
+    @Req() req: AuthenticatedRequest,
     @Param("enrollmentId") enrollmentId: string,
   ) {
-    const tenantId = req.user.tenantId;
+    const { tenantId } = req.user;
 
     return this.certificatesService.getCertificate(tenantId, enrollmentId);
   }
@@ -81,11 +82,11 @@ export class CertificatesController {
   @Get("enrollments/:enrollmentId/download")
   @UseGuards(JwtAuthGuard)
   async downloadCertificate(
-    @Req() req: any,
+    @Req() req: AuthenticatedRequest,
     @Param("enrollmentId") enrollmentId: string,
     @Res() res: Response,
   ) {
-    const tenantId = req.user.tenantId;
+    const { tenantId } = req.user;
 
     // This will regenerate the PDF from the certificate record
     const pdfBuffer = await this.certificatesService.generateDc3(
@@ -110,12 +111,11 @@ export class CertificatesController {
   @Post(":certificateId/revoke")
   @UseGuards(JwtAuthGuard)
   async revokeCertificate(
-    @Req() req: any,
+    @Req() req: AuthenticatedRequest,
     @Param("certificateId") certificateId: string,
     @Body() body: { reason: string },
   ) {
-    const tenantId = req.user.tenantId;
-    const userId = req.user.userId;
+    const { tenantId, id: userId } = req.user;
 
     return this.certificatesService.revokeCertificate(
       tenantId,

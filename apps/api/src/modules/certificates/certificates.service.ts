@@ -1,5 +1,6 @@
 import {
   Injectable,
+  Logger,
   NotFoundException,
   BadRequestException,
 } from "@nestjs/common";
@@ -16,6 +17,8 @@ import { MailService } from "../mail/mail.service";
  */
 @Injectable()
 export class CertificatesService {
+  private readonly logger = new Logger(CertificatesService.name);
+
   constructor(
     private readonly prisma: PrismaService,
     private readonly mailService: MailService,
@@ -124,7 +127,7 @@ export class CertificatesService {
       });
     } catch (error) {
       // Log email error but don't fail certificate generation
-      console.error("Failed to send certificate email:", error);
+      this.logger.error("Failed to send certificate email", error);
     }
 
     return pdfBuffer;

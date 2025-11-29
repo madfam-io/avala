@@ -1,5 +1,6 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { PrismaService } from "../../database/prisma.service";
+import { CacheService, CacheTTL } from "../cache/cache.service";
 import { LeaderboardType } from "@avala/db";
 import { Cron, CronExpression } from "@nestjs/schedule";
 
@@ -26,10 +27,13 @@ interface LeaderboardResult {
 export class LeaderboardService {
   private readonly logger = new Logger(LeaderboardService.name);
 
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly cache: CacheService,
+  ) {}
 
   /**
-   * Get leaderboard by type
+   * Get leaderboard by type (with caching)
    */
   async getLeaderboard(
     tenantId: string,
@@ -40,42 +44,75 @@ export class LeaderboardService {
     const period = this.getPeriodForType(type);
     const startDate = this.getStartDateForType(type);
 
+    // Try to get cached leaderboard entries
+    const cacheKey = this.cache.getLeaderboardKey(tenantId, `${type}:${limit}`);
     let entries: LeaderboardEntry[];
     let totalParticipants: number;
 
-    switch (type) {
-      case LeaderboardType.WEEKLY_POINTS:
-      case LeaderboardType.MONTHLY_POINTS:
-        ({ entries, totalParticipants } = await this.getPointsLeaderboard(
-          tenantId,
-          startDate,
-          limit,
-        ));
-        break;
-      case LeaderboardType.GLOBAL_POINTS:
-        ({ entries, totalParticipants } =
-          await this.getAllTimePointsLeaderboard(tenantId, limit));
-        break;
-      case LeaderboardType.STREAK_LENGTH:
-        ({ entries, totalParticipants } = await this.getStreakLeaderboard(
-          tenantId,
-          limit,
-        ));
-        break;
-      default:
-        ({ entries, totalParticipants } =
-          await this.getAllTimePointsLeaderboard(tenantId, limit));
+    const cached = await this.cache.get<{
+      entries: LeaderboardEntry[];
+      totalParticipants: number;
+    }>(cacheKey);
+
+    if (cached) {
+      entries = cached.entries;
+      totalParticipants = cached.totalParticipants;
+    } else {
+      // Fetch from database
+      switch (type) {
+        case LeaderboardType.WEEKLY_POINTS:
+        case LeaderboardType.MONTHLY_POINTS:
+          ({ entries, totalParticipants } = await this.getPointsLeaderboard(
+            tenantId,
+            startDate,
+            limit,
+          ));
+          break;
+        case LeaderboardType.GLOBAL_POINTS:
+          ({ entries, totalParticipants } =
+            await this.getAllTimePointsLeaderboard(tenantId, limit));
+          break;
+        case LeaderboardType.STREAK_LENGTH:
+          ({ entries, totalParticipants } = await this.getStreakLeaderboard(
+            tenantId,
+            limit,
+          ));
+          break;
+        default:
+          ({ entries, totalParticipants } =
+            await this.getAllTimePointsLeaderboard(tenantId, limit));
+      }
+
+      // Cache leaderboard for 1 minute (short TTL since leaderboards change frequently)
+      await this.cache.set(
+        cacheKey,
+        { entries, totalParticipants },
+        CacheTTL.SHORT,
+      );
+      this.logger.debug(`Cached leaderboard: ${type} for tenant ${tenantId}`);
     }
 
-    // Get current user's rank if provided
+    // Get current user's rank if provided (cached separately)
     let userRank: LeaderboardEntry | undefined;
     if (currentUserId) {
-      userRank = await this.getUserRankForType(
+      const userRankCacheKey = this.cache.getUserRankKey(
         tenantId,
         currentUserId,
         type,
-        startDate,
       );
+      userRank = await this.cache.get<LeaderboardEntry>(userRankCacheKey);
+
+      if (!userRank) {
+        userRank = await this.getUserRankForType(
+          tenantId,
+          currentUserId,
+          type,
+          startDate,
+        );
+        if (userRank) {
+          await this.cache.set(userRankCacheKey, userRank, CacheTTL.SHORT);
+        }
+      }
     }
 
     return {

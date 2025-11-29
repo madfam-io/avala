@@ -1,6 +1,7 @@
 import { Test, TestingModule } from "@nestjs/testing";
 import { QuizController } from "./quiz.controller";
 import { QuizService } from "./quiz.service";
+import { AuthenticatedRequest } from "../../common/interfaces";
 
 describe("QuizController", () => {
   let controller: QuizController;
@@ -17,8 +18,8 @@ describe("QuizController", () => {
   };
 
   const mockReq = {
-    user: { tenantId: "tenant-1", id: "user-1", userId: "user-1" },
-  };
+    user: { tenantId: "tenant-1", id: "user-1" },
+  } as unknown as AuthenticatedRequest;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -36,10 +37,15 @@ describe("QuizController", () => {
   });
 
   describe("findAll", () => {
-    it("should return all quizzes for tenant", async () => {
-      quizService.findAll.mockResolvedValue([]);
-      await controller.findAll(mockReq);
-      expect(quizService.findAll).toHaveBeenCalledWith("tenant-1");
+    it("should return all quizzes for tenant with pagination", async () => {
+      const mockQuery = { page: 1, limit: 20 };
+      const mockResult = {
+        items: [],
+        meta: { total: 0, page: 1, limit: 20, totalPages: 0 },
+      };
+      quizService.findAll.mockResolvedValue(mockResult as any);
+      await controller.findAll(mockReq, mockQuery as any);
+      expect(quizService.findAll).toHaveBeenCalledWith("tenant-1", mockQuery);
     });
   });
 

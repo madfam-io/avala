@@ -4,8 +4,9 @@ import {
   Post,
   Body,
   Param,
+  Query,
   UseGuards,
-  Request,
+  Req,
   HttpCode,
   HttpStatus,
 } from "@nestjs/common";
@@ -18,6 +19,8 @@ import {
 import { QuizService, QuizSubmission } from "./quiz.service";
 import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
 import { SubmitQuizDto } from "./dto/submit-quiz.dto";
+import { QuizQueryDto } from "./dto/quiz-query.dto";
+import { AuthenticatedRequest } from "../../common/interfaces";
 
 @ApiTags("Quiz")
 @Controller("quiz")
@@ -27,10 +30,13 @@ export class QuizController {
   constructor(private readonly quizService: QuizService) {}
 
   @Get()
-  @ApiOperation({ summary: "Get all quizzes for the tenant" })
-  @ApiResponse({ status: 200, description: "List of quizzes" })
-  async findAll(@Request() req: any) {
-    return this.quizService.findAll(req.user.tenantId);
+  @ApiOperation({ summary: "Get all quizzes for the tenant with pagination" })
+  @ApiResponse({ status: 200, description: "Paginated list of quizzes" })
+  async findAll(
+    @Req() req: AuthenticatedRequest,
+    @Query() query: QuizQueryDto,
+  ) {
+    return this.quizService.findAll(req.user.tenantId, query);
   }
 
   @Get(":id")
@@ -40,7 +46,7 @@ export class QuizController {
     description: "Quiz with questions (answers hidden)",
   })
   @ApiResponse({ status: 404, description: "Quiz not found" })
-  async findOne(@Param("id") id: string, @Request() req: any) {
+  async findOne(@Param("id") id: string, @Req() req: AuthenticatedRequest) {
     return this.quizService.findOne(id, req.user.tenantId);
   }
 
@@ -51,7 +57,10 @@ export class QuizController {
     description: "Quiz with questions (answers hidden)",
   })
   @ApiResponse({ status: 404, description: "Quiz not found" })
-  async findByCode(@Param("code") code: string, @Request() req: any) {
+  async findByCode(
+    @Param("code") code: string,
+    @Req() req: AuthenticatedRequest,
+  ) {
     return this.quizService.findByCode(code, req.user.tenantId);
   }
 
@@ -61,12 +70,12 @@ export class QuizController {
   @ApiResponse({ status: 201, description: "Quiz attempt started" })
   @ApiResponse({ status: 400, description: "Maximum attempts reached" })
   @ApiResponse({ status: 404, description: "Quiz not found" })
-  async startAttempt(@Param("id") quizId: string, @Request() req: any) {
-    return this.quizService.startAttempt(
-      quizId,
-      req.user.id,
-      req.user.tenantId,
-    );
+  async startAttempt(
+    @Param("id") quizId: string,
+    @Req() req: AuthenticatedRequest,
+  ) {
+    const { id, tenantId } = req.user;
+    return this.quizService.startAttempt(quizId, id, tenantId);
   }
 
   @Post("attempt/:attemptId/submit")
@@ -81,7 +90,7 @@ export class QuizController {
   async submitAttempt(
     @Param("attemptId") attemptId: string,
     @Body() submitDto: SubmitQuizDto,
-    @Request() req: any,
+    @Req() req: AuthenticatedRequest,
   ) {
     const submission: QuizSubmission = {
       quizId: submitDto.quizId,
@@ -94,7 +103,10 @@ export class QuizController {
   @Get(":id/attempts")
   @ApiOperation({ summary: "Get user attempts for a quiz" })
   @ApiResponse({ status: 200, description: "List of user attempts" })
-  async getUserAttempts(@Param("id") quizId: string, @Request() req: any) {
+  async getUserAttempts(
+    @Param("id") quizId: string,
+    @Req() req: AuthenticatedRequest,
+  ) {
     return this.quizService.getUserAttempts(quizId, req.user.id);
   }
 
@@ -104,7 +116,7 @@ export class QuizController {
   @ApiResponse({ status: 404, description: "Attempt not found" })
   async getAttemptDetails(
     @Param("attemptId") attemptId: string,
-    @Request() req: any,
+    @Req() req: AuthenticatedRequest,
   ) {
     return this.quizService.getAttemptDetails(attemptId, req.user.id);
   }

@@ -47,10 +47,18 @@ describe("CoursesController", () => {
   });
 
   describe("findAll", () => {
-    it("should return all courses", async () => {
-      coursesService.findAll.mockResolvedValue([]);
-      await controller.findAll(mockTenantId);
-      expect(coursesService.findAll).toHaveBeenCalledWith(mockTenantId);
+    it("should return all courses with pagination", async () => {
+      const mockQuery = { page: 1, limit: 20 };
+      const mockResult = {
+        items: [],
+        meta: { total: 0, page: 1, limit: 20, totalPages: 0 },
+      };
+      coursesService.findAll.mockResolvedValue(mockResult as any);
+      await controller.findAll(mockTenantId, mockQuery as any);
+      expect(coursesService.findAll).toHaveBeenCalledWith(
+        mockTenantId,
+        mockQuery,
+      );
     });
   });
 

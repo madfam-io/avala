@@ -20,6 +20,7 @@ import {
   FileText,
 } from "lucide-react";
 import type { ECLesson, ECModule, LessonProgress } from "@/lib/api/ec-api";
+import { createSanitizedMarkup } from "@/lib/sanitize";
 
 interface LessonViewerProps {
   lesson: ECLesson;
@@ -219,7 +220,9 @@ export function LessonViewer({
                 {section.content && (
                   <div
                     className="prose prose-sm max-w-none dark:prose-invert"
-                    dangerouslySetInnerHTML={{ __html: section.content }}
+                    dangerouslySetInnerHTML={createSanitizedMarkup(
+                      section.content,
+                    )}
                   />
                 )}
               </CardContent>

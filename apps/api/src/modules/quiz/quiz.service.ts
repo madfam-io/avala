@@ -6,6 +6,7 @@ import {
 } from "@nestjs/common";
 import { PrismaService } from "../../database/prisma.service";
 import { QuizAttemptStatus, QuestionType, Prisma } from "@avala/db";
+import { QuizQueryDto } from "./dto/quiz-query.dto";
 
 export interface QuestionAnswer {
   questionId: string;
@@ -45,18 +46,47 @@ export class QuizService {
   constructor(private readonly prisma: PrismaService) {}
 
   /**
-   * Get all quizzes for a tenant
+   * Get all quizzes for a tenant with pagination
    */
-  async findAll(tenantId: string) {
-    return this.prisma.quiz.findMany({
-      where: { tenantId },
-      include: {
-        _count: {
-          select: { questions: true, attempts: true },
+  async findAll(tenantId: string, query?: QuizQueryDto) {
+    const page = query?.page || 1;
+    const limit = query?.limit || 20;
+    const skip = (page - 1) * limit;
+
+    const where: Prisma.QuizWhereInput = {
+      tenantId,
+      ...(query?.search && {
+        OR: [
+          { title: { contains: query.search, mode: "insensitive" } },
+          { code: { contains: query.search, mode: "insensitive" } },
+        ],
+      }),
+    };
+
+    const [items, total] = await Promise.all([
+      this.prisma.quiz.findMany({
+        where,
+        include: {
+          _count: {
+            select: { questions: true, attempts: true },
+          },
         },
+        orderBy: { createdAt: "desc" },
+        skip,
+        take: limit,
+      }),
+      this.prisma.quiz.count({ where }),
+    ]);
+
+    return {
+      items,
+      meta: {
+        total,
+        page,
+        limit,
+        totalPages: Math.ceil(total / limit),
       },
-      orderBy: { createdAt: "desc" },
-    });
+    };
   }
 
   /**

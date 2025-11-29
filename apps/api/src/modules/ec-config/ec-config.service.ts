@@ -2,9 +2,12 @@ import {
   Injectable,
   NotFoundException,
   ConflictException,
+  Logger,
 } from "@nestjs/common";
 import { PrismaService } from "../../database/prisma.service";
+import { CacheService, CacheTTL } from "../cache/cache.service";
 import { Prisma, ECStandardStatus } from "@avala/db";
+import { createHash } from "crypto";
 import {
   CreateECStandardDto,
   UpdateECStandardDto,
@@ -19,7 +22,22 @@ import {
 
 @Injectable()
 export class ECConfigService {
-  constructor(private readonly prisma: PrismaService) {}
+  private readonly logger = new Logger(ECConfigService.name);
+
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly cache: CacheService,
+  ) {}
+
+  /**
+   * Generate hash for query parameters (for cache key)
+   */
+  private hashQuery(query: object): string {
+    return createHash("md5")
+      .update(JSON.stringify(query))
+      .digest("hex")
+      .slice(0, 12);
+  }
 
   // ============================================
   // EC STANDARDS
@@ -70,61 +88,79 @@ export class ECConfigService {
   async findAllStandards(query: ECStandardQueryDto) {
     const { status, sector, level, search, page = 1, limit = 20 } = query;
 
-    const where: Prisma.ECStandardWhereInput = {};
+    // Generate cache key based on query parameters
+    const cacheKey = this.cache.getECStandardsListKey(this.hashQuery(query));
 
-    if (status) {
-      where.status = status as ECStandardStatus;
-    }
+    return this.cache.getOrSet(
+      cacheKey,
+      async () => {
+        const where: Prisma.ECStandardWhereInput = {};
 
-    if (sector) {
-      where.sector = sector;
-    }
+        if (status) {
+          where.status = status as ECStandardStatus;
+        }
 
-    if (level) {
-      where.level = level;
-    }
+        if (sector) {
+          where.sector = sector;
+        }
 
-    if (search) {
-      where.OR = [
-        { code: { contains: search, mode: "insensitive" } },
-        { title: { contains: search, mode: "insensitive" } },
-        { titleEn: { contains: search, mode: "insensitive" } },
-        { description: { contains: search, mode: "insensitive" } },
-      ];
-    }
+        if (level) {
+          where.level = level;
+        }
 
-    const [data, total] = await Promise.all([
-      this.prisma.eCStandard.findMany({
-        where,
-        include: {
-          _count: {
-            select: {
-              elements: true,
-              modules: true,
-              templates: true,
-              assessments: true,
-              simulations: true,
-              enrollments: true,
+        if (search) {
+          where.OR = [
+            { code: { contains: search, mode: "insensitive" } },
+            { title: { contains: search, mode: "insensitive" } },
+            { titleEn: { contains: search, mode: "insensitive" } },
+            { description: { contains: search, mode: "insensitive" } },
+          ];
+        }
+
+        const [data, total] = await Promise.all([
+          this.prisma.eCStandard.findMany({
+            where,
+            include: {
+              _count: {
+                select: {
+                  elements: true,
+                  modules: true,
+                  templates: true,
+                  assessments: true,
+                  simulations: true,
+                  enrollments: true,
+                },
+              },
             },
-          },
-        },
-        orderBy: { code: "asc" },
-        skip: (page - 1) * limit,
-        take: limit,
-      }),
-      this.prisma.eCStandard.count({ where }),
-    ]);
+            orderBy: { code: "asc" },
+            skip: (page - 1) * limit,
+            take: limit,
+          }),
+          this.prisma.eCStandard.count({ where }),
+        ]);
 
-    return {
-      data,
-      total,
-      page,
-      limit,
-      totalPages: Math.ceil(total / limit),
-    };
+        this.logger.debug(`Fetched ${data.length} EC Standards from database`);
+
+        return {
+          data,
+          total,
+          page,
+          limit,
+          totalPages: Math.ceil(total / limit),
+        };
+      },
+      CacheTTL.MEDIUM, // 5 minutes
+    );
   }
 
   async findStandardByCode(code: string) {
+    const cacheKey = this.cache.getECStandardKey(code);
+
+    const cached = await this.cache.get<any>(cacheKey);
+    if (cached) {
+      return cached;
+    }
+
     const standard = await this.prisma.eCStandard.findUnique({
       where: { code },
       include: {
@@ -166,6 +202,10 @@ export class ECConfigService {
     if (!standard) {
       throw new NotFoundException(`EC Standard with code ${code} not found`);
     }
+
+    // Cache for 15 minutes (standards don't change often)
+    await this.cache.set(cacheKey, standard, CacheTTL.LONG);
+    this.logger.debug(`Cached EC Standard: ${code}`);
 
     return standard;
   }
@@ -239,7 +279,7 @@ export class ECConfigService {
       }
     }
 
-    return this.prisma.eCStandard.update({
+    const updated = await this.prisma.eCStandard.update({
       where: { code },
       data: updateData,
       include: {
@@ -255,6 +295,11 @@ export class ECConfigService {
         },
       },
     });
+
+    // Invalidate cache
+    await this.cache.invalidateECStandard(code);
+
+    return updated;
   }
 
   async deleteStandard(code: string) {
@@ -280,6 +325,9 @@ export class ECConfigService {
     await this.prisma.eCStandard.delete({
       where: { code },
     });
+
+    // Invalidate cache
+    await this.cache.invalidateECStandard(code);
 
     return { message: `EC Standard ${code} deleted successfully` };
   }

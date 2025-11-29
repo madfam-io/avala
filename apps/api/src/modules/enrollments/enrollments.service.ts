@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { Injectable, Logger, NotFoundException } from "@nestjs/common";
 import { PrismaService } from "../../database/prisma.service";
 import { CourseEnrollmentStatus } from "@avala/db";
 import { MailService } from "../mail/mail.service";
@@ -9,6 +9,8 @@ import { MailService } from "../mail/mail.service";
  */
 @Injectable()
 export class EnrollmentsService {
+  private readonly logger = new Logger(EnrollmentsService.name);
+
   constructor(
     private readonly prisma: PrismaService,
     private readonly mailService: MailService,
@@ -125,7 +127,7 @@ export class EnrollmentsService {
       });
     } catch (error) {
       // Log email error but don't fail enrollment
-      console.error("Failed to send enrollment email:", error);
+      this.logger.error("Failed to send enrollment email", error);
     }
 
     return {

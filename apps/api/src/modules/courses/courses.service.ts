@@ -1,6 +1,11 @@
-import { Injectable, NotFoundException, ConflictException } from '@nestjs/common';
-import { PrismaService } from '../../database/prisma.service';
-import { Course, CourseStatus, Prisma } from '@avala/db';
+import {
+  Injectable,
+  NotFoundException,
+  ConflictException,
+} from "@nestjs/common";
+import { PrismaService } from "../../database/prisma.service";
+import { Course, CourseStatus, Prisma } from "@avala/db";
+import { CourseQueryDto } from "./dto/course-query.dto";
 
 export interface CreateCourseDto {
   code: string;
@@ -40,7 +45,9 @@ export class CoursesService {
     });
 
     if (existing) {
-      throw new ConflictException(`Course with code ${dto.code} already exists`);
+      throw new ConflictException(
+        `Course with code ${dto.code} already exists`,
+      );
     }
 
     // Prepare course data
@@ -81,42 +88,69 @@ export class CoursesService {
   }
 
   /**
-   * Get all courses for tenant
+   * Get all courses for tenant with pagination
    */
-  async findAll(tenantId: string): Promise<Course[]> {
+  async findAll(tenantId: string, query?: CourseQueryDto) {
     const tenantClient = this.prisma.forTenant(tenantId);
+    const page = query?.page || 1;
+    const limit = query?.limit || 20;
+    const skip = (page - 1) * limit;
 
-    return tenantClient.course.findMany({
-      where: {
-        status: {
-          not: 'ARCHIVED',
+    const where: Prisma.CourseWhereInput = {
+      status: query?.status || { not: "ARCHIVED" },
+      ...(query?.search && {
+        OR: [
+          { title: { contains: query.search, mode: "insensitive" } },
+          { code: { contains: query.search, mode: "insensitive" } },
+        ],
+      }),
+      ...(query?.level && { level: query.level }),
+      ...(query?.format && { format: query.format }),
+      ...(query?.categoryId && { categoryId: query.categoryId }),
+    };
+
+    const [items, total] = await Promise.all([
+      tenantClient.course.findMany({
+        where,
+        include: {
+          standards: {
+            select: {
+              id: true,
+              code: true,
+              title: true,
+            },
+          },
+          owner: {
+            select: {
+              id: true,
+              firstName: true,
+              lastName: true,
+              email: true,
+            },
+          },
+          _count: {
+            select: {
+              modules: true,
+              assessments: true,
+            },
+          },
         },
+        orderBy: { [query?.sortBy || "createdAt"]: query?.sortOrder || "desc" },
+        skip,
+        take: limit,
+      }),
+      tenantClient.course.count({ where }),
+    ]);
+
+    return {
+      items,
+      meta: {
+        total,
+        page,
+        limit,
+        totalPages: Math.ceil(total / limit),
       },
-      include: {
-        standards: {
-          select: {
-            id: true,
-            code: true,
-            title: true,
-          },
-        },
-        owner: {
-          select: {
-            id: true,
-            firstName: true,
-            lastName: true,
-            email: true,
-          },
-        },
-        _count: {
-          select: {
-            modules: true,
-            assessments: true,
-          },
-        },
-      },
-      orderBy: { createdAt: 'desc' },
-    });
+    };
   }
 
   /**
@@ -148,7 +182,7 @@ export class CoursesService {
           include: {
             lessons: true,
           },
-          orderBy: { order: 'asc' },
+          orderBy: { order: "asc" },
         },
         _count: {
           select: {
@@ -225,7 +259,9 @@ export class CoursesService {
       });
 
       if (codeConflict) {
-        throw new ConflictException(`Course with code ${dto.code} already exists`);
+        throw new ConflictException(
+          `Course with code ${dto.code} already exists`,
+        );
       }
     }
 
@@ -246,7 +282,7 @@ export class CoursesService {
     }
 
     // Update publishedAt when status changes to PUBLISHED
-    if (dto.status === 'PUBLISHED' && existing.status !== 'PUBLISHED') {
+    if (dto.status === "PUBLISHED" && existing.status !== "PUBLISHED") {
       updateData.publishedAt = new Date();
     }
 
@@ -283,7 +319,7 @@ export class CoursesService {
 
     return tenantClient.course.update({
       where: { id },
-      data: { status: 'ARCHIVED' },
+      data: { status: "ARCHIVED" },
     });
   }
 
@@ -298,13 +334,13 @@ export class CoursesService {
         AND: [
           {
             status: {
-              not: 'ARCHIVED',
+              not: "ARCHIVED",
             },
           },
           {
             OR: [
-              { code: { contains: query, mode: 'insensitive' } },
-              { title: { contains: query, mode: 'insensitive' } },
+              { code: { contains: query, mode: "insensitive" } },
+              { title: { contains: query, mode: "insensitive" } },
             ],
           },
         ],
@@ -326,7 +362,7 @@ export class CoursesService {
           },
         },
       },
-      orderBy: { createdAt: 'desc' },
+      orderBy: { createdAt: "desc" },
     });
   }
 
@@ -342,13 +378,13 @@ export class CoursesService {
         modules: {
           include: {
             lessons: {
-              orderBy: { order: 'asc' },
+              orderBy: { order: "asc" },
             },
             _count: {
               select: { lessons: true },
             },
           },
-          orderBy: { order: 'asc' },
+          orderBy: { order: "asc" },
         },
       },
     });

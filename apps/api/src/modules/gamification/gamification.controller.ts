@@ -1,11 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Query,
-  UseGuards,
-  Request,
-} from "@nestjs/common";
+import { Controller, Get, Post, Query, UseGuards, Req } from "@nestjs/common";
 import {
   ApiTags,
   ApiOperation,
@@ -15,6 +8,8 @@ import {
 } from "@nestjs/swagger";
 import { GamificationService } from "./gamification.service";
 import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
+import { AuthenticatedRequest } from "../../common/interfaces";
+import { LeaderboardType } from "@avala/db";
 @ApiTags("Gamification")
 @Controller("gamification")
 @UseGuards(JwtAuthGuard)
@@ -32,21 +27,17 @@ export class GamificationController {
     status: 200,
     description: "User progress with points, level, streak",
   })
-  async getUserProgress(@Request() req: any) {
-    return this.gamificationService.getUserProgress(
-      req.user.id,
-      req.user.tenantId,
-    );
+  async getUserProgress(@Req() req: AuthenticatedRequest) {
+    const { id, tenantId } = req.user;
+    return this.gamificationService.getUserProgress(id, tenantId);
   }
 
   @Get("stats")
   @ApiOperation({ summary: "Get detailed user gamification stats" })
   @ApiResponse({ status: 200, description: "Detailed user stats" })
-  async getUserStats(@Request() req: any) {
-    return this.gamificationService.getUserStats(
-      req.user.id,
-      req.user.tenantId,
-    );
+  async getUserStats(@Req() req: AuthenticatedRequest) {
+    const { id, tenantId } = req.user;
+    return this.gamificationService.getUserStats(id, tenantId);
   }
 
   // ============================================
@@ -59,14 +50,14 @@ export class GamificationController {
     status: 200,
     description: "List of achievements with user unlock status",
   })
-  async getAchievements(@Request() req: any) {
+  async getAchievements(@Req() req: AuthenticatedRequest) {
     return this.gamificationService.getAchievementsWithStatus(req.user.id);
   }
 
   @Get("achievements/unlocked")
   @ApiOperation({ summary: "Get user unlocked achievements" })
   @ApiResponse({ status: 200, description: "List of unlocked achievements" })
-  async getUnlockedAchievements(@Request() req: any) {
+  async getUnlockedAchievements(@Req() req: AuthenticatedRequest) {
     return this.gamificationService.getUnlockedAchievements(req.user.id);
   }
 
@@ -76,10 +67,11 @@ export class GamificationController {
     status: 200,
     description: "List of newly unlocked achievement codes",
   })
-  async checkAchievements(@Request() req: any) {
+  async checkAchievements(@Req() req: AuthenticatedRequest) {
+    const { id, tenantId } = req.user;
     const unlocked = await this.gamificationService.checkAchievements(
-      req.user.id,
-      req.user.tenantId,
+      id,
+      tenantId,
     );
     return { newlyUnlocked: unlocked };
   }
@@ -91,11 +83,9 @@ export class GamificationController {
   @Post("activity/log")
   @ApiOperation({ summary: "Log daily activity (updates streak)" })
   @ApiResponse({ status: 200, description: "Activity logged, streak updated" })
-  async logDailyActivity(@Request() req: any) {
-    return this.gamificationService.recordDailyActivity(
-      req.user.id,
-      req.user.tenantId,
-    );
+  async logDailyActivity(@Req() req: AuthenticatedRequest) {
+    const { id, tenantId } = req.user;
+    return this.gamificationService.recordDailyActivity(id, tenantId);
   }
 
   @Get("activity/history")
@@ -107,7 +97,10 @@ export class GamificationController {
     description: "Number of days (default 30)",
   })
   @ApiResponse({ status: 200, description: "Activity history" })
-  async getActivityHistory(@Request() req: any, @Query("days") days?: number) {
+  async getActivityHistory(
+    @Req() req: AuthenticatedRequest,
+    @Query("days") days?: number,
+  ) {
     return this.gamificationService.getActivityHistory(req.user.id, days || 30);
   }
 
@@ -137,13 +130,14 @@ export class GamificationController {
   })
   @ApiResponse({ status: 200, description: "Leaderboard entries" })
   async getLeaderboard(
-    @Request() req: any,
-    @Query("type") type?: string,
+    @Req() req: AuthenticatedRequest,
+    @Query("type") type?: LeaderboardType,
     @Query("limit") limit?: number,
   ) {
+    const { tenantId } = req.user;
     return this.gamificationService.getLeaderboard(
-      req.user.tenantId,
-      (type as any) || "WEEKLY_POINTS",
+      tenantId,
+      type || LeaderboardType.WEEKLY_POINTS,
       limit || 10,
     );
   }
@@ -151,7 +145,8 @@ export class GamificationController {
   @Get("leaderboard/rank")
   @ApiOperation({ summary: "Get current user rank on leaderboard" })
   @ApiResponse({ status: 200, description: "User rank information" })
-  async getUserRank(@Request() req: any) {
-    return this.gamificationService.getUserRank(req.user.id, req.user.tenantId);
+  async getUserRank(@Req() req: AuthenticatedRequest) {
+    const { id, tenantId } = req.user;
+    return this.gamificationService.getUserRank(id, tenantId);
   }
 }

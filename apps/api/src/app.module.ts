@@ -1,8 +1,10 @@
 import { Module } from "@nestjs/common";
-import { ConfigModule } from "@nestjs/config";
+import { ConfigModule, ConfigService } from "@nestjs/config";
 import { ScheduleModule } from "@nestjs/schedule";
+import { ThrottlerModule } from "@nestjs/throttler";
 import { APP_INTERCEPTOR } from "@nestjs/core";
 import { DatabaseModule } from "./database/database.module";
+import { CacheModule } from "./modules/cache/cache.module";
 import { TenantInterceptor } from "./common/interceptors/tenant.interceptor";
 import { TenantModule } from "./modules/tenant/tenant.module";
 import { UserModule } from "./modules/user/user.module";
@@ -23,6 +25,7 @@ import { SimulationModule } from "./modules/ec-simulation/simulation.module";
 import { CertificationModule } from "./modules/certification/certification.module";
 import { SearchModule } from "./modules/search/search.module";
 import { ComplianceModule } from "./modules/compliance/compliance.module";
+import { CredentialsModule } from "./modules/credentials/credentials.module";
 
 // Multi-EC Training System (Phase 7)
 import { ECConfigModule } from "./modules/ec-config/ec-config.module";
@@ -51,8 +54,36 @@ import { ECAssessmentModule } from "./modules/ec-assessment/ec-assessment.module
     // Scheduling (for RENEC harvest cron jobs)
     ScheduleModule.forRoot(),
 
+    // Rate Limiting (Security)
+    ThrottlerModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) => ({
+        throttlers: [
+          {
+            name: "short",
+            ttl: 1000, // 1 second
+            limit: config.get<number>("THROTTLE_SHORT_LIMIT", 3),
+          },
+          {
+            name: "medium",
+            ttl: 10000, // 10 seconds
+            limit: config.get<number>("THROTTLE_MEDIUM_LIMIT", 20),
+          },
+          {
+            name: "long",
+            ttl: 60000, // 1 minute
+            limit: config.get<number>("THROTTLE_LONG_LIMIT", 100),
+          },
+        ],
+      }),
+    }),
+
     // Database
     DatabaseModule,
+
+    // Caching (Redis/In-memory)
+    CacheModule,
 
     // Auth (Phase 1-A)
     AuthModule,
@@ -104,6 +135,9 @@ import { ECAssessmentModule } from "./modules/ec-assessment/ec-assessment.module
 
     // STPS Compliance: SIRCE Export & LFT Plans (Phase 8)
     ComplianceModule,
+
+    // Open Badges 3.0 Credentials (Phase 8)
+    CredentialsModule,
 
     // Multi-EC Training System (Phase 7)
     // Configuration-driven EC training for EC0249, EC0217, etc.

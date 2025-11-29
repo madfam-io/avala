@@ -6,6 +6,7 @@ import {
 } from "@nestjs/common";
 import { PrismaService } from "../../database/prisma.service";
 import { DocumentStatus, Prisma } from "@avala/db";
+import { DocumentQueryDto, TemplateQueryDto } from "./dto/document-query.dto";
 
 export interface DocumentSection {
   id: string;
@@ -36,12 +37,36 @@ export class DocumentsService {
   // ============================================
 
   /**
-   * Get all document templates
+   * Get all document templates with pagination
    */
-  async findAllTemplates() {
-    return this.prisma.documentTemplate.findMany({
-      orderBy: [{ element: "asc" }, { orderIndex: "asc" }],
-    });
+  async findAllTemplates(query?: TemplateQueryDto) {
+    const page = query?.page || 1;
+    const limit = query?.limit || 20;
+    const skip = (page - 1) * limit;
+
+    const where: Prisma.DocumentTemplateWhereInput = {
+      ...(query?.element && { element: query.element }),
+    };
+
+    const [items, total] = await Promise.all([
+      this.prisma.documentTemplate.findMany({
+        where,
+        orderBy: [{ element: "asc" }, { orderIndex: "asc" }],
+        skip,
+        take: limit,
+      }),
+      this.prisma.documentTemplate.count({ where }),
+    ]);
+
+    return {
+      items,
+      meta: {
+        total,
+        page,
+        limit,
+        totalPages: Math.ceil(total / limit),
+      },
+    };
   }
 
   /**
@@ -74,23 +99,55 @@ export class DocumentsService {
   // ============================================
 
   /**
-   * Get all documents for a user
+   * Get all documents for a user with pagination
    */
-  async findUserDocuments(userId: string, tenantId: string) {
-    return this.prisma.document.findMany({
-      where: { userId, tenantId },
-      include: {
-        template: {
-          select: {
-            templateCode: true,
-            title: true,
-            element: true,
-            icon: true,
+  async findUserDocuments(
+    userId: string,
+    tenantId: string,
+    query?: DocumentQueryDto,
+  ) {
+    const page = query?.page || 1;
+    const limit = query?.limit || 20;
+    const skip = (page - 1) * limit;
+
+    const where: Prisma.DocumentWhereInput = {
+      userId,
+      tenantId,
+      ...(query?.status && { status: query.status }),
+      ...(query?.element && {
+        template: { element: query.element },
+      }),
+    };
+
+    const [items, total] = await Promise.all([
+      this.prisma.document.findMany({
+        where,
+        include: {
+          template: {
+            select: {
+              templateCode: true,
+              title: true,
+              element: true,
+              icon: true,
+            },
           },
         },
+        orderBy: { updatedAt: "desc" },
+        skip,
+        take: limit,
+      }),
+      this.prisma.document.count({ where }),
+    ]);
+
+    return {
+      items,
+      meta: {
+        total,
+        page,
+        limit,
+        totalPages: Math.ceil(total / limit),
       },
-      orderBy: { updatedAt: "desc" },
-    });
+    };
   }
 
   /**

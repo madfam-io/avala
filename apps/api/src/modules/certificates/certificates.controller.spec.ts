@@ -1,6 +1,7 @@
 import { Test, TestingModule } from "@nestjs/testing";
 import { CertificatesController } from "./certificates.controller";
 import { CertificatesService } from "./certificates.service";
+import { AuthenticatedRequest } from "../../common/interfaces";
 
 describe("CertificatesController", () => {
   let controller: CertificatesController;
@@ -53,7 +54,9 @@ describe("CertificatesController", () => {
       const mockBuffer = Buffer.from("PDF content");
       certificatesService.generateDc3.mockResolvedValue(mockBuffer);
 
-      const mockReq = { user: { tenantId: "tenant-1" } };
+      const mockReq = {
+        user: { tenantId: "tenant-1" },
+      } as unknown as AuthenticatedRequest;
       const mockRes = {
         setHeader: jest.fn(),
         send: jest.fn(),
@@ -78,7 +81,9 @@ describe("CertificatesController", () => {
       const mockResult = { id: "cert-1", folio: "DC3-2024-001" };
       certificatesService.getCertificate.mockResolvedValue(mockResult as any);
 
-      const mockReq = { user: { tenantId: "tenant-1" } };
+      const mockReq = {
+        user: { tenantId: "tenant-1" },
+      } as unknown as AuthenticatedRequest;
       const result = await controller.getCertificate(mockReq, "enroll-1");
 
       expect(certificatesService.getCertificate).toHaveBeenCalledWith(
@@ -94,7 +99,9 @@ describe("CertificatesController", () => {
       const mockBuffer = Buffer.from("PDF content");
       certificatesService.generateDc3.mockResolvedValue(mockBuffer);
 
-      const mockReq = { user: { tenantId: "tenant-1" } };
+      const mockReq = {
+        user: { tenantId: "tenant-1" },
+      } as unknown as AuthenticatedRequest;
       const mockRes = {
         setHeader: jest.fn(),
         send: jest.fn(),
@@ -117,7 +124,9 @@ describe("CertificatesController", () => {
         mockResult as any,
       );
 
-      const mockReq = { user: { tenantId: "tenant-1", userId: "user-1" } };
+      const mockReq = {
+        user: { tenantId: "tenant-1", id: "user-1" },
+      } as unknown as AuthenticatedRequest;
       const result = await controller.revokeCertificate(mockReq, "cert-1", {
         reason: "Invalid data",
       });

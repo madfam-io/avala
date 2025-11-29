@@ -16,7 +16,9 @@ import {
   ApiOperation,
   ApiBearerAuth,
   ApiQuery,
+  ApiTooManyRequestsResponse,
 } from "@nestjs/swagger";
+import { ThrottlerGuard, Throttle, SkipThrottle } from "@nestjs/throttler";
 import { Response } from "express";
 import { AuthService } from "./auth.service";
 import { JanuaAuthService } from "./janua-auth.service";
@@ -26,9 +28,11 @@ import { LocalAuthGuard } from "./guards/local-auth.guard";
 import { JwtAuthGuard } from "./guards/jwt-auth.guard";
 import { CurrentUser } from "../../common/decorators/tenant.decorator";
 import { User } from "@avala/db";
+import { AuthenticatedRequest } from "../../common/interfaces";
 
 @ApiTags("auth")
 @Controller("auth")
+@UseGuards(ThrottlerGuard)
 export class AuthController {
   constructor(
     private readonly authService: AuthService,
@@ -38,14 +42,19 @@ export class AuthController {
   /**
    * Login endpoint
    * Validates credentials and returns JWT in cookie + response
+   * Rate limited: 5 attempts per minute to prevent brute force attacks
    */
   @Post("login")
+  @Throttle({ default: { ttl: 60000, limit: 5 } })
   @UseGuards(LocalAuthGuard)
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: "Login with email and password" })
+  @ApiTooManyRequestsResponse({
+    description: "Too many login attempts. Please try again later.",
+  })
   async login(
     @Body() _loginDto: LoginDto, // Validated by LocalAuthGuard
-    @Req() req: any,
+    @Req() req: AuthenticatedRequest,
     @Res({ passthrough: true }) res: Response,
   ): Promise<LoginResponseDto> {
     // User is already validated and attached by LocalAuthGuard
@@ -72,9 +81,14 @@ export class AuthController {
 
   /**
    * SSO Login - Redirect to Janua OAuth
+   * Rate limited: 10 attempts per minute
    */
   @Get("sso/login")
+  @Throttle({ default: { ttl: 60000, limit: 10 } })
   @ApiOperation({ summary: "Initiate SSO login via Janua" })
+  @ApiTooManyRequestsResponse({
+    description: "Too many SSO login attempts. Please try again later.",
+  })
   @ApiQuery({
     name: "tenant",
     required: false,
@@ -107,9 +121,14 @@ export class AuthController {
 
   /**
    * SSO Callback - Handle Janua OAuth callback
+   * Rate limited: 10 attempts per minute
    */
   @Get("sso/callback")
+  @Throttle({ default: { ttl: 60000, limit: 10 } })
   @ApiOperation({ summary: "Handle SSO callback from Janua" })
+  @ApiTooManyRequestsResponse({
+    description: "Too many callback attempts. Please try again later.",
+  })
   async ssoCallback(
     @Query() query: SsoCallbackDto,
     @Res({ passthrough: true }) res: Response,
@@ -238,6 +257,7 @@ export class AuthController {
    * Clears authentication cookies
    */
   @Post("logout")
+  @SkipThrottle()
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: "Logout and clear cookies" })
   async logout(@Res({ passthrough: true }) res: Response) {
@@ -252,6 +272,7 @@ export class AuthController {
    * Returns authenticated user info
    */
   @Get("me")
+  @SkipThrottle()
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: "Get current authenticated user" })

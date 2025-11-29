@@ -25,6 +25,7 @@ import {
   CurrentUser,
 } from "../../common/decorators/tenant.decorator";
 import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
+import { CourseQueryDto } from "./dto/course-query.dto";
 
 @ApiTags("courses")
 @ApiBearerAuth()
@@ -47,9 +48,9 @@ export class CoursesController {
   }
 
   @Get()
-  @ApiOperation({ summary: "List all courses" })
-  findAll(@TenantId() tenantId: string) {
-    return this.coursesService.findAll(tenantId);
+  @ApiOperation({ summary: "List all courses with pagination" })
+  findAll(@TenantId() tenantId: string, @Query() query: CourseQueryDto) {
+    return this.coursesService.findAll(tenantId, query);
   }
 
   @Get("search")

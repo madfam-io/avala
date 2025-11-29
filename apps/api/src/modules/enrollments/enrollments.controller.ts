@@ -11,6 +11,7 @@ import {
 import { EnrollmentsService } from "./enrollments.service";
 import { ProgressService } from "./progress.service";
 import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
+import { AuthenticatedRequest } from "../../common/interfaces";
 
 /**
  * EnrollmentsController
@@ -29,9 +30,11 @@ export class EnrollmentsController {
    * Enroll the current user in a course
    */
   @Post()
-  async enrollInCourse(@Req() req: any, @Body() body: { courseId: string }) {
-    const tenantId = req.user.tenantId;
-    const userId = req.user.userId;
+  async enrollInCourse(
+    @Req() req: AuthenticatedRequest,
+    @Body() body: { courseId: string },
+  ) {
+    const { tenantId, id: userId } = req.user;
     const { courseId } = body;
 
     return this.enrollmentsService.enroll(tenantId, userId, courseId);
@@ -42,9 +45,8 @@ export class EnrollmentsController {
    * Get all courses the current user is enrolled in
    */
   @Get("my-courses")
-  async getMyCourses(@Req() req: any) {
-    const tenantId = req.user.tenantId;
-    const userId = req.user.userId;
+  async getMyCourses(@Req() req: AuthenticatedRequest) {
+    const { tenantId, id: userId } = req.user;
 
     return this.enrollmentsService.getMyCourses(tenantId, userId);
   }
@@ -55,10 +57,10 @@ export class EnrollmentsController {
    */
   @Get(":enrollmentId")
   async getEnrollmentProgress(
-    @Req() req: any,
+    @Req() req: AuthenticatedRequest,
     @Param("enrollmentId") enrollmentId: string,
   ) {
-    const tenantId = req.user.tenantId;
+    const { tenantId } = req.user;
 
     return this.enrollmentsService.getEnrollmentProgress(
       tenantId,
@@ -71,8 +73,11 @@ export class EnrollmentsController {
    * Unenroll from a course
    */
   @Delete(":enrollmentId")
-  async unenroll(@Req() req: any, @Param("enrollmentId") enrollmentId: string) {
-    const tenantId = req.user.tenantId;
+  async unenroll(
+    @Req() req: AuthenticatedRequest,
+    @Param("enrollmentId") enrollmentId: string,
+  ) {
+    const { tenantId } = req.user;
 
     return this.enrollmentsService.unenroll(tenantId, enrollmentId);
   }
@@ -83,11 +88,11 @@ export class EnrollmentsController {
    */
   @Post(":enrollmentId/lessons/:lessonId/start")
   async startLesson(
-    @Req() req: any,
+    @Req() req: AuthenticatedRequest,
     @Param("enrollmentId") enrollmentId: string,
     @Param("lessonId") lessonId: string,
   ) {
-    const tenantId = req.user.tenantId;
+    const { tenantId } = req.user;
 
     return this.progressService.markLessonInProgress(
       tenantId,
@@ -102,11 +107,11 @@ export class EnrollmentsController {
    */
   @Post(":enrollmentId/lessons/:lessonId/complete")
   async completeLesson(
-    @Req() req: any,
+    @Req() req: AuthenticatedRequest,
     @Param("enrollmentId") enrollmentId: string,
     @Param("lessonId") lessonId: string,
   ) {
-    const tenantId = req.user.tenantId;
+    const { tenantId } = req.user;
 
     return this.progressService.markLessonComplete(
       tenantId,
@@ -121,11 +126,11 @@ export class EnrollmentsController {
    */
   @Post(":enrollmentId/lessons/:lessonId/reset")
   async resetLesson(
-    @Req() req: any,
+    @Req() req: AuthenticatedRequest,
     @Param("enrollmentId") enrollmentId: string,
     @Param("lessonId") lessonId: string,
   ) {
-    const tenantId = req.user.tenantId;
+    const { tenantId } = req.user;
 
     return this.progressService.resetLessonProgress(
       tenantId,
@@ -140,11 +145,11 @@ export class EnrollmentsController {
    */
   @Get(":enrollmentId/lessons/:lessonId")
   async getLessonProgress(
-    @Req() req: any,
+    @Req() req: AuthenticatedRequest,
     @Param("enrollmentId") enrollmentId: string,
     @Param("lessonId") lessonId: string,
   ) {
-    const tenantId = req.user.tenantId;
+    const { tenantId } = req.user;
 
     return this.progressService.getLessonProgress(
       tenantId,
@@ -159,10 +164,10 @@ export class EnrollmentsController {
    */
   @Get(":enrollmentId/next-lesson")
   async getNextLesson(
-    @Req() req: any,
+    @Req() req: AuthenticatedRequest,
     @Param("enrollmentId") enrollmentId: string,
   ) {
-    const tenantId = req.user.tenantId;
+    const { tenantId } = req.user;
 
     return this.progressService.getNextLesson(tenantId, enrollmentId);
   }

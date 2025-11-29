@@ -1,17 +1,20 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { NotFoundException, BadRequestException } from '@nestjs/common';
-import { CertificatesService } from './certificates.service';
-import { PrismaService } from '../../database/prisma.service';
-import { MailService } from '../mail/mail.service';
+import { Test, TestingModule } from "@nestjs/testing";
+import { NotFoundException, BadRequestException } from "@nestjs/common";
+import { CertificatesService } from "./certificates.service";
+import { PrismaService } from "../../database/prisma.service";
+import { MailService } from "../mail/mail.service";
 
-// Mock pdfkit and qrcode
-jest.mock('pdfkit', () => {
+// Mock pdfkit
+jest.mock("pdfkit", () => {
   return jest.fn().mockImplementation(() => ({
     on: jest.fn((event, callback) => {
-      if (event === 'end') {
-        setTimeout(() => callback(), 0);
+      if (event === "data") {
+        setTimeout(() => callback(Buffer.from("pdf-chunk")), 0);
       }
-      return this;
+      if (event === "end") {
+        setTimeout(() => callback(), 10);
+      }
+      return { on: jest.fn().mockReturnThis() };
     }),
     fontSize: jest.fn().mockReturnThis(),
     font: jest.fn().mockReturnThis(),
@@ -22,66 +25,66 @@ jest.mock('pdfkit', () => {
     fillColor: jest.fn().mockReturnThis(),
     image: jest.fn().mockReturnThis(),
     end: jest.fn(),
+    y: 100,
     page: {
       width: 612,
       height: 792,
-      margins: { top: 50, bottom: 50, left: 50, right: 50 },
+      margins: { left: 50, right: 50, top: 50, bottom: 50 },
     },
-    y: 100,
   }));
 });
 
-jest.mock('qrcode', () => ({
-  toBuffer: jest.fn().mockResolvedValue(Buffer.from('qr-code')),
+// Mock qrcode
+jest.mock("qrcode", () => ({
+  toBuffer: jest.fn().mockResolvedValue(Buffer.from("qr-code-data")),
 }));
 
-describe('CertificatesService', () => {
+describe("CertificatesService", () => {
   let service: CertificatesService;
 
-  const mockTenantId = 'tenant-123';
-  const mockEnrollmentId = 'enrollment-456';
-  const mockCertificateId = 'cert-789';
-  const mockCertificateUuid = 'uuid-abc-123';
+  const mockTenantId = "tenant-123";
+  const mockEnrollmentId = "enrollment-123";
+  const mockCertificateId = "cert-123";
+  const mockUserId = "user-123";
 
   const mockUser = {
-    id: 'user-123',
-    email: 'test@example.com',
-    firstName: 'John',
-    lastName: 'Doe',
-    curp: 'CURP123456ABCDEF01',
-    rfc: 'RFC123456ABC',
+    id: mockUserId,
+    firstName: "Juan",
+    lastName: "Pérez",
+    email: "juan@example.com",
+    curp: "CURP123456789012",
+    rfc: "RFC1234567890",
   };
 
   const mockCourse = {
-    id: 'course-123',
-    title: 'Safety Training Course',
-    code: 'SAFETY-101',
-    durationHours: 20,
-    stpsRegistrationNumber: 'STPS-12345',
-    ecCodes: ['EC0217'],
-    tenantId: mockTenantId,
+    id: "course-123",
+    title: "Seguridad Industrial",
+    code: "SI-001",
+    durationHours: 40,
+    stpsRegistrationNumber: "STPS-001",
     owner: {
-      id: 'instructor-123',
-      firstName: 'Jane',
-      lastName: 'Instructor',
-      email: 'instructor@example.com',
+      firstName: "María",
+      lastName: "García",
+      email: "maria@example.com",
     },
     modules: [],
   };
 
   const mockTenant = {
     id: mockTenantId,
-    name: 'Test Company',
-    legalName: 'Test Company S.A. de C.V.',
-    rfc: 'TCO123456ABC',
-    representativeName: 'Legal Representative',
+    name: "Test Company",
+    legalName: "Test Company S.A. de C.V.",
+    rfc: "RFC0987654321",
+    representativeName: "Carlos Ruiz",
   };
 
   const mockEnrollment = {
     id: mockEnrollmentId,
-    status: 'COMPLETED',
-    enrolledAt: new Date('2024-01-01'),
-    completedAt: new Date('2024-02-01'),
+    userId: mockUserId,
+    courseId: "course-123",
+    status: "COMPLETED",
+    enrolledAt: new Date("2024-01-01"),
+    completedAt: new Date("2024-02-01"),
     user: mockUser,
     course: mockCourse,
     certificates: [],
@@ -89,14 +92,15 @@ describe('CertificatesService', () => {
 
   const mockCertificate = {
     id: mockCertificateId,
-    certificateUuid: mockCertificateUuid,
+    certificateUuid: "cert-uuid-123",
     enrollmentId: mockEnrollmentId,
-    folio: 'DC3-2024-000001',
-    issuedAt: new Date('2024-02-01'),
+    folio: "DC3-2024-000001",
+    issuedAt: new Date(),
     revokedAt: null,
     revokedBy: null,
     revokedReason: null,
     pdfPath: null,
+    enrollment: mockEnrollment,
   };
 
   const mockTenantClient = {
@@ -104,14 +108,15 @@ describe('CertificatesService', () => {
       findUnique: jest.fn(),
     },
     certificate: {
-      count: jest.fn(),
-      create: jest.fn(),
       findFirst: jest.fn(),
+      findUnique: jest.fn(),
+      create: jest.fn(),
       update: jest.fn(),
+      count: jest.fn(),
     },
   };
 
-  const mockPrisma = {
+  const mockPrismaService = {
     forTenant: jest.fn().mockReturnValue(mockTenantClient),
     tenant: {
       findUnique: jest.fn(),
@@ -126,44 +131,202 @@ describe('CertificatesService', () => {
   };
 
   beforeEach(async () => {
-    jest.clearAllMocks();
-    process.env.NEXT_PUBLIC_APP_URL = 'http://localhost:3000';
-
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         CertificatesService,
-        { provide: PrismaService, useValue: mockPrisma },
+        { provide: PrismaService, useValue: mockPrismaService },
         { provide: MailService, useValue: mockMailService },
       ],
     }).compile();
 
     service = module.get<CertificatesService>(CertificatesService);
+    jest.clearAllMocks();
   });
 
-  afterEach(() => {
-    delete process.env.NEXT_PUBLIC_APP_URL;
+  it("should be defined", () => {
+    expect(service).toBeDefined();
   });
 
-  describe('getCertificate', () => {
-    it('should return certificate by enrollment ID', async () => {
-      const certificateWithEnrollment = {
-        ...mockCertificate,
-        enrollment: {
-          ...mockEnrollment,
-          user: mockUser,
-          course: mockCourse,
-        },
-      };
+  describe("generateDc3", () => {
+    it("should throw NotFoundException when enrollment not found", async () => {
+      mockTenantClient.courseEnrollment.findUnique.mockResolvedValue(null);
 
-      mockTenantClient.certificate.findFirst.mockResolvedValue(certificateWithEnrollment);
-
-      const result = await service.getCertificate(mockTenantId, mockEnrollmentId);
-
-      expect(result).toEqual(certificateWithEnrollment);
-      expect(mockPrisma.forTenant).toHaveBeenCalledWith(mockTenantId);
+      await expect(
+        service.generateDc3(mockTenantId, mockEnrollmentId),
+      ).rejects.toThrow(NotFoundException);
     });
 
-    it('should throw NotFoundException when certificate not found', async () => {
+    it("should throw BadRequestException when enrollment not completed", async () => {
+      mockTenantClient.courseEnrollment.findUnique.mockResolvedValue({
+        ...mockEnrollment,
+        status: "IN_PROGRESS",
+      });
+
+      await expect(
+        service.generateDc3(mockTenantId, mockEnrollmentId),
+      ).rejects.toThrow(BadRequestException);
+    });
+
+    it("should throw NotFoundException when tenant not found", async () => {
+      mockTenantClient.courseEnrollment.findUnique.mockResolvedValue(
+        mockEnrollment,
+      );
+      mockPrismaService.tenant.findUnique.mockResolvedValue(null);
+
+      await expect(
+        service.generateDc3(mockTenantId, mockEnrollmentId),
+      ).rejects.toThrow(NotFoundException);
+    });
+
+    it("should throw BadRequestException when missing tenant RFC", async () => {
+      mockTenantClient.courseEnrollment.findUnique.mockResolvedValue(
+        mockEnrollment,
+      );
+      mockPrismaService.tenant.findUnique.mockResolvedValue({
+        ...mockTenant,
+        rfc: null,
+      });
+
+      await expect(
+        service.generateDc3(mockTenantId, mockEnrollmentId),
+      ).rejects.toThrow(BadRequestException);
+    });
+
+    it("should throw BadRequestException when missing user CURP", async () => {
+      mockTenantClient.courseEnrollment.findUnique.mockResolvedValue({
+        ...mockEnrollment,
+        user: { ...mockUser, curp: null },
+      });
+      mockPrismaService.tenant.findUnique.mockResolvedValue(mockTenant);
+
+      await expect(
+        service.generateDc3(mockTenantId, mockEnrollmentId),
+      ).rejects.toThrow(BadRequestException);
+    });
+
+    it("should regenerate PDF for existing certificate", async () => {
+      mockTenantClient.courseEnrollment.findUnique.mockResolvedValue({
+        ...mockEnrollment,
+        certificates: [mockCertificate],
+      });
+      mockPrismaService.tenant.findUnique.mockResolvedValue(mockTenant);
+
+      const result = await service.generateDc3(mockTenantId, mockEnrollmentId);
+
+      expect(result).toBeInstanceOf(Buffer);
+      expect(mockTenantClient.certificate.create).not.toHaveBeenCalled();
+    });
+
+    it("should create new certificate when none exists", async () => {
+      mockTenantClient.courseEnrollment.findUnique.mockResolvedValue(
+        mockEnrollment,
+      );
+      mockPrismaService.tenant.findUnique.mockResolvedValue(mockTenant);
+      mockTenantClient.certificate.count.mockResolvedValue(0);
+      mockTenantClient.certificate.create.mockResolvedValue(mockCertificate);
+      mockMailService.sendCertificateEmail.mockResolvedValue(undefined);
+
+      const result = await service.generateDc3(mockTenantId, mockEnrollmentId);
+
+      expect(result).toBeInstanceOf(Buffer);
+      const currentYear = new Date().getFullYear();
+      expect(mockTenantClient.certificate.create).toHaveBeenCalledWith({
+        data: {
+          enrollmentId: mockEnrollmentId,
+          folio: `DC3-${currentYear}-000001`,
+          pdfPath: null,
+        },
+      });
+    });
+
+    it("should send certificate email after generation", async () => {
+      mockTenantClient.courseEnrollment.findUnique.mockResolvedValue(
+        mockEnrollment,
+      );
+      mockPrismaService.tenant.findUnique.mockResolvedValue(mockTenant);
+      mockTenantClient.certificate.count.mockResolvedValue(5);
+      mockTenantClient.certificate.create.mockResolvedValue(mockCertificate);
+      mockMailService.sendCertificateEmail.mockResolvedValue(undefined);
+
+      await service.generateDc3(mockTenantId, mockEnrollmentId);
+
+      expect(mockMailService.sendCertificateEmail).toHaveBeenCalledWith({
+        email: mockUser.email,
+        firstName: mockUser.firstName,
+        courseTitle: mockCourse.title,
+        folio: mockCertificate.folio,
+        pdfBuffer: expect.any(Buffer),
+      });
+    });
+
+    it("should continue even if email fails", async () => {
+      mockTenantClient.courseEnrollment.findUnique.mockResolvedValue(
+        mockEnrollment,
+      );
+      mockPrismaService.tenant.findUnique.mockResolvedValue(mockTenant);
+      mockTenantClient.certificate.count.mockResolvedValue(0);
+      mockTenantClient.certificate.create.mockResolvedValue(mockCertificate);
+      mockMailService.sendCertificateEmail.mockRejectedValue(
+        new Error("Email failed"),
+      );
+
+      const result = await service.generateDc3(mockTenantId, mockEnrollmentId);
+
+      expect(result).toBeInstanceOf(Buffer);
+    });
+
+    it("should generate sequential folio numbers", async () => {
+      mockTenantClient.courseEnrollment.findUnique.mockResolvedValue(
+        mockEnrollment,
+      );
+      mockPrismaService.tenant.findUnique.mockResolvedValue(mockTenant);
+      mockTenantClient.certificate.count.mockResolvedValue(42);
+      mockTenantClient.certificate.create.mockResolvedValue({
+        ...mockCertificate,
+        folio: `DC3-${new Date().getFullYear()}-000043`,
+      });
+      mockMailService.sendCertificateEmail.mockResolvedValue(undefined);
+
+      await service.generateDc3(mockTenantId, mockEnrollmentId);
+
+      expect(mockTenantClient.certificate.create).toHaveBeenCalledWith({
+        data: expect.objectContaining({
+          folio: expect.stringMatching(/^DC3-\d{4}-000043$/),
+        }),
+      });
+    });
+  });
+
+  describe("getCertificate", () => {
+    it("should return certificate by enrollment ID", async () => {
+      mockTenantClient.certificate.findFirst.mockResolvedValue(mockCertificate);
+
+      const result = await service.getCertificate(
+        mockTenantId,
+        mockEnrollmentId,
+      );
+
+      expect(result).toEqual(mockCertificate);
+      expect(mockTenantClient.certificate.findFirst).toHaveBeenCalledWith({
+        where: {
+          enrollmentId: mockEnrollmentId,
+          revokedAt: null,
+        },
+        include: {
+          enrollment: {
+            include: {
+              user: true,
+              course: true,
+            },
+          },
+        },
+        orderBy: {
+          issuedAt: "desc",
+        },
+      });
+    });
+
+    it("should throw NotFoundException when certificate not found", async () => {
       mockTenantClient.certificate.findFirst.mockResolvedValue(null);
 
       await expect(
@@ -172,150 +335,103 @@ describe('CertificatesService', () => {
     });
   });
 
-  describe('revokeCertificate', () => {
-    it('should revoke certificate successfully', async () => {
-      const revokedCertificate = {
+  describe("revokeCertificate", () => {
+    it("should revoke certificate with reason", async () => {
+      const revokedCert = {
         ...mockCertificate,
         revokedAt: new Date(),
-        revokedBy: 'admin-123',
-        revokedReason: 'Fraudulent completion',
+        revokedBy: mockUserId,
+        revokedReason: "Test revocation",
       };
-
-      mockTenantClient.certificate.update.mockResolvedValue(revokedCertificate);
+      mockTenantClient.certificate.update.mockResolvedValue(revokedCert);
 
       const result = await service.revokeCertificate(
         mockTenantId,
         mockCertificateId,
-        'admin-123',
-        'Fraudulent completion',
+        mockUserId,
+        "Test revocation",
       );
 
       expect(result.revokedAt).toBeDefined();
-      expect(result.revokedBy).toBe('admin-123');
-      expect(result.revokedReason).toBe('Fraudulent completion');
+      expect(result.revokedBy).toBe(mockUserId);
+      expect(result.revokedReason).toBe("Test revocation");
+      expect(mockTenantClient.certificate.update).toHaveBeenCalledWith({
+        where: { id: mockCertificateId },
+        data: {
+          revokedAt: expect.any(Date),
+          revokedBy: mockUserId,
+          revokedReason: "Test revocation",
+        },
+      });
     });
   });
 
-  describe('verifyPublicCertificate', () => {
-    it('should return valid certificate data', async () => {
-      const fullCertificate = {
+  describe("verifyPublicCertificate", () => {
+    it("should return valid=false when certificate not found", async () => {
+      mockPrismaService.certificate.findUnique.mockResolvedValue(null);
+
+      const result = await service.verifyPublicCertificate("invalid-uuid");
+
+      expect(result).toEqual({ valid: false });
+    });
+
+    it("should return valid=false for revoked certificate", async () => {
+      const revokedCert = {
         ...mockCertificate,
+        revokedAt: new Date(),
+        revokedReason: "Invalid data",
         enrollment: {
-          user: {
-            firstName: mockUser.firstName,
-            lastName: mockUser.lastName,
-            curp: mockUser.curp,
-          },
+          ...mockEnrollment,
           course: {
-            title: mockCourse.title,
-            code: mockCourse.code,
-            durationHours: mockCourse.durationHours,
-            ecCodes: ['EC0217'],
+            ...mockCourse,
             tenantId: mockTenantId,
           },
         },
       };
+      mockPrismaService.certificate.findUnique.mockResolvedValue(revokedCert);
 
-      mockPrisma.certificate.findUnique.mockResolvedValue(fullCertificate);
-      mockPrisma.tenant.findUnique.mockResolvedValue(mockTenant);
-
-      const result = await service.verifyPublicCertificate(mockCertificateUuid);
-
-      expect(result.valid).toBe(true);
-      expect(result.certificate).toEqual({
-        certificateUuid: mockCertificateUuid,
-        folio: mockCertificate.folio,
-        issuedAt: mockCertificate.issuedAt,
-        revokedAt: null,
-        revokedReason: null,
-      });
-      expect(result.trainee?.fullName).toBe('John Doe');
-    });
-
-    it('should return invalid for revoked certificate', async () => {
-      const revokedCertificate = {
-        ...mockCertificate,
-        revokedAt: new Date('2024-03-01'),
-        revokedReason: 'Invalid completion',
-        enrollment: {
-          user: mockUser,
-          course: mockCourse,
-        },
-      };
-
-      mockPrisma.certificate.findUnique.mockResolvedValue(revokedCertificate);
-
-      const result = await service.verifyPublicCertificate(mockCertificateUuid);
+      const result = await service.verifyPublicCertificate(
+        mockCertificate.certificateUuid,
+      );
 
       expect(result.valid).toBe(false);
-      expect(result.certificate?.revokedAt).toBeDefined();
+      expect(result.certificate.revokedAt).toBeDefined();
+      expect(result.certificate.revokedReason).toBe("Invalid data");
     });
 
-    it('should return invalid when certificate not found', async () => {
-      mockPrisma.certificate.findUnique.mockResolvedValue(null);
-
-      const result = await service.verifyPublicCertificate(mockCertificateUuid);
-
-      expect(result).toEqual({ valid: false });
-    });
-  });
-
-  describe('generateDc3', () => {
-    beforeEach(() => {
-      mockTenantClient.courseEnrollment.findUnique.mockResolvedValue(mockEnrollment);
-      mockPrisma.tenant.findUnique.mockResolvedValue(mockTenant);
-      mockTenantClient.certificate.count.mockResolvedValue(0);
-      mockTenantClient.certificate.create.mockResolvedValue(mockCertificate);
-      mockMailService.sendCertificateEmail.mockResolvedValue(undefined);
-    });
-
-    it('should throw NotFoundException when enrollment not found', async () => {
-      mockTenantClient.courseEnrollment.findUnique.mockResolvedValue(null);
-
-      await expect(
-        service.generateDc3(mockTenantId, mockEnrollmentId),
-      ).rejects.toThrow(NotFoundException);
-    });
-
-    it('should throw BadRequestException when enrollment is not completed', async () => {
-      const incompleteEnrollment = {
-        ...mockEnrollment,
-        status: 'IN_PROGRESS',
+    it("should return valid=true with public data for valid certificate", async () => {
+      const validCert = {
+        ...mockCertificate,
+        enrollment: {
+          user: {
+            firstName: "Juan",
+            lastName: "Pérez",
+            curp: "CURP123456789012",
+          },
+          course: {
+            title: "Seguridad Industrial",
+            code: "SI-001",
+            durationHours: 40,
+            ecCodes: ["EC0249"],
+            tenantId: mockTenantId,
+          },
+        },
       };
-      mockTenantClient.courseEnrollment.findUnique.mockResolvedValue(incompleteEnrollment);
+      mockPrismaService.certificate.findUnique.mockResolvedValue(validCert);
+      mockPrismaService.tenant.findUnique.mockResolvedValue({
+        name: "Test Company",
+        legalName: "Test Company S.A. de C.V.",
+      });
 
-      await expect(
-        service.generateDc3(mockTenantId, mockEnrollmentId),
-      ).rejects.toThrow(BadRequestException);
-    });
+      const result = await service.verifyPublicCertificate(
+        mockCertificate.certificateUuid,
+      );
 
-    it('should throw NotFoundException when tenant not found', async () => {
-      mockPrisma.tenant.findUnique.mockResolvedValue(null);
-
-      await expect(
-        service.generateDc3(mockTenantId, mockEnrollmentId),
-      ).rejects.toThrow(NotFoundException);
-    });
-
-    it('should throw BadRequestException when tenant RFC is missing', async () => {
-      const tenantWithoutRfc = { ...mockTenant, rfc: null };
-      mockPrisma.tenant.findUnique.mockResolvedValue(tenantWithoutRfc);
-
-      await expect(
-        service.generateDc3(mockTenantId, mockEnrollmentId),
-      ).rejects.toThrow(BadRequestException);
-    });
-
-    it('should throw BadRequestException when user CURP is missing', async () => {
-      const enrollmentWithoutCurp = {
-        ...mockEnrollment,
-        user: { ...mockUser, curp: null },
-      };
-      mockTenantClient.courseEnrollment.findUnique.mockResolvedValue(enrollmentWithoutCurp);
-
-      await expect(
-        service.generateDc3(mockTenantId, mockEnrollmentId),
-      ).rejects.toThrow(BadRequestException);
+      expect(result.valid).toBe(true);
+      expect(result.trainee.fullName).toBe("Juan Pérez");
+      expect(result.trainee.curp).toBe("CURP123456789012");
+      expect(result.course.title).toBe("Seguridad Industrial");
+      expect(result.tenant.legalName).toBe("Test Company S.A. de C.V.");
     });
   });
 });

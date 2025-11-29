@@ -1,5 +1,6 @@
 import {
   Injectable,
+  Logger,
   NotFoundException,
   ConflictException,
 } from "@nestjs/common";
@@ -31,6 +32,8 @@ export interface FindAllOptions {
  */
 @Injectable()
 export class UserService {
+  private readonly logger = new Logger(UserService.name);
+
   constructor(
     private readonly prisma: PrismaService,
     private readonly mailService: MailService,
@@ -239,7 +242,7 @@ export class UserService {
       });
     } catch (error) {
       // Log email error but don't fail user creation
-      console.error("Failed to send welcome email:", error);
+      this.logger.error("Failed to send welcome email", error);
     }
 
     return user;

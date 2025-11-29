@@ -1,6 +1,8 @@
 import { Test, TestingModule } from "@nestjs/testing";
 import { GamificationController } from "./gamification.controller";
 import { GamificationService } from "./gamification.service";
+import { AuthenticatedRequest } from "../../common/interfaces";
+import { LeaderboardType } from "@avala/db";
 
 describe("GamificationController", () => {
   let controller: GamificationController;
@@ -20,7 +22,7 @@ describe("GamificationController", () => {
 
   const mockReq = {
     user: { id: "user-1", tenantId: "tenant-1" },
-  };
+  } as unknown as AuthenticatedRequest;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -118,10 +120,14 @@ describe("GamificationController", () => {
   describe("getLeaderboard", () => {
     it("should get leaderboard", async () => {
       gamificationService.getLeaderboard.mockResolvedValue([]);
-      await controller.getLeaderboard(mockReq, "WEEKLY_POINTS", 10);
+      await controller.getLeaderboard(
+        mockReq,
+        LeaderboardType.WEEKLY_POINTS,
+        10,
+      );
       expect(gamificationService.getLeaderboard).toHaveBeenCalledWith(
         "tenant-1",
-        "WEEKLY_POINTS",
+        LeaderboardType.WEEKLY_POINTS,
         10,
       );
     });

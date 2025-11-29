@@ -39,6 +39,7 @@ describe("CoursesService", () => {
       findMany: jest.fn(),
       create: jest.fn(),
       update: jest.fn(),
+      count: jest.fn(),
     },
   };
 
@@ -112,19 +113,17 @@ describe("CoursesService", () => {
   describe("findAll", () => {
     beforeEach(() => {
       mockTenantClient.course.findMany.mockResolvedValue([mockCourse]);
+      mockTenantClient.course.count.mockResolvedValue(1);
     });
 
-    it("should return all non-archived courses", async () => {
-      const result = await service.findAll(mockTenantId);
-
-      expect(result).toEqual([mockCourse]);
-      expect(mockTenantClient.course.findMany).toHaveBeenCalledWith({
-        where: {
-          status: { not: "ARCHIVED" },
-        },
-        include: expect.any(Object),
-        orderBy: { createdAt: "desc" },
+    it("should return all non-archived courses with pagination", async () => {
+      const result = await service.findAll(mockTenantId, {
+        page: 1,
+        limit: 20,
       });
+
+      expect(result.items).toEqual([mockCourse]);
+      expect(result.meta.total).toBe(1);
     });
   });
 

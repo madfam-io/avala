@@ -2,6 +2,7 @@ import { Test, TestingModule } from "@nestjs/testing";
 import { EnrollmentsController } from "./enrollments.controller";
 import { EnrollmentsService } from "./enrollments.service";
 import { ProgressService } from "./progress.service";
+import { AuthenticatedRequest } from "../../common/interfaces";
 
 describe("EnrollmentsController", () => {
   let controller: EnrollmentsController;
@@ -24,8 +25,8 @@ describe("EnrollmentsController", () => {
   };
 
   const mockReq = {
-    user: { tenantId: "tenant-1", userId: "user-1" },
-  };
+    user: { tenantId: "tenant-1", id: "user-1" },
+  } as unknown as AuthenticatedRequest;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({

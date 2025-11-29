@@ -6,6 +6,7 @@ import {
   Delete,
   Body,
   Param,
+  Query,
   UseGuards,
   Request,
   HttpCode,
@@ -20,6 +21,8 @@ import {
 import { DocumentsService } from "./documents.service";
 import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
 import { CreateDocumentDto, UpdateDocumentDto } from "./dto/document.dto";
+import { DocumentQueryDto, TemplateQueryDto } from "./dto/document-query.dto";
+import { AuthenticatedRequest } from "../../common/interfaces";
 
 @ApiTags("Documents")
 @Controller("documents")
@@ -33,10 +36,13 @@ export class DocumentsController {
   // ============================================
 
   @Get("templates")
-  @ApiOperation({ summary: "Get all document templates" })
-  @ApiResponse({ status: 200, description: "List of document templates" })
-  async findAllTemplates() {
-    return this.documentsService.findAllTemplates();
+  @ApiOperation({ summary: "Get all document templates with pagination" })
+  @ApiResponse({
+    status: 200,
+    description: "Paginated list of document templates",
+  })
+  async findAllTemplates(@Query() query: TemplateQueryDto) {
+    return this.documentsService.findAllTemplates(query);
   }
 
   @Get("templates/element/:element")
@@ -62,12 +68,18 @@ export class DocumentsController {
   // ============================================
 
   @Get()
-  @ApiOperation({ summary: "Get all documents for the current user" })
-  @ApiResponse({ status: 200, description: "List of user documents" })
-  async findUserDocuments(@Request() req: any) {
+  @ApiOperation({
+    summary: "Get all documents for the current user with pagination",
+  })
+  @ApiResponse({ status: 200, description: "Paginated list of user documents" })
+  async findUserDocuments(
+    @Request() req: AuthenticatedRequest,
+    @Query() query: DocumentQueryDto,
+  ) {
     return this.documentsService.findUserDocuments(
       req.user.id,
       req.user.tenantId,
+      query,
     );
   }
 

@@ -1,43 +1,43 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { NotFoundException, BadRequestException } from '@nestjs/common';
-import { QuizService } from './quiz.service';
-import { PrismaService } from '../../database/prisma.service';
-import { QuizAttemptStatus, QuestionType } from '@avala/db';
+import { Test, TestingModule } from "@nestjs/testing";
+import { NotFoundException, BadRequestException } from "@nestjs/common";
+import { QuizService } from "./quiz.service";
+import { PrismaService } from "../../database/prisma.service";
+import { QuizAttemptStatus, QuestionType } from "@avala/db";
 
-describe('QuizService', () => {
+describe("QuizService", () => {
   let service: QuizService;
 
-  const mockTenantId = 'tenant-123';
-  const mockUserId = 'user-456';
-  const mockQuizId = 'quiz-789';
-  const mockAttemptId = 'attempt-101';
+  const mockTenantId = "tenant-123";
+  const mockUserId = "user-456";
+  const mockQuizId = "quiz-789";
+  const mockAttemptId = "attempt-101";
 
   const mockQuiz = {
     id: mockQuizId,
-    title: 'Test Quiz',
-    code: 'QUIZ-001',
+    title: "Test Quiz",
+    code: "QUIZ-001",
     tenantId: mockTenantId,
     passingScore: 70,
     allowedAttempts: 3,
     timeLimit: 60,
     questions: [
       {
-        id: 'question-1',
+        id: "question-1",
         type: QuestionType.MULTIPLE_CHOICE,
-        questionText: 'What is 2+2?',
+        questionText: "What is 2+2?",
         points: 10,
         orderIndex: 0,
-        questionData: { options: ['3', '4', '5'], correctAnswer: '4' },
-        explanation: 'Basic math',
+        questionData: { options: ["3", "4", "5"], correctAnswer: "4" },
+        explanation: "Basic math",
       },
       {
-        id: 'question-2',
+        id: "question-2",
         type: QuestionType.TRUE_FALSE,
-        questionText: 'The sky is blue.',
+        questionText: "The sky is blue.",
         points: 10,
         orderIndex: 1,
-        questionData: { correctAnswer: 'true' },
-        explanation: 'Fact check',
+        questionData: { correctAnswer: "true" },
+        explanation: "Fact check",
       },
     ],
   };
@@ -57,6 +57,7 @@ describe('QuizService', () => {
     quiz: {
       findMany: jest.fn(),
       findFirst: jest.fn(),
+      count: jest.fn(),
     },
     quizAttempt: {
       findFirst: jest.fn(),
@@ -83,38 +84,36 @@ describe('QuizService', () => {
     service = module.get<QuizService>(QuizService);
   });
 
-  describe('findAll', () => {
-    it('should return all quizzes for a tenant', async () => {
+  describe("findAll", () => {
+    it("should return all quizzes for a tenant with pagination", async () => {
       const mockQuizzes = [mockQuiz];
       mockPrisma.quiz.findMany.mockResolvedValue(mockQuizzes);
+      mockPrisma.quiz.count.mockResolvedValue(1);
 
-      const result = await service.findAll(mockTenantId);
-
-      expect(result).toEqual(mockQuizzes);
-      expect(mockPrisma.quiz.findMany).toHaveBeenCalledWith({
-        where: { tenantId: mockTenantId },
-        include: {
-          _count: {
-            select: { questions: true, attempts: true },
-          },
-        },
-        orderBy: { createdAt: 'desc' },
+      const result = await service.findAll(mockTenantId, {
+        page: 1,
+        limit: 20,
       });
+
+      expect(result.items).toEqual(mockQuizzes);
+      expect(result.meta.total).toBe(1);
     });
   });
 
-  describe('findOne', () => {
-    it('should return quiz by ID with sanitized questions', async () => {
+  describe("findOne", () => {
+    it("should return quiz by ID with sanitized questions", async () => {
       mockPrisma.quiz.findFirst.mockResolvedValue(mockQuiz);
 
       const result = await service.findOne(mockQuizId, mockTenantId);
 
       expect(result.id).toBe(mockQuizId);
       // Verify correct answers are stripped
-      expect(result.questions[0].questionData).not.toHaveProperty('correctAnswer');
+      expect(result.questions[0].questionData).not.toHaveProperty(
+        "correctAnswer",
+      );
     });
 
-    it('should throw NotFoundException if quiz not found', async () => {
+    it("should throw NotFoundException if quiz not found", async () => {
       mockPrisma.quiz.findFirst.mockResolvedValue(null);
 
       await expect(service.findOne(mockQuizId, mockTenantId)).rejects.toThrow(
@@ -123,25 +122,25 @@ describe('QuizService', () => {
     });
   });
 
-  describe('findByCode', () => {
-    it('should return quiz by code', async () => {
+  describe("findByCode", () => {
+    it("should return quiz by code", async () => {
       mockPrisma.quiz.findFirst.mockResolvedValue(mockQuiz);
 
-      const result = await service.findByCode('QUIZ-001', mockTenantId);
+      const result = await service.findByCode("QUIZ-001", mockTenantId);
 
       expect(result.id).toBe(mockQuizId);
     });
 
-    it('should throw NotFoundException if quiz not found', async () => {
+    it("should throw NotFoundException if quiz not found", async () => {
       mockPrisma.quiz.findFirst.mockResolvedValue(null);
 
-      await expect(service.findByCode('INVALID', mockTenantId)).rejects.toThrow(
+      await expect(service.findByCode("INVALID", mockTenantId)).rejects.toThrow(
         NotFoundException,
       );
     });
   });
 
-  describe('startAttempt', () => {
+  describe("startAttempt", () => {
     beforeEach(() => {
       mockPrisma.quiz.findFirst.mockResolvedValue(mockQuiz);
       mockPrisma.quizAttempt.count.mockResolvedValue(0);
@@ -149,23 +148,31 @@ describe('QuizService', () => {
       mockPrisma.quizAttempt.create.mockResolvedValue(mockAttempt);
     });
 
-    it('should create a new quiz attempt', async () => {
-      const result = await service.startAttempt(mockQuizId, mockUserId, mockTenantId);
+    it("should create a new quiz attempt", async () => {
+      const result = await service.startAttempt(
+        mockQuizId,
+        mockUserId,
+        mockTenantId,
+      );
 
       expect(result.id).toBe(mockAttemptId);
       expect(mockPrisma.quizAttempt.create).toHaveBeenCalled();
     });
 
-    it('should return existing in-progress attempt', async () => {
+    it("should return existing in-progress attempt", async () => {
       mockPrisma.quizAttempt.findFirst.mockResolvedValue(mockAttempt);
 
-      const result = await service.startAttempt(mockQuizId, mockUserId, mockTenantId);
+      const result = await service.startAttempt(
+        mockQuizId,
+        mockUserId,
+        mockTenantId,
+      );
 
       expect(result).toEqual(mockAttempt);
       expect(mockPrisma.quizAttempt.create).not.toHaveBeenCalled();
     });
 
-    it('should throw NotFoundException if quiz not found', async () => {
+    it("should throw NotFoundException if quiz not found", async () => {
       mockPrisma.quiz.findFirst.mockResolvedValue(null);
 
       await expect(
@@ -173,7 +180,7 @@ describe('QuizService', () => {
       ).rejects.toThrow(NotFoundException);
     });
 
-    it('should throw BadRequestException if max attempts reached', async () => {
+    it("should throw BadRequestException if max attempts reached", async () => {
       mockPrisma.quizAttempt.count.mockResolvedValue(3);
 
       await expect(
@@ -182,12 +189,12 @@ describe('QuizService', () => {
     });
   });
 
-  describe('submitAttempt', () => {
+  describe("submitAttempt", () => {
     const submission = {
       quizId: mockQuizId,
       answers: [
-        { questionId: 'question-1', answer: '4', timeSpent: 30 },
-        { questionId: 'question-2', answer: 'true', timeSpent: 15 },
+        { questionId: "question-1", answer: "4", timeSpent: 30 },
+        { questionId: "question-2", answer: "true", timeSpent: 15 },
       ],
       totalTimeSpent: 45,
     };
@@ -201,8 +208,12 @@ describe('QuizService', () => {
       });
     });
 
-    it('should grade and submit quiz attempt', async () => {
-      const result = await service.submitAttempt(mockAttemptId, submission, mockUserId);
+    it("should grade and submit quiz attempt", async () => {
+      const result = await service.submitAttempt(
+        mockAttemptId,
+        submission,
+        mockUserId,
+      );
 
       expect(result.attemptId).toBe(mockAttemptId);
       expect(result.score).toBe(20); // Both correct = 10 + 10
@@ -211,12 +222,12 @@ describe('QuizService', () => {
       expect(result.gradedQuestions).toHaveLength(2);
     });
 
-    it('should fail quiz when answers are wrong', async () => {
+    it("should fail quiz when answers are wrong", async () => {
       const wrongSubmission = {
         ...submission,
         answers: [
-          { questionId: 'question-1', answer: '3', timeSpent: 30 },
-          { questionId: 'question-2', answer: 'false', timeSpent: 15 },
+          { questionId: "question-1", answer: "3", timeSpent: 30 },
+          { questionId: "question-2", answer: "false", timeSpent: 15 },
         ],
       };
 
@@ -231,7 +242,7 @@ describe('QuizService', () => {
       expect(result.passed).toBe(false);
     });
 
-    it('should throw NotFoundException if attempt not found', async () => {
+    it("should throw NotFoundException if attempt not found", async () => {
       mockPrisma.quizAttempt.findFirst.mockResolvedValue(null);
 
       await expect(
@@ -239,7 +250,7 @@ describe('QuizService', () => {
       ).rejects.toThrow(NotFoundException);
     });
 
-    it('should throw BadRequestException if time limit exceeded', async () => {
+    it("should throw BadRequestException if time limit exceeded", async () => {
       const expiredAttempt = {
         ...mockAttempt,
         startedAt: new Date(Date.now() - 120 * 60 * 1000), // 2 hours ago
@@ -252,8 +263,8 @@ describe('QuizService', () => {
     });
   });
 
-  describe('getUserAttempts', () => {
-    it('should return user attempts for a quiz', async () => {
+  describe("getUserAttempts", () => {
+    it("should return user attempts for a quiz", async () => {
       const mockAttempts = [mockAttempt];
       mockPrisma.quizAttempt.findMany.mockResolvedValue(mockAttempts);
 
@@ -276,13 +287,13 @@ describe('QuizService', () => {
             },
           },
         },
-        orderBy: { createdAt: 'desc' },
+        orderBy: { createdAt: "desc" },
       });
     });
   });
 
-  describe('getAttemptDetails', () => {
-    it('should return attempt details', async () => {
+  describe("getAttemptDetails", () => {
+    it("should return attempt details", async () => {
       const attemptWithDetails = {
         ...mockAttempt,
         responses: [],
@@ -294,7 +305,7 @@ describe('QuizService', () => {
       expect(result).toEqual(attemptWithDetails);
     });
 
-    it('should throw NotFoundException if attempt not found', async () => {
+    it("should throw NotFoundException if attempt not found", async () => {
       mockPrisma.quizAttempt.findFirst.mockResolvedValue(null);
 
       await expect(

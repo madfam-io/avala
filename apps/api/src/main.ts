@@ -1,5 +1,5 @@
 import { NestFactory } from "@nestjs/core";
-import { ValidationPipe } from "@nestjs/common";
+import { Logger, ValidationPipe } from "@nestjs/common";
 import { SwaggerModule, DocumentBuilder } from "@nestjs/swagger";
 import cookieParser from "cookie-parser";
 import { AppModule } from "./app.module";
@@ -57,9 +57,10 @@ async function bootstrap() {
   const port = process.env.PORT || 4000;
   await app.listen(port);
 
-  console.log(`\n🚀 AVALA API running on: http://localhost:${port}/v1`);
+  const logger = new Logger("Bootstrap");
+  logger.log(`AVALA API running on: http://localhost:${port}/v1`);
   if (process.env.NODE_ENV !== "production") {
-    console.log(`📚 Swagger docs: http://localhost:${port}/docs\n`);
+    logger.log(`Swagger docs: http://localhost:${port}/docs`);
   }
 }
 

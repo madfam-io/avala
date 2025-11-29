@@ -1,6 +1,7 @@
 import { Test, TestingModule } from "@nestjs/testing";
 import { DocumentsController } from "./documents.controller";
 import { DocumentsService } from "./documents.service";
+import { AuthenticatedRequest } from "../../common/interfaces";
 
 describe("DocumentsController", () => {
   let controller: DocumentsController;
@@ -22,7 +23,7 @@ describe("DocumentsController", () => {
 
   const mockReq = {
     user: { id: "user-1", tenantId: "tenant-1" },
-  };
+  } as unknown as AuthenticatedRequest;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -42,10 +43,15 @@ describe("DocumentsController", () => {
   });
 
   describe("findAllTemplates", () => {
-    it("should return all templates", async () => {
-      documentsService.findAllTemplates.mockResolvedValue([]);
-      await controller.findAllTemplates();
-      expect(documentsService.findAllTemplates).toHaveBeenCalled();
+    it("should return all templates with pagination", async () => {
+      const mockQuery = { page: 1, limit: 20 };
+      const mockResult = {
+        items: [],
+        meta: { total: 0, page: 1, limit: 20, totalPages: 0 },
+      };
+      documentsService.findAllTemplates.mockResolvedValue(mockResult as any);
+      await controller.findAllTemplates(mockQuery as any);
+      expect(documentsService.findAllTemplates).toHaveBeenCalledWith(mockQuery);
     });
   });
 
@@ -70,12 +76,18 @@ describe("DocumentsController", () => {
   });
 
   describe("findUserDocuments", () => {
-    it("should return user documents", async () => {
-      documentsService.findUserDocuments.mockResolvedValue([]);
-      await controller.findUserDocuments(mockReq);
+    it("should return user documents with pagination", async () => {
+      const mockQuery = { page: 1, limit: 20 };
+      const mockResult = {
+        items: [],
+        meta: { total: 0, page: 1, limit: 20, totalPages: 0 },
+      };
+      documentsService.findUserDocuments.mockResolvedValue(mockResult as any);
+      await controller.findUserDocuments(mockReq, mockQuery as any);
       expect(documentsService.findUserDocuments).toHaveBeenCalledWith(
         "user-1",
         "tenant-1",
+        mockQuery,
       );
     });
   });

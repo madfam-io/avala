@@ -6,7 +6,7 @@ import { RenecScraperService } from "./renec-scraper.service";
 describe("RenecController", () => {
   let controller: RenecController;
   let renecService: jest.Mocked<RenecService>;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+   
   let scraperService: any;
 
   const mockRenecService = {
