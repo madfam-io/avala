@@ -229,7 +229,7 @@ async function fetchAPI<T>(
   endpoint: string,
   params?: Record<string, string | number | undefined>,
 ): Promise<T> {
-  const url = new URL(`${API_BASE}/renec${endpoint}`);
+  const url = new URL(`${API_BASE}/v1/renec${endpoint}`);
 
   if (params) {
     Object.entries(params).forEach(([key, value]) => {
@@ -255,7 +255,40 @@ async function fetchAPI<T>(
 
 // Stats & Overview
 export async function getStats(estado?: string): Promise<RenecStats> {
-  return fetchAPI<RenecStats>("/stats", { estado });
+  // API returns flat structure, transform to expected format
+  const raw = await fetchAPI<{
+    totalCentros: number;
+    totalCertificadores: number;
+    totalECStandards: number;
+    totalSectores: number;
+    lastHarvestDate: string | null;
+    lastHarvestStatus: string | null;
+    dataFreshness: {
+      centros: number;
+      certificadores: number;
+      ecStandards: number;
+    };
+  }>("/stats", { estado });
+
+  return {
+    overview: {
+      ecStandards: {
+        total: raw.totalECStandards,
+        active: raw.totalECStandards,
+      },
+      certifiers: {
+        total: raw.totalCertificadores,
+        active: raw.totalCertificadores,
+      },
+      centers: { total: raw.totalCentros, active: raw.totalCentros },
+      lastSyncAt: raw.lastHarvestDate,
+    },
+    distributions: {
+      ecBySector: [],
+      certifiersByState: [],
+      centersByState: [],
+    },
+  };
 }
 
 // Autocomplete
@@ -409,7 +442,7 @@ export interface LeadResponse {
 }
 
 export async function createLead(data: LeadInput): Promise<LeadResponse> {
-  const response = await fetch(`${API_BASE}/renec/leads`, {
+  const response = await fetch(`${API_BASE}/v1/renec/leads`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -450,7 +483,7 @@ export interface SearchAnalyticsInput {
 export async function trackSearch(data: SearchAnalyticsInput): Promise<void> {
   try {
     // Fire and forget - don't block on analytics
-    fetch(`${API_BASE}/renec/analytics/search`, {
+    fetch(`${API_BASE}/v1/renec/analytics/search`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
