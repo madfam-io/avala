@@ -1,7 +1,7 @@
 version: "3.8"
 
 services:
-  # Avala API (NestJS)
+  # Avala API (NestJS) - port 4000 per PORT_REGISTRY
   api:
     build:
       context: .
@@ -12,6 +12,7 @@ services:
     environment:
       - NODE_ENV=development
       - PORT=4000
+      - API_PORT=4000
       - DATABASE_URL=postgresql://avala:avala_dev@postgres:5432/avala_dev
       - REDIS_URL=redis://redis:6379/0
       - JANUA_URL=http://host.docker.internal:8000
@@ -29,16 +30,17 @@ services:
     networks:
       - avala-network
 
-  # Avala Web (Next.js)
+  # Avala Web (Next.js) - port 3010 per PORT_REGISTRY
   web:
     build:
       context: .
       dockerfile: Dockerfile.web
       target: development
     ports:
-      - "3000:3000"
+      - "3010:3010"
     environment:
       - NODE_ENV=development
+      - PORT=3010
       - NEXT_PUBLIC_API_URL=http://localhost:4000
       - NEXT_PUBLIC_JANUA_URL=http://localhost:8000
       - NEXT_PUBLIC_JANUA_CLIENT_ID=avala-dev

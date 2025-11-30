@@ -1,9 +1,10 @@
-'use client';
+"use client";
 
-import * as React from 'react';
-import { useState, useEffect } from 'react';
-import { ArrowRight, X } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import * as React from "react";
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { ArrowRight, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export function FloatingCTA() {
   const [isVisible, setIsVisible] = useState(false);
@@ -21,8 +22,8 @@ export function FloatingCTA() {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [isDismissed]);
 
   if (!isVisible) return null;
@@ -44,10 +45,10 @@ export function FloatingCTA() {
           Comienza tu prueba gratuita de 14 días.
         </p>
         <Button size="sm" className="w-full" asChild>
-          <a href="/demo">
+          <Link href="/demo">
             Comenzar gratis
             <ArrowRight className="ml-2 h-4 w-4" />
-          </a>
+          </Link>
         </Button>
       </div>
     </div>

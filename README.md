@@ -86,9 +86,9 @@ pnpm dev
 
 | Service | URL | Description |
 |---------|-----|-------------|
-| Web | http://localhost:3060 | Next.js frontend |
-| API | http://localhost:4900 | NestJS backend |
-| API Docs | http://localhost:4900/docs | Swagger documentation |
+| Web | http://localhost:3010 | Next.js frontend |
+| API | http://localhost:4000 | NestJS backend |
+| API Docs | http://localhost:4000/docs | Swagger documentation |
 | Mailhog | http://localhost:8025 | Email testing UI |
 | MinIO | http://localhost:9001 | Object storage console |
 
